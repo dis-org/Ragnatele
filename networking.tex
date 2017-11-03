@@ -1,11 +1,16 @@
 \documentclass[a4paper,11pt]{paper}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
+\usepackage{nameref}
 \usepackage{graphicx}
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \graphicspath{./images/}
 
 \def\code#1{\texttt{#1}}
+\def\sec#1{\section{#1}\label{#1}}
+\def\sub#1{\subsection{#1}\label{#1}}
+\def\subsub#1{\subsubsection{#1}\label{#1}}
+\def\vedi#1{\nameref{#1}}
 
 \title{Networking}
 
@@ -15,94 +20,123 @@
 \tableofcontents
 \newpage
 
-\subsection{Introduzione}
+\sub{Introduzione}
 Gioara
-\subsubsection{Il modello ISO OSI}
+\subsub{I protocolli}
+\subsub{Il modello ISO OSI}
 \subsubsection{Internet protocol suit (TCP/IP)}
 
 \newpage
 
-\section{Livello Fisico}
+\sec{Livello Fisico}
 Arianna
 
-\subsection{Terminologia}
-\subsubsection{Informazione}
-\subsubsection{Codice}
-\subsubsection{Segnale}
-\subsubsection{Lunghezza d'onda}
-\subsubsection{Spettro}
-\subsubsection{Banda}
+\sub{Terminologia}
+\subsub{Informazione}
+\subsub{Codice}
+\subsub{Segnale}
+\subsub{Lunghezza d'onda}
+\subsub{Spettro}
+\subsub{Banda}
+lalalalalalal \vedi{Codice} lalalall
+\sub{Filtri}
 
-\subsection{Filtri}
+\sub{Flusso di trasmissione}
+\subsub{Simplex}
+\subsub{Half-Duplex}
+\subsub{Full-Duplex}
 
-\subsection{Flusso di trasmissione}
-\subsubsection{Simplex}
-\subsubsection{Half-Duplex}
-\subsubsection{Full-Duplex}
-
-\subsection{Modulazione}
-\subsubsection{Ad onda continua}
-\subsubsection{Impulsiva}
-\subsubsection{Digitale}
+\sub{Modulazione}
+\subsub{Ad onda continua}
+\subsub{Impulsiva}
+\subsub{Digitale}
 
 \subsection{Qualità delle trasmissioni} non so se mi piace qui
-\subsubsection{Ritardo}
-\subsubsection{Tempo di risposta}
-\subsubsection{Throughput}
-\subsubsection{Latenza}
-\subsubsection{Jitter}
+\subsub{Ritardo}
+\subsub{Tempo di risposta}
+\subsub{Throughput}
+\subsub{Latenza}
+\subsub{Jitter}
 
-\subsection{Alterazioni del segnale}
-\subsubsection{Attenuazione}
-\subsubsection{Distorzione}
-\subsubsection{Rumore}
-\subsubsection{Interferenza}
+\sub{Alterazioni del segnale}
+\subsub{Attenuazione}
+\subsub{Distorzione}
+\subsub{Rumore}
+\subsub{Interferenza}
 
 \subsection{Limiti alla velocità di trasferimento}
-\subsubsection{Classificazione dei canali trasmissivi}
-\subsubsection{Teorema di Nyquist}
-\subsubsection{Teorema di Shannon}
+\subsub{Classificazione dei canali trasmissivi}
+\subsub{Teorema di Nyquist}
+\subsub{Teorema di Shannon}
 \subsubsection{Velocità di modulazione}
 
 \newpage
-\section{Livello di Collegamento}
+\sec{Livello di Collegamento}
 
-\subsection{Tipi di trasmissione}
-\subsubsection{Sincrona}
-\subsubsection{Asincrona}
-\subsubsection{Orientata al carattere}
-\subsubsection{Orientata al bit}
+\sub{Tipi di trasmissione}
+\subsub{Sincrona}
+\subsub{Asincrona}
+\subsub{Orientata al carattere} forse non è collegamento
+\subsub{Orientata al bit}
 
-\subsection{Controlo degli errori}
-\subsubsection{Ridondanza}
+\sub{Controlo degli errori}
+\subsub{Ridondanza}
 
 \subsection{Protocolli primario-secondario}
-\subsubsection{RTS-CTS}
-\subsubsection{XON-XOF}
-\subsubsection{ARQ}
+\subsub{RTS-CTS}
+\subsub{XON-XOF}
+\subsub{ARQ}
 
+\sub{Protocolli internet}
+\subsub{ARP}
+\subsub{RARP}
+\subsub{NDP}
+\subsub{MAC}
+
+\sub{Ethernet}
 
 \newpage
-\section{Livello di Rete}
+\sec{Livello di Rete}
 
-\subsection{Terminologia}
-\subsubsection{Rete}
-\subsubsection{DTE}
-\subsubsection{DCE}
-\subsubsection{CPE}
-\subsection{Tipologie di rete}
-\subsection{Topologia delle reti}
+\sub{Terminologia}
+\subsub{Rete}
+\subsub{DTE}
+\subsub{DCE}
+\subsub{CPE}
+\sub{Tipologie di rete}
+\sub{Topologia delle reti}
 \subsection{Qualità della rete}
-\subsection{Routing}
-\subsubsection{Tabella di routing}
+\sub{Routing}
+\subsub{Tabella di routing}
 \code{netstat -nr}
-\subsection{Protocolli di Routing}
-Claudio
+
+\sub{Internet Protocol (IP)}
+
+
+\sub{Protocolli di routing dinamico}
+\subsub{ICMP}
+\subsub{IGMP}
+\subsub{RIP}
+\subsub{OSPF}
+
+
+\textbf{Claudio} Pannacci
 \newpage
-\section{Livello di Trasporto}
+\sec{Livello di Trasporto}
+\sub{Protocolli}
+\subsub{TCP}
+\subsub{UDP}
 \newpage
-\section{Livelli Applicativi}
-\subsection{Servizi di Rete}
+
+\sec{Livello Applicazione}
+\sub{Servizi di Rete}
 Tommaso
-\subsubsection{Telnet}
+\subsub{Telnet}
+\subsub{FTP}
+\subsub{SSH}
+\subsub{BGP}
+\subsub{DHCP}
+\subsub{DNS}
+\subsub{HTTP}
+
 \end{document}
