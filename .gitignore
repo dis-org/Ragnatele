@@ -1,0 +1,5 @@
+*
+!*.pdf
+!*.tex
+!*.md
+!.gitignore
