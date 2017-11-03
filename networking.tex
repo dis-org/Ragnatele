@@ -60,7 +60,14 @@ Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa afferm
 L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate}. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche.
 \subsection{Filtri}
 Un filtro è un sistema che tratta le varie componenti del segnale in modo diverso a seconda della loro frequenza.
-\\E' opportuna innanzitutto una distinzione tra filtri \textit{passivi} ed \textit{attivi}: i primi sono costituiti solamente da resistenze e condensatori, mentre i secondi includono altre componenti, come i transistor e gli amplificatori. A prescindere dal
+\\E' opportuna innanzitutto una distinzione tra filtri \textit{passivi} ed \textit{attivi}: i primi sono costituiti solamente da resistenze e condensatori, mentre i secondi includono altre componenti, come i transistor e gli amplificatori. Inoltre, a seconda del comportamento, si distinguono quattro tipi di filtri:
+\begin{itemize}
+\item \textbf{filtro passa basso}: permette il passaggio delle frequenze al di sotto di una determinata \textit{frequenza di taglio}, definita come \[\frac{v_{out}}{v_{in}}=\frac{1}{(2)^{1/2}}\]
+dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
+\item \textbf{filtro passa alto}: complementare al filtro passa basso, permette il passaggio delle frequenze al di sopra della frequenza di taglio, definita come sopra
+\item \textbf{filtro passa banda}: composizione di un filtro passa basso e un filtro passa alto
+\item \textbf{filtro elimina banda}: complemento del filtro passa banda, blocca le frequenze comprese tra due frequenze di taglio.
+\end{itemize}
 \subsection{Flusso di trasmissione}
 \subsubsection{Simplex}
 \subsubsection{Half-Duplex}
