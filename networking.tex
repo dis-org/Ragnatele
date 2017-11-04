@@ -4,6 +4,7 @@
 \usepackage[italian]{babel}
 \usepackage{graphicx}
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
+\usepackage{hyperref}
 \graphicspath{{./images/}}
 
 \def\code#1{\texttt{#1}}
@@ -55,7 +56,11 @@ Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente
 \item $1/t=f$ è detta \textit{frequenza} (misurabile in Hz)\\\\
 \end{itemize}
 %la spiegazione trigonometrica va inclusa? 
+\begin{figure}
+\centering
 \includegraphics[scale=0.5]{segnali_sin.png}
+\caption{Rappresentazione grafica di un segnale sinusoidale}\label{fig. 1}
+\end{figure}
 
 \subsubsection{Lunghezza d'onda}
 In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f$ (dove $c$ è la velocità di propagazione del segnale).
@@ -67,13 +72,32 @@ Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa afferm
 L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche.
 
 \subsection{Qualità delle trasmissioni}
-Come già accennato in precedenza, lo strato fisico è determinante per la qualità delle trasmissioni
-\subsubsection{Ritardo}
-\subsubsection{Tempo di risposta}
-\subsubsection{Throughput}
-\subsubsection{Latenza}
-\subsubsection{Jitter}
+Come già accennato in precedenza, é lo strato fisico che determina in larga parte la qualità delle comunicazioni, valutabile in base a prestazioni e affidabilità. 
+\\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
+\begin{itemize}
+\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi
+\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
+\item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
+
+\end{itemize}
+\subsubsection{Criteri di valutazione in base alle prestazioni}
+\begin{itemize}
+\item \textbf{ritardo}: tempo necessario per il transito dei dati
+\item \textbf{tempo di risposta}: tempo che intercorre tra il momento in cui viene effettuata una richiesta e il momento in cui si ottiene una risposta
+\item \textbf{throughput}: quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete
+\item \textbf{latenza}: tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
+\begin{itemize}
+\item \textbf{tempo di propagazione}: tempo di transito sulla rete per arrivare dal mittente al destinatario
+\item \textbf{tempo di trasmissione}: tempo necessario per immettere i bit sulla rete, ossia $\frac{dim_{m}}{v}$, dove $dim_{m}$ è la dimensione del messaggio e $v$ la velocità trasmissiva
+\item \textbf{tempo di inoltro}: tempo necessario ai nodi per consegnare il messaggio in transito, non legato al traffico ma solo ad hardware e software
+\item \textbf{tempo di attesa} nelle code di rete, dipendente dal traffico
+\end{itemize}
+\subsubsection{Criteri di valutazione in base all'affidabilità}
+\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnari in ricezione
+\item \textbf{packet loss}: pacchetti persi.
+
 \subsection{Filtri}
+\end{itemize}
 Un filtro è un sistema che tratta le varie componenti del segnale in modo diverso a seconda della loro frequenza.
 \\E' opportuna innanzitutto una distinzione tra filtri \textit{passivi} ed \textit{attivi}: i primi sono costituiti solamente da resistenze e condensatori, mentre i secondi includono altre componenti, come i transistor e gli amplificatori. Inoltre, a seconda del comportamento, si distinguono quattro tipi di filtri:
 \begin{itemize}

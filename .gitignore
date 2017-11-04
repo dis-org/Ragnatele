@@ -1,4 +1,6 @@
 *
+!*.png
+!*.jpeg
 !*.tex
 !*.md
 !.gitignore
