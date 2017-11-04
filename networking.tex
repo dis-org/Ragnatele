@@ -17,15 +17,18 @@
 \tableofcontents
 \newpage
 
-\subsection{Introduzione}
+\section{Introduzione}
 Gioara
-\subsubsection{Il modello ISO OSI}
-\subsubsection{Internet protocol suite (TCP/IP)}
+\subsection{Terminologia}
+\subsubsection{Tipi di flusso trasmissivo} 
+\subsection{Il modello di riferimento ISO/OSI}
+\subsection{Internet protocol suite (TCP/IP)}
 
 \newpage
 
 \section{Livello Fisico}
 Nonostante l'amministratore di rete non abbia la possibilità di influirvi direttamente, è importante descrivere lo strato fisico poiché esso influenza significativamente le prestazioni della rete.
+
 \subsection{Terminologia}
 \subsubsection{Informazione} 
 L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati. 
@@ -39,6 +42,7 @@ Al fine di rappresentare l'informazione in maniera tale da renderne più semplic
 \item Gray
 \item EBCDIC (Extended Binary Coded Decimal Code, 8 bit), in uso presso le banche
 \end{itemize}
+
 \subsubsection{Segnale}
 Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente un'informazione. Un segnale \textbf{analogico} varia in modo continuo nel tempo ed ha infiniti livelli di intensità; un segnale \textbf{digitale} varia invece in modo discreto e ha solo due livelli di intensità. Ogni tipo di dato può essere rappresentato in entrambe le maniere e può essere convertito da analogico a digitale e viceversa.
 \\\\Fra i segnali analogici assumono particolare rilevanza i \textbf{segnali sinusoidali}, ossia segnali che variano nel tempo secondo una legge del tipo \[u=Usen(\omega t+\Phi )\] dove 
@@ -52,12 +56,23 @@ Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente
 \end{itemize}
 %la spiegazione trigonometrica va inclusa? 
 \includegraphics[scale=0.5]{segnali_sin.png}
+
 \subsubsection{Lunghezza d'onda}
 In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f$ (dove $c$ è la velocità di propagazione del segnale).
+
 \subsubsection{Spettro}
 Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa affermazione, non necessariamente di immediata comprensione, diventa subito chiara se si tiene presente il \textbf{teorema di Fourier}, il quale afferma che un segnale può essere rappresentato come somma di sinusoidi (potenzialmente infinite) con caratteristiche differenti.
+
 \subsubsection{Ampiezza di banda}
-L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate}. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche.
+L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche.
+
+\subsection{Qualità delle trasmissioni}
+Come già accennato in precedenza, lo strato fisico è determinante per la qualità delle trasmissioni
+\subsubsection{Ritardo}
+\subsubsection{Tempo di risposta}
+\subsubsection{Throughput}
+\subsubsection{Latenza}
+\subsubsection{Jitter}
 \subsection{Filtri}
 Un filtro è un sistema che tratta le varie componenti del segnale in modo diverso a seconda della loro frequenza.
 \\E' opportuna innanzitutto una distinzione tra filtri \textit{passivi} ed \textit{attivi}: i primi sono costituiti solamente da resistenze e condensatori, mentre i secondi includono altre componenti, come i transistor e gli amplificatori. Inoltre, a seconda del comportamento, si distinguono quattro tipi di filtri:
@@ -68,22 +83,11 @@ dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
 \item \textbf{filtro passa banda}: composizione di un filtro passa basso e un filtro passa alto
 \item \textbf{filtro elimina banda}: complemento del filtro passa banda, blocca le frequenze comprese tra due frequenze di taglio.
 \end{itemize}
-\subsection{Flusso di trasmissione}
-\subsubsection{Simplex}
-\subsubsection{Half-Duplex}
-\subsubsection{Full-Duplex}
 
 \subsection{Modulazione}
 \subsubsection{Ad onda continua}
 \subsubsection{Impulsiva}
 \subsubsection{Digitale}
-
-\subsection{Qualità delle trasmissioni} non so se mi piace qui
-\subsubsection{Ritardo}
-\subsubsection{Tempo di risposta}
-\subsubsection{Throughput}
-\subsubsection{Latenza}
-\subsubsection{Jitter}
 
 \subsection{Alterazioni del segnale}
 \subsubsection{Attenuazione}
