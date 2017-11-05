@@ -1,66 +1,126 @@
-\documentclass[a4paper,11pt]{paper}
+\documentclass[a4paper,11pt]{article}
+\author{Quelli della B1}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
-\usepackage{nameref}
 \usepackage{graphicx}
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
-\graphicspath{./images/}
+\usepackage{hyperref}
+\usepackage{nameref} 
+\graphicspath{{./images/}}
 
 \def\code#1{\texttt{#1}}
-\def\sec#1{\section{#1}\label{#1}}
-\def\sub#1{\subsection{#1}\label{#1}}
-\def\subsub#1{\subsubsection{#1}\label{#1}}
-\def\vedi#1{\nameref{#1}}
+\def\sec#1{\section{#1}\label{#1}} 
+\def\sub#1{\subsection{#1}\label{#1}} 
+\def\subsub#1{\subsubsection{#1}\label{#1}} 
+\def\vedi#1{\nameref{#1}} 
 
 \title{Networking}
 
 \begin{document}
 
 \maketitle
+\newpage
 \tableofcontents
 \newpage
 
-\sub{Introduzione}
-Gioara
-\subsub{I protocolli}
-\subsub{Il modello ISO OSI}
-\subsubsection{Internet protocol suit (TCP/IP)}
+\sec{Introduzione}
+%Gioara
+\subsection{Terminologia}
+\subsub{Tipi di flusso trasmissivo} 
+\sub{Il modello di riferimento ISO/OSI}
+\sub{Internet protocol suite (TCP/IP)}
 
 \newpage
 
 \sec{Livello Fisico}
-Arianna
+Nonostante l'amministratore di rete non abbia la possibilità di influirvi direttamente, è importante descrivere lo strato fisico poiché esso influenza significativamente le prestazioni della rete.
 
-\sub{Terminologia}
-\subsub{Informazione}
+\subsection{Terminologia}
+\subsub{Informazione} 
+L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati. 
+
 \subsub{Codice}
-\subsub{Segnale}
-\subsub{Lunghezza d'onda}
-\subsub{Spettro}
-\subsub{Banda}
-lalalalalalal \vedi{Codice} lalalall
-\sub{Filtri}
+Al fine di rappresentare l'informazione in maniera tale da renderne più semplice la gestione, un codice associa sequenze di bit a caratteri. I codici che godono della più ampia diffusione sono:
+\begin{itemize}
+\item ASCII (American Standard Code for Information Interchange, 7 bit estesi a 1 byte)
+\item BCD (Binary-Coded Decimal)
+\item AIKEN 
+\item Gray
+\item EBCDIC (Extended Binary Coded Decimal Code, 8 bit), in uso presso le banche
+\end{itemize}
 
-\sub{Flusso di trasmissione}
-\subsub{Simplex}
-\subsub{Half-Duplex}
-\subsub{Full-Duplex}
+\subsubsection{Segnale}
+Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente un'informazione. Un segnale \textbf{analogico} varia in modo continuo nel tempo ed ha infiniti livelli di intensità; un segnale \textbf{digitale} varia invece in modo discreto e ha solo due livelli di intensità. Ogni tipo di dato può essere rappresentato in entrambe le maniere e può essere convertito da analogico a digitale e viceversa.
+\\\\Fra i segnali analogici assumono particolare rilevanza i \textbf{segnali sinusoidali}, ossia segnali che variano nel tempo secondo una legge del tipo \[u=Usen(\omega t+\Phi )\] dove 
+\begin{itemize}
+\item $u$ è l'ampiezza istantanea
+\item $U$ è l'ampiezza massima
+\item $\omega $ è la velocità angolare %va spiegato meglio
+\item $\Phi $ è lo sfasamento rispetto all'origine
+\item l'intervallo di tempo impiegato dall'onda per tornare allo stesso livello d'intensità è detto \textit{periodo}.
+\item $1/t=f$ è detta \textit{frequenza} (misurabile in Hz)\\\\
+\end{itemize}
+La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
+\begin{figure}
+\centering
+\includegraphics[scale=0.5]{segnali_sin.png}
+\caption{Rappresentazione grafica di un segnale sinusoidale}\label{fig. 1}
+\end{figure}
+
+\subsubsection{Lunghezza d'onda}
+In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f$ (dove $c$ è la velocità di propagazione del segnale).
+
+\subsub{Spettro}
+Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa affermazione, non necessariamente di immediata comprensione, diventa subito chiara se si tiene presente il \textbf{teorema di Fourier}, il quale afferma che un segnale può essere rappresentato come somma di sinusoidi (potenzialmente infinite) con caratteristiche differenti.
+
+\subsub{Ampiezza di banda}
+L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche.
+
+\subsection{Qualità delle trasmissioni}
+Come già accennato in precedenza, é lo strato fisico che determina in larga parte la qualità delle comunicazioni, valutabile in base a prestazioni e affidabilità. 
+\\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
+\begin{itemize}
+\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi
+\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
+\item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
+\end{itemize}
+
+\subsub{Criteri di valutazione in base alle prestazioni}
+\begin{itemize}
+\item \textbf{ritardo}: tempo necessario per il transito dei dati
+\item \textbf{tempo di risposta}: tempo che intercorre tra il momento in cui viene effettuata una richiesta e il momento in cui si ottiene una risposta
+\item \textbf{throughput}: quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete
+\item \textbf{latenza}: tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
+\begin{itemize}
+\item \textbf{tempo di propagazione}: tempo di transito sulla rete per arrivare dal mittente al destinatario
+\item \textbf{tempo di trasmissione}: tempo necessario per immettere i bit sulla rete, ossia $\frac{dim_{m}}{v}$, dove $dim_{m}$ è la dimensione del messaggio e $v$ la velocità trasmissiva
+\item \textbf{tempo di inoltro}: tempo necessario ai nodi per consegnare il messaggio in transito, non legato al traffico ma solo ad hardware e software
+\item \textbf{tempo di attesa} nelle code di rete, dipendente dal traffico
+\end{itemize}
+\subsubsection{Criteri di valutazione in base all'affidabilità}
+\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnari in ricezione
+\item \textbf{packet loss}: pacchetti persi.
+
+\sub{Filtri}
+\end{itemize}
+Un filtro è un sistema che tratta le varie componenti del segnale in modo diverso a seconda della loro frequenza.
+\\E' opportuna innanzitutto una distinzione tra filtri \textit{passivi} ed \textit{attivi}: i primi sono costituiti solamente da resistenze e condensatori, mentre i secondi includono altre componenti, come i transistor e gli amplificatori. Inoltre, a seconda del comportamento, si distinguono quattro tipi di filtri:
+\begin{itemize}
+\item \textbf{filtro passa basso}: permette il passaggio delle frequenze al di sotto di una determinata \textit{frequenza di taglio}, definita come \[\frac{v_{out}}{v_{in}}=\frac{1}{(2)^{1/2}}\]
+dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
+\item \textbf{filtro passa alto}: complementare al filtro passa basso, permette il passaggio delle frequenze al di sopra della frequenza di taglio, definita come sopra
+\item \textbf{filtro passa banda}: composizione di un filtro passa basso e un filtro passa alto
+\item \textbf{filtro elimina banda}: complemento del filtro passa banda, blocca le frequenze comprese tra due frequenze di taglio.
+\end{itemize}
 
 \sub{Modulazione}
 \subsub{Ad onda continua}
 \subsub{Impulsiva}
 \subsub{Digitale}
 
-\subsection{Qualità delle trasmissioni} non so se mi piace qui
-\subsub{Ritardo}
-\subsub{Tempo di risposta}
-\subsub{Throughput}
-\subsub{Latenza}
-\subsub{Jitter}
-
 \sub{Alterazioni del segnale}
 \subsub{Attenuazione}
-\subsub{Distorzione}
+\subsub{Distorsione}
 \subsub{Rumore}
 \subsub{Interferenza}
 
@@ -69,74 +129,68 @@ lalalalalalal \vedi{Codice} lalalall
 \subsub{Teorema di Nyquist}
 \subsub{Teorema di Shannon}
 \subsubsection{Velocità di modulazione}
-
 \newpage
 \sec{Livello di Collegamento}
 
 \sub{Tipi di trasmissione}
 \subsub{Sincrona}
 \subsub{Asincrona}
-\subsub{Orientata al carattere} forse non è collegamento
+\subsub{Orientata al carattere}
 \subsub{Orientata al bit}
 
-\sub{Controlo degli errori}
+\sub{Controllo degli errori}
 \subsub{Ridondanza}
 
-\subsection{Protocolli primario-secondario}
+\sub{Protocolli primario-secondario}
 \subsub{RTS-CTS}
 \subsub{XON-XOF}
 \subsub{ARQ}
 
-\sub{Protocolli internet}
-\subsub{ARP}
-\subsub{RARP}
-\subsub{NDP}
-\subsub{MAC}
-
-\sub{Ethernet}
-
+\sub{Protocolli internet} 
+\subsub{ARP} 
+\subsub{RARP} 
+\subsub{NDP} 
+\subsub{MAC} 
+ 
+\sub{Ethernet} 
 \newpage
 \sec{Livello di Rete}
 
-\sub{Terminologia}
+\subsection{Terminologia}
 \subsub{Rete}
 \subsub{DTE}
 \subsub{DCE}
 \subsub{CPE}
 \sub{Tipologie di rete}
-\sub{Topologia delle reti}
+\sub{Topologia di una rete}
 \subsection{Qualità della rete}
 \sub{Routing}
 \subsub{Tabella di routing}
 \code{netstat -nr}
+\sub{Protocolli di routing}
+%Claudio
+\subsub{ICMP} 
+\subsub{IGMP} 
+\subsub{RIP} 
+\subsub{OSPF} 
 
-\sub{Internet Protocol (IP)}
-
-
-\sub{Protocolli di routing dinamico}
-\subsub{ICMP}
-\subsub{IGMP}
-\subsub{RIP}
-\subsub{OSPF}
-
-
-\textbf{Claudio} Pannacci
-\newpage
-\sec{Livello di Trasporto}
-\sub{Protocolli}
-\subsub{TCP}
-\subsub{UDP}
+\sub{Internet Protocol (IP)} 
 \newpage
 
-\sec{Livello Applicazione}
-\sub{Servizi di Rete}
-Tommaso
+\sec{Livello di trasporto}
+\sub{Protocolli} 
+\subsub{TCP} 
+\subsub{UDP} 
+\newpage
+
+\sec{Livello delle applicazioni}
+\sub{Servizi di rete}
+%Tommaso
 \subsub{Telnet}
-\subsub{FTP}
-\subsub{SSH}
-\subsub{BGP}
-\subsub{DHCP}
-\subsub{DNS}
-\subsub{HTTP}
-
+\subsub{FTP} 
+\subsub{SSH} 
+\subsub{BGP} 
+\subsub{DHCP} 
+\subsub{DNS} 
+\subsub{HTTP} 
 \end{document}
