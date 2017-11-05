@@ -24,7 +24,7 @@
 \newpage
 
 \sec{Introduzione}
-Gioara 
+%Gioara 
 \sub{Il modello di riferimento ISO/OSI}
 Il modello Open Systems Interconnection (abbreviato in modello ISO/OSI) è stato progettato dall’International Organization for Standardization (ISO) come modello di riferimento per consentire una comunicazione aperta tra diversi sistemi tecnici. Questo punto diventa più chiaro, se si pensa alle origini di Internet: alla fine degli anni ’70 i leader del settore nelle tecnologie di rete si ritrovarono di fronte al problema che le architetture di rete proprietarie si potevano collegare solo tramite dispositivi propri, infatti nessun produttore aveva pensato di costruire componenti hardware o software compatibili con le specificazioni di altri fornitori. Ma un progetto come quello di Internet presuppone alcuni standard per poter rendere possibile una comunicazione comune.
 Il modello lSO/OSI è nato dal tentativo di creare uno standard di questo tipo e offre una base per gli standard di comunicazione, indipendentemente dai fornitori. In base a questo modello, il complesso processo della comunicazione di rete si divide in sette strati, i livelli (in inglese layer). Si parla perciò anche di una comunicazione per livelli. All’interno della comunicazione tra due sistemi devono essere svolti degli specifici compiti su ogni singolo livello, tra questi rientrano ad esempio il controllo della comunicazione, l’indirizzamento del sistema target o la conversione dei pacchetti in segnali fisici. Ma questo funziona solo se tutti i sistemi coinvolti nella comunicazione si attengono a regole precise, stabilite nei protocolli, che si applicano ai singoli livelli o si possono utilizzare su ciascuno di questi (multilivello).
@@ -65,12 +65,13 @@ Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente
 \begin{itemize}
 \item $u$ è l'ampiezza istantanea
 \item $U$ è l'ampiezza massima
-\item $\omega $ è la velocità angolare %va spiegato meglio
+\item $\omega $ è la velocità angolare 
+va spiegato meglio
 \item $\Phi $ è lo sfasamento rispetto all'origine
 \item l'intervallo di tempo impiegato dall'onda per tornare allo stesso livello d'intensità è detto \textit{periodo}.
 \item $1/t=f$ è detta \textit{frequenza} (misurabile in Hz)\\\\
 \end{itemize}
-%la spiegazione trigonometrica va inclusa? 
+La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
 \begin{figure}
 \centering
 \includegraphics[scale=0.5]{segnali_sin.png}
