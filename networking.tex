@@ -1,4 +1,4 @@
-\documentclass[a4paper,11pt]{paper}
+\documentclass[a4paper,11pt]{article}
 \author{Quelli della B1}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
@@ -24,9 +24,7 @@
 \newpage
 
 \sec{Introduzione}
-Gioara
-\subsection{Terminologia}
-\subsub{Tipi di flusso trasmissivo} 
+Gioara 
 \sub{Il modello di riferimento ISO/OSI}
 \sub{Internet protocol suite (TCP/IP)}
 
@@ -132,6 +130,11 @@ dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
 \newpage
 \sec{Livello di Collegamento}
 
+\sub{Tipi di flusso trasmissivo}
+\subsub{Simplex}
+\subsub{Half-Duplex}
+\subsub{Full-Duplex}
+
 \sub{Tipi di trasmissione}
 \subsub{Sincrona}
 \subsub{Asincrona}
@@ -141,11 +144,6 @@ dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
 \sub{Controllo degli errori}
 \subsub{Ridondanza}
 
-\sub{Protocolli primario-secondario}
-\subsub{RTS-CTS}
-\subsub{XON-XOF}
-\subsub{ARQ}
-
 \sub{Protocolli internet} 
 \subsub{ARP} 
 \subsub{RARP} 
@@ -154,21 +152,31 @@ dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
  
 \sub{Ethernet} 
 \newpage
+
+
 \sec{Livello di Rete}
 
 \subsection{Terminologia}
+%Claudio
 \subsub{Rete}
+Insieme di dispositivi connessi da canali di comunicazione.
 \subsub{DTE}
+Data Terminal Equipment: qualunque dispositivo che è la sorgente o la destinazione di una comunicazione di dati.
+Un esempio è il Personal Computer (PC). 
 \subsub{DCE}
+Data Circuit-terminating Equipment o Data Communication Equipment: dispositivo intermedio tra \vedi{DTE} e il resto della rete, esegue conversioni di segnale, correzione di errori e gestisce il clock dei dispositivi connessi. Può anche essere del \vedi{DTE}. Tipicamente è un Modem-Router.
 \subsub{CPE}
+Customer Premises Equipment: ISDN
+
 \sub{Tipologie di rete}
+
+
 \sub{Topologia di una rete}
 \subsection{Qualità della rete}
 \sub{Routing}
 \subsub{Tabella di routing}
 \code{netstat -nr}
 \sub{Protocolli di routing}
-%Claudio
 \subsub{ICMP} 
 \subsub{IGMP} 
 \subsub{RIP} 
@@ -178,6 +186,13 @@ dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
 \newpage
 
 \sec{Livello di trasporto}
+
+\sub{Protocolli primario-secondario}
+\subsub{RTS-CTS}
+\subsub{XON-XOF}
+\subsub{ARQ}
+Il protocollo ARQ è di tipo \vedi{Full-Duplex}
+
 \sub{Protocolli} 
 \subsub{TCP} 
 \subsub{UDP} 
