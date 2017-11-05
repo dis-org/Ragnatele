@@ -14,7 +14,7 @@ Allega un file .txt (no altri formati) in cui spieghi in quale sezione vada inco
 * Per creare un tuo branch (da farsi una sola volta) utilizzare i seguenti comandi:
 	1. ` $git branch *nome_branch* //creazione branch `
 	2. ` $git checkout *nome_branch* //il nuovo branch viene impostato come tuo spazio di lavoro `
-	3. ` $git push --set-upstream *nome_branch* //creazione branch online, su GitHub `
+	3. ` $git push --set-upstream origin *nome_branch* //creazione branch online, su GitHub `
 * Prima di fare modifiche:
 	1. ` $git pull origin master //se harisont ha comunicato di aver effettuato il merge `
 	2. ` $git pull //in ogni altro caso `
