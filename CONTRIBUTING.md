@@ -5,7 +5,8 @@ vari rami verranno riuniti il più spesso possibile da harisont.
 
 ## Se conosci il latex
 * Utilizza ` \code{} ` per parti di codice e comandi da terminale menzionati nel testo;
-* Utilizza ` \vedi{NOME_SOTTOSEZIONE} ` per creare un riferimenti all'interno del testo.
+* Utilizza ` \vedi{Nome_sottosezione} ` (si rispettino eventuali maiuscole iniziali) per creare riferimenti all'interno del 
+testo.
 
 ## Se non conosci il latex
 Allega un file .txt (no altri formati) in cui spieghi in quale sezione vada incollato il paragrafo scritto.
