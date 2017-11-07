@@ -74,7 +74,7 @@ va spiegato meglio
 La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
 \begin{figure}
 \centering
-\includegraphics[scale=0.5]{segnali_sin.png}
+\fbox{\includegraphics[scale=0.5]{segnali_sin.png}}
 \caption{Rappresentazione grafica di un segnale sinusoidale}\label{fig. 1}
 \end{figure}
 
@@ -135,7 +135,7 @@ Si parla di modulazione ad onda continua nel momento in cui viene modulata una p
 \end{itemize}
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{am_fm_pm.png}
+\fbox{\includegraphics[scale=0.5]{am_fm_pm.png}}
 \caption{Confronto tra tipologie di modulazione ad onda continua}\label{fig. 2}
 \end{figure}
 \subsub{Impulsiva}
@@ -146,11 +146,22 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{pam_pwm_ppm_pcm.png}
+\fbox{\includegraphics[scale=0.5]{pam_pwm_ppm_pcm.png}}
 \caption{Confronto tra tipologie di modulazione impulsiva}
 \label{fig. 3}
 \end{figure}
-\item \textbf{PCM} (Pulse Code Modulation), nata intorno agli anni '40 dall'esigenza di aumentare il numero di collegamenti telefonici interurbani. 
+\item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
+\begin{itemize}
+\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
+\item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. %da finire
+\item \textbf{codifica}:
+\end{itemize}
+\begin{figure}[h]
+\centering
+\fbox{\includegraphics[scale=0.5]{pcm.jpg}}
+\caption{Fasi della PCM}
+\label{fig. 4}
+\end{figure}
 \end{itemize}
 
 \subsub{Digitale}
