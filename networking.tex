@@ -59,7 +59,7 @@ Al fine di rappresentare l'informazione in maniera tale da renderne più semplic
 \item EBCDIC (Extended Binary Coded Decimal Code, 8 bit), in uso presso le banche
 \end{itemize}
 
-\subsubsection{Segnale}
+\subsub{Segnale}
 Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente un'informazione. Un segnale \textbf{analogico} varia in modo continuo nel tempo ed ha infiniti livelli di intensità; un segnale \textbf{digitale} varia invece in modo discreto e ha solo due livelli di intensità. Ogni tipo di dato può essere rappresentato in entrambe le maniere e può essere convertito da analogico a digitale e viceversa.
 \\\\Fra i segnali analogici assumono particolare rilevanza i \textbf{segnali sinusoidali}, ossia segnali che variano nel tempo secondo una legge del tipo \[u=Usen(\omega t+\Phi )\] dove 
 \begin{itemize}
@@ -74,7 +74,7 @@ va spiegato meglio
 La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
 \begin{figure}
 \centering
-\includegraphics[scale=0.5]{segnali_sin.png}
+\fbox{\includegraphics[scale=0.5]{segnali_sin.png}}
 \caption{Rappresentazione grafica di un segnale sinusoidale}\label{fig. 1}
 \end{figure}
 
@@ -130,15 +130,40 @@ Sovente capita che l'informazione debba essere convertita in maniera idonea ad e
 Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie:
 \begin{itemize}
 \item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante. Per quel che riguarda la trasmissione digitale, lo 0 è associato a bassa potenza e l'1 ad alta potenza.
-\item \textbf{FM} (Frequency Modulation): 
-\item \textbf{PM} (Phase Modulation): 
+\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rafefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
+\item \textbf{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale. 
 \end{itemize}
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.5]{am_fm_pm.png}
+\fbox{\includegraphics[scale=0.5]{am_fm_pm.png}}
 \caption{Confronto tra tipologie di modulazione ad onda continua}\label{fig. 2}
 \end{figure}
 \subsub{Impulsiva}
+La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codificata in una serie di impulsi. I principali tipi di modulazione impulsiva sono:
+\begin{itemize}
+\item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM
+\item \textbf{PFM} (Pulse Frequency Modulation), analoga alla FM
+\item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM
+\begin{figure}[h]
+\centering
+\fbox{\includegraphics[scale=0.5]{pam_pwm_ppm_pcm.png}}
+\caption{Confronto tra tipologie di modulazione impulsiva}
+\label{fig. 3}
+\end{figure}
+\item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
+\begin{itemize}
+\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
+\item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. %da finire
+\item \textbf{codifica}:
+\end{itemize}
+\begin{figure}[h]
+\centering
+\fbox{\includegraphics[scale=0.5]{pcm.jpg}}
+\caption{Fasi della PCM}
+\label{fig. 4}
+\end{figure}
+\end{itemize}
+
 \subsub{Digitale}
 
 \sub{Alterazioni del segnale}
