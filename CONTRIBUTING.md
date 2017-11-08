@@ -4,16 +4,28 @@ nell'indice, sentendoti libero di aggiungervi eventuali argomenti mancanti. Ti r
 vari rami verranno riuniti il più spesso possibile da harisont.
 
 ## Se conosci il latex
-* Utilizza ` **\code{}** ` per parti di codice e comandi da terminale menzionati nel testo;
-* Utilizza ` **\vedi{*NOME_SOTTOSEZIONE*}** ` per creare un riferimenti all'interno del testo.
+* Utilizza ` \code{} ` per parti di codice e comandi da terminale menzionati nel testo;
+* Utilizza ` \vedi{Nome_sottosezione} ` (si rispettino eventuali maiuscole iniziali) per creare riferimenti all'interno del 
+testo.
+* Inserisci le immagini nel modo che segue:
+```
+\begin{figure}[h]
+\centering
+\fbox{\includegraphics[scale=0.5]{nome_immagine.estensione}}
+\caption{Descrizione immagine}\label{fig. (n° 
+progressivo)}
+\end{figure}
+```
+(NB: l'immagine deve essere salvata nella cartella 
+`images`). 
 
 ## Se non conosci il latex
 Allega un file .txt (no altri formati) in cui spieghi in quale sezione vada incollato il paragrafo scritto.
  
 ## Precisazioni su Git e GitHub
 * Per creare un tuo branch (da farsi una sola volta) utilizzare i seguenti comandi:
-	1. ` $git branch *nome_branch* //creazione branch `
-	2. ` $git checkout *nome_branch* //il nuovo branch viene impostato come tuo spazio di lavoro `
+	1. ` $git branch nome_branch //creazione branch `
+	2. ` $git checkout nome_branch //il nuovo branch viene impostato come tuo spazio di lavoro `
 	3. ` $git push --set-upstream origin *nome_branch* //creazione branch online, su GitHub `
 * Prima di fare modifiche:
 	1. ` $git pull origin master //se harisont ha comunicato di aver effettuato il merge `
@@ -22,5 +34,6 @@ Allega un file .txt (no altri formati) in cui spieghi in quale sezione vada inco
 	1. ` $git status //controlla lo stato delle cose `
 	2. `$git add . //traccia tutti i file: non preoccuparti di eventuali file intermedi ottenuti in compilazione, il 
 .gitignore li ignora `
-	1. ` $git commit -a -m "*Breve messaggio di commit in cui spieghi il tuo lavoro*" `
+	1. ` $git commit -a -m "Breve messaggio di commit in cui spieghi il tuo lavoro" `
 	2. ` $git push //carica online il tuo lavoro `
+
