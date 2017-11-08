@@ -39,7 +39,9 @@ La comunicazione tra due computer può apparire banale agli utenti, ma in realt�
 I sette livelli del modello ISO/OSI si dividono in due gruppi in base ai compiti che svolgono: orientati all’applicazione e orientati al trasporto. I processi che si svolgono sui singoli livelli si possono spiegare prendendo ad esempio la trasmissione e-mail da un dispositivo ad un mail server.
 
 \sub{Internet protocol suite (TCP/IP)}
-
+\sub{Standards}
+%definizione di 'standard'
+\subsub{IEEE 802}
 \newpage
 
 \sec{Livello Fisico}
@@ -47,7 +49,7 @@ Nonostante l'amministratore di rete non abbia la possibilità di influirvi diret
 
 \subsection{Terminologia}
 \subsub{Informazione} 
-L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati. 
+L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati.
 
 \subsub{Codice}
 Al fine di rappresentare l'informazione in maniera tale da renderne più semplice la gestione, un codice associa sequenze di bit a caratteri. I codici che godono della più ampia diffusione sono:
@@ -195,10 +197,10 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \subsub{ARQ}
 %NB protocolli nel livello di rete?
 \sub{Protocolli internet} 
-\subsub{ARP} 
+\subsub{ARP}
 \subsub{RARP} 
-\subsub{NDP} 
-\subsub{MAC} 
+\subsub{NDP}
+\subsub{MAC}
  
 \sub{Ethernet} 
 \newpage
@@ -214,13 +216,23 @@ Data Terminal Equipment: qualunque dispositivo che è la sorgente o la destinazi
 Un esempio è il Personal Computer (PC). 
 \subsub{DCE}
 Data Circuit-terminating Equipment o Data Communication Equipment: dispositivo intermedio 
-tra \vedi{DTE} e il resto della rete, esegue conversioni di segnale, correzione di errori
-e gestisce il clock dei dispositivi connessi. Può anche essere del \vedi{DTE}. Tipicamente è un Modem-Router.
+tra uno o più \vedi{DTE} e il resto della rete; esegue conversioni di segnale, correzione di errori
+e gestisce il clock dei dispositivi connessi. Può anche essere interno al \vedi{DTE}. Tipicamente è un Modem.
 \subsub{CPE}
-Customer Premises Equipment: ISDN
+Customer Premises Equipment: dispositivo terminale connesso direttamente ad una \vedi{WAN}. Rientrano in questa categoria telefoni, Router e Switch di rete.
 
-\sub{Tipologie di rete}
+\sub{Tipologie di rete cablata}
+\subsub{PAN} Personal Area Network: Rete personale come PC e altri dispositivi domestici connessi tra di loro via cavo.
+\subsub{LAN} Local Area Network:
+\subsub{WAN} Wide Area Network:
+\subsub{MAN} Metropolitan Area Network:
+\subsub{GAN} Global Area Network:
 
+\sub{Tipologie di rete wireless}
+\subsub{NFC} Near-Field Communication: Lo scambio di informazioni tramite tag elettromagnetici.\\ Portata: 20cm.
+\subsub{BAN} Body Area Network: Rete che collega dispositivi indossabili, raggio di azione inferiore al metro.
+\subsub{WPAN} Wireless Personal Area Network: 
+\subsub{WLAN} Wireless Local Area Network:
 
 \sub{Topologia di una rete}
 \subsection{Qualità della rete}
@@ -238,10 +250,6 @@ Customer Premises Equipment: ISDN
 
 \sec{Livello di trasporto}
 
-\sub{Protocolli primario-secondario}
-\subsub{RTS-CTS}
-\subsub{XON-XOF}
-\subsub{ARQ}
 Il protocollo ARQ è di tipo \vedi{Full-Duplex}
 
 \sub{Protocolli} 
