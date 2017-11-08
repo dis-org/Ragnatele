@@ -182,6 +182,9 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \newpage
 \sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
+\sub{Ethernet} 
+\subsub {Ethernet framing}
+
 \sub{Tipi di trasmissione}
 \subsub{Sincrona}
 \subsub{Asincrona}
@@ -191,21 +194,20 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \sub{Controllo degli errori}
 \subsub{Ridondanza}
 
-\sub{Protocolli primario-secondario}
-\subsub{RTS-CTS}
-\subsub{XON-XOF}
-\subsub{ARQ}
-%NB protocolli nel livello di rete?
-\sub{Protocolli internet} 
+%NB non credo vadano qui...
+%\sub{Protocolli primario-secondario}
+%\subsub{RTS-CTS}
+%\subsub{XON-XOF}
+%\subsub{ARQ}
+
+\sub{Protocolli di collegamento con lv3} 
 \subsub{ARP}
+Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
+L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP (contenente IP di sia di A che di B), B la chiamata a suo nome e risponde segnando l' IP di a in una cache di consultazione e riinviando il proprio mac address a A
 \subsub{RARP} 
-\subsub{NDP}
-\subsub{MAC}
+%\subsub{NDP} 
+%ARP, MAC, Ethernet da spostare nel lv. di rete?
  
-\sub{Ethernet} 
-\newpage
-
-
 \sec{Livello di Rete}
 %Claudio & Giorgio ---------------------------------------------------------------------------------------------------------------------
 \subsection{Terminologia}
