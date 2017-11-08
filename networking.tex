@@ -39,7 +39,9 @@ La comunicazione tra due computer può apparire banale agli utenti, ma in realt�
 I sette livelli del modello ISO/OSI si dividono in due gruppi in base ai compiti che svolgono: orientati all’applicazione e orientati al trasporto. I processi che si svolgono sui singoli livelli si possono spiegare prendendo ad esempio la trasmissione e-mail da un dispositivo ad un mail server.
 
 \sub{Internet protocol suite (TCP/IP)}
-
+\sub{Standards}
+%definizione di 'standard'
+\subsub{IEEE 802}
 \newpage
 
 \sec{Livello Fisico}
@@ -47,7 +49,7 @@ Nonostante l'amministratore di rete non abbia la possibilità di influirvi diret
 
 \subsection{Terminologia}
 \subsub{Informazione} 
-L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati. 
+L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati.
 
 \subsub{Codice}
 Al fine di rappresentare l'informazione in maniera tale da renderne più semplice la gestione, un codice associa sequenze di bit a caratteri. I codici che godono della più ampia diffusione sono:
@@ -153,8 +155,8 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
 \begin{itemize}
 \item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
-\item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. %da finire
-\item \textbf{codifica}:
+\item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'ampiezza è uguale per tutti i sottolivelli; di norma, tuttavia, essa segue una scala logaritmica. Com'è intuibile, la quanmtizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - si è verificato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze.
+\item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit (nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione).
 \end{itemize}
 \begin{figure}[h]
 \centering
@@ -192,7 +194,6 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \sub{Controllo degli errori}
 \subsub{Ridondanza}
 
-
 %NB non credo vadano qui...
 %\sub{Protocolli primario-secondario}
 %\subsub{RTS-CTS}
@@ -205,13 +206,10 @@ Due host internet possono comunicare solamente conoscendo il reciproco indirizzo
 L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP (contenente IP di sia di A che di B), B la chiamata a suo nome e risponde segnando l' IP di a in una cache di consultazione e riinviando il proprio mac address a A
 \subsub{RARP} 
 %\subsub{NDP} 
+%ARP, MAC, Ethernet da spostare nel lv. di rete?
  
- 
-
-
-
 \sec{Livello di Rete}
-%Claudio---------------------------------------------------------------------------------------------------------------------
+%Claudio & Giorgio ---------------------------------------------------------------------------------------------------------------------
 \subsection{Terminologia}
 \subsub{Rete}
 Insieme di dispositivi connessi da canali di comunicazione.
@@ -220,13 +218,23 @@ Data Terminal Equipment: qualunque dispositivo che è la sorgente o la destinazi
 Un esempio è il Personal Computer (PC). 
 \subsub{DCE}
 Data Circuit-terminating Equipment o Data Communication Equipment: dispositivo intermedio 
-tra \vedi{DTE} e il resto della rete, esegue conversioni di segnale, correzione di errori
-e gestisce il clock dei dispositivi connessi. Può anche essere del \vedi{DTE}. Tipicamente è un Modem-Router.
+tra uno o più \vedi{DTE} e il resto della rete; esegue conversioni di segnale, correzione di errori
+e gestisce il clock dei dispositivi connessi. Può anche essere interno al \vedi{DTE}. Tipicamente è un Modem.
 \subsub{CPE}
-Customer Premises Equipment: ISDN
+Customer Premises Equipment: dispositivo terminale connesso direttamente ad una \vedi{WAN}. Rientrano in questa categoria telefoni, Router e Switch di rete.
 
-\sub{Tipologie di rete}
+\sub{Tipologie di rete cablata}
+\subsub{PAN} Personal Area Network: Rete personale come PC e altri dispositivi domestici connessi tra di loro via cavo.
+\subsub{LAN} Local Area Network:
+\subsub{WAN} Wide Area Network:
+\subsub{MAN} Metropolitan Area Network:
+\subsub{GAN} Global Area Network:
 
+\sub{Tipologie di rete wireless}
+\subsub{NFC} Near-Field Communication: Lo scambio di informazioni tramite tag elettromagnetici.\\ Portata: 20cm.
+\subsub{BAN} Body Area Network: Rete che collega dispositivi indossabili, raggio di azione inferiore al metro.
+\subsub{WPAN} Wireless Personal Area Network: 
+\subsub{WLAN} Wireless Local Area Network:
 
 \sub{Topologia di una rete}
 \subsection{Qualità della rete}
@@ -244,10 +252,6 @@ Customer Premises Equipment: ISDN
 
 \sec{Livello di trasporto}
 
-\sub{Protocolli primario-secondario}
-\subsub{RTS-CTS}
-\subsub{XON-XOF}
-\subsub{ARQ}
 Il protocollo ARQ è di tipo \vedi{Full-Duplex}
 
 \sub{Protocolli} 
@@ -256,13 +260,27 @@ Il protocollo ARQ è di tipo \vedi{Full-Duplex}
 \newpage
 
 \sec{Livello delle applicazioni}
-\sub{Servizi di rete}
+Il livello delle applicazioni racchiude tutte le applicazioni dedicate all'utente finale. 
+Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (e.g. telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
+\sub{Protocolli}
 %Tommaso
-\subsub{Telnet}
-\subsub{FTP} 
-\subsub{SSH} 
+\subsub{Telnet e SSH} %standard odierno
+Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Principalmente, Telnet, \'e sempre stato utilizzato per fornire all'utente una sessione remota del terminale dell'host. L'host ascolta sulla porta 22 e l'utente stabilisce una connessione utilizzando il public IP, nome utente e password di un Unix user dell'host. L'unico grande problema di Telnet riguarda la sicurezza: \'e un protocollo non il criptato, ovvero la password il nome utente e tutte le altre informazioni inviate, risultano completamente chiare a qualsiasi utente estraneo alla conversazione.
+%Qui \'e dove il protocollo SSH 
+\subsub{FTP e SCP} %standard odierno
 \subsub{BGP} 
-\subsub{DHCP} 
+\subsub{DHCP} %Discovering ,Offering , Codice 
 \subsub{DNS} 
-\subsub{HTTP} 
+\subsub{HTTP/HTTPS} 
+\subsub{NFS}
+\subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
+
+\sub{Implementazioni}
+
+\subsub{Telnet e SSH} %standard odierno
+\subsub{FTP e SCP} %standard odierno
+\subsub{DNS} 
+\subsub{HTTP/HTTPS} 
+\subsub{NFS}
+\subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
 \end{document}
