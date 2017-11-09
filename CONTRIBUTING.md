@@ -17,7 +17,8 @@ progressivo)}
 \end{figure}
 ```
 (NB: l'immagine deve essere salvata nella cartella 
-`images`). 
+`images`);
+* Se hai bisogno di creare una piccola sezione *all'interno di una sotto-sottosezione*, utilizza il tag `\paragraph{titolo_paragrafo}`.
 
 ## Se non conosci il latex
 Allega un file .txt (no altri formati) in cui spieghi in quale sezione vada incollato il paragrafo scritto.
