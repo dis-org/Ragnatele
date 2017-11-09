@@ -225,7 +225,7 @@ Customer Premises Equipment: dispositivo terminale connesso direttamente ad una 
 
 \sub{Tipologie di rete cablata}
 \subsub{PAN} Personal Area Network: Rete personale come quella composta dal PC e da altri dispositivi domestici connessi tra di loro via cavo.
-\subsub{LAN} Local Area Network: Rete con un raggio limitato ad una abitazione o un edificio. (La prima rete LAN è stata Ark Net nel 1977)
+\subsub{LAN} Local Area Network: Rete con un raggio limitato ad una abitazione o un edificio. (La prima rete LAN è stata ARKNET nel 1977)
 \subsub{WAN} Wide Area Network: Rete che copre ampie aree geografiche connettendo tra loro più sottoreti locali. 
 \subsub{MAN} Metropolitan Area Network: Rete metropolitana caratterizzata da una velocità di trasmissione molto elevata (tipicamente fibra ottica).
 \subsub{GAN} Global Area Network: Internet.
@@ -236,7 +236,17 @@ Customer Premises Equipment: dispositivo terminale connesso direttamente ad una 
 \subsub{WPAN} Wireless Personal Area Network: Rete di dispositivi personali in un raggio inferiore ai 20 metri, ad esempio stampanti Bluetooth.
 \subsub{WLAN} Wireless Local Area Network: LAN ottenuta tramite tegnologie wireless, ad esempio reti WiFi. 
 
-\sub{Topologia di una rete}
+\sub{Topologia delle reti}
+\subsub{Rete a dorsale}
+I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un interruzzione in qualunque punto della dorsale compromette tutta la rete.
+\subsub{Rete ad albero} La trasmissione avviene in modo gerarchico tra i nodi padre e figlio, fino ad arrivare alla \textit{root} dalla quale dipende tutto il funzionamento della rete.
+\subsub{Rete a stella} Tutti i dispositivi sono connessi ad un HUB (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
+\subsub{Rete ad anello} Le informazioni vengono passate da un dispositivo all'altro in modo ciclico, la trasmissione è unidirezionale anche se questo si può ovviare con un secondo anello in direzione opposta. Questa topologia era tipica delle \vedi{LAN} TokenRing, ora viene utilizzata principalmente nelle \vedi{MAN} in fibra ottica.
+\subsub{Rete a maglia} In inglese \textit{mesh}, è una rete in cui ogni dispositivo può essere connesso ad ogni altro dispositivo ottenendo di fatto un grafo connesso. \'E la topologia di rete meno vulnerabile ma è poco utilizzata nelle reti cablate a causa dei costi elevati. \'E diffusa invece nelle \vedi{WLAN}, spesso nella versione \textit{ad -hoc} dove i collegamenti nascono e muoiono dinamicamente. In questa topologia il \vedi{Routing} viene effettuato da ogni nodo.
+
+%GRID? 
+
+
 \subsection{Qualità della rete}
 \sub{Routing}
 \subsub{Tabella di routing}
