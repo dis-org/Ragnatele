@@ -12,8 +12,7 @@ testo.
 \begin{figure}[h]
 \centering
 \fbox{\includegraphics[scale=0.5]{nome_immagine.estensione}}
-\caption{Descrizione immagine}\label{fig. (n° 
-progressivo)}
+\caption{Descrizione immagine}\label{fig. (n° progressivo)}
 \end{figure}
 ```
 (NB: l'immagine deve essere salvata nella cartella 
