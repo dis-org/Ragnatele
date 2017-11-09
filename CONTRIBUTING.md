@@ -21,7 +21,7 @@ progressivo)}
 * Se hai bisogno di creare una piccola sezione *all'interno di una sotto-sottosezione*, utilizza il tag `\paragraph{titolo_paragrafo}`.
 
 ## Se non conosci il latex
-Allega un file .txt (no altri formati) in cui spieghi in quale sezione vada incollato il paragrafo scritto.
+Invia un file .txt (no altri formati) a uzkamascio@gmail.com contenente il testo e le indicazioni sulla sezione in cui collocarlo.
  
 ## Precisazioni su Git e GitHub
 * Per creare un tuo branch (da farsi una sola volta) utilizzare i seguenti comandi:
