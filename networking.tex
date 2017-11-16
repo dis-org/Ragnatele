@@ -29,6 +29,8 @@
 \subsub{IEEE}
 \subsub{CCITT - ITU}
 \subsub{ISO}
+\subsub{IETF}
+Internet Engineering Task Force:
 %Gioara 
 \sub{Il modello di riferimento ISO/OSI}
 Il modello Open Systems Interconnection (abbreviato in modello ISO/OSI) è stato progettato dall’International Organization for Standardization (ISO) come modello di riferimento per consentire una comunicazione aperta tra diversi sistemi tecnici. Questo punto diventa più chiaro, se si pensa alle origini di Internet: alla fine degli anni ’70 i leader del settore nelle tecnologie di rete si ritrovarono di fronte al problema che le architetture di rete proprietarie si potevano collegare solo tramite dispositivi propri, infatti nessun produttore aveva pensato di costruire componenti hardware o software compatibili con le specificazioni di altri fornitori. Ma un progetto come quello di Internet presuppone alcuni standard per poter rendere possibile una comunicazione comune.
@@ -44,9 +46,13 @@ La comunicazione tra due computer può apparire banale agli utenti, ma in realt�
 I sette livelli del modello ISO/OSI si dividono in due gruppi in base ai compiti che svolgono: orientati all’applicazione e orientati al trasporto. I processi che si svolgono sui singoli livelli si possono spiegare prendendo ad esempio la trasmissione e-mail da un dispositivo ad un mail server.
 
 \sub{Internet protocol suite (TCP/IP)}
-\sub{Standards}
+
+
+\sub{Standardizzazione}
 %definizione di 'standard'
 \subsub{IEEE 802}
+\subsub{RFC}
+Request For Comments: documento pubblicato dalla \vedi{IETF} riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{rfc-editor.org}
 \newpage
 
 \sec{Livello Fisico}
@@ -199,6 +205,11 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \sub{Controllo degli errori}
 \subsub{Ridondanza}
 
+\sub{Flussi trasmissivi}
+\subsub{Simplex}
+\subsub{Half-Duplex}
+\subsub{Full-Duplex}
+
 %NB non credo vadano qui...
 %\sub{Protocolli primario-secondario}
 %\subsub{RTS-CTS}
@@ -233,7 +244,7 @@ Customer Premises Equipment: dispositivo terminale connesso direttamente ad una 
 \subsub{LAN} Local Area Network: Rete con un raggio limitato ad una abitazione o un edificio. (La prima rete LAN è stata ARKNET nel 1977)
 \subsub{WAN} Wide Area Network: Rete che copre ampie aree geografiche connettendo tra loro più sottoreti locali. 
 \subsub{MAN} Metropolitan Area Network: Rete metropolitana caratterizzata da una velocità di trasmissione molto elevata (tipicamente fibra ottica).
-\subsub{GAN} Global Area Network: Internet.
+\subsub{GAN} Global Area Network: \vedi{Internet}.
 
 \sub{Tipologie di rete wireless}
 \subsub{NFC} Near-Field Communication: Lo scambio di informazioni tramite tag elettromagnetici.\\ Portata: 20cm.
@@ -254,7 +265,18 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 \subsection{Qualità della rete} %da rivedere
 \subsub{Jitter}
 
-\sub{Internet Protocol (IP)} 
+\sub{Internet}
+Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente ed a condividere servizi, definita formalmente nel \vedi{RFC}1122 (originariamente in \vedi{RFC}760.
+\subsubsection{Internet Protocol (IP)} \label{IP}
+Fornisce le funzioni necessarie per l'invio di un pacchetto di bit detto \textit{Internet datagram} da un host all'altro. Ogni nodo è identificato da un indirizzo IP.
+\paragraph{Differenze tra IPv4 e IPv6}
+L’IP versione 4 fornisce anche i servizi di
+frammentazione e riassemblaggio di datagram,
+quando la trasmissione avviene attraverso reti con
+capacità di trasporto di pacchetti più piccola del
+pacchetto originale (dovuto alle diverse tecnologie di
+rete del passato). IP versione 6 abolisce questo
+comportamento. %copiato dalle slide (da rivedere e ampliare)
 
 
 \sub{Routing}
