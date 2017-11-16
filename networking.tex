@@ -23,7 +23,7 @@
 \tableofcontents
 \newpage
 
-\sec{Introduzione}
+\section*{Introduzione}
 %quattro parole sulla storia del networking
 \sub{Organizzazioni}
 \subsub{IEEE}
@@ -216,7 +216,7 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 %\subsub{XON-XOF}
 %\subsub{ARQ}
 
-\sub{Protocolli di collegamento con lv3} 
+\subsection{Protocolli di collegamento con lv3} 
 \subsub{ARP}
 Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
 L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP (contenente IP di sia di A che di B), B la chiamata a suo nome e risponde segnando l' IP di a in una cache di consultazione e riinviando il proprio mac address a A
@@ -262,11 +262,8 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 
 %GRID? 
 
-\subsection{Qualità della rete} %da rivedere
-\subsub{Jitter}
-
 \sub{Internet}
-Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente ed a condividere servizi, definita formalmente nel \vedi{RFC}1122 (originariamente in \vedi{RFC}760.
+Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente ed a condividere servizi, definita formalmente nel \vedi{RFC}1122 (originariamente in \vedi{RFC}760).
 \subsubsection{Internet Protocol (IP)} \label{IP}
 Fornisce le funzioni necessarie per l'invio di un pacchetto di bit detto \textit{Internet datagram} da un host all'altro. Ogni nodo è identificato da un indirizzo IP.
 \paragraph{Differenze tra IPv4 e IPv6}
@@ -279,9 +276,32 @@ rete del passato). IP versione 6 abolisce questo
 comportamento. %copiato dalle slide (da rivedere e ampliare)
 
 
-\sub{Routing}
+\subsection{Routing con IPv4} \label{Routing}
+Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso nodi intermedi che implementano un modulo internet.
+%frase che non mi convince:
+Questi moduli regolamentano l'interpretazione dei campi dell' indirizzo IP al fine di frammentare e riassemblare i datagram.\\
+
+\subsub{Router}
+Nodo provvisto di procedure specifiche volte ad effettuare le scelte di routing.
+
+\subsub{Gateway}
+Router 
+
 \subsub{Tabella di routing}
-\code{netstat -nr}
+Nella tabella di routing ogni riga rappresenta una "strada", composta da 
+\begin{itemize}
+\item indirizzo dell'host o sottorete di destinazione
+\item indirizzo dell'eventuale prossimo gateway da attraversare 
+\item "distanza" dalla destinazione, detta \vedi{Metric}  
+\end{itemize}
+Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{netstat.png}
+\caption{Output del comando \code{netstat -r}}\label{fig. 5}
+\end{figure}
+\\\'E Possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
+
 \sub{Protocolli di routing}
 \subsub{ICMP} 
 \subsub{IGMP} 
@@ -294,7 +314,7 @@ comportamento. %copiato dalle slide (da rivedere e ampliare)
 
 Il protocollo ARQ è di tipo \vedi{Full-Duplex} %missing
 
-\sub{Protocolli} 
+\subsection{Protocolli} 
 \subsub{TCP} 
 \subsub{UDP} 
 \newpage
@@ -305,12 +325,8 @@ Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: 
 \subsection{Protocolli}
 %Tommaso
 \subsub{Telnet e SSH} %standard odierno
-\paragraph{Protocollo}
-Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Principalmente, Telnet, \'e sempre stato utilizzato per fornire all'utente una sessione remota del terminale dell'host. L'host ascolta sulla porta 23 e l'utente stabilisce una connessione utilizzando il public IP, nome utente e password di un Unix user dell'host. L'unico grande problema di Telnet riguarda la sicurezza: \'e un protocollo non il criptato, ovvero la password il nome utente e tutte le altre informazioni inviate, risultano completamente chiare a qualsiasi utente estraneo alla conversazione.
-SSH (SecureShell) nasce per ovviare questo problema: svolge le stesse funzioni di Telnet (standard porta 22) in maniera molto pi\'u sicura: utilizza coppie di chiavi pubbliche-private per cryptare la conversazione. L'host possiede la chiave pubblica che non \'e mai trasferita via internet e i client utilizzando la chiave privata corrispondente.
-SSH \'e ormai lo standard per le connessioni da remoto. Telnet \'e ormai un servizio bloccato (nessuno permette delle connessioni di tipo telnet) ed inutilizzato.
-\paragraph{Implementazione}
-
+Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Principalmente, Telnet, \'e sempre stato utilizzato per fornire all'utente una sessione remota del terminale dell'host. L'host ascolta sulla porta 22 e l'utente stabilisce una connessione utilizzando il public IP, nome utente e password di un Unix user dell'host. L'unico grande problema di Telnet riguarda la sicurezza: \'e un protocollo non il criptato, ovvero la password il nome utente e tutte le altre informazioni inviate, risultano completamente chiare a qualsiasi utente estraneo alla conversazione.
+%Qui \'e dove il protocollo SSH 
 \subsub{FTP e SCP} %standard odierno
 \subsub{BGP} 
 \subsub{DHCP} %Discovering ,Offering , Codice 
@@ -318,5 +334,4 @@ SSH \'e ormai lo standard per le connessioni da remoto. Telnet \'e ormai un serv
 \subsub{HTTP/HTTPS} 
 \subsub{NFS}
 \subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
-
 \end{document}
