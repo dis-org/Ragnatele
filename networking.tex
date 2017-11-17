@@ -266,6 +266,13 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente ed a condividere servizi, definita formalmente nel \vedi{RFC}1122 (originariamente in \vedi{RFC}760).
 \subsubsection{Internet Protocol (IP)} \label{IP}
 Fornisce le funzioni necessarie per l'invio di un pacchetto di bit detto \textit{Internet datagram} da un host all'altro. Ogni nodo è identificato da un indirizzo IP.
+\subsubsection{Indirizzo IP} Numero che identifica univocamente i dispositivi nell'ambito di una rete. In particolare l'IPv4, su 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
+\begin{figure}[h]
+\centering
+\fbox{\includegraphics[scale=0.8]{ipaddress.png}}
+\caption{Suddivisione in classi degli indirizzi ip}\label{fig. n}
+\end{figure}
+\subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo ip i tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si può indicare la sua netmask predefinita sia come $0.127.127.18/8$, sia come $255.0.0.0$.
 \paragraph{Differenze tra IPv4 e IPv6}
 L’IP versione 4 fornisce anche i servizi di
 frammentazione e riassemblaggio di datagram,
@@ -274,7 +281,6 @@ capacità di trasporto di pacchetti più piccola del
 pacchetto originale (dovuto alle diverse tecnologie di
 rete del passato). IP versione 6 abolisce questo
 comportamento. %copiato dalle slide (da rivedere e ampliare)
-
 
 \subsection{Routing con IPv4} \label{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso nodi intermedi che implementano un modulo internet.
@@ -300,7 +306,7 @@ Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
 \includegraphics[scale=0.5]{netstat.png}
 \caption{Output del comando \code{netstat -r}}\label{fig. 5}
 \end{figure}
-\\\'E Possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
+\\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
 
 \sub{Protocolli di routing}
 \subsub{ICMP} 
