@@ -316,7 +316,7 @@ In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul
 
 \sub{Topologia delle reti}
 \subsub{Rete a dorsale}
-I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un interruzzione in qualunque punto della dorsale compromette tutta la rete.
+I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un' interruzione in qualunque punto della dorsale compromette tutta la rete.
 \subsub{Rete ad albero} La trasmissione avviene in modo gerarchico tra i nodi padre e figlio, fino ad arrivare alla \textit{root} dalla quale dipende tutto il funzionamento della rete.
 \subsub{Rete a stella} Tutti i dispositivi sono connessi ad un HUB (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
 \subsub{Rete ad anello} Le informazioni vengono passate da un dispositivo all'altro in modo ciclico, la trasmissione è unidirezionale anche se questo si può ovviare con un secondo anello in direzione opposta. Questa topologia era tipica delle \vedi{LAN} TokenRing, ora viene utilizzata principalmente nelle \vedi{MAN} in fibra ottica.
@@ -354,16 +354,35 @@ L'header del datagram IPv4 contiene i seguenti campi:
 \caption{Formato header IPv4}\label{fig. 6}
 \end{figure}
 
-\subsub{Indirizzo IP} Numero che identifica univocamente ogni connessione di ogni host ad una rete. 
+\subsub{Indirizzo IP} Numero che identifica univocamente ogni dispostivo connesso ad una rete. Più propriamente, l'IP identifica una connessione: questa precisazione è necessaria in quanto una macchina -per esempio un router- può avere più interfacce di rete, più connessioni e dunque più indirizzi IP.
 In particolare l'IPv4, su 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
 \begin{figure}[h]
 \centering
 \fbox{\includegraphics[scale=0.8]{ipaddress.png}}
-\caption{Suddivisione in classi degli indirizzi ip}\label{fig. 7}
+\caption{Suddivisione in classi degli indirizzi IP}\label{fig. 7}
 \end{figure}
-\subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si esplicitare la sua netmask predefinita sia assieme all'indirizzo, come $0.127.127.18/8$, sia separatamente come $255.0.0.0$.
+\paragraph{Convenzioni} Nell'ambito degli indirizzi ip sussistono alcune convenzioni:
+\begin{itemize}
+\item se la parte host di un indirizzo è 0, si sta indicando non un host in particolare, bensì la rete stessa
+\item se la parte host di un indirizzo ha valore 1 su tutti i bit, si sta specificando un \textit{indirizzo broadcast}, utilizzato per inviare pacchetti a tutti gli host della rete
+\item l'indirizzo $0.0.0.0$ indica la \textit{default route}, indicante il gateway di default al fine di instradare pacchetti la cui destinazione non è nella tabella di routing. Si tratta di una scelta poco felice, poiché costituisce uno spreco di spazio d'indirizzamento di classe A
+\item l'indirizzo $127.0.0.1$ è il cosiddetto \textit{loopback address} (\code{localhost}), che sfrutta un interfaccia di rete virtuale
+\item gli indirizzi $10.0.0.0/8$, $172.16.0.0/12$, $192.168.0.0/16$ e $169.254.0.0/16$ sono riservati, ossia identificano reti private, e sono gestiti dai server NAT. %server NAT=? serve un \vedi{}
+\end{itemize}
+
+\paragraph{Configurazione}
+La configurazione di un indirizzo IP avviene automaticamente attraverso il protocollo \vedi{DHCP} o manualmente, specificando indirizzo IP dell'host, \vedi{Netmask}, \vedi{Gateway} di default e indirizzo IP del nameserver. %\vedi{nameserver} o qualcosa del genere
+\\Nei sistemi Unix-Linux, il comando per la configurazione manuale dell'IP è \code{ifconfig} (dove "if" sta per "interface"). La sintassi è la seguente:
+\\\\ \code{\$ ifconfig <nome interfaccia> <indirizzo IP> netmask <netmask\\ x.y.z.q> broadcast <indirizzo broadcast>} %forse meglio un esempio?
+\\\\Se non si specifica nulla, il comando \code{ifconfig} mostra lo stato delle diverse interfacce di rete.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=0.5]{ifconfig.png}
+\caption{Output del comando ifconfig su una macchina Linux}\label{fig. 8}
+\end{figure}
 \paragraph{Differenze tra IPv4 e IPv6}
 L’IP versione 4 fornisce anche i servizi di frammentazione e riassemblaggio di datagram, quando la trasmissione avviene attraverso reti con capacità di trasporto di pacchetti più piccola del pacchetto originale (dovuto alle diverse tecnologie di rete del passato). IP versione 6 abolisce questo comportamento, non più necessario. %copiato dalle slide (da rivedere e ampliare)
+\subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si esplicitare la sua netmask predefinita sia assieme all'indirizzo, come $0.127.127.18/8$, sia separatamente come $255.0.0.0$.
 
 \subsection{Routing con IPv4} \label{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso nodi intermedi che implementano un modulo internet.
@@ -381,16 +400,16 @@ Nella tabella di routing ogni riga rappresenta una "strada", composta da
 \begin{itemize}
 \item indirizzo dell'host o sottorete di destinazione
 \item indirizzo dell'eventuale prossimo gateway da attraversare 
-\item "distanza" dalla destinazione, detta \vedi{Metric}  
+\item "distanza" dalla destinazione, detta \vedi{Metric}
 \end{itemize}
 Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{netstat.png}
-\caption{Output del comando \code{netstat -r}}\label{fig. 8}
+\caption{Output del comando \code{netstat -r}}\label{fig. 9}
 \end{figure}
 \\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
-
+\subsub{Metric} %non necessariamente va qui
 \sub{Protocolli di routing}
 \subsub{ICMP} 
 \subsub{IGMP} 
