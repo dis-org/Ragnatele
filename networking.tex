@@ -6,6 +6,7 @@
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{hyperref}
 \usepackage{nameref} 
+\usepackage{siunitx} 
 \graphicspath{{./images/}}
 
 \def\code#1{\texttt{#1}}
@@ -27,13 +28,32 @@
 %quattro parole sulla storia del networking
 \sub{Organizzazioni}
 \subsub{IEEE}
-\subsub{CCITT - ITU}
+Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare l'IEEE 802 LAN/MAN Standards Committee, commissione preposta a sviluppare standard per le reti locali e metropolitane. 
+\subsub{CCITT}
+Consultative Committee for International Telephony and Telegraphy: parte della \textbf{ITU} (International Telegraph Union), agenzia dell'ONU specializzata in telecomunicazioni, articola i propri lavori in quadrienni, gli \textit{Study Period}, al termine dei quali ha luogo un’assemblea plenaria incaricata di emettere le cosiddette raccomandazioni.
 \subsub{ISO}
+International Standards Organization, consulente dell'ONU allo scopo di promuovere a livello globale lo sviluppo di standards, con l’obiettivo di favorire lo scambio internazionale di beni e servizi. Il suo maggior successo nell'ambito delle telecomunicazioni è il concepimento del \vedi{Modello di riferimento ISO/OSI}.
 \subsub{IETF}
-Internet Engineering Task Force:
+Internet Engineering Task Force: organismo internazionale libero, composto da tecnici, specialisti e ricercatori interessati all'evoluzione tecnica e tecnologica di Internet. Si occupa di sviluppare e promuovere standard Internet, in stretta cooperazione con il \vedi{W3C} e l'\vedi{ISO}. L'iscrizione è a titolo personale e non come rappresentanti di qualche istituzione pubblica o privata. 
+\subsub{IRTF}
+Internet Research Task Force: organizzazione che coordina i diversi gruppi di ricerca in ambito Internet, controllata dall'\textbf{IRSG} (Internet Research Steering Group) e il cui coordinatore è nominato dallo \textbf{IAB} (Internet Activities Board).
+\subsub{W3C}
+World Wide Web Consortium: organizzazione non governativa internazionale che ha come scopo quello di sviluppare tutte le potenzialità del World Wide Web. La principale attività svolta dal W3C consiste nello stabilire standard tecnici per il World Wide Web inerenti sia i linguaggi di marcatura che i protocolli di comunicazione.
+\subsub{IANA}
+Internet Assigned Numbers Authority: ente storico incaricato della gestione dello spazio di indirizzamento IP e dei nomi a dominio, dei numeri di Autonomous System e dei numeri di protocollo IP. Nel tempo, IANA ha delegato la gestione locale ad una serie di entità regionali:
+\begin{itemize}
+\item \textbf{ARIN} per le Americhe
+\item \textbf{RIPE NCC} per l'Europa
+\item \textbf{APNIC} per l'Asia e tutta l'area del Pacifico
+\end{itemize}
+Attualmente, la materia è oggetto di completa ristrutturazione sotto la responsabilità dell’ \vedi{ICANN}, da cui lo IANA è stato assimilato.
+\subsub{ICANN}
+Internet Corporation for Assigned Names and Numbers: organizzazione che ha attualmente la responsabilità della gestione dello spazio di indirizzamento IP (vedi \vedi{IANA}).
+\subsub{GIPI}
+Global Internet Policy Initiative: rete di organizzazioni non governative no-profit che sostiene l’adozione nei paesi in via di sviluppo di piattaforme legislative e politiche per la realizzazione di un’accesso ad Internet aperto e democratico.
 %Gioara 
-\sub{Il modello di riferimento ISO/OSI}
-Il modello Open Systems Interconnection (abbreviato in modello ISO/OSI) è stato progettato dall’International Organization for Standardization (ISO) come modello di riferimento per consentire una comunicazione aperta tra diversi sistemi tecnici. Questo punto diventa più chiaro, se si pensa alle origini di Internet: alla fine degli anni ’70 i leader del settore nelle tecnologie di rete si ritrovarono di fronte al problema che le architetture di rete proprietarie si potevano collegare solo tramite dispositivi propri, infatti nessun produttore aveva pensato di costruire componenti hardware o software compatibili con le specificazioni di altri fornitori. Ma un progetto come quello di Internet presuppone alcuni standard per poter rendere possibile una comunicazione comune.
+\sub{Modello di riferimento ISO/OSI}
+Il modello Open Systems Interconnection (abbreviato in modello ISO/OSI) è stato progettato dalla \vedi{ISO} come modello di riferimento per consentire una comunicazione aperta tra diversi sistemi tecnici. Questo punto diventa più chiaro, se si pensa alle origini di Internet: alla fine degli anni ’70 i leader del settore nelle tecnologie di rete si ritrovarono di fronte al problema che le architetture di rete proprietarie si potevano collegare solo tramite dispositivi propri, infatti nessun produttore aveva pensato di costruire componenti hardware o software compatibili con le specificazioni di altri fornitori. Ma un progetto come quello di Internet presuppone alcuni standard per poter rendere possibile una comunicazione comune.
 Il modello lSO/OSI è nato dal tentativo di creare uno standard di questo tipo e offre una base per gli standard di comunicazione, indipendentemente dai fornitori. In base a questo modello, il complesso processo della comunicazione di rete si divide in sette strati, i livelli (in inglese layer). Si parla perciò anche di una comunicazione per livelli. All’interno della comunicazione tra due sistemi devono essere svolti degli specifici compiti su ogni singolo livello, tra questi rientrano ad esempio il controllo della comunicazione, l’indirizzamento del sistema target o la conversione dei pacchetti in segnali fisici. Ma questo funziona solo se tutti i sistemi coinvolti nella comunicazione si attengono a regole precise, stabilite nei protocolli, che si applicano ai singoli livelli o si possono utilizzare su ciascuno di questi (multilivello).
 \\Il modello di riferimento ISO/OSI non è però uno standard di rete concreto, ma descrive in forma astratta quali procedimenti devono essere regolati per far funzionare la comunicazione in una rete.  
 \subsub{I livelli}
@@ -52,7 +72,7 @@ I sette livelli del modello ISO/OSI si dividono in due gruppi in base ai compiti
 %definizione di 'standard'
 \subsub{IEEE 802}
 \subsub{RFC}
-Request For Comments: documento pubblicato dalla \vedi{IETF} riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{rfc-editor.org}
+Request For Comments: documento pubblicato dalla \vedi{IETF} riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{rfc-editor.org}.
 \newpage
 
 \sec{Livello Fisico}
@@ -98,7 +118,7 @@ In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit
 Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa affermazione, non necessariamente di immediata comprensione, diventa subito chiara se si tiene presente il \textbf{teorema di Fourier}, il quale afferma che un segnale può essere rappresentato come somma di sinusoidi (potenzialmente infinite) con caratteristiche differenti.
 
 \subsub{Ampiezza di banda}
-L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche.
+L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
 
 \subsection{Qualità delle trasmissioni}
 Come già accennato in precedenza, é lo strato fisico che determina in larga parte la qualità delle comunicazioni, valutabile in base a prestazioni e affidabilità. 
@@ -138,7 +158,7 @@ dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
 \end{itemize}
 
 \sub{Modulazione}
-Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}.
+Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}, tipicamente analogico.
 \subsub{Ad onda continua}
 Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie:
 \begin{itemize}
@@ -151,7 +171,7 @@ Si parla di modulazione ad onda continua nel momento in cui viene modulata una p
 \fbox{\includegraphics[scale=0.5]{am_fm_pm.png}}
 \caption{Confronto tra tipologie di modulazione ad onda continua}\label{fig. 2}
 \end{figure}
-\subsub{Impulsiva}
+\subsub{Modulazione impulsiva}
 La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codificata in una serie di impulsi. I principali tipi di modulazione impulsiva sono:
 \begin{itemize}
 \item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM
@@ -166,8 +186,9 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
 \begin{itemize}
 \item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
-\item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'ampiezza è uguale per tutti i sottolivelli; di norma, tuttavia, essa segue una scala logaritmica. Com'è intuibile, la quanmtizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - si è verificato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze.
-\item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit (nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione).
+\item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'ampiezza è uguale per tutti i sottolivelli; di norma, tuttavia, essa segue una scala logaritmica. Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - si è verificato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze. 
+\item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
+\\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
 \end{itemize}
 \begin{figure}[h]
 \centering
@@ -177,7 +198,32 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \end{figure}
 \end{itemize}
 
-\subsub{Digitale}
+\subsub{Modulazioni digitali} 
+Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \textbf{modem}, acronimo per modulatore-demodulatore), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, in prima approssimazione, attraverso una mappatura biunivoca tra sequenze di bit in ingresso ed un insieme di forme d'onda analogiche limitate nel tempo in uscita, dette \textit{simboli}. E' dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
+\begin{itemize} 
+\item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
+\item \textbf{FSK} (Frequency-Shift Keying): la frequenza portante istantanea viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note, l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
+\begin{itemize} 
+\item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{interferenza intersimbolica}) 
+\item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso 
+\item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di apssaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione 
+\item La frequenza d'impulso è solitamente maggiore di quella di intervallo 
+\end{itemize} 
+La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi nei ponti radio e nelle trasmissioni di tipo GSM tra cellulari. 
+\item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
+\begin{figure}[h] 
+\centering 
+\fbox{\includegraphics[scale=0.3]{ask_psk_fsk.png}} 
+\caption{Confronto tra codifiche ASK, FSK, e PSK} 
+\label{fig. 5} 
+\end{figure} 
+\begin{itemize} 
+\item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: per garantire la massima protezione dal rumore e dalle interferenze, vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$. 
+\item \textbf{DPSK} (Differential Phase-Shift Keying) 
+\end{itemize} 
+\item \textbf{QAM} (Quadrature Amplitude Modulation) 
+\item \textbf{Trellis} 
+\end{itemize}
 
 \sub{Alterazioni del segnale}
 \subsub{Attenuazione}
@@ -266,6 +312,13 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente ed a condividere servizi, definita formalmente nel \vedi{RFC}1122 (originariamente in \vedi{RFC}760).
 \subsubsection{Internet Protocol (IP)} \label{IP}
 Fornisce le funzioni necessarie per l'invio di un pacchetto di bit detto \textit{Internet datagram} da un host all'altro. Ogni nodo è identificato da un indirizzo IP.
+\subsubsection{Indirizzo IP} Numero che identifica univocamente i dispositivi nell'ambito di una rete. In particolare l'IPv4, su 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
+\begin{figure}[h]
+\centering
+\fbox{\includegraphics[scale=0.8]{ipaddress.png}}
+\caption{Suddivisione in classi degli indirizzi ip}\label{fig. n}
+\end{figure}
+\subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo ip i tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si può indicare la sua netmask predefinita sia come $0.127.127.18/8$, sia come $255.0.0.0$.
 \paragraph{Differenze tra IPv4 e IPv6}
 L’IP versione 4 fornisce anche i servizi di
 frammentazione e riassemblaggio di datagram,
@@ -274,7 +327,6 @@ capacità di trasporto di pacchetti più piccola del
 pacchetto originale (dovuto alle diverse tecnologie di
 rete del passato). IP versione 6 abolisce questo
 comportamento. %copiato dalle slide (da rivedere e ampliare)
-
 
 \subsection{Routing con IPv4} \label{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso nodi intermedi che implementano un modulo internet.
@@ -300,7 +352,7 @@ Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
 \includegraphics[scale=0.5]{netstat.png}
 \caption{Output del comando \code{netstat -r}}\label{fig. 5}
 \end{figure}
-\\\'E Possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
+\\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
 
 \sub{Protocolli di routing}
 \subsub{ICMP} 
