@@ -28,7 +28,7 @@
 %quattro parole sulla storia del networking
 \sub{Organizzazioni}
 \subsub{IEEE}
-Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare l'IEEE 802 LAN/MAN Standards Committee, commissione preposta a sviluppare standard per le reti locali e metropolitane. 
+Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare l'\vedi{IEEE 802} LAN/MAN Standards Committee, commissione preposta a sviluppare standard per le reti locali e metropolitane. 
 \subsub{CCITT}
 Consultative Committee for International Telephony and Telegraphy: parte della \textbf{ITU} (International Telegraph Union), agenzia dell'ONU specializzata in telecomunicazioni, articola i propri lavori in quadrienni, gli \textit{Study Period}, al termine dei quali ha luogo un’assemblea plenaria incaricata di emettere le cosiddette raccomandazioni.
 \subsub{ISO}
@@ -51,12 +51,19 @@ Attualmente, la materia è oggetto di completa ristrutturazione sotto la respons
 Internet Corporation for Assigned Names and Numbers: organizzazione che ha attualmente la responsabilità della gestione dello spazio di indirizzamento IP (vedi \vedi{IANA}).
 \subsub{GIPI}
 Global Internet Policy Initiative: rete di organizzazioni non governative no-profit che sostiene l’adozione nei paesi in via di sviluppo di piattaforme legislative e politiche per la realizzazione di un’accesso ad Internet aperto e democratico.
+\sub{Standard}
+Si distinguono standard \textit{de iure}, cioè codificati da organizzazioni come quelle di cui sopra, e standard \textit{de facto}, affermatisi spontaneamente per la loro ampia adozione.
+\subsub{IEEE 802}
+\subsub{RFC}
+Request For Comments: documento pubblicato dalla \vedi{IETF} riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{rfc-editor.org}.
+\sub{Protocolli} %def di protocollo
+
 %Gioara 
 \sub{Modello di riferimento ISO/OSI}
 Il modello Open Systems Interconnection (abbreviato in modello ISO/OSI) è stato progettato dalla \vedi{ISO} come modello di riferimento per consentire una comunicazione aperta tra diversi sistemi tecnici. Questo punto diventa più chiaro, se si pensa alle origini di Internet: alla fine degli anni ’70 i leader del settore nelle tecnologie di rete si ritrovarono di fronte al problema che le architetture di rete proprietarie si potevano collegare solo tramite dispositivi propri, infatti nessun produttore aveva pensato di costruire componenti hardware o software compatibili con le specificazioni di altri fornitori. Ma un progetto come quello di Internet presuppone alcuni standard per poter rendere possibile una comunicazione comune.
 Il modello lSO/OSI è nato dal tentativo di creare uno standard di questo tipo e offre una base per gli standard di comunicazione, indipendentemente dai fornitori. In base a questo modello, il complesso processo della comunicazione di rete si divide in sette strati, i livelli (in inglese layer). Si parla perciò anche di una comunicazione per livelli. All’interno della comunicazione tra due sistemi devono essere svolti degli specifici compiti su ogni singolo livello, tra questi rientrano ad esempio il controllo della comunicazione, l’indirizzamento del sistema target o la conversione dei pacchetti in segnali fisici. Ma questo funziona solo se tutti i sistemi coinvolti nella comunicazione si attengono a regole precise, stabilite nei protocolli, che si applicano ai singoli livelli o si possono utilizzare su ciascuno di questi (multilivello).
 \\Il modello di riferimento ISO/OSI non è però uno standard di rete concreto, ma descrive in forma astratta quali procedimenti devono essere regolati per far funzionare la comunicazione in una rete.  
-\subsub{I livelli}
+\subsub{Architettura a livelli}
 La comunicazione tra due computer può apparire banale agli utenti, ma in realtà durante la trasmissione di dati in una rete devono essere compiuti numerosi compiti e soddisfatte diverse richieste nell’ambito dell’attendibilità, della sicurezza e dell’integrità. Per questo si è deciso di dividere la comunicazione di rete in livelli. Ad ogni livello, strutturato gerarchicamente, sono assegnate delle funzioni specifiche (quindi uno standard copre generalmente solo una parte del modello): ogni livello accede tramite un’interfaccia a quello inferiore e mette a disposizione il servizio del livello superiore.
 \\Questo principio ha due vantaggi decisivi:
 \begin{itemize}
@@ -65,14 +72,17 @@ La comunicazione tra due computer può apparire banale agli utenti, ma in realt�
 \end{itemize}
 I sette livelli del modello ISO/OSI si dividono in due gruppi in base ai compiti che svolgono: orientati all’applicazione e orientati al trasporto. I processi che si svolgono sui singoli livelli si possono spiegare prendendo ad esempio la trasmissione e-mail da un dispositivo ad un mail server.
 
-\sub{Internet protocol suite (TCP/IP)}
+\sub{Internet}
+Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente ed a condividere servizi, definita formalmente nel \vedi{RFC}1122 (originariamente in \vedi{RFC}760).
 
+\subsub{Intranet}
+Termine utilizzato per indicare l'uso di Internet all'interno di un'azienda, basato sull'utilizzo di una \vedi{LAN}.
 
-\sub{Standardizzazione}
-%definizione di 'standard'
-\subsub{IEEE 802}
-\subsub{RFC}
-Request For Comments: documento pubblicato dalla \vedi{IETF} riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{rfc-editor.org}.
+\subsub{Extranet}
+Termine che identifica le risorse hardware e software che realizzano la presenza visibile in internet di un'organizzazione.
+
+\subsub{Internet protocol suite (TCP/IP)}
+
 \newpage
 
 \sec{Livello Fisico}
@@ -251,7 +261,7 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \sub{Controllo degli errori}
 \subsub{Ridondanza}
 
-\sub{Flussi trasmissivi}
+\sub{Tipi di flusso trasmissivo}
 \subsub{Simplex}
 \subsub{Half-Duplex}
 \subsub{Full-Duplex}
@@ -285,6 +295,12 @@ e gestisce il clock dei dispositivi connessi. Può anche essere interno al \vedi
 \subsub{CPE}
 Customer Premises Equipment: dispositivo terminale connesso direttamente ad una \vedi{WAN}. Rientrano in questa categoria telefoni, Router e Switch di rete.
 
+\sub{Tipologie di comunicazione}
+\subsub{Connection-oriented} 
+Un servizio connection-oriented, di cui è un esempio la rete telefonica, richiede che venga creato un canale di comunicazione -sia esso logico o fisico- prima dell'invio dei dati. Questo metodo è considerato "affidabile", poiché è garantito che i dati arriveranno nell'ordine in cui sono stati inviati.
+\subsub{Connectionless}
+In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul destinatario ed è instradato secondo queste ultime, indipendentemente dagli altri. L'ordine di arrivo dei pacchetti è arbitrario.
+
 \sub{Tipologie di rete cablata}
 \subsub{PAN} Personal Area Network: Rete personale come quella composta dal PC e da altri dispositivi domestici connessi tra di loro via cavo.
 \subsub{LAN} Local Area Network: Rete con un raggio limitato ad una abitazione o un edificio. (La prima rete LAN è stata ARKNET nel 1977)
@@ -308,25 +324,45 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 
 %GRID? 
 
-\sub{Internet}
-Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente ed a condividere servizi, definita formalmente nel \vedi{RFC}1122 (originariamente in \vedi{RFC}760).
-\subsubsection{Internet Protocol (IP)} \label{IP}
-Fornisce le funzioni necessarie per l'invio di un pacchetto di bit detto \textit{Internet datagram} da un host all'altro. Ogni nodo è identificato da un indirizzo IP.
-\subsubsection{Indirizzo IP} Numero che identifica univocamente i dispositivi nell'ambito di una rete. In particolare l'IPv4, su 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
+\subsection{Internet Protocol (IP)} \label{IP}
+L'IP fornisce innanzitutto le funzioni necessarie per l'invio di un pacchetto di bit detto \textit{Internet datagram} da un host all'altro con un approccio \vedi{Connectionless}, per cui l'affidabilità delle trasmissioni è garantita da servizi di più alto livello, deputati al reinvio degli eventuali pacchetti persi e al ristabilire la loro giusta sequenza (\textbf{consegna best-effort}). 
+Il protocollo IP definisce inoltre l'esatto formato dei dati e svolge funzioni di routing.
+\\Nel contesto del protocollo IP, l'unità fondamentale di trasferimento è detta \textbf{datagram} IP, suddiviso in \textit{header} e blocco di dati.
+\paragraph{Header} 
+L'header del datagram IPv4 contiene i seguenti campi: 
+\begin{itemize}
+\item \textbf{Version}: versione IP del datagram. 
+\item \textbf{HL} (Header Length): lunghezza dell'header in parole da 32 bit
+\item \textbf{TOS} (Type Of Service) o Differentiated services: indicazioni sulla corretta gestione del datagram, volte a trattare in modo differente i diversi servizi, quasi del tutto inutilizzate
+\item \textbf{Total lenght}: lunghezza totale del datagram
+\item campi che controllano la frammentazione e il riassemblaggio dei datagram:
+\begin{itemize}
+\item \textbf{Identification}: indicazione del pacchetto cui appartiene il datagram
+\item \textbf{IP flags}
+\item \textbf{Offset del frammento}
+\end{itemize}
+\item \textbf{TTL} (Time To Leave): duarata per cui il datagram permane in transito, espressa in secondi
+\item \textbf{Protocol}: indicazione di quale protocollo di più alto livello ha generato il blocco dei dati
+\item \textbf{Header checksum}: sequenza di bit che utilizzata per verificare l'integrità dei dati contenuti nell'header
+\item \textbf{Source address}: \vedi{Indirizzo IP} di provenienza
+\item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione
+\item \textbf{opzioni} (campo opzionale, utilizzato per test e debugging)
+\end{itemize} 
+\begin{figure}[h]
+\centering
+\fbox{\includegraphics[scale=0.45]{ip-header.png}}
+\caption{Formato header IPv4}\label{fig. 6}
+\end{figure}
+
+\subsub{Indirizzo IP} Numero che identifica univocamente i dispositivi nell'ambito di una rete. In particolare l'IPv4, su 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
 \begin{figure}[h]
 \centering
 \fbox{\includegraphics[scale=0.8]{ipaddress.png}}
-\caption{Suddivisione in classi degli indirizzi ip}\label{fig. n}
+\caption{Suddivisione in classi degli indirizzi ip}\label{fig. 7}
 \end{figure}
-\subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo ip i tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si può indicare la sua netmask predefinita sia come $0.127.127.18/8$, sia come $255.0.0.0$.
+\subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si esplicitare la sua netmask predefinita sia assieme all'indirizzo, come $0.127.127.18/8$, sia separatamente come $255.0.0.0$.
 \paragraph{Differenze tra IPv4 e IPv6}
-L’IP versione 4 fornisce anche i servizi di
-frammentazione e riassemblaggio di datagram,
-quando la trasmissione avviene attraverso reti con
-capacità di trasporto di pacchetti più piccola del
-pacchetto originale (dovuto alle diverse tecnologie di
-rete del passato). IP versione 6 abolisce questo
-comportamento. %copiato dalle slide (da rivedere e ampliare)
+L’IP versione 4 fornisce anche i servizi di frammentazione e riassemblaggio di datagram, quando la trasmissione avviene attraverso reti con capacità di trasporto di pacchetti più piccola del pacchetto originale (dovuto alle diverse tecnologie di rete del passato). IP versione 6 abolisce questo comportamento, non più necessario. %copiato dalle slide (da rivedere e ampliare)
 
 \subsection{Routing con IPv4} \label{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso nodi intermedi che implementano un modulo internet.
@@ -350,7 +386,7 @@ Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
 \begin{figure}[h]
 \centering
 \includegraphics[scale=0.5]{netstat.png}
-\caption{Output del comando \code{netstat -r}}\label{fig. 5}
+\caption{Output del comando \code{netstat -r}}\label{fig. 8}
 \end{figure}
 \\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
 

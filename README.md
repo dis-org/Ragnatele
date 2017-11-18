@@ -3,4 +3,7 @@ Progetto di realizzazione di dispense collaborative di **Architettura reti** e *
 Le fonti sono:
 + Slides e appunti delle lezioni tenutesi nell'ambito dei corsi sopra citati nell' A.A. 2017-'18
 + *Computer networks* (Tanenbaum, Wetherall)
++ linktionary.com
++ wikipedia.org
 + ...
+
