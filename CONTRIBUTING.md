@@ -7,13 +7,10 @@ vari rami verranno riuniti il più spesso possibile da harisont.
 * Utilizza ` \code{} ` per parti di codice e comandi da terminale menzionati nel testo;
 * Utilizza ` \vedi{Nome_sottosezione} ` (si rispettino eventuali maiuscole iniziali) per creare riferimenti all'interno del 
 testo.
-* Inserisci le immagini nel modo che segue:
+* Inserisci le immagini in uno dei due modi seguenti:
 ```
-\begin{figure}[h]
-\centering
-\fbox{\includegraphics[scale=0.5]{nome_immagine.estensione}}
-\caption{Descrizione immagine}\label{fig. (n° progressivo)}
-\end{figure}
+\image[nomefile.ext][scale=0.x]{Descrizione} %senza bordo
+\boximage[nomefile.ext][scale=0.x]{Descrizione} %con bordo
 ```
 (NB: l'immagine deve essere salvata nella cartella 
 `images`);
