@@ -3,6 +3,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{hyperref}
 \usepackage{nameref} 
@@ -115,10 +116,10 @@ va spiegato meglio
 \item $1/t=f$ è detta \textit{frequenza} (misurabile in Hz)\\\\
 \end{itemize}
 La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
-\begin{figure}
+\begin{figure}[H]
 \centering
 \fbox{\includegraphics[scale=0.5]{segnali_sin.png}}
-\caption{Rappresentazione grafica di un segnale sinusoidale}\label{fig. 1}
+\caption{Rappresentazione grafica di un segnale sinusoidale}
 \end{figure}
 
 \subsubsection{Lunghezza d'onda}
@@ -176,10 +177,10 @@ Si parla di modulazione ad onda continua nel momento in cui viene modulata una p
 \item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rafefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
 \item \textbf{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale. 
 \end{itemize}
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \fbox{\includegraphics[scale=0.5]{am_fm_pm.png}}
-\caption{Confronto tra tipologie di modulazione ad onda continua}\label{fig. 2}
+\caption{Confronto tra tipologie di modulazione ad onda continua}
 \end{figure}
 \subsub{Modulazione impulsiva}
 La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codificata in una serie di impulsi. I principali tipi di modulazione impulsiva sono:
@@ -187,11 +188,10 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM
 \item \textbf{PFM} (Pulse Frequency Modulation), analoga alla FM
 \item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \fbox{\includegraphics[scale=0.5]{pam_pwm_ppm_pcm.png}}
 \caption{Confronto tra tipologie di modulazione impulsiva}
-\label{fig. 3}
 \end{figure}
 \item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
 \begin{itemize}
@@ -200,11 +200,10 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
 \\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
 \end{itemize}
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \fbox{\includegraphics[scale=0.5]{pcm.jpg}}
 \caption{Fasi della PCM}
-\label{fig. 4}
 \end{figure}
 \end{itemize}
 
@@ -221,11 +220,10 @@ Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \textbf{mode
 \end{itemize} 
 La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi nei ponti radio e nelle trasmissioni di tipo GSM tra cellulari. 
 \item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
-\begin{figure}[ht] 
+\begin{figure}[H] 
 \centering 
 \fbox{\includegraphics[scale=0.3]{ask_psk_fsk.png}} 
 \caption{Confronto tra codifiche ASK, FSK, e PSK} 
-\label{fig. 5} 
 \end{figure} 
 \begin{itemize} 
 \item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: per garantire la massima protezione dal rumore e dalle interferenze, vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$. 
@@ -246,8 +244,8 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \subsub{Teorema di Nyquist}
 \subsub{Teorema di Shannon}
 \subsubsection{Velocità di modulazione}
-\newpage
-\sec{Livello di Collegamento}
+
+\newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
 \sub{Ethernet} 
 \subsub {Ethernet framing}
@@ -278,9 +276,14 @@ Due host internet possono comunicare solamente conoscendo il reciproco indirizzo
 L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP (contenente IP di sia di A che di B), B la chiamata a suo nome e risponde segnando l' IP di a in una cache di consultazione e riinviando il proprio mac address a A
 \subsub{RARP} 
 %\subsub{NDP} 
-%ARP, MAC, Ethernet da spostare nel lv. di rete?
- 
-\sec{Livello di Rete}
+%ARP, RARP da spostare nel lv. di rete
+
+\sub{Sottolivelli}
+\subsub{MAC}
+\subsub{LLC}
+
+
+\newpage\sec{Livello di Rete}
 %Claudio & Giorgio ---------------------------------------------------------------------------------------------------------------------
 \subsection{Terminologia}
 \subsub{Rete}
@@ -301,6 +304,7 @@ Un servizio connection-oriented, di cui è un esempio la rete telefonica, richie
 \subsub{Connectionless}
 In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul destinatario ed è instradato secondo queste ultime, indipendentemente dagli altri. L'ordine di arrivo dei pacchetti è arbitrario.
 
+\newpage
 \sub{Tipologie di rete cablata}
 \subsub{PAN} Personal Area Network: Rete personale come quella composta dal PC e da altri dispositivi domestici connessi tra di loro via cavo.
 \subsub{LAN} Local Area Network: Rete con un raggio limitato ad una abitazione o un edificio. (La prima rete LAN è stata ARKNET nel 1977)
@@ -314,6 +318,7 @@ In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul
 \subsub{WPAN} Wireless Personal Area Network: Rete di dispositivi personali in un raggio inferiore ai 20 metri, ad esempio stampanti Bluetooth.
 \subsub{WLAN} Wireless Local Area Network: LAN ottenuta tramite tegnologie wireless, ad esempio reti WiFi. 
 
+\newpage
 \sub{Topologia delle reti}
 \subsub{Rete a dorsale}
 I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un' interruzione in qualunque punto della dorsale compromette tutta la rete.
@@ -322,8 +327,10 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 \subsub{Rete ad anello} Le informazioni vengono passate da un dispositivo all'altro in modo ciclico, la trasmissione è unidirezionale anche se questo si può ovviare con un secondo anello in direzione opposta. Questa topologia era tipica delle \vedi{LAN} TokenRing, ora viene utilizzata principalmente nelle \vedi{MAN} in fibra ottica.
 \subsub{Rete a maglia} In inglese \textit{mesh}, è una rete in cui ogni dispositivo può essere connesso ad ogni altro dispositivo ottenendo di fatto un grafo connesso. \'E la topologia di rete meno vulnerabile ma è poco utilizzata nelle reti cablate a causa dei costi elevati. \'E diffusa invece nelle \vedi{WLAN}, spesso nella versione \textit{ad -hoc} dove i collegamenti nascono e muoiono dinamicamente. In questa topologia il \vedi{Routing} viene effettuato da ogni nodo.
 
-%GRID? 
-
+\sub{Grid}
+Rete di computer incentrata sulla condivisione dinamica delle risorse nel contesto di calcolo distribuito e HTC (High Troughput Computing).\\ Rispetto ad un vero e proprio cluster di computer, la grid ha una composizione più eterogenea. L'accesso ai dispositivi non si limita al software ma comprende anche l'hardware, ciò è ottenuto utilizzando librerie middleware (\textit{software glue}) che si collocano tra il sistema operativo e lo strato fisico della macchina. La più importante grid europea è EGEE del CERN, bastata sul middleware gLite.%qualche link forse
+ 
+\newpage
 \subsection{Internet Protocol (IP)} \label{IP}
 L'IP fornisce innanzitutto le funzioni necessarie per l'invio di un pacchetto di bit detto \textit{Internet datagram} da un host all'altro con un approccio \vedi{Connectionless}, per cui l'affidabilità delle trasmissioni è garantita da servizi di più alto livello, deputati al reinvio degli eventuali pacchetti persi e al ristabilire la loro giusta sequenza (\textbf{consegna best-effort}). 
 Il protocollo IP definisce inoltre l'esatto formato dei dati e svolge funzioni di routing.
@@ -348,37 +355,38 @@ L'header del datagram IPv4 contiene i seguenti campi:
 \item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione
 \item \textbf{opzioni} (campo opzionale, utilizzato per test e debugging)
 \end{itemize} 
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \fbox{\includegraphics[scale=0.45]{ip-header.png}}
-\caption{Formato header IPv4}\label{fig. 6}
+\caption{Formato header IPv4}
 \end{figure}
 
-\subsub{Indirizzo IP} Numero che identifica univocamente ogni dispostivo connesso ad una rete. Più propriamente, l'IP identifica una connessione: questa precisazione è necessaria in quanto una macchina -per esempio un router- può avere più interfacce di rete, più connessioni e dunque più indirizzi IP.
-In particolare l'IPv4, su 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
-\begin{figure}[h]
+\subsub{Indirizzo IP} Numero che identifica univocamente ogni dispostivo connesso ad una rete. Più propriamente, l'indirizzo IP identifica una connessione: questa precisazione è necessaria in quanto una macchina -per esempio un router- può avere più interfacce di rete, più connessioni e dunque più indirizzi IP.
+\paragraph{Indirizzo IPv4}
+Composto da 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
+\begin{figure}[H]
 \centering
 \fbox{\includegraphics[scale=0.8]{ipaddress.png}}
-\caption{Suddivisione in classi degli indirizzi IP}\label{fig. 7}
+\caption{Suddivisione in classi degli indirizzi IPv4}
 \end{figure}
-\paragraph{Convenzioni} Nell'ambito degli indirizzi ip sussistono alcune convenzioni:
+\ \\Nell'ambito degli indirizzi IPv4 sussistono alcune convenzioni:
 \begin{itemize}
 \item se la parte host di un indirizzo è 0, si sta indicando non un host in particolare, bensì la rete stessa
 \item se la parte host di un indirizzo ha valore 1 su tutti i bit, si sta specificando un \textit{indirizzo broadcast}, utilizzato per inviare pacchetti a tutti gli host della rete
 \item l'indirizzo $0.0.0.0$ indica la \textit{default route}, indicante il gateway di default al fine di instradare pacchetti la cui destinazione non è nella tabella di routing. Si tratta di una scelta poco felice, poiché costituisce uno spreco di spazio d'indirizzamento di classe A
 \item l'indirizzo $127.0.0.1$ è il cosiddetto \textit{loopback address} (\code{localhost}), che sfrutta un interfaccia di rete virtuale
-\item gli indirizzi $10.0.0.0/8$, $172.16.0.0/12$, $192.168.0.0/16$ e $169.254.0.0/16$ sono riservati, ossia identificano reti private, e sono gestiti dai server NAT. %server NAT=? serve un \vedi{}
+\item gli indirizzi $10.0.0.0/8$, $172.16.0.0/12$, $192.168.0.0/16$ e $169.254.0.0/16$ sono riservati, ossia identificano reti private, e sono gestiti dai server \vedi{NAT}.
 \end{itemize}
 
 \paragraph{Configurazione}
 La configurazione di un indirizzo IP avviene automaticamente attraverso il protocollo \vedi{DHCP} o manualmente, specificando indirizzo IP dell'host, \vedi{Netmask}, \vedi{Gateway} di default e indirizzo IP del nameserver. %\vedi{nameserver} o qualcosa del genere
 \\Nei sistemi Unix-Linux, il comando per la configurazione manuale dell'IP è \code{ifconfig} (dove "if" sta per "interface"). La sintassi è la seguente:
 \\\\ \code{\$ ifconfig <nome interfaccia> <indirizzo IP> netmask <netmask\\ x.y.z.q> broadcast <indirizzo broadcast>} %forse meglio un esempio?
-\\\\Se non si specifica nulla, il comando \code{ifconfig} mostra lo stato delle diverse interfacce di rete.
-\begin{figure}[h]
+\\\\Il comando \code{ifconfig} senza argomenti mostra lo stato delle interfacce.
+\begin{figure}[H]
 \centering
-\includegraphics[scale=0.5]{ifconfig.png}
-\caption{Output del comando ifconfig su una macchina Linux}\label{fig. 8}
+\includegraphics[scale=0.4]{ifconfig.png}
+\caption{Output del comando ifconfig su una macchina Linux}
 \end{figure}
 \paragraph{Differenze tra IPv4 e IPv6}
 L’IP versione 4 fornisce anche i servizi di frammentazione e riassemblaggio di datagram, quando la trasmissione avviene attraverso reti con capacità di trasporto di pacchetti più piccola del pacchetto originale (dovuto alle diverse tecnologie di rete del passato). IP versione 6 abolisce questo comportamento, non più necessario. %copiato dalle slide (da rivedere e ampliare)
@@ -403,12 +411,10 @@ Nella tabella di routing ogni riga rappresenta una "strada", composta da
 \item "distanza" dalla destinazione, detta \vedi{Metric}
 \end{itemize}
 Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
-\begin{figure}[ht]
-\centering
-\includegraphics[scale=0.5]{netstat.png}
-\caption{Output del comando \code{netstat -r}}\label{fig. 6}
-\end{figure}
-\\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
+\begin{figure}[H]
+  \includegraphics[scale=0.5]{netstat.png}
+  \caption{Output del comando \code{netstat -r}}\end{figure}
+\ \\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
 
 \subsub{Metric}
 \begin{itemize}
@@ -452,4 +458,6 @@ Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una c
 \subsub{HTTP/HTTPS} 
 \subsub{NFS}
 \subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
+\subsub{NAT}
+Network Address Translation:
 \end{document}
