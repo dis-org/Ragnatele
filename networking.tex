@@ -246,7 +246,10 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %Filippo---------------------------------------------------------------------------------------------------------------------
 \'E il secondo livello dello standard ISO/OSI, subito sopra il livello fisico, si occupa di:
 \begin{itemize} 
-\item 
+\item raggruppare in frame i bit da inviare
+\item modulare la multillazione per l' accesso condiviso fra più utenti al canale fisico per evitare conflitti
+\item controllare gli errori di trasmissione e gestirli
+\item gestire il flusso 
 \end{itemize}
 \sub{Ethernet} 
 \subsub {Ethernet framing}
@@ -273,8 +276,11 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %\subsub{NDP} 
 
 \sub{Sottolivelli}
-\subsub{MAC}
-\subsub{LLC}
+il DLL, secondo lo standard IEEE 802, in caso di reti lan brodcast, è diviso in due sottolivelli:
+\begin{itemize}
+\item LLC (Logical Link Control): fornisce controlli del flusso di dati e per la gestione degli errori, i protocolli PPP e HDLC fanno parte di questo sottolivello.
+\item MAC (Media Access Controll): disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
+\end{itemize}
 
 \newpage\sec{Livello di Rete}
 
@@ -383,10 +389,12 @@ L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tut
 La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta ARP, sia possibile riinviare dati al suddetto host. le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
 %immagine
 Occorre considerare alcuni problemi:\\
-	- Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
-	- Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
+\begin {itemize}
+\item Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
+\item Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
+\end{itemize}
 \subsub{RARP}
-
+\'E un protocollo appartenerte al TCP/IP che consente, al contrario dell' ARP, di risalire al proprio indirizzo ip dal mac address
 \sub{Protocolli di boh}
 \subsub{ICMP} 
 \subsub{IGMP}
