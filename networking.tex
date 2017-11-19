@@ -431,7 +431,7 @@ Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
 \subsub{ICMP}
 Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
 \boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
-In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. 
+In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 
 \\I comandi \code{ping} e \code{traceroute} (vedi \vedi{qualita}) sfruttano il protocollo ICMP.
 \newpage
 
@@ -440,12 +440,14 @@ In particolare, il messaggio \textbf{redirection} indica la necessità di reinst
 \subsection{Protocolli} 
 \subsub{TCP} 
 \subsub{UDP} 
+A differenza del \vedi{TCP}, l' UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, meno affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle \vedi{porte}.
+\paragraph{Porte} Le porte, identificate da un numero intero detto \textit{portnumber}, rappresentano punti di destinazione astratti che vengono indirizzati dagli host internet per implementare i diversi \vedi{Servizi di rete}. Esse consentono ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione al suo interno. \label{porte}
 \newpage
 
 \sec{Livello delle applicazioni}
 Il livello delle applicazioni racchiude tutte le applicazioni dedicate all'utente finale. 
 Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (e.g. telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
-\subsection{Protocolli}
+\sub{Servizi di rete}
 %Tommaso
 \subsub{Telnet e SSH} %standard odierno
 Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Principalmente, Telnet, \'e sempre stato utilizzato per fornire all'utente una sessione remota del terminale dell'host. L'host ascolta sulla porta 22 e l'utente stabilisce una connessione utilizzando il public IP, nome utente e password di un Unix user dell'host. L'unico grande problema di Telnet riguarda la sicurezza: \'e un protocollo non il criptato, ovvero la password il nome utente e tutte le altre informazioni inviate, risultano completamente chiare a qualsiasi utente estraneo alla conversazione.
