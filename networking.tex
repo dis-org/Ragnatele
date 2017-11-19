@@ -247,7 +247,10 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %Filippo---------------------------------------------------------------------------------------------------------------------
 \'E il secondo livello dello standard ISO/OSI, subito sopra il livello fisico, si occupa di:
 \begin{itemize} 
-\item 
+\item raggruppare in frame i bit da inviare
+\item modulare la multillazione per l' accesso condiviso fra più utenti al canale fisico per evitare conflitti
+\item controllare gli errori di trasmissione e gestirli
+\item gestire il flusso 
 \end{itemize}
 \sub{Ethernet} 
 \subsub {Ethernet framing}
@@ -274,8 +277,11 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %\subsub{NDP} 
 
 \sub{Sottolivelli}
-\subsub{MAC}
-\subsub{LLC}
+il DLL, secondo lo standard IEEE 802, in caso di reti lan brodcast, è diviso in due sottolivelli:
+\begin{itemize}
+\item LLC (Logical Link Control): fornisce controlli del flusso di dati e per la gestione degli errori, i protocolli PPP e HDLC fanno parte di questo sottolivello.
+\item MAC (Media Access Controll): disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
+\end{itemize}
 
 \newpage\sec{Livello di Rete}
 
@@ -387,15 +393,18 @@ Si parla di IP multicasting quando un datagram è trasmesso ad un gruppo di host
 Le funzioni di IP multicasting sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
 
 \subsection{Protocolli di Address Resolution} 
-\subsub{ARP}
+\subsub{ARP} %Address Resolution Protocol (daje, scrivilo da qualche parte!)
 Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
 L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tutti gli host (contenente IP di B e il mac address di A), B vedendo una chiamata con il suo IP, risponde segnando il mac address di A in una cache di consultazione e riinviando il proprio mac address a A.\\
 La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta ARP, sia possibile riinviare dati al suddetto host. le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
 %immagine
 Occorre considerare alcuni problemi:\\
-	- Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
-	- Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
-\subsub{RARP}
+\begin {itemize}
+\item Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
+\item Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
+\end{itemize}
+\subsub{RARP} %Reverse Address Resolution Protocol (daje, scrivilo da qualche parte!)
+\'E un protocollo appartenente al TCP/IP che consente, al contrario dell' ARP, di risalire al proprio indirizzo ip dal mac address
 
 \subsection{Routing con IPv4} \label{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
