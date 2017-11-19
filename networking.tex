@@ -142,11 +142,11 @@ Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa afferm
 \subsub{Ampiezza di banda}
 L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
 
-\subsection{Qualità delle trasmissioni}
+\subsection{Qualità delle trasmissioni} \label{qualita}
 Come già accennato in precedenza, é lo strato fisico che determina in larga parte la qualità delle comunicazioni, valutabile in base a prestazioni e affidabilità. 
 \\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
 \begin{itemize}
-\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi
+\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi 
 \item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
@@ -381,6 +381,11 @@ Quando un'interfaccia virtuale di rete viene configurata ad essa viene assegnato
 \\\\Il comando \code{ifconfig} senza argomenti mostra lo stato delle interfacce.
 \boximage[ifconfig.png][scale=0.45]{Output del comando ifconfig su una macchina Linux}
 
+\sub{IP multicasting} 
+Si parla di IP multicasting quando un datagram è trasmesso ad un gruppo di host identificato da un unico \vedi{Indirizzo IP}. Gli appartenenti al gruppo possono cambiare dinamicamente -un gruppo può essere dunque permanente o transitorio- e si può definire una chiave di accesso che renda selettivo l'ingresso. La gestione delle informazioni relative alla composizione dei gruppi e l'invio in internet dei datagram sono responsabilità dei \textit{multicast agents}, che girano sui router o su host particolari.
+\subsub{IGMP} 
+Le funzioni di IP multicasting sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
+
 \subsection{Protocolli di Address Resolution} 
 \subsub{ARP}
 Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
@@ -391,10 +396,6 @@ Occorre considerare alcuni problemi:\\
 	- Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
 	- Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
 \subsub{RARP}
-
-\sub{Protocolli di boh}
-\subsub{ICMP} 
-\subsub{IGMP}
 
 \subsection{Routing con IPv4} \label{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
@@ -443,21 +444,26 @@ Il concetto di distanza tra due nodi di una rete, a seconda del contesto può es
 \subsub{RIP} 
 \subsub{OSPF} 
 
+\subsub{ICMP}
+Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
+\boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
+In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 
+\\I comandi \code{ping} e \code{traceroute} (vedi \vedi{qualita}) sfruttano il protocollo ICMP.
 \newpage
 
 \sec{Livello di trasporto}
 
-
-
 \subsection{Protocolli} 
 \subsub{TCP} 
 \subsub{UDP} 
+A differenza del \vedi{TCP}, l' UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, meno affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle \vedi{porte}.
+\paragraph{Porte} Le porte, identificate da un numero intero detto \textit{portnumber}, rappresentano punti di destinazione astratti che vengono indirizzati dagli host internet per implementare i diversi \vedi{Servizi di rete}. Esse consentono ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione al suo interno. \label{porte}
 \newpage
 
 \sec{Livello delle applicazioni}
 Il livello delle applicazioni racchiude tutte le applicazioni dedicate all'utente finale. 
 Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (e.g. telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
-\subsection{Protocolli}
+\sub{Servizi di rete}
 %Tommaso
 \subsub{Telnet e SSH} %standard odierno
 Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Principalmente, Telnet, \'e sempre stato utilizzato per fornire all'utente una sessione remota del terminale dell'host. L'host ascolta sulla porta 22 e l'utente stabilisce una connessione utilizzando il public IP, nome utente e password di un Unix user dell'host. L'unico grande problema di Telnet riguarda la sicurezza: \'e un protocollo non il criptato, ovvero la password il nome utente e tutte le altre informazioni inviate, risultano completamente chiare a qualsiasi utente estraneo alla conversazione.
