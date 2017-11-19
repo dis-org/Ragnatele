@@ -14,6 +14,7 @@
 \def\sec#1{\section{#1}\label{#1}} 
 \def\sub#1{\subsection{#1}\label{#1}} 
 \def\subsub#1{\subsubsection{#1}\label{#1}} 
+\def\para#1{\paragraph{#1}\label{#1}}
 \def\vedi#1{\nameref{#1}} 
 \def\italic#1{\textit{#1}}
 \def\image[#1][#2]#3{
@@ -204,7 +205,7 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
 \\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
 \end{itemize}
-\boximage[pcm.jpg][scale=0.5]{Fasi della PCM}
+\boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
 
 \end{itemize}
 
@@ -325,8 +326,8 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 Rete di computer incentrata sulla condivisione dinamica delle risorse nel contesto di calcolo distribuito e HTC (High Troughput Computing).\\ Rispetto ad un vero e proprio cluster di computer, la grid ha una composizione più eterogenea. L'accesso ai dispositivi non si limita al software ma comprende anche l'hardware, ciò è ottenuto utilizzando librerie middleware (\textit{software glue}) che si collocano tra il sistema operativo e lo strato fisico della macchina. La più importante grid europea è EGEE del CERN, bastata sul middleware gLite.%qualche link forse
  
 \newpage
-\subsection{Internet Protocol (IP)} \label{IP}
-L'IP fornisce innanzitutto le funzioni necessarie per l'invio di un pacchetto di bit detto \textit{Internet datagram} da un host all'altro con un approccio \vedi{Connectionless}, per cui l'affidabilità delle trasmissioni è garantita da servizi di più alto livello, deputati al reinvio degli eventuali pacchetti persi e al ristabilire la loro giusta sequenza (\textbf{consegna best-effort}). 
+\sub{IP}
+Internet Protocol: fornisce le funzioni necessarie per l'invio di pacchetti di bit detti \textit{Internet datagram} da un host all'altro con un approccio \vedi{Connectionless}, per cui l'affidabilità delle trasmissioni è garantita da servizi di più alto livello, deputati al reinvio degli eventuali pacchetti persi e al ristabilire la loro giusta sequenza (\textbf{consegna best-effort}). 
 Il protocollo IP definisce inoltre l'esatto formato dei dati e svolge funzioni di routing.
 \\Nel contesto del protocollo IP, l'unità fondamentale di trasferimento è detta \textbf{datagram} IP, suddiviso in \textit{header} e blocco di dati.
 \paragraph{Header} 
@@ -351,30 +352,34 @@ L'header del datagram IPv4 contiene i seguenti campi:
 \end{itemize} 
 \boximage[ip-header.png][scale=0.45]{Formato header IPv4}
 
-\subsub{Indirizzo IP} Numero che identifica univocamente ogni dispostivo connesso ad una rete. Più propriamente, l'indirizzo IP identifica una connessione: questa precisazione è necessaria in quanto una macchina -per esempio un router- può avere più interfacce di rete, più connessioni e dunque più indirizzi IP.
+\subsub{Indirizzo IP} Ogni dispositivo connesso ad una rete IP è identificato da un indirizzo IP, univoco in quella rete. Più propriamente l'indirizzo IP viene associato alle interfacce del dispositivo. Un dispositivo con più schede di rete -per esempio un router- può connettersi direttamente a più reti e per ognuna avrà un indirizzo IP.
+
 \paragraph{Indirizzo IPv4}
 Composto da 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
 \boximage[ipaddress.png][scale=0.8]{Suddivisione in classi degli indirizzi IPv4}
+
+\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$ .
 
 \ \\Nell'ambito degli indirizzi IPv4 sussistono alcune convenzioni:
 \begin{itemize}
 \item se la parte host di un indirizzo è 0, si sta indicando non un host in particolare, bensì la rete stessa
 \item se la parte host di un indirizzo ha valore 1 su tutti i bit, si sta specificando un \textit{indirizzo broadcast}, utilizzato per inviare pacchetti a tutti gli host della rete
 \item l'indirizzo $0.0.0.0$ indica la \textit{default route}, indicante il gateway di default al fine di instradare pacchetti la cui destinazione non è nella tabella di routing. Si tratta di una scelta poco felice, poiché costituisce uno spreco di spazio d'indirizzamento di classe A
-\item l'indirizzo $127.0.0.1$ è il cosiddetto \textit{loopback address} (\code{localhost}), che sfrutta un interfaccia di rete virtuale
-\item gli indirizzi $10.0.0.0/8$, $172.16.0.0/12$, $192.168.0.0/16$ e $169.254.0.0/16$ sono riservati, ossia identificano reti private, e sono gestiti dai server \vedi{NAT}.
+\item l'indirizzo $127.0.0.1$ è il cosiddetto \textit{loopback address} (\code{localhost}), associato all'\vedi{Interfaccia di rete} virtuale di loopback
+\item gli indirizzi di rete $10.0.0.0/8$, $172.16.0.0/12$, $192.168.0.0/16$ e\\ $169.254.0.0/16$ sono riservati, ossia identificano reti private gestite dai server \vedi{NAT}.
 \end{itemize}
-
-\paragraph{Configurazione}
-La configurazione di un indirizzo IP avviene automaticamente attraverso il protocollo \vedi{DHCP} o manualmente, specificando indirizzo IP dell'host, \vedi{Netmask}, \vedi{Gateway} di default e indirizzo IP del nameserver. %\vedi{nameserver} o qualcosa del genere
-\\Nei sistemi Unix-Linux, il comando per la configurazione manuale dell'IP è \code{ifconfig} (dove "if" sta per "interface"). La sintassi è la seguente:
-\\\\ \code{\$ ifconfig <nome interfaccia> <indirizzo IP> netmask <netmask\\ x.y.z.q> broadcast <indirizzo broadcast>} %forse meglio un esempio?
-\\\\Il comando \code{ifconfig} senza argomenti mostra lo stato delle interfacce.
-\boximage[ifconfig.png][scale=0.4]{Output del comando ifconfig su una macchina Linux}
 
 \paragraph{Differenze tra IPv4 e IPv6}
 L’IP versione 4 fornisce anche i servizi di frammentazione e riassemblaggio di datagram, quando la trasmissione avviene attraverso reti con capacità di trasporto di pacchetti più piccola del pacchetto originale (dovuto alle diverse tecnologie di rete del passato). IP versione 6 abolisce questo comportamento, non più necessario. %copiato dalle slide (da rivedere e ampliare)
-\subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si esplicitare la sua netmask predefinita sia assieme all'indirizzo, come $0.127.127.18/8$, sia separatamente come $255.0.0.0$.
+
+
+\subsub{Interfaccia di rete}
+Ad ogni scheda di rete (hardware) di un dispositivo corrisponde un'interfaccia di rete (software) sulla quale operano protocolli di rete come \vedi{Ethernet}. Esistono anche interfacce virtuali come quella di loopback locale presente in ogni computer (\code{lo} su Unix).
+Quando un'interfaccia virtuale di rete viene configurata ad essa viene assegnato un indirizzo IP, ciò avviene automaticamente attraverso il protocollo \vedi{DHCP} o può essere effettuato manualmente.
+\\Nei sistemi Unix-Linux, il comando per la configurazione manuale dell'IP è \code{ifconfig} (dove "if" sta per "interface"). La sintassi è la seguente:
+\\\\ \code{\$ ifconfig <nome interfaccia> <indirizzo IP> netmask <netmask\\ x.y.z.q> broadcast <indirizzo broadcast>} %forse meglio un esempio?
+\\\\Il comando \code{ifconfig} senza argomenti mostra lo stato delle interfacce.
+\boximage[ifconfig.png][scale=0.45]{Output del comando ifconfig su una macchina Linux}
 
 \subsection{Protocolli di Address Resolution} 
 \subsub{ARP}
@@ -392,35 +397,46 @@ Occorre considerare alcuni problemi:\\
 \subsub{IGMP}
 
 \subsection{Routing con IPv4} \label{Routing}
-Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso nodi intermedi che implementano un modulo internet.
-%frase che non mi convince:
-Questi moduli regolamentano l'interpretazione dei campi dell' indirizzo IP al fine di frammentare e riassemblare i datagram.\\
+Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
+\begin{itemize}
+\item \textbf{Routing Minimale}: la tabella di routing viene definita al momento della configurazione dell'\vedi{Interfaccia di rete}
+\item \textbf{Routing Statico}: adatto a \vedi{LAN} di piccole dimensioni, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \code{route add -net <indirizzo di rete> netmask <netmask x.y.z.q> gw <indirizzo gateway> }
+\item \textbf{Routing Dinamico}: utilizza \vedi{Protocolli di routing}
+\end{itemize}
 
 \subsub{Router}
 Nodo provvisto di procedure specifiche volte ad effettuare le scelte di routing.
 
 \subsub{Gateway}
-Router 
+\vedi{Router} che connette due reti o sottoreti differenti.
 
 \subsub{Tabella di routing}
-Nella tabella di routing ogni riga rappresenta una "strada", composta da 
+Presente in ogni nodo di rete, contiene le informazioni per il routing.\\
+Nella tabella di routing ogni riga rappresenta una "strada", composta da:
 \begin{itemize}
 \item indirizzo dell'host o sottorete di destinazione
 \item indirizzo dell'eventuale prossimo gateway da attraversare 
 \item "distanza" dalla destinazione, detta \vedi{Metric}
 \end{itemize}
-Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
-\boximage[netstat.png][scale=0.5]{Output del comando \code{netstat -r}}
+Nei sistemi Unix-Linux si visualizza tramite il comando \code{netstat -r} o \code{route}.
+\boximage[netstat.png][scale=0.48]{Output del comando \code{netstat -r}}
 \ \\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
+Il significato delle \italic{flag} è il seguente:
+\begin{itemize}
+\item U indica che l'\vedi{Interfaccia di rete} è attiva (Up)
+\item G indica un uscita verso un'altra rete tramite \vedi{Gateway}
+\item H indica l'accesso diretto ad un host
+\end{itemize} 
 
 \subsub{Metric}
+Il concetto di distanza tra due nodi di una rete, a seconda del contesto può essere dato da:
 \begin{itemize}
-\item Path Length
-\item Reliability
-\item Delay
-\item Bandwidth
-\item Load
-\item Communication cost
+\item Path Length (o hop-count): numero di nodi da attraversare
+\item Reliability: affidabilità
+\item Delay: ritardo
+\item Bandwidth: larghezza della banda
+\item Load: carico
+\item Communication cost: costo della comunicazione
 \end{itemize}
 
 \sub{Protocolli di routing}
