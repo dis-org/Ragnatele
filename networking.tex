@@ -431,7 +431,7 @@ Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
 \subsub{ICMP}
 Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
 \boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
-In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti.
+In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. 
 \\I comandi \code{ping} e \code{traceroute} (vedi \vedi{qualita}) sfruttano il protocollo ICMP.
 \newpage
 
