@@ -269,22 +269,8 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %\sub{Protocolli primario-secondario}
 %\subsub{RTS-CTS}
 %\subsub{XON-XOF}
-%\subsub{ARQ}
-
-\subsection{Protocolli di collegamento con lv3} 
-\subsub{ARP}
-Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
-L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tutti gli host (contenente IP di B e il mac address di A), B vedendo una chiamata con il suo IP, risponde segnando il mac address di A in una cache di consultazione e riinviando il proprio mac address a A.\\
-La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta ARP, sia possibile riinviare dati al suddetto host. le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
-%immagine
-Occorre considerare alcuni problemi:\\
-	- Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
-	- Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
-\subsub{RARP} 
-
+%\subsub{ARQ}Il protocollo ARQ è di tipo \vedi{Full-Duplex} %missing
 %\subsub{NDP} 
-
-%ARP, RARP da spostare nel lv. di rete
 
 \sub{Sottolivelli}
 \subsub{MAC}
@@ -384,11 +370,26 @@ La configurazione di un indirizzo IP avviene automaticamente attraverso il proto
 \\Nei sistemi Unix-Linux, il comando per la configurazione manuale dell'IP è \code{ifconfig} (dove "if" sta per "interface"). La sintassi è la seguente:
 \\\\ \code{\$ ifconfig <nome interfaccia> <indirizzo IP> netmask <netmask\\ x.y.z.q> broadcast <indirizzo broadcast>} %forse meglio un esempio?
 \\\\Il comando \code{ifconfig} senza argomenti mostra lo stato delle interfacce.
-\image[ifconfig.png][scale=0.4]{Output del comando ifconfig su una macchina Linux}
+\boximage[ifconfig.png][scale=0.4]{Output del comando ifconfig su una macchina Linux}
 
 \paragraph{Differenze tra IPv4 e IPv6}
 L’IP versione 4 fornisce anche i servizi di frammentazione e riassemblaggio di datagram, quando la trasmissione avviene attraverso reti con capacità di trasporto di pacchetti più piccola del pacchetto originale (dovuto alle diverse tecnologie di rete del passato). IP versione 6 abolisce questo comportamento, non più necessario. %copiato dalle slide (da rivedere e ampliare)
 \subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si esplicitare la sua netmask predefinita sia assieme all'indirizzo, come $0.127.127.18/8$, sia separatamente come $255.0.0.0$.
+
+\subsection{Protocolli di Address Resolution} 
+\subsub{ARP}
+Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
+L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tutti gli host (contenente IP di B e il mac address di A), B vedendo una chiamata con il suo IP, risponde segnando il mac address di A in una cache di consultazione e riinviando il proprio mac address a A.\\
+La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta ARP, sia possibile riinviare dati al suddetto host. le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
+%immagine
+Occorre considerare alcuni problemi:\\
+	- Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
+	- Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
+\subsub{RARP}
+
+\sub{Protocolli di boh}
+\subsub{ICMP} 
+\subsub{IGMP}
 
 \subsection{Routing con IPv4} \label{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso nodi intermedi che implementano un modulo internet.
@@ -409,7 +410,7 @@ Nella tabella di routing ogni riga rappresenta una "strada", composta da
 \item "distanza" dalla destinazione, detta \vedi{Metric}
 \end{itemize}
 Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
-\image[netstat.png][scale=0.5]{Output del comando \code{netstat -r}}
+\boximage[netstat.png][scale=0.5]{Output del comando \code{netstat -r}}
 \ \\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
 
 \subsub{Metric}
@@ -423,8 +424,6 @@ Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
 \end{itemize}
 
 \sub{Protocolli di routing}
-\subsub{ICMP} 
-\subsub{IGMP} 
 \subsub{RIP} 
 \subsub{OSPF} 
 
@@ -432,7 +431,7 @@ Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
 
 \sec{Livello di trasporto}
 
-Il protocollo ARQ è di tipo \vedi{Full-Duplex} %missing
+
 
 \subsection{Protocolli} 
 \subsub{TCP} 
