@@ -207,6 +207,10 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \newpage
 \sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
+\'E il secondo livello dello standard ISO/OSI, subito sopra il livello fisico, si occupa di:
+\begin{itemize} 
+\item 
+\end{itemize}
 \sub{Ethernet} 
 \subsub {Ethernet framing}
 
@@ -228,10 +232,16 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \sub{Protocolli di collegamento con lv3} 
 \subsub{ARP}
 Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
-L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP (contenente IP di sia di A che di B), B la chiamata a suo nome e risponde segnando l' IP di a in una cache di consultazione e riinviando il proprio mac address a A
+L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tutti gli host (contenente IP di B e il mac address di A), B vedendo una chiamata con il suo IP, risponde segnando il mac address di A in una cache di consultazione e riinviando il proprio mac address a A.\\
+La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta ARP, sia possibile riinviare dati al suddetto host. le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
+%immagine
+Occorre considerare alcuni problemi:\\
+	- Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
+	- Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
 \subsub{RARP} 
+
 %\subsub{NDP} 
-%ARP, MAC, Ethernet da spostare nel lv. di rete?
+
  
 \sec{Livello di Rete}
 %Claudio & Giorgio ---------------------------------------------------------------------------------------------------------------------
