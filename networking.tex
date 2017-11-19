@@ -15,6 +15,13 @@
 \def\sub#1{\subsection{#1}\label{#1}} 
 \def\subsub#1{\subsubsection{#1}\label{#1}} 
 \def\vedi#1{\nameref{#1}} 
+\def\italic#1{\textit{#1}}
+\def\image[#1][#2]#3{
+  \begin{figure}[H]
+  \centering
+  \includegraphics[#2]{#1}
+  \caption{#3}
+  \end{figure}}
 
 \title{Networking}
 
@@ -383,11 +390,8 @@ La configurazione di un indirizzo IP avviene automaticamente attraverso il proto
 \\Nei sistemi Unix-Linux, il comando per la configurazione manuale dell'IP è \code{ifconfig} (dove "if" sta per "interface"). La sintassi è la seguente:
 \\\\ \code{\$ ifconfig <nome interfaccia> <indirizzo IP> netmask <netmask\\ x.y.z.q> broadcast <indirizzo broadcast>} %forse meglio un esempio?
 \\\\Il comando \code{ifconfig} senza argomenti mostra lo stato delle interfacce.
-\begin{figure}[H]
-\centering
-\includegraphics[scale=0.4]{ifconfig.png}
-\caption{Output del comando ifconfig su una macchina Linux}
-\end{figure}
+\image[ifconfig.png][scale=0.4]{Output del comando ifconfig su una macchina Linux}
+
 \paragraph{Differenze tra IPv4 e IPv6}
 L’IP versione 4 fornisce anche i servizi di frammentazione e riassemblaggio di datagram, quando la trasmissione avviene attraverso reti con capacità di trasporto di pacchetti più piccola del pacchetto originale (dovuto alle diverse tecnologie di rete del passato). IP versione 6 abolisce questo comportamento, non più necessario. %copiato dalle slide (da rivedere e ampliare)
 \subsub{Netmask} Oltre che ad un singolo host, un indirizzo IP può riferirsi ad un'intera rete, nel qual caso è necessario associare una netmask all'indirizzo. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti. Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. Ad esempio, $0.127.127.18$ è un indirizzo di classe A, e si esplicitare la sua netmask predefinita sia assieme all'indirizzo, come $0.127.127.18/8$, sia separatamente come $255.0.0.0$.
@@ -411,9 +415,7 @@ Nella tabella di routing ogni riga rappresenta una "strada", composta da
 \item "distanza" dalla destinazione, detta \vedi{Metric}
 \end{itemize}
 Nei sistemi Unix-Linux, il comando \code{netstat -r} restituisce la tabella:
-\begin{figure}[H]
-  \includegraphics[scale=0.5]{netstat.png}
-  \caption{Output del comando \code{netstat -r}}\end{figure}
+\image[netstat.png][scale=0.5]{Output del comando \code{netstat -r}}
 \ \\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
 
 \subsub{Metric}
