@@ -298,7 +298,26 @@ tra uno o più \vedi{DTE} e il resto della rete; esegue conversioni di segnale, 
 e gestisce il clock dei dispositivi connessi. Può anche essere interno al \vedi{DTE}. Tipicamente è un Modem.
 \subsub{CPE}
 Customer Premises Equipment: dispositivo terminale connesso direttamente ad una \vedi{WAN}. Rientrano in questa categoria telefoni, Router e Switch di rete.
-
+\subsub{IS}
+Intermediate System: dispositivo di rete con funzionalià fino al terzo livello del \vedi{Modello di riferimento ISO/OSI}, come un \vedi{Router} o un  \vedi{Gateway}.
+\subsub{ISP}
+Internet Service Provider: Organizzazione che fornisce come servizio l'accesso ad \vedi{Internet}.
+\subsub{AS}
+Autonomuos System: dominio di \vedi{Routing} gestito dallo stesso \vedi{ISP} nel quale viene applicata la stessa \italic{policy}, può essere di più tipi:
+\begin{itemize}
+\item \textbf{Stub} se connesso solo ad un'altro AS
+\item \textbf{Multihomed} se connesso a più AS ma senza permettere il \italic{pass-trough}
+\item \textbf{Transit} se permette il \italic{pass-trough}, ovvero il passaggio di traffico diretto ad un'altro AS
+\end{itemize} 
+\para{ASN} Ogni AS è identificato da un ASN(Autonompus System Number) assegnato dall'\vedi{ICANN} ai RIR(Regional Internet Registers) seguendo le norme definite nell'\vedi{RFC}1930. 
+\subsub{Router}
+Nodo provvisto di procedure specifiche volte ad effettuare le scelte di \vedi{Routing}. Può essere:
+\begin{itemize}
+\item \textbf{Interior} se opera all'interno di un \vedi{AS}, utilizza protocolli \vedi{IGP}
+\item \textbf{Exterior} se opera tra \vedi{AS} differenti, utilizza protocolli \vedi{EGP}
+\end{itemize}
+\subsub{Gateway}
+\vedi{Router} che connette due reti o sottoreti differenti.
 \sub{Tipologie di comunicazione}
 \subsub{Connection-oriented} 
 Un servizio connection-oriented, di cui è un esempio la rete telefonica, richiede che venga creato un canale di comunicazione -sia esso logico o fisico- prima dell'invio dei dati. Questo metodo è considerato "affidabile", poiché è garantito che i dati arriveranno nell'ordine in cui sono stati inviati.
@@ -390,7 +409,7 @@ Quando un'interfaccia virtuale di rete viene configurata ad essa viene assegnato
 \sub{IP multicasting} 
 Si parla di IP multicasting quando un datagram è trasmesso ad un gruppo di host identificato da un unico \vedi{Indirizzo IP}. Gli appartenenti al gruppo possono cambiare dinamicamente -un gruppo può essere dunque permanente o transitorio- e si può definire una chiave di accesso che renda selettivo l'ingresso. La gestione delle informazioni relative alla composizione dei gruppi e l'invio in internet dei datagram sono responsabilità dei \textit{multicast agents}, che girano sui router o su host particolari.
 \subsub{IGMP} 
-Le funzioni di IP multicasting sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
+Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
 
 \subsection{Protocolli di Address Resolution} 
 \subsub{ARP} %Address Resolution Protocol (daje, scrivilo da qualche parte!)
@@ -406,19 +425,13 @@ Occorre considerare alcuni problemi:\\
 \subsub{RARP} %Reverse Address Resolution Protocol (daje, scrivilo da qualche parte!)
 \'E un protocollo appartenente al TCP/IP che consente, al contrario dell' ARP, di risalire al proprio indirizzo ip dal mac address
 
-\subsection{Routing con IPv4} \label{Routing}
+\sub{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
 \begin{itemize}
 \item \textbf{Routing Minimale}: la tabella di routing viene definita al momento della configurazione dell'\vedi{Interfaccia di rete}
-\item \textbf{Routing Statico}: adatto a \vedi{LAN} di piccole dimensioni, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \code{route add -net <indirizzo di rete> netmask <netmask x.y.z.q> gw <indirizzo gateway> }
-\item \textbf{Routing Dinamico}: utilizza \vedi{Protocolli di routing}
+\item \textbf{Routing Statico}: utilizzato quasi solamente per gli host, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \code{route add -net <indirizzo di rete> netmask <netmask x.y.z.q> gw <indirizzo gateway> }. I comandi possono essere salvati in un file di configuarzione eseguito all'avvio della macchina (In Unix-Linux \code{/etc/init.d/rc.local}) 
+\item \textbf{Routing Dinamico}: utilizzato nei router, prevede \vedi{Protocolli di routing}
 \end{itemize}
-
-\subsub{Router}
-Nodo provvisto di procedure specifiche volte ad effettuare le scelte di routing.
-
-\subsub{Gateway}
-\vedi{Router} che connette due reti o sottoreti differenti.
 
 \subsub{Tabella di routing}
 Presente in ogni nodo di rete, contiene le informazioni per il routing.\\
@@ -449,14 +462,26 @@ Il concetto di distanza tra due nodi di una rete, a seconda del contesto può es
 \item Communication cost: costo della comunicazione
 \end{itemize}
 
+\sub{Famiglie di protocolli di routing}
+\subsub{IGP}
+Interior Gateway Protocol: famiglia di protocolli per il routing interno ad un \vedi{AS}, iclude \vedi{RIP}, IGRP e \vedi{OSPF}.
+\subsub{EGP}
+Exterior Gateway Protocol: famiglia di protocolli per il routing tra due diversi \vedi{AS}, include EGP (storico), \vedi{BGP} e IDRP (OSI Inter-Domain Routing Protocol). 
+\subsub{CIDR}
+Classles Inter-Domain Routing: include \vedi{OSPF}, \vedi{BGP} e IS-IS.
+
 \sub{Protocolli di routing}
 \subsub{RIP} 
+Routing Information Protocol:
 \subsub{OSPF} 
+Open Shortest Path First:
+\subsub{BGP}
+Border Gateway Protocol: 
 
-\subsub{ICMP}
+\sub{ICMP}
 Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
 \boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
-In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 
+\ \\In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 
 \\I comandi \code{ping} e \code{traceroute} (vedi \vedi{qualita}) sfruttano il protocollo ICMP.
 \newpage
 
@@ -478,7 +503,7 @@ Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: 
 Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Principalmente, Telnet, \'e sempre stato utilizzato per fornire all'utente una sessione remota del terminale dell'host. L'host ascolta sulla porta 22 e l'utente stabilisce una connessione utilizzando il public IP, nome utente e password di un Unix user dell'host. L'unico grande problema di Telnet riguarda la sicurezza: \'e un protocollo non il criptato, ovvero la password il nome utente e tutte le altre informazioni inviate, risultano completamente chiare a qualsiasi utente estraneo alla conversazione.
 Qui \'e dove il protocollo SSH torna utile
 \subsub{FTP e SCP} %standard odierno
-\subsub{BGP} 
+%\subsub{BGP} io dico che è un protocollo
 \subsub{DHCP} %Discovering ,Offering , Codice 
 \subsub{DNS} 
 \subsub{HTTP/HTTPS} 
