@@ -440,6 +440,14 @@ Il routing consiste nella scelta del cammino migliore da percorrere per trasmett
 \item \textbf{Routing Statico}: utilizzato quasi solamente per gli host, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \code{route add -net <indirizzo di rete> netmask <netmask x.y.z.q> gw <indirizzo gateway> }. I comandi possono essere salvati in un file di configuarzione eseguito all'avvio della macchina (In Unix-Linux \code{/etc/init.d/rc.local}) 
 \item \textbf{Routing Dinamico}: utilizzato nei router, prevede \vedi{Protocolli di routing}
 \end{itemize}
+\ \\
+Ogni nodo delle rete esegue le seguenti operazioni:
+\begin{itemize}
+\item determina il tipo di classe dell’indirizzo IP 
+\item controlla se la rete di destinazione è locale ed eventualmente
+applica all’indirizzo di destinazione la subnet mask
+\item cerca la rete di destinazione nella \vedi{Tabella di routing} e, se presente, instrada il datagram verso il \vedi{Gateway} corrispondente
+\end{itemize}
 
 \subsub{Tabella di routing}
 Presente in ogni nodo di rete, contiene le informazioni per il routing.\\
@@ -474,11 +482,12 @@ Il concetto di distanza tra due nodi di una rete, a seconda del contesto può es
 \subsub{IGP}
 Interior Gateway Protocol: famiglia di protocolli per il routing interno ad un \vedi{AS}, iclude \vedi{RIP}, IGRP e \vedi{OSPF}.
 \subsub{EGP}
-Exterior Gateway Protocol: famiglia di protocolli per il routing tra due diversi \vedi{AS}, include EGP (storico), \vedi{BGP} (attualmente è in uso la versione 4) e IDRP (OSI Inter-Domain Routing Protocol) che dovebbe rimpiazzare il BGP una volta divenuto obsoleto. 
+Exterior Gateway Protocol: famiglia di protocolli per il routing tra due diversi \vedi{AS}, include EGP (storico), \vedi{BGP} (versione 4 attualmente in uso) e IDRP (OSI Inter-Domain Routing Protocol) che dovebbe rimpiazzare il BGP una volta divenuto obsoleto. 
 \subsub{CIDR}
 Classles Inter-Domain Routing: include \vedi{OSPF}, \vedi{BGP} e IS-IS.
 
 \sub{Protocolli di routing}
+I protocolli di routing mantengono aggiornata la \vedi{Tabella di routing} di ogni dispositivo che gestiscono tramite lo scambio di appositi messaggi, questi aggiornamenti prevalgono su eventuali configurazioni statiche. Un router può essere gestito da più algoritmi di routing contemporaneamente.
 \subsub{RIP} 
 Routing Information Protocol:
 \subsub{OSPF} 
