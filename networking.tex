@@ -1,5 +1,5 @@
 \documentclass[a4paper,11pt]{article}
-\author{Quelli della B1}
+\author{I ragni della B1}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage{graphicx}
@@ -265,9 +265,9 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \subsub{Ridondanza}
 
 \sub{Tipi di flusso trasmissivo}
-\subsub{Simplex}
-\subsub{Half-Duplex}
-\subsub{Full-Duplex}
+\subsub{Simplex} Flusso monodirezionale. Le trasmissioni radiofoniche ne sono un tipico esempio. 
+\subsub{Half-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in un solo senso alla volta. Le ricetrasmittenti lavorano in questa maniera. 
+\subsub{Full-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in ambo i sensi contemporaneamente, come nella rete telefonica. 
 
 %NB non credo vadano qui...
 %\sub{Protocolli primario-secondario}
@@ -301,7 +301,11 @@ Customer Premises Equipment: dispositivo terminale connesso direttamente ad una 
 
 \sub{Tipologie di comunicazione}
 \subsub{Connection-oriented} 
-Un servizio connection-oriented, di cui è un esempio la rete telefonica, richiede che venga creato un canale di comunicazione -sia esso logico o fisico- prima dell'invio dei dati. Questo metodo è considerato "affidabile", poiché è garantito che i dati arriveranno nell'ordine in cui sono stati inviati.
+Un servizio connection-oriented, di cui è un esempio la rete telefonica, richiede che venga creato un canale di comunicazione -sia esso logico o fisico- prima dell'invio dei dati. Questo metodo è considerato "affidabile", poiché è garantito che i dati arriveranno nell'ordine in cui sono stati inviati. In termini più tecnici, le principali caratteristiche di un servizio connection-oriented sono:
+\begin{itemize}
+\item \textbf{orientamento dello stream}: l'ordine di invio dei byte viene mantenuto
+\item \textbf{connessione di circuito virtuale}: la trasmissione ha luogo solo quando emittente e destinatario hanno verificato la sussistenza delle condizioni necessarie.
+\end{itemize}
 \subsub{Connectionless}
 In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul destinatario ed è instradato secondo queste ultime, indipendentemente dagli altri. L'ordine di arrivo dei pacchetti è arbitrario.
 
@@ -461,12 +465,23 @@ In particolare, il messaggio \textbf{redirection} indica la necessità di reinst
 \newpage
 
 \sec{Livello di trasporto}
+\subsection{Terminologia}
+\subsub{Porta} 
+Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. 
 
 \subsection{Protocolli} 
-\subsub{TCP} 
 \subsub{UDP} 
-A differenza del \vedi{TCP}, l' UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, meno affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle \vedi{porte}.
-\paragraph{Porte} Le porte, identificate da un numero intero detto \textit{portnumber}, rappresentano punti di destinazione astratti che vengono indirizzati dagli host internet per implementare i diversi \vedi{Servizi di rete}. Esse consentono ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione al suo interno. \label{porte}
+L' UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, poco affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle porte.
+
+\subsub{TCP}
+A differenza dell'\vedi{UDP}, il TCP (Transmission Control Protocol) è un protocollo \vedi{Connection-oriented}. La prima definizione del TCP si trova nell'\vedi{RFC} 793, ma le molteplici modifiche che essa ha subito, formalizzate in altrettanti \vedi{RFC}, hanno portato alla necessità di pubblicare un ennesimo \vedi{RFC}, il 4614: una sorta di guida ai documenti sul TCP. Affidabile e di applicabilità generale, è progettato per adattarsi dinamicamente alle peculiarità delle diverse reti che compongono \vedi{Internet}, contribuendo ad isolare le applicazioni dai dettagli di networking. Più specificamente, oltre a quelle di qualsiasi protocollo \vedi{Connection-oriented}, le principali caratteristiche del TCP sono:%
+\begin{itemize}
+\item \textbf{trasferimento bufferizzato}: il trasferimento viene ottimizzato, a seconda delle situazioni, accorpando più byte o suddividendo blocchi di dati di grandi dimensioni
+\item  \textbf{stream non strutturato}: la comprensione della forma dei dati trasmessi sta all'applicazione che utilizza il protocollo in oggetto
+\item \textbf{connessione \vedi{Full-Duplex}}
+\item affidabilità garantita mediante \textbf{riscontro positivo con ritrasmissione} (\textit{acknowledgement}): alla ricezione di un pacchetto, il destinatario risponde con un "ACK", ossia una conferma di ricezione. Il mittente dovrà poi ritrasmettere i pacchetti persi o, eventualmente, chiudere la connessione.
+
+\end{itemize}
 \newpage
 
 \sec{Livello delle applicazioni}
