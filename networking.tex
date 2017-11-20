@@ -441,7 +441,9 @@ Occorre considerare alcuni problemi:\\
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
 \begin{itemize}
 \item \textbf{Routing Minimale}: la tabella di routing viene definita al momento della configurazione dell'\vedi{Interfaccia di rete}
-\item \textbf{Routing Statico}: utilizzato quasi solamente per gli host, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \code{route add -net <indirizzo di rete> netmask <netmask x.y.z.q> gw <indirizzo gateway> }. I comandi possono essere salvati in un file di configuarzione eseguito all'avvio della macchina (In Unix-Linux \code{/etc/init.d/rc.local}) 
+\item \textbf{Routing Statico}: utilizzato quasi solamente per gli host, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \\\\
+\code{\$ route add -net <indirizzo di rete> netmask <netmask x.y.z.q> gw <indirizzo gateway> }.\\\\
+I comandi possono essere salvati in un file di configuarzione eseguito all'avvio della macchina (In Unix-Linux \code{/etc/init.d/rc.local}) 
 \item \textbf{Routing Dinamico}: utilizzato nei router, prevede \vedi{Protocolli di routing}
 \end{itemize}
 
@@ -460,18 +462,18 @@ Il significato delle \italic{flag} è il seguente:
 \begin{itemize}
 \item U indica che l'\vedi{Interfaccia di rete} è attiva (Up)
 \item G indica un uscita verso un'altra rete tramite \vedi{Gateway}
-\item H indica l'accesso diretto ad un host
+\item H indica l'accesso diretto ad un host.
 \end{itemize} 
 
 \subsub{Metric}
 Il concetto di distanza tra due nodi di una rete, a seconda del contesto può essere dato da:
 \begin{itemize}
 \item Path Length (o hop-count): numero di nodi da attraversare
-\item Reliability: affidabilità
-\item Delay: ritardo
-\item Bandwidth: larghezza della banda
-\item Load: carico
-\item Communication cost: costo della comunicazione
+\item Reliability: benché talvolta impostata ad un valore costante, poiché le condizioni della rete cambiano costantemente, l'affidabilità di una connessione è variabile. Essa viene dunque misurata ad intervalli regolari
+\item Load: traffico, anch'esso misurato ad intervalli regolari 
+\item Delay: tempo necessario al router per trasmettere un datagram, misurato in $\mu s$. 
+\item Bandwidth (\vedi{Ampiezza di banda})
+\item Communication cost: numero intero che indica arbitrariamente quanto un percorso sia conveniente. Valori più bassi indicano un percorso migliore. 
 \end{itemize}
 
 \sub{Famiglie di protocolli di routing}
