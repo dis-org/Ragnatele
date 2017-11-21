@@ -309,7 +309,9 @@ Autonomuos System: dominio di \vedi{Routing} gestito dallo stesso \vedi{ISP} nel
 \item \textbf{Multihomed} se connesso a più AS ma senza permettere il \italic{pass-trough}, ovvero il passaggio di traffico diretto ad un altro AS.
 \item \textbf{Transit} se permette il \italic{pass-trough}.
 \end{itemize} 
-L'utilizzo degli AS è definito nell'\vedi{RFC} 1930
+Strutturare \vedi{Internet} in AS, suddividendo i router in gruppi, si è rivelato necessario innanzitutto perché se Internet fosse una singola rete, il numero dei suoi router sarebbe tanto grande da rendere insostenibile il traffico, difatti il \textbf{ritardo} (vedi Qualità delle trasmissioni - \vedi{Criteri di valutazione in base alle prestazioni}) e l' \textbf{overhead di gestione} dipendono dal numero di router coinvolti.
+Inoltre è opportuno che le diverse organizzazioni commerciali siano il più possibile autonome nella gestione delle proprie reti.
+L'utilizzo degli AS è definito nell'\vedi{RFC} 1930.
 \para{ASN} Ogni AS è identificato da un ASN (Autonomous System Number) assegnato dall'\vedi{ICANN} ai RIR (Regional Internet Registers), che a loro volta li assegnano alle organizzazioni. 
 Fino al 2007 gli ASN erano costituiti da numeri interi
 a 16 bit (0-65535), denominati \textit{asplain}, poi sostituiti da numeri a 32 bit detti \italic{asdot} (\vedi{RFC} 4893),
@@ -501,9 +503,9 @@ Routing Information Protocol:
 \subsub{OSPF} 
 Open Shortest Path First:
 \subsub{BGP}
-Il protocollo BGP (Border Gateway Protocol) mette in comunicazione i diversi \vedi{AS}.
+Il protocollo BGP (Border Gateway Protocol) è un protocollo \vedi{EGP}. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le politiche adottate da ognuno di essi.
 
-\sub{ICMP}
+\sub{ICMP} %da spostare prima? Boh. Bah.
 Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
 \boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
 \ \\In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 
