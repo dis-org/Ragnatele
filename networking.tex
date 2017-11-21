@@ -444,7 +444,7 @@ Il routing consiste nella scelta del cammino migliore da percorrere per trasmett
 \begin{itemize}
 \item \textbf{Routing Minimale}: la tabella di routing viene definita al momento della configurazione dell'\vedi{Interfaccia di rete}
 \item \textbf{Routing Statico}: utilizzato quasi solamente per gli host, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \\\\
-\code{\$ route add -net <indirizzo di rete> netmask <netmask x.y.z.q> gw <indirizzo gateway> }.\\\\
+\code{\$ route add -net <indirizzo di rete> netmask <netmask\\ x.y.z.q> gw <indirizzo gateway> }.\\\\
 I comandi possono essere salvati in un file di configuarzione eseguito all'avvio della macchina (In Unix-Linux \code{/etc/init.d/rc.local}) 
 \item \textbf{Routing Dinamico}: utilizzato nei router, prevede \vedi{Protocolli di routing}
 \end{itemize}
@@ -486,8 +486,7 @@ Il concetto di distanza tra due nodi di una rete, a seconda del contesto può es
 \item Communication cost: numero intero che indica arbitrariamente quanto un percorso sia conveniente. Valori più bassi indicano un percorso migliore. 
 \end{itemize}
 
-\sub{Protocolli di routing}
-\paragraph{Considerazioni generali} %non ci scriviamo niente?
+\sub{Famiglie di protocolli di routing}
 \boximage[routing.png][scale=0.45]{Protocolli di routing}
 \subsub{IGP}
 Interior Gateway Protocol: famiglia di protocolli per il routing interno ad un \vedi{AS}, include \vedi{RIP}, IGRP e \vedi{OSPF}.
@@ -496,12 +495,79 @@ Exterior Gateway Protocol: famiglia di protocolli per il routing tra due diversi
 \subsub{CIDR}
 Classless Inter-Domain Routing: include \vedi{OSPF}, \vedi{BGP} e IS-IS.
 
+\subsub{Distance-vector}
+RIP
+\subsub{Link-State}
+In un protocollo link state ogni nodo della rete acquisisce informazioni sullo stato dei collegamenti adiacenti ed inoltra queste informazioni a tutti gli altri nodi della rete tramite un pacchetto link state.\\
+L'utilizzo di un protocollo link state, presenta diversi vantaggi:
+\\può gestire reti composte da un gran numero di nodi;
+\\converge rapidamente al cammino minimo;
+\\difficilmente genera cammini ciclici;
+\\è facile da comprendere poiché ogni nodo salva la mappa della rete nel \italic{Link-State Database} o  \italic{topological database}.
+\\Appartengono a questa categoria i protocolli \vedi{OSPF} e IS-IS.
+
+
 \sub{Protocolli di routing}
 I protocolli di routing mantengono aggiornata la \vedi{Tabella di routing} di ogni dispositivo che gestiscono tramite lo scambio di appositi messaggi, questi aggiornamenti prevalgono su eventuali configurazioni statiche. Un router può essere gestito da più algoritmi di routing contemporaneamente.
 \subsub{RIP} 
 Routing Information Protocol:
-\subsub{OSPF} 
-Open Shortest Path First:
+\newpage\subsub{OSPF} 
+Open Shortest Path First: Protocollo Open Source sviluppato nel 1988 dall’\vedi{IGP} working group di \vedi{IETF}, è basato sull’algoritmo Shortest Path First (Dijkstra
+algorithm), divenuto standard nel 1990 (\vedi{RFC} 1247).\\
+Supporta subnet variabili, routing in base al tipo di servizio ed autenticazione, inoltre esegue il bilanciamento del carico.\\
+L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{aree}: ogni router conserva il \italic{topological database} della sua area, dove salva la lista dei router adiacenti, indicando quelli designati a svolgere il ruolo di hub: \italic{designated routers (DS)} e \italic{backup designated router (BDR)}.\\ Le varie aree sono collegate tra loro dalla cosiddetta \italic{backbone area} (area 0): non è neccessariamente continua ma può essere resa tale virtualmente, definendo \italic{virtual-links} tra router di backbone e router di altre aree, che funzionano come link diretti (la topologia logica può essere diversa da quella fisica).\\ La divisione in aree porta a due tipi diversi di routing: \italic{intra-area} ed \italic{inter-area}e a quattro diversi tipi di router:
+\begin{itemize}
+\item \textbf{Internal Router (IR)}: router interno ad un'area
+\item \textbf{Area Border Router (ABR)}: a confine tra più aree, mantengono il \italic{topological database} di ogni area che collegano.
+\item \textbf{Backbone Router (BR)} router dell'area di backbone
+\item \textbf{AS Boundary Router (ASBR)}: router di confine tra \vedi{AS} 
+\end{itemize}
+
+\paragraph{I pacchetti OSPF}
+L'OSPF utilizza pacchetti di tipo \vedi{Link-State} Advertisement (LSA), in particolare presenta quattro tipi di pacchetto:
+\begin{itemize}
+\item Tipo 1: \vedi{Hello}
+\item Tipo 2: \vedi{Database Description}
+\item Tipo 3: \vedi{Link State Request}
+\item Tipo 4: \vedi{Link State Update}
+\item Tipo 5: \vedi{Link State Acknowledgment}
+\end{itemize}
+
+\paragraph{Header} Comune a tutti i pacchetti, è composto da \textbf{versione} del protocollo OSPF, \textbf{tipo} di pacchetto, \textbf{lunghezza} del pacchetto, \textbf{ID del router}, \textbf{ID dell'area}, \textbf{check-sum} per il controllo degli errori e \textbf{Autenticazione}.
+\newpage\para{Hello}
+Primo pacchetto ad essere inviato quando si abilita l'OSPF su un'interfaccia, esso è il mezzo attraverso il quale i router vengono a conoscenza l'uno dell'altro e viene reinviato periodicamente.
+\boximage[opsf-hello-packet.jpg][scale=0.8]{Pacchetto Hello}
+\begin{itemize}
+\item \textbf{Network Mask}: solo i router che concordano sulla suddivisione della rete si connettono tra loro
+\item \textbf{Hello Interval}: stabilisce l'intervallo in secondi tra i pacchetti \italic{Hello}, se diverso tra due router essi non stabiliranno una connessione.
+\item \textbf{Options}: indica le funzionalità del router per verificarne la compatibilità
+\item \textbf{Router Priority}: indica la priorità del router
+\item \textbf{Router Dead Interval}: numero di secondi che il mittente aspetterà prima di dichiarare morto il destinatario
+\item \textbf{Designed Router}: indirizzo IP dell'interfaccia del DR conosciuto, se non è ancora stato eletto è $0.0.0.0$.
+\item \textbf{Backup Designed Router}:indirizzo IP dell'interfaccia del BDR conosciuto, se non è ancora stato eletto è $0.0.0.0$.
+\item \textbf{Neighbor}: lista dei router con i quali il mittente è in contatto, serve a generare il \italic{topological database}.
+\end{itemize}
+
+
+\newpage\para{Database Description}
+Utilizzato quando viene stabilito un contatto tra due router per confrontare quali messaggi LSA hanno ricevuto. Vengono inviati solo gli header e durante lo scambio di pacchetti uno dei due router assume il ruolo di \italic{master} e l'altro di \italic{slave}.
+\boximage[ospf-database-description.jpg][scale=0.9]{Pacchetto Database Description}
+
+\newpage\para{Link State Request}
+Quando, in seguito ad un messaggio di Database Description, un router si accorge di non avere in database un LSA, lo richiede tramite un pacchetto di request.
+\boximage[ospf-link-state-request.jpg][scale=0.8]{Pacchetto Link State Request}
+
+\newpage\para{Link State Update}
+Il
+\boximage[ospf-link-state-update.jpg][scale=0.8]{Pacchetto Link State Update}
+
+
+\newpage\para{Link State Acknowledgment}
+asjs
+\boximage[ospf-link-state-akn.jpg][scale=0.8]{Pacchetto Link State Acknowledgment}
+
+\newpage
+
 \subsub{BGP}
 Il protocollo BGP (Border Gateway Protocol) è un protocollo \vedi{EGP}. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le politiche adottate da ognuno di essi.
 
