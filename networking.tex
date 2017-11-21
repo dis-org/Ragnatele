@@ -306,7 +306,7 @@ Internet Service Provider: Organizzazione che fornisce accesso ad \vedi{Internet
 Autonomuos System: dominio di \vedi{Routing} gestito dallo stesso \vedi{ISP} nel quale viene applicata la stessa \italic{policy}, può essere di più tipi:
 \begin{itemize}
 \item \textbf{Stub} se connesso solo ad un'altro AS;
-\item \textbf{Multihomed} se connesso a più AS ma senza permettere il \italic{pass-trough}, ovvero il passaggio di traffico diretto ad un altro AS.
+\item \textbf{Multihomed} se connesso a più AS ma senza permettere il \italic{pass-trough}, ovvero il passaggio di traffico diretto ad un altro AS;
 \item \textbf{Transit} se permette il \italic{pass-trough}.
 \end{itemize} 
 Strutturare \vedi{Internet} in AS, suddividendo i router in gruppi, si è rivelato necessario innanzitutto perché se Internet fosse una singola rete, il numero dei suoi router sarebbe tanto grande da rendere insostenibile il traffico, difatti il \textbf{ritardo} (vedi Qualità delle trasmissioni - \vedi{Criteri di valutazione in base alle prestazioni}) e l' \textbf{overhead di gestione} dipendono dal numero di router coinvolti.
@@ -490,9 +490,9 @@ Il concetto di distanza tra due nodi di una rete, a seconda del contesto può es
 \paragraph{Considerazioni generali} %non ci scriviamo niente?
 \boximage[routing.png][scale=0.45]{Protocolli di routing}
 \subsub{IGP}
-Interior Gateway Protocol: famiglia di protocolli per il routing interno ad un \vedi{AS}, include \vedi{RIP}, IGRP e \vedi{OSPF}.
+Interior Gateway Protocol: famiglia di protocolli per il routing interno ad un \vedi{AS} (\textit{intra-domain routing}), include \vedi{RIP}, IGRP e \vedi{OSPF}.
 \subsub{EGP}
-Exterior Gateway Protocol: famiglia di protocolli per il routing tra due diversi \vedi{AS}, include EGP (storico), \vedi{BGP} (versione 4 attualmente in uso) e IDRP (OSI Inter-Domain Routing Protocol) che dovebbe rimpiazzare il BGP una volta divenuto obsoleto. 
+Exterior Gateway Protocol: famiglia di protocolli per il routing tra due diversi \vedi{AS} (\textit{inter-domain routing}), include EGP (storico), \vedi{BGP} (versione 4 attualmente in uso) e IDRP (OSI Inter-Domain Routing Protocol) che dovebbe rimpiazzare il BGP una volta divenuto obsoleto. 
 \subsub{CIDR}
 Classless Inter-Domain Routing: include \vedi{OSPF}, \vedi{BGP} e IS-IS.
 
@@ -503,8 +503,18 @@ Routing Information Protocol:
 \subsub{OSPF} 
 Open Shortest Path First:
 \subsub{BGP}
-Il protocollo BGP (Border Gateway Protocol) è un protocollo \vedi{EGP}. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le politiche adottate da ognuno di essi.
-
+Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell' \vedi{RFC} 1771 \footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrato più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le policy adottate dal rispettivo \vedi{ISP}. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
+\\Perché due router possano comunicare, devono essere innanzitutto definiti come \textit{BGP neighbors}, detti anche \textit{peers} tramite una configurazione manuale che ha per risultato la creazione di una sessione \vedi{TCP}.
+A questo punto, i peer si invieranno l'un l'altro la \vedi{Tabella di routing} ed una serie di messaggi:
+\begin{itemize}
+\item \textbf{OPEN}: è il messaggio che i peers si scambiano per aprire la connessione e negoziarne i parametri; 
+\item \textbf{KEEPALIVE}: conferma dell'apertura della sessione; continua poi ad essere inviato periodicamente per mantenerla attiva;
+\item \textbf{UPDATE};
+\item \textbf{NOTIFICATION}: viene trasmesso in condizioni particolari, ad esempio al rilevamento di un errore;
+\item \textbf{REFRESH}.
+\end{itemize} 
+\paragraph{iBGP} \label{iBGP}
+Come accennato, iBGP sta per "internal BGP" ed è coinvolto nell'\textit{intra-domain routing}. La sua funzione è quella di stabilire quale sia il router ottimale come punto di connessione con gli \vedi{AS} esterni.
 \sub{ICMP} %da spostare prima? Boh. Bah.
 Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
 \boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
