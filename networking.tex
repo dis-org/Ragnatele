@@ -247,12 +247,13 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %Filippo---------------------------------------------------------------------------------------------------------------------
 \'E il secondo livello dello standard ISO/OSI, subito sopra il livello fisico, si occupa di:
 \begin{itemize} 
-\item raggruppare in frame i bit da inviare
-\item modulare la multillazione per l' accesso condiviso fra più utenti al canale fisico per evitare conflitti
-\item controllare gli errori di trasmissione e gestirli
-\item gestire il flusso 
+\item raggruppare in frame i bit da inviare;
+\item modulare la multiplazione per l' accesso condiviso fra più utenti al canale fisico per evitare conflitti;
+\item controllare gli errori di trasmissione e gestirli;
+\item gestire il flusso di dati.
 \end{itemize}
 \sub{Ethernet} 
+\'E una delle tecnologie per il collegamento LAN più utilizzate al mondo,posto a metà fra il LV 1 e il LV 2 (più in particolare nel sottolivello MAC) del modello ISO.
 \subsub {Ethernet framing}
 
 \sub{Tipi di trasmissione}
@@ -277,10 +278,10 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %\subsub{NDP} 
 
 \sub{Sottolivelli}
-il DLL, secondo lo standard IEEE 802, in caso di reti lan brodcast, è diviso in due sottolivelli:
+il DLL, secondo lo standard IEEE 802, in caso di reti LAN brodcast, è diviso in due sottolivelli:
 \begin{itemize}
-\item LLC (Logical Link Control): fornisce controlli del flusso di dati e per la gestione degli errori, i protocolli PPP e HDLC fanno parte di questo sottolivello.
-\item MAC (Media Access Controll): disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
+\item LLC (Logical Link Control): fornisce controlli del flusso di dati e per la gestione degli errori ed un interfaccia unificata per il LV 3, i protocolli PPP e HDLC fanno parte di questo sottolivello, è uguale per ogni tipo di LAN utilizzata
+\item MAC (Media Access Controll): disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni, è diversa in base alla LAN utilizzata poichè strettamente legata al LV 1
 \end{itemize}
 
 \newpage\sec{Livello di Rete}
@@ -301,36 +302,38 @@ Customer Premises Equipment: dispositivo terminale connesso direttamente ad una 
 \subsub{IS}
 Intermediate System: dispositivo di rete con funzionalià fino al terzo livello del \vedi{Modello di riferimento ISO/OSI}, come un \vedi{Router} o un  \vedi{Gateway}.
 \subsub{ISP}
-Internet Service Provider: Organizzazione che fornisce come servizio l'accesso ad \vedi{Internet}.
+Internet Service Provider: Organizzazione che fornisce accesso ad \vedi{Internet}.
 \subsub{AS}
 Autonomuos System: dominio di \vedi{Routing} gestito dallo stesso \vedi{ISP} nel quale viene applicata la stessa \italic{policy}, può essere di più tipi:
 \begin{itemize}
-\item \textbf{Stub} se connesso solo ad un'altro AS
-\item \textbf{Multihomed} se connesso a più AS ma senza permettere il \italic{pass-trough}
-\item \textbf{Transit} se permette il \italic{pass-trough}, ovvero il passaggio di traffico diretto ad un'altro AS
+\item \textbf{Stub} se connesso solo ad un'altro AS;
+\item \textbf{Multihomed} se connesso a più AS ma senza permettere il \italic{pass-trough}, ovvero il passaggio di traffico diretto ad un altro AS.
+\item \textbf{Transit} se permette il \italic{pass-trough}.
 \end{itemize} 
-L'utilizzo degli AS è definito nell'\vedi{RFC} 1930
-\para{ASN} Ogni AS è identificato da un ASN (Autonompus System Number) assegnato dall'\vedi{ICANN} ai RIR (Regional Internet Registers) che a loro volta ne assegnano alle organizzazioni. 
-Fino al 2007 gli ASN erano indicati da un numero intero
-a 16 bit (0-65536), denominati \textit{asplain}, sono poi stati sostituiti (\vedi{RFC} 4893) da numeri a 32 denominati \italic{asdot},
-nella forma x.y, con x e y numeri interi di 16 bit, dove i numeri 0.y coincidono con gli asplain.\\
+Strutturare \vedi{Internet} in AS, suddividendo i router in gruppi, si è rivelato necessario innanzitutto perché se Internet fosse una singola rete, il numero dei suoi router sarebbe tanto grande da rendere insostenibile il traffico, difatti il \textbf{ritardo} (vedi Qualità delle trasmissioni - \vedi{Criteri di valutazione in base alle prestazioni}) e l' \textbf{overhead di gestione} dipendono dal numero di router coinvolti.
+Inoltre è opportuno che le diverse organizzazioni commerciali siano il più possibile autonome nella gestione delle proprie reti.
+L'utilizzo degli AS è definito nell'\vedi{RFC} 1930.
+\para{ASN} Ogni AS è identificato da un ASN (Autonomous System Number) assegnato dall'\vedi{ICANN} ai RIR (Regional Internet Registers), che a loro volta li assegnano alle organizzazioni. 
+Fino al 2007 gli ASN erano costituiti da numeri interi
+a 16 bit (0-65535), denominati \textit{asplain}, poi sostituiti da numeri a 32 bit detti \italic{asdot} (\vedi{RFC} 4893),
+nella forma $x.y$, con $x$ e $y$ numeri interi a 16 bit, dove i numeri $0.y$ coincidono con gli asplain.\\ %cioé y è l'asplain?
 Gli ASN 0, 23456 e 65535 sono riservati e non possono
 essere usati dagli operatori.
-Gli ASN 64512- 65534 deviniti come privati dall'\vedi{RFC} 
-6996.
+Gli ASN 64512-65534 definiti come privati dall'\vedi{RFC} 
+6996. %qual è la differenza tra privati e riservati, in questo caso?
 \subsub{Router}
-Nodo provvisto di procedure specifiche volte ad effettuare le scelte di \vedi{Routing}. Può essere:
+Nodo provvisto di procedure specifiche volte ad effettuare le scelte di \vedi{Routing}. Collega più reti o sottoreti dello stesso tipo. Può essere:
 \begin{itemize}
-\item \textbf{Interior} se opera all'interno di un \vedi{AS}, utilizza protocolli \vedi{IGP}
-\item \textbf{Exterior} se opera tra \vedi{AS} differenti, utilizza protocolli \vedi{EGP}
+\item \textbf{Interior} se opera all'interno di un \vedi{AS}, utilizza protocolli \vedi{IGP};
+\item \textbf{Exterior} se opera tra \vedi{AS} differenti, utilizza protocolli \vedi{EGP}.
 \end{itemize}
-\subsub{Gateway}
-\vedi{Router} che connette due reti o sottoreti differenti.
+\subsub{Gateway} 
+\vedi{Router} che connette due reti o sottoreti di tipo diverso.
 \sub{Tipologie di comunicazione}
 \subsub{Connection-oriented} 
 Un servizio connection-oriented, di cui è un esempio la rete telefonica, richiede che venga creato un canale di comunicazione -sia esso logico o fisico- prima dell'invio dei dati. Questo metodo è considerato "affidabile", poiché è garantito che i dati arriveranno nell'ordine in cui sono stati inviati. In termini più tecnici, le principali caratteristiche di un servizio connection-oriented sono:
 \begin{itemize}
-\item \textbf{orientamento dello stream}: l'ordine di invio dei byte viene mantenuto
+\item \textbf{orientamento dello stream}: l'ordine di invio dei byte viene mantenuto;
 \item \textbf{connessione di circuito virtuale}: la trasmissione ha luogo solo quando emittente e destinatario hanno verificato la sussistenza delle condizioni necessarie.
 \end{itemize}
 \subsub{Connectionless}
@@ -338,7 +341,7 @@ In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul
 
 \newpage
 \sub{Tipologie di rete cablata}
-\subsub{PAN} Personal Area Network: Rete personale come quella composta dal PC e da altri dispositivi domestici connessi tra di loro via cavo.
+\subsub{PAN} Personal Area Network: Rete personale che non si estende per più di 10-20 metri. Il termine si riferisce propriamente a reti con connessioni via cavo, ma poiché la gran parte delle reti di dimensioni così piccole è wireless, è sepsso utilizzato come sinonimo di \vedi{WPAN}. 
 \subsub{LAN} Local Area Network: Rete con un raggio limitato ad una abitazione o un edificio. (La prima rete LAN è stata ARKNET nel 1977)
 \subsub{WAN} Wide Area Network: Rete che copre ampie aree geografiche connettendo tra loro più sottoreti locali. 
 \subsub{MAN} Metropolitan Area Network: Rete metropolitana caratterizzata da una velocità di trasmissione molto elevata (tipicamente fibra ottica).
@@ -357,7 +360,7 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 \subsub{Rete ad albero} La trasmissione avviene in modo gerarchico tra i nodi padre e figlio, fino ad arrivare alla \textit{root} dalla quale dipende tutto il funzionamento della rete.
 \subsub{Rete a stella} Tutti i dispositivi sono connessi ad un HUB (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
 \subsub{Rete ad anello} Le informazioni vengono passate da un dispositivo all'altro in modo ciclico, la trasmissione è unidirezionale anche se questo si può ovviare con un secondo anello in direzione opposta. Questa topologia era tipica delle \vedi{LAN} TokenRing, ora viene utilizzata principalmente nelle \vedi{MAN} in fibra ottica.
-\subsub{Rete a maglia} In inglese \textit{mesh}, è una rete in cui ogni dispositivo può essere connesso ad ogni altro dispositivo ottenendo di fatto un grafo connesso. \'E la topologia di rete meno vulnerabile ma è poco utilizzata nelle reti cablate a causa dei costi elevati. \'E diffusa invece nelle \vedi{WLAN}, spesso nella versione \textit{ad -hoc} dove i collegamenti nascono e muoiono dinamicamente. In questa topologia il \vedi{Routing} viene effettuato da ogni nodo.
+\subsub{Rete a maglia} In inglese \textit{mesh}, è una rete in cui ogni dispositivo può essere connesso ad ogni altro dispositivo ottenendo di fatto un grafo connesso. \'E la topologia di rete meno vulnerabile, ma è poco utilizzata nelle reti cablate a causa dei costi. \'E diffusa invece nelle \vedi{WLAN}, spesso nella versione \textit{ad hoc}, dove i collegamenti nascono e muoiono dinamicamente. In questa topologia il \vedi{Routing} viene effettuato da ogni nodo.
 
 \sub{Grid}
 Rete di computer incentrata sulla condivisione dinamica delle risorse nel contesto di calcolo distribuito e HTC (High Troughput Computing).\\ Rispetto ad un vero e proprio cluster di computer, la grid ha una composizione più eterogenea. L'accesso ai dispositivi non si limita al software ma comprende anche l'hardware, ciò è ottenuto utilizzando librerie middleware (\textit{software glue}) che si collocano tra il sistema operativo e lo strato fisico della macchina. La più importante grid europea è EGEE del CERN, bastata sul middleware gLite.%qualche link forse
@@ -395,7 +398,7 @@ L'header del datagram IPv4 contiene i seguenti campi:
 Composto da 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
 \boximage[ipaddress.png][scale=0.8]{Suddivisione in classi degli indirizzi IPv4}
 
-\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$ .
+\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$.
 
 \ \\Nell'ambito degli indirizzi IPv4 sussistono alcune convenzioni:
 \begin{itemize}
@@ -423,19 +426,20 @@ Si parla di IP multicasting quando un datagram è trasmesso ad un gruppo di host
 \subsub{IGMP} 
 Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
 
-\subsection{Protocolli di Address Resolution} 
-\subsub{ARP} %Address Resolution Protocol (daje, scrivilo da qualche parte!)
-Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
-L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tutti gli host (contenente IP di B e il mac address di A), B vedendo una chiamata con il suo IP, risponde segnando il mac address di A in una cache di consultazione e riinviando il proprio mac address a A.\\
-La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta ARP, sia possibile riinviare dati al suddetto host. le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
+\subsection{protocolli di address resolution} 
+\subsub{arp} %address resolution protocol (daje, scrivilo da qualche parte!)
+due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.\\
+l' host a, per sapere l' indirizzo fisico di b, invierà una richiesta arp a tutti gli host (contenente ip di b e il mac address di a), b vedendo una chiamata con il suo ip, risponde segnando il mac address di a in una cache di consultazione e riinviando il proprio mac address a a.\\
+la cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta arp, sia possibile riinviare dati al suddetto host.\\ le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
 %immagine
-Occorre considerare alcuni problemi:\\
+occorre considerare alcuni problemi:\\
 \begin {itemize}
-\item Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
-\item Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
+\item il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
+\item impatto sull' operatività di altri protocolli in presenza di richieste arp pendenti.\\
 \end{itemize}
-\subsub{RARP} %Reverse Address Resolution Protocol (daje, scrivilo da qualche parte!)
-\'E un protocollo appartenente al TCP/IP che consente, al contrario dell' ARP, di risalire al proprio indirizzo ip dal mac address
+\subsub{rarp} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
+\'e un protocollo appartenente al tcp/ip che consente, al contrario dell' arp, di risalire al proprio indirizzo ip dal mac address.\\
+\'e utilizzato ad ogni avvio dagli host diskless(senza memoria secondaria) per determinare il proprio indirizzo ip, chiedendolo a dei particolari server rarp che contengono le informazioni in specifici file di configurazione
 
 \sub{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
@@ -588,9 +592,9 @@ Usati per confermare la recezione degli LSA via Link State Update, ne contiene l
 \newpage
 
 \subsub{BGP}
-Il protocollo BGP (Border Gateway Protocol) mette in comunicazione i diversi \vedi{AS}.
+Il protocollo BGP (Border Gateway Protocol) è un protocollo \vedi{EGP}. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le politiche adottate da ognuno di essi.
 
-\sub{ICMP}
+\sub{ICMP} %da spostare prima? Boh. Bah.
 Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
 \boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
 \ \\In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 

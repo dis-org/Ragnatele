@@ -3,9 +3,11 @@ Progetto di realizzazione di dispense collaborative di **Architettura reti** e *
 Fonti:
 + Slides e appunti delle lezioni tenutesi nell'ambito dei corsi sopra citati nell' A.A. 2017-'18
 + *Computer networks* (Tanenbaum, Wetherall)
++ www.learnnetworks.wordpress.com/
 + www.linktionary.com
 + www.wikipedia.org
 + www.duricomeilmetallo.net (consigliamo al lettore di scaricare il file [Date fondamentali](http://www.duricomeilmetallo.net/home/bbestia/uni/appunti/224/riassunto-architettura-delle-reti/), una cronologia della storia di internet che non abbiamo al momento intenzione di inserire nelle nostre dispense)
++ http://www.di-srv.unisa.it/
 + ...
 
 
