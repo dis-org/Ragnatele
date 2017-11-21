@@ -253,6 +253,7 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \item gestire il flusso 
 \end{itemize}
 \sub{Ethernet} 
+\'E una delle tecnologie per il collegamento LAN più utilizzate al mondo,posto a metà fra il LV 1 e il LV 2 (più in particolare nel sottolivello MAC) del modello ISO.
 \subsub {Ethernet framing}
 
 \sub{Tipi di trasmissione}
@@ -277,10 +278,10 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %\subsub{NDP} 
 
 \sub{Sottolivelli}
-il DLL, secondo lo standard IEEE 802, in caso di reti lan brodcast, è diviso in due sottolivelli:
+il DLL, secondo lo standard IEEE 802, in caso di reti LAN brodcast, è diviso in due sottolivelli:
 \begin{itemize}
-\item LLC (Logical Link Control): fornisce controlli del flusso di dati e per la gestione degli errori, i protocolli PPP e HDLC fanno parte di questo sottolivello.
-\item MAC (Media Access Controll): disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
+\item LLC (Logical Link Control): fornisce controlli del flusso di dati e per la gestione degli errori ed un interfaccia unificata per il LV 3, i protocolli PPP e HDLC fanno parte di questo sottolivello, è uguale per ogni tipo di LAN utilizzata
+\item MAC (Media Access Controll): disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni, è diversa in base alla LAN utilizzata poichè strettamente legata al LV 1
 \end{itemize}
 
 \newpage\sec{Livello di Rete}
