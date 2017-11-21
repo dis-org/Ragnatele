@@ -522,7 +522,7 @@ L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{ar
 \end{itemize}
 
 \paragraph{I pacchetti OSPF}
-L'OSPF utilizza pacchetti di tipo \vedi{Link-State} Advertisement (LSA), in particolare presenta quattro tipi di pacchetto:
+L'OSPF utilizza pacchetti di tipo \vedi{Link-State} Advertisement (LSA), in particolare presenta cinque tipi di pacchetto:
 \begin{itemize}
 \item Tipo 1: \vedi{Hello}
 \item Tipo 2: \vedi{Database Description}
@@ -538,7 +538,7 @@ Primo pacchetto ad essere inviato quando si abilita l'OSPF su un'interfaccia, es
 \begin{itemize}
 \item \textbf{Network Mask}: solo i router che concordano sulla suddivisione della rete si connettono tra loro
 \item \textbf{Hello Interval}: stabilisce l'intervallo in secondi tra i pacchetti \italic{Hello}, se diverso tra due router essi non stabiliranno una connessione.
-\item \textbf{Options}: indica le funzionalità del router per verificarne la compatibilità
+\item \textbf{Options}: indica le funzionalità del mittente per verificare che siano compatibili con il destinatario, prima di connettersi
 \item \textbf{Router Priority}: indica la priorità del router
 \item \textbf{Router Dead Interval}: numero di secondi che il mittente aspetterà prima di dichiarare morto il destinatario
 \item \textbf{Designed Router}: indirizzo IP dell'interfaccia del DR conosciuto, se non è ancora stato eletto è $0.0.0.0$.
@@ -548,20 +548,41 @@ Primo pacchetto ad essere inviato quando si abilita l'OSPF su un'interfaccia, es
 
 
 \newpage\para{Database Description}
-Utilizzato quando viene stabilito un contatto tra due router per confrontare quali messaggi LSA hanno ricevuto. Vengono inviati solo gli header e durante lo scambio di pacchetti uno dei due router assume il ruolo di \italic{master} e l'altro di \italic{slave}.
+Utilizzato quando viene stabilito un contatto tra due router al fine di confrontare i pacchetti LSA ricevuti. Uno dei due router assume il ruolo di \italic{master} e l'altro di \italic{slave} e si scambiano una serie di messaggi contenenti gli header dei LSA.
 \boximage[ospf-database-description.jpg][scale=0.9]{Pacchetto Database Description}
+\begin{itemize}
+\item \textbf{Interface MTU}: dimensione in otteti del più grande datagram che il mittente può trasmettere senza frammentazione
+\item \textbf{Options}: indica le funzionalità del mittente per permettere una selezione dei LSA trasmessi, in base alle sue capacità
+\item \textbf{I}: Initial bit, ha valore 1 solo se è il primo pacchetto della serie
+\item \textbf{M}: More bit, ha valore 0 solo se è l'ultimo della serie 
+\item \textbf{MS}: Master/Slave bit, 1 se il mittente è il Master, 0 se è lo Slave
+\item \textbf{DD Sequence Number}: assicura la recezione di tutta la sequenza di pacchetti di Database Description, è impostato dal master nel primo pacchetto e viene incrementato in ogni pacchetto seguente per mantenere la sincronizzazione
+\item \textbf{LSA Headers}: lista di header di pacchetti LSA ricevuti dal mittente
+\end{itemize}
+
 
 \newpage\para{Link State Request}
-Quando, in seguito ad un messaggio di Database Description, un router si accorge di non avere in database un LSA, lo richiede tramite un pacchetto di request.
+Quando, in seguito ad un messaggio di Database Description, un router si accorge di non aver ricevuto uno dei LSA ricevuti dall'altro, richiede che gli venga ritrasmesso tramite un pacchetto LSR.
 \boximage[ospf-link-state-request.jpg][scale=0.8]{Pacchetto Link State Request}
 
+\ \\Dopo l'header si ripetono i seguenti tre campi per ogni pacchetto LSA richiesto: 
+\begin{itemize}
+\item \textbf{Link State Type}: tipo di LSA richiesto
+\item \textbf{Link State ID}: codice identificativo del LSA in funzione del tipo
+\item \textbf{Advertising Router}: ID del router che ha originato l' LSA
+\end{itemize}
+
 \newpage\para{Link State Update}
-Il
+Inviato in risposta ad un pacchetto Link State Request, il pacchetto LSU contiene le informazioni degli LSA richiesti. In caso il richiedente non sia cennesso direttamente al mittente, verrà inviato un LSU con le stesse informazioni da router a router fino alla destinazione.
 \boximage[ospf-link-state-update.jpg][scale=0.8]{Pacchetto Link State Update}
+\begin{itemize}
+\item \textbf{Number of LSAs}: numero di LSA contenuti
+\item \textbf{LSAs}: descrizione completa degli LSA 
+\end{itemize}
 
 
-\newpage\para{Link State Acknowledgment}
-asjs
+\para{Link State Acknowledgment}
+Usati per confermare la recezione degli LSA via Link State Update, ne contiene la lista degli header.
 \boximage[ospf-link-state-akn.jpg][scale=0.8]{Pacchetto Link State Acknowledgment}
 
 \newpage
