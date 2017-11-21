@@ -395,7 +395,7 @@ L'header del datagram IPv4 contiene i seguenti campi:
 Composto da 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
 \boximage[ipaddress.png][scale=0.8]{Suddivisione in classi degli indirizzi IPv4}
 
-\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$ .
+\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$.
 
 \ \\Nell'ambito degli indirizzi IPv4 sussistono alcune convenzioni:
 \begin{itemize}
@@ -423,19 +423,20 @@ Si parla di IP multicasting quando un datagram è trasmesso ad un gruppo di host
 \subsub{IGMP} 
 Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
 
-\subsection{Protocolli di Address Resolution} 
-\subsub{ARP} %Address Resolution Protocol (daje, scrivilo da qualche parte!)
-Due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.
-L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tutti gli host (contenente IP di B e il mac address di A), B vedendo una chiamata con il suo IP, risponde segnando il mac address di A in una cache di consultazione e riinviando il proprio mac address a A.\\
-La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta ARP, sia possibile riinviare dati al suddetto host. le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
+\subsection{protocolli di address resolution} 
+\subsub{arp} %address resolution protocol (daje, scrivilo da qualche parte!)
+due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.\\
+l' host a, per sapere l' indirizzo fisico di b, invierà una richiesta arp a tutti gli host (contenente ip di b e il mac address di a), b vedendo una chiamata con il suo ip, risponde segnando il mac address di a in una cache di consultazione e riinviando il proprio mac address a a.\\
+la cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta arp, sia possibile riinviare dati al suddetto host.\\ le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
 %immagine
-Occorre considerare alcuni problemi:\\
+occorre considerare alcuni problemi:\\
 \begin {itemize}
-\item Il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
-\item Impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.\\
+\item il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
+\item impatto sull' operatività di altri protocolli in presenza di richieste arp pendenti.\\
 \end{itemize}
-\subsub{RARP} %Reverse Address Resolution Protocol (daje, scrivilo da qualche parte!)
-\'E un protocollo appartenente al TCP/IP che consente, al contrario dell' ARP, di risalire al proprio indirizzo ip dal mac address
+\subsub{rarp} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
+\'e un protocollo appartenente al tcp/ip che consente, al contrario dell' arp, di risalire al proprio indirizzo ip dal mac address.\\
+\'e utilizzato ad ogni avvio dagli host diskless(senza memoria secondaria) per determinare il proprio indirizzo ip, chiedendolo a dei particolari server rarp che contengono le informazioni in specifici file di configurazione
 
 \sub{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
