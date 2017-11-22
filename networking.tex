@@ -503,7 +503,10 @@ Exterior Gateway Protocol: famiglia di protocolli per il routing tra due diversi
 Classless Inter-Domain Routing: include \vedi{OSPF}, \vedi{BGP} e IS-IS.
 
 \subsub{Distance-vector}
-RIP
+Un algoritmo del tipo distance-vector prevede che ogni router mantenga la propria \vedi{Tabella di routing} aggiornata effettuando scambi regolari con gli altri router raggiungibili. Questi aggiornamenti sono in forma di 2-ple del tipo (rete di destinazione, distanza).
+\\La distanza può essere misurata in \italic{hops} o in base al \italic{propagation delay}.
+\\Implementa questo algoritmo il protocollo \vedi{RIP}.
+
 \subsub{Link-State}
 In un protocollo link state ogni nodo della rete acquisisce informazioni sullo stato dei collegamenti adiacenti ed inoltra queste informazioni a tutti gli altri nodi della rete tramite un pacchetto link state.\\
 L'utilizzo di un protocollo link state, presenta diversi vantaggi:
@@ -517,7 +520,39 @@ L'utilizzo di un protocollo link state, presenta diversi vantaggi:
 \sub{Protocolli di routing}
 I protocolli di routing mantengono aggiornata la \vedi{Tabella di routing} di ogni dispositivo che gestiscono tramite lo scambio di appositi messaggi, questi aggiornamenti prevalgono su eventuali configurazioni statiche. Un router può essere gestito da più algoritmi di routing contemporaneamente.
 \subsub{RIP} 
-Routing Information Protocol:
+Routing Information Protocol: Protocollo sviluppato nel 1988 come parte di ARPANET e basato sull'algoritmo di Bellman-Ford; è definito negli RFC 1058 e 1023.
+\\Utilizza UDP come protocollo di trasporto, sulla porta riservata 520.
+\\Misura \vedi{Metric} in \italic{hops} ed ha 15 come limite di distanza su cui effettuare il routing.
+Un numero di hop pari a 16 equivale a infinito ed è usato per indicare le rotte inaccessibili che non verranno aggiunte alla \vedi{Tabella di routing}.
+\\Il RIP ha due forme a seconda dell’utilizzatore:
+\begin{itemize}
+	\item Forma passiva, usata dagli host: riceve messaggi ma non ne invia;
+	\item Forma attiva, usata dai router: riceve ed invia in \italic{broadcast} messaggi.
+\end{itemize}
+Questi messaggi prendono il nome di \italic{routing updates} e consistono nella porzione di \vedi{Tabella di routing} in cui si è trovato un percorso migliore.
+\\I router inviano aggiornamenti in due occasioni:
+\begin{itemize}
+	\item ad ogni clock del \italic{routing-update timer}, cioè a cadenza regolare (abitualmente ogni 30 secondi);
+	\item quando cambia la topologia della rete dei router confinanti.
+\end{itemize}
+Un altro timer utilizzato è il \italic{route timeout}: se una route non viene aggiornata nella tabella entro un tempo limite, viene segnata come \italic{invalid} e successivamente rimossa allo scadere del \italic{route-flush timer}.
+\\\\Rispetto all’\vedi{OSPF}, il RIP converge meno rapidamente ed è potenzialmente più soggetto a \italic{routing loops}.
+Di contro, ha il vantaggio di essere più leggero in termini di risorse utilizzate e risulta più semplice nell’implementazione e nella gestione.
+\\\\Al fine di evitare frequenti cambi nella routing table per percorsi di costo uguale, il RIP impone di mantenere gli istradamenti esistenti finché non ne è presente un altro di costo più basso (isteresi).
+\\\\I problemi legati alla convergenza lenta vengono arginati mediante le seguenti tecniche:
+\begin{itemize}
+	\item \italic{split horizon update}: gli aggiornamenti non vengono propagati ai router che li hanno generati;
+	\item \italic{hold-down timer}: quando un router riceve un messaggio di rete irraggiungibile, questo ignorerà per un certo periodo (di solito 60 secondi) tutti gli aggiornamenti inerenti tale rete;
+	\item \italic{triggered update}: obbliga i router ad annunciare subito la scomparsa di route, ignorando eventuali timer;
+	\item \italic{poison reverse}: la scomparsa di un collegamento nella rete viene annunciata più volte per un certo lasso di tempo;
+\end{itemize}
+\boximage[rip_timers.png][scale=0.5]{Timer usati da RIP e loro durate standard}
+In RIP v1 non sono supportate subnet variabili.
+\\In RIP v2 ogni router invia messaggi di aggiornamento soltanto ai propri \italic{neighbor} (distanza 1 hop) mediante \italic{unicast updates} e non più in broadcast, alleggerendo il traffico.
+\\Immagine unicast update
+\\\\RIP è presente di default sui sistemi Unix/Linux (daemon \textbf{routed}).
+\boximage[rip_es_config.png][scale=0.4]{RIP: Esempio di configurazione}
+
 \newpage\subsub{OSPF} 
 Open Shortest Path First: Protocollo Open Source sviluppato nel 1988 dall’\vedi{IGP} working group di \vedi{IETF}, è basato sull’algoritmo Shortest Path First (Dijkstra
 algorithm), divenuto standard nel 1990 (\vedi{RFC} 1247).\\
