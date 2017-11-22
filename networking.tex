@@ -676,22 +676,52 @@ A differenza dell'\vedi{UDP}, il TCP (Transmission Control Protocol) è un proto
 \newpage
 
 \sec{Livello delle applicazioni}
-Il livello delle applicazioni racchiude tutte le applicazioni dedicate all'utente finale. 
-Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (e.g. telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
+Il quinto livello del \vedi{Modello di riferimento ISO/OSI} racchiude tutte le applicazioni dedicate all'utente finale. 
+Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (ad es. Telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
 \sub{Servizi di rete}
 %Tommaso
-\subsub{Telnet e SSH} %standard odierno
-Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Principalmente, Telnet, \'e sempre stato utilizzato per fornire all'utente una sessione remota del terminale dell'host. L'host ascolta sulla porta 22 e l'utente stabilisce una connessione utilizzando il public IP, nome utente e password di un Unix user dell'host. L'unico grande problema di Telnet riguarda la sicurezza: \'e un protocollo non il criptato, ovvero la password il nome utente e tutte le altre informazioni inviate, risultano completamente chiare a qualsiasi utente estraneo alla conversazione.
-Qui \'e dove il protocollo SSH torna utile
-\subsub{FTP} %SCP standard odierno
-%\subsub{BGP} io dico che è un protocollo
+\subsub{Telnet} %standard odierno
+Telnet, definto negli \vedi{RFC} 854 e 855, nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}, basato su TCP. Telnet consente di accedere da remoto ad una macchina, emulandone il terminale tramite un \textbf{NVT} (Network Virtual Terminal), che fornisce un'interfaccia standard. Il client ascolta sulla porta predefinita e l'utente stabilisce una connessione utilizzando \vedi{IP}, nome utente e password di un utente del server. Inizialmente, vi é una negoziazione dei parametri, dalla quale dipendono le funzionalità attivate per la sessione. le funzioni di controllo standard sono illustrate in figura. 
+\boximage[nvt.jpg][scale=0.5]{Funzioni di controllo standard}
+
+\ \\L'unico grande problema di Telnet riguarda la sicurezza. Si tratta infatti di un protocollo non criptato: la password, il nome utente e tutte le altre informazioni sono inviate in chiaro. A questa problematica pone rimedio \vedi{SSH}.
+\subsub{Comandi r}
+Progettati per i sistemi BSD Unix e anch'essi basati sul \vedi{TCP}, i comandi r hanno funzionalità analoghe a quelle di \vedi{Telnet}:
+\begin{itemize}
+\item \code{rlogin} (\textit{remote login}) permette di amministrare una serie di macchine autenticandosi una sola volta (\textit{one time login}); 
+\item \code{rsh} (\textit{remote shell}) consente di eseguire da remoto singoli comandi;
+\item \code{rcp} (\textit{remote copy}) abilita alla copia di file attraverso la rete. 
+\end{itemize}
+Anche in questi casi non vi è alcuna forma di crittografia ed \vedi{SSH} sopperisce a questa mancanza.
+
+\subsub{FTP}
+Anche il File Transfer Protocol è basato sul \vedi{TCP}. Ogni trasferimento coinvolge due processi, che si traducono in due connessioni distinte:
+\begin{itemize}
+\item \textbf{PI} (Protocol Interpreter), volto alla trasmissione dei comandi; 
+\item \textbf{DTP} (Data Transfer Protocol), che consiste nel vero e proprio trasferimento. In questa fase client e server si scambiano i ruoli. Ad oggi, gran parte delle richiese FTP non avviene da linea di comando, ma da browser, ad esempio specificando un url.
+\end{itemize}
+Nell'ambito dell'FTP, si parla di \textit{sessione anonima} quando si utilizza il protocollo in sola lettura; in tal caso si usa \code{anonymous} come account.\\
+Un alternativa più leggera all'FTP standard, pensata per l'ambito \vedi{LAN}, è il TFTP (Trivial FTP) utilizzata dalle macchine diskless per ottenere l'immagine del sistema operativo. Essa sfrutta l'\vedi{UDP} al posto del \vedi{TCP}. Anche l'FTP è carente dal punto di vista della sicurezza e le sue funzionalità sono state reimplementate in Open \vedi{SSH}.
+\subsub{SSH}
+Come si è anticipato, \vedi{Telnet}, i \vedi{Comandi r} ed  \vedi{FTP} sono stati rimpiazzati da SSH (Secure SHell), che permette di instradare connessioni TCP in un canale cifrato, accorpandone tutte le funzionalità. Inoltre, con la specifica \code{-x}, SSH permette di trasmettere anche il desktop, funzionalità in precedenza fornita da un programmi appositi. Il vantaggio di SSH è appunto l'impiego di crittografia asimmetrica. 
+Le chiavi pubbliche (\textit{authorized keys}) vengono salvate in un file ASCII del server, mentre il client memorizza i \textit{known hosts}. La chiave privata del client viene controllata alla sua prima connessione con il server.\\ 
+Del protocollo esistono due versioni, SSH1 ed SSH2, tra loro incompatibili.\\
+L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url{www.openssh.com} per i dettagli sulla licenza), comprende una vasta gamma di programmi:
+\begin{itemize}
+\item \code{ssh}, che sostituisce \code{rlogin} e \vedi{Telnet};
+\item \code{scp}, che sostituisce \code{rcp};
+\item \code{sftp}, che sostituisce \vedi{FTP};
+\item \code{ssh-add}, \code{ssh-agent} ed \code{ssh-keygen}, una serie di programmi per la generazione e la gestione delle chiavi;
+\item i demoni \code{sshd} ed \code{sftp-server}.
+\end{itemize}
 \subsub{DHCP} %Discovering ,Offering , Codice 
 \newpage\subsub{DNS}
-Domain Name System: sistema gerarchico e distribuito tramite il quale vengono associati nomi di dominio (testatuali) ad indirizzi \vedi{IP} (numerici).
-\para{Nome di dominio} Costituito da una serie di stringhe separate da punti, la gerarchia procede da destra verso sinistra, partendo dalla prima stringa   detta \italic{Top Level Domain} (TLD)
+Il DNS (\textit{Domain Name System}) è un sistema gerarchico e distribuito tramite il quale vengono associati nomi di dominio (testuali) ad indirizzi \vedi{IP} (numerici). Il DNS specifica inoltre le funzionalità tecniche del servizio di database essenziale per il suo funzionamento definendo il protocollo DNS, che specifica come i vari nameserver comunichino fra loro.
+\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ quando questo modello diventò insostenibile nel 1983, assieme a Paul Mockapetris e Craig Partridge, idearono il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
+\para{Nome di dominio} un nome di dominio è costituito da una serie di stringhe separate da punti, la gerarchia procede da destra verso sinistra. La prima stringa da destra è detta pertanto TLD (\italic{Top Level Domain}), la cui lista completa è disponibile all'indirizzo \url{http://data.iana.org/TLD/tlds-alpha-by-domain.txt}.
+\image[dns.png][scale=0.35]{Gerarchia dei domini}
 
-\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ quando questo modello diventò insostenibile nel 1983, assieme a Paul Mockapetris e Craig Partridge, idearono il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.\\\\
-I Domain Name Servers (sempre DNS), presentano un database locale  \\\\
+\ \\I nameserver, talvolta detti anche a loro volta DNS (\textit{Domain Name Server}). sono distribuiti capillarmente nella rete e contengono una porzione delle associazioni indirizzo-nome.\\\\
 L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (BIND) 
 disponibile sul sito dell' \italic{Internet Software Consortium} (ISC) \url{isc.org}.
 
