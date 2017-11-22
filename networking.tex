@@ -716,15 +716,24 @@ L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url
 \end{itemize}
 \subsub{DHCP} %Discovering ,Offering , Codice 
 \newpage\subsub{DNS}
-Il DNS (\textit{Domain Name System}) è un sistema gerarchico e distribuito tramite il quale vengono associati nomi di dominio (testuali) ad indirizzi \vedi{IP} (numerici). Il DNS specifica inoltre le funzionalità tecniche del servizio di database essenziale per il suo funzionamento definendo il protocollo DNS, che specifica come i vari nameserver comunichino fra loro.
+Il DNS (\textit{Domain Name System}) è un sistema gerarchico e distribuito tramite il quale vengono associati nomi di dominio (testuali) ad indirizzi \vedi{IP} (numerici). Lo spazio di indirizzamento è suddiviso per organizzazione e non dipende in alcun modo dalla topologia della rete; ogni organizzazione può in tal modo gestire liberamente lo spazio ad essa riservato. Il DNS specifica inoltre le funzionalità tecniche del servizio di database essenziale per il suo funzionamento definendo il protocollo DNS, che specifica come i vari nameserver comunichino fra loro.
 \paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ quando questo modello diventò insostenibile nel 1983, assieme a Paul Mockapetris e Craig Partridge, idearono il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
-\para{Nome di dominio} un nome di dominio è costituito da una serie di stringhe separate da punti, la gerarchia procede da destra verso sinistra. La prima stringa da destra è detta pertanto TLD (\italic{Top Level Domain}), la cui lista completa è disponibile all'indirizzo \url{http://data.iana.org/TLD/tlds-alpha-by-domain.txt}.
+
+\para{Nome di dominio} un nome di dominio è costituito da una serie di stringhe separate da punti, la gerarchia procede da destra verso sinistra. La prima stringa da destra è detta pertanto TLD (\italic{Top Level Domain}). 
 \image[dns.png][scale=0.35]{Gerarchia dei domini}
-
-\ \\I nameserver, talvolta detti anche a loro volta DNS (\textit{Domain Name Server}). sono distribuiti capillarmente nella rete e contengono una porzione delle associazioni indirizzo-nome.\\\\
-L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (BIND) 
-disponibile sul sito dell' \italic{Internet Software Consortium} (ISC) \url{isc.org}.
-
+I TDL sono definiti da \vedi{ICANN} e suddivisi in tre categorie:
+\begin{itemize}
+\item \textbf{ccTLD} (\textit{country code TLD}), lista delle sigle dei paesi del mondo;
+\item \textbf{gTLD} (\textit{generic TLD}), usati da particolari organizzazione (ad es. \code{.com}, \code{.edu}, \code{.gov}...);
+\item \textbf{Infrastrutturali} (\code{.arpa}, utilizzato nella risoluzione inversa dei nomi).
+\end{itemize}
+La loro lista completa è disponibile all'indirizzo \url{www.iana.org/domains/root/db}.
+L'\vedi{RFC} 2606 specifica alcuni domini riservati: \code{.example}, \code{.invalid}, \code{.localhost} e \code{.test}. \\
+Ogni regione geografica ed ogni organizzazione hanno una propria autorità responsabile del proprio TDL (per l'Italia l'IIT CNR), la quale delega la gestione tecnico-amministrativa dei vari sottodomini agli enti che ne fanno richiesta. Essi a loro volta possono suddividerne ulteriormente la gestione generando nuovi sotto-sottodomini, e via discorrendo. 
+\para{Nameserver}
+I nameserver, o più precisamente i DNS (\textit{Domain Name Server}), sono distribuiti capillarmente nella rete e contengono una porzione delle associazioni indirizzo-nome. Va notato che indirizzi e nomi sono ovviamente intercambiabili, ma prima di effettuare una connessione, i nomi vengono convertiti in indirizzi (\textit{risoluzione nome-indirizzo IP}). Questo processo avviene nei client tramite la consultazione della \textit{host table}, che può essere configurata staticamente o aggiornata in modo dinamico per l'appunto consultando un nameserver. In quest'ultimo caso sarà sufficiente indicare in un file di configurazione i nameserver di riferimento. 
+\\\\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
+disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo:
 \newpage
 \subsub{HTTP/HTTPS} 
 \subsub{NFS}
