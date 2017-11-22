@@ -503,16 +503,20 @@ Routing Information Protocol:
 \subsub{OSPF} 
 Open Shortest Path First:
 \subsub{BGP}
-Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell' \vedi{RFC} 1771 \footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrato più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le policy adottate dal rispettivo \vedi{ISP}. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
-\\Perché due router possano comunicare, devono essere innanzitutto definiti come \textit{BGP neighbors}, detti anche \textit{peers} tramite una configurazione manuale che ha per risultato la creazione di una sessione \vedi{TCP}.
-A questo punto, i peer si invieranno l'un l'altro la \vedi{Tabella di routing} ed una serie di messaggi:
+Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell' \vedi{RFC} 1771 \footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrata più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le policy adottate dal rispettivo \vedi{ISP}. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
+\\Perché due router possano comunicare, devono essere innanzitutto definiti come \textit{BGP neighbors}, detti anche \textit{peers} tramite una configurazione manuale che ha per risultato la creazione di una sessione \vedi{TCP} sulla \vedi{Porta} 179.
+A questo punto, i peer si invieranno l'un l'altro la \vedi{Tabella di routing} in formato \vedi{CIDR} ed una serie di messaggi:
+\boximage[header_bgp.png][scale=0.6]{Header di un messaggio BGP. Il campo \textbf{Marker} contiene un valore riconosciuto da entrambi i peer, importante per sincronizzazione ed autenticazione}
 \begin{itemize}
-\item \textbf{OPEN}: è il messaggio che i peers si scambiano per aprire la connessione e negoziarne i parametri; 
-\item \textbf{KEEPALIVE}: conferma dell'apertura della sessione; continua poi ad essere inviato periodicamente per mantenerla attiva;
-\item \textbf{UPDATE};
-\item \textbf{NOTIFICATION}: viene trasmesso in condizioni particolari, ad esempio al rilevamento di un errore;
-\item \textbf{REFRESH}.
+\item \textbf{OPEN}: messaggio che i peers si scambiano all'apertura della connessione e negoziarne i parametri; 
+\item \textbf{KEEPALIVE}: conferma dell'apertura della connessione; continua poi ad essere inviato periodicamente da ogni nodo per segnalare la propria attività, in modo tale che la connessione venga mantenuta;
+\item \textbf{UPDATE}: messaggio tramite il quale vengono aggiornate le tabelle di routing dopo il primo scambio. All'aggiornamento, viene modificato il numero di versione della tabella, che deve essere lo stesso per tutti i \textit{peer};
+\item \textbf{NOTIFICATION}: viene trasmesso in condizioni particolari, ad esempio al rilevamento di un errore. Serve inoltre a chiudere una connessione e ad avvisare gli altri router del perché;
+\item \textbf{REFRESH}: richiesta di reinvio delle informazioni di routing. 
 \end{itemize} 
+\boximage[bgp_messages.png][scale=0.5]{La struttura di alcuni messaggi BGP}
+La \vedi{Metric} utilizzata dal BGP è il \textit{communication cost}, assegnata ad ogni nodo dall'amministratore di rete.\\\\
+Una tipologia particolare di \textit{inter-domain routing} è il \textit{pass-through autonomous system routing}, che avviene tra due rotuer BGP che si scambiano traffico tramite un terzo AS che non esegue BGP: esso fa dunque solo da "ponte", in quanto non è né emittente né destinatario delle comunicazioni.
 \paragraph{iBGP} \label{iBGP}
 Come accennato, iBGP sta per "internal BGP" ed è coinvolto nell'\textit{intra-domain routing}. La sua funzione è quella di stabilire quale sia il router ottimale come punto di connessione con gli \vedi{AS} esterni.
 \sub{ICMP} %da spostare prima? Boh. Bah.
@@ -525,7 +529,7 @@ Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC}
 \sec{Livello di trasporto}
 \subsection{Terminologia}
 \subsub{Porta} 
-Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. 
+Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. Le porte $0-1023$ sono quelle raccomandate per i protocolli \vedi{TCP} e \vedi{UDP}.
 
 \subsection{Protocolli} 
 \subsub{UDP} 
@@ -534,9 +538,9 @@ L' UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. 
 \subsub{TCP}
 A differenza dell'\vedi{UDP}, il TCP (Transmission Control Protocol) è un protocollo \vedi{Connection-oriented}. La prima definizione del TCP si trova nell'\vedi{RFC} 793, ma le molteplici modifiche che essa ha subito, formalizzate in altrettanti \vedi{RFC}, hanno portato alla necessità di pubblicare un ennesimo \vedi{RFC}, il 4614: una sorta di guida ai documenti sul TCP. Affidabile e di applicabilità generale, è progettato per adattarsi dinamicamente alle peculiarità delle diverse reti che compongono \vedi{Internet}, contribuendo ad isolare le applicazioni dai dettagli di networking. Più specificamente, oltre a quelle di qualsiasi protocollo \vedi{Connection-oriented}, le principali caratteristiche del TCP sono:%
 \begin{itemize}
-\item \textbf{trasferimento bufferizzato}: il trasferimento viene ottimizzato, a seconda delle situazioni, accorpando più byte o suddividendo blocchi di dati di grandi dimensioni
-\item  \textbf{stream non strutturato}: la comprensione della forma dei dati trasmessi sta all'applicazione che utilizza il protocollo in oggetto
-\item \textbf{connessione \vedi{Full-Duplex}}
+\item \textbf{trasferimento bufferizzato}: il trasferimento viene ottimizzato creando pacchetti di dimensione il più possibile simile;
+\item  \textbf{stream non strutturato}: la comprensione della forma dei dati trasmessi sta all'applicazione che utilizza il protocollo in oggetto;
+\item \textbf{connessione \vedi{Full-Duplex}};
 \item affidabilità garantita mediante \textbf{riscontro positivo con ritrasmissione} (\textit{acknowledgement}): alla ricezione di un pacchetto, il destinatario risponde con un "ACK", ossia una conferma di ricezione. Il mittente dovrà poi ritrasmettere i pacchetti persi o, eventualmente, chiudere la connessione.
 
 \end{itemize}
