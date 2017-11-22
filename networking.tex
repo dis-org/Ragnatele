@@ -629,14 +629,16 @@ Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: 
 \subsub{Telnet e SSH} %standard odierno
 Telenet nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Principalmente, Telnet, \'e sempre stato utilizzato per fornire all'utente una sessione remota del terminale dell'host. L'host ascolta sulla porta 22 e l'utente stabilisce una connessione utilizzando il public IP, nome utente e password di un Unix user dell'host. L'unico grande problema di Telnet riguarda la sicurezza: \'e un protocollo non il criptato, ovvero la password il nome utente e tutte le altre informazioni inviate, risultano completamente chiare a qualsiasi utente estraneo alla conversazione.
 Qui \'e dove il protocollo SSH torna utile
-\subsub{FTP e SCP} %standard odierno
+\subsub{FTP} %SCP standard odierno
 %\subsub{BGP} io dico che è un protocollo
 \subsub{DHCP} %Discovering ,Offering , Codice 
 \newpage\subsub{DNS}
 Domain Name System: sistema gerarchico e distribuito tramite il quale vengono associati nomi di dominio (testatuali) ad indirizzi \vedi{IP} (numerici).
-\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ quando questo modello diventò insostenibile nel 1983, assieme a Paul Mockapetris e Craig Partridge, idearono il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto negli \vedi{RFC} 1032, 1035  e 2035.\\\\
+\para{Nome di dominio} Costituito da una serie di stringhe separate da punti, la gerarchia procede da destra verso sinistra, partendo dalla prima stringa   detta \italic{Top Level Domain} (TLD)
+
+\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ quando questo modello diventò insostenibile nel 1983, assieme a Paul Mockapetris e Craig Partridge, idearono il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.\\\\
 I Domain Name Servers (sempre DNS), presentano un database locale  \\\\
-L'implementazione più comune del DNS è il \italic{Berkeley Internet Name Domain} (BIND) 
+L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (BIND) 
 disponibile sul sito dell' \italic{Internet Software Consortium} (ISC) \url{isc.org}.
 
 \newpage
