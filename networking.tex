@@ -245,10 +245,10 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
-\'E il secondo livello dello standard ISO/OSI, subito sopra il livello fisico, si occupa di:
+In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
 \begin{itemize} 
 \item raggruppare in frame i bit da inviare;
-\item modulare la multiplazione per l' accesso condiviso fra più utenti al canale fisico per evitare conflitti;
+\item modulare la multiplazione per l'accesso condiviso fra più utenti al canale fisico per evitare conflitti;
 \item controllare gli errori di trasmissione e gestirli;
 \item gestire il flusso di dati.
 \end{itemize}
@@ -278,11 +278,15 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 %\subsub{NDP} 
 
 \sub{Sottolivelli}
-il DLL, secondo lo standard IEEE 802, in caso di reti LAN brodcast, è diviso in due sottolivelli:
-\begin{itemize}
-\item LLC (Logical Link Control): fornisce controlli del flusso di dati e per la gestione degli errori ed un interfaccia unificata per il LV 3, i protocolli PPP e HDLC fanno parte di questo sottolivello, è uguale per ogni tipo di LAN utilizzata
-\item MAC (Media Access Controll): disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni, è diversa in base alla LAN utilizzata poichè strettamente legata al LV 1
-\end{itemize}
+Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
+\subsub{MAC} Il livello MAC (\textit{Media Access Control}) disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
+\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.
+\subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
+I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
+
+\subsection{Protocolli}
+\subsub{HDLC}
+\subsub{PPP}
 
 \newpage\sec{Livello di Rete}
 
@@ -428,18 +432,19 @@ Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Inter
 
 \subsection{Protocolli di address resolution} 
 \subsub{ARP} %address resolution protocol (daje, scrivilo da qualche parte!)
-Due host Internet possono comunicare solamente conoscendo il reciproco indirizzo fisico (MAC address), che è specifico di ogni macchina e quindi non individuabile dall'esterno.\\
-L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tutti gli host (contenente ip di B e il MAC address di A), B vedendo una chiamata con il suo IP, risponde segnando il MAC address di A in una cache di consultazione e riinviando il proprio mac address ad A.\\
-La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover reinviare una richiesta ARP, sia possibile reinviare dati al suddetto host.\\ Le informazioni nella cache possono però diventare obsolete, per questo un timer ne fa scadere la validità.\\
+\textbf{Address Resolution Protocol}: Due host Internet possono comunicare solamente conoscendo il reciproco \vedi{Indirizzo MAC}.\\
+L' host A, per sapere l'indirizzo fisico di B, invierà una richiesta ARP a tutti gli host contenente l'\vedi{Indirizzo IP} di B e il proprio indirizzo MAC; B vedendo la chiamata, risponde scrivendo il MAC address di A in una cache di consultazione e riinviando il proprio MAC address ad A.\\
+La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover reinviare una richiesta ARP, sia possibile reinviare dati al suddetto host. Le informazioni nella cache possono però diventare obsolete, per questo un timer ne fa scadere la validità.\\
 %immagine
-Occorre considerare alcuni problemi:\\
+Occorre considerare alcuni problemi:
 \begin {itemize}
-\item il dover aggiornare la cache ogni tot tempo può portare ad un ritardo (jitter);
+\item il ritardo (\textit{jitter}) provocato degli aggiornamenti della cache;
 \item l'impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.
 \end{itemize}
 \subsub{RARP} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
-\'E un protocollo appartenente al TCP/IP che consente, al contrario dell'ARP, di risalire al proprio indirizzo IP dal MAC address.\\
-\'E utilizzato ad ogni avvio dagli host diskless (senza memoria secondaria) per determinare il proprio indirizzo IP, chiedendolo a dei particolari server RARP che contengono le informazioni in specifici file di configurazione.
+\textbf{Reverse ARP}: Consente, al contrario dell'ARP, di risalire al proprio \vedi{Indirizzo IP} dal \vedi{Indirizzo MAC}.\\
+Viene utilizzato ad ogni avvio dagli host diskless (senza memoria secondaria) per determinare il proprio indirizzo IP, chiedendolo a dei particolari server RARP che contengono le informazioni in specifici file di configurazione.\\
+\'E reso obsoleto dal \vedi{DHCP}.
 
 \sub{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
