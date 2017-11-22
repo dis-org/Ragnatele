@@ -426,20 +426,20 @@ Si parla di IP multicasting quando un datagram è trasmesso ad un gruppo di host
 \subsub{IGMP} 
 Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
 
-\subsection{protocolli di address resolution} 
-\subsub{arp} %address resolution protocol (daje, scrivilo da qualche parte!)
-due host internet possono comunicare solamente conoscendo il reciproco indirizzo fisico(mac address), che è specifico di ogni macchina e quindi non individuabile dall' esterno.\\
-l' host a, per sapere l' indirizzo fisico di b, invierà una richiesta arp a tutti gli host (contenente ip di b e il mac address di a), b vedendo una chiamata con il suo ip, risponde segnando il mac address di a in una cache di consultazione e riinviando il proprio mac address a a.\\
-la cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover riinviare una richiesta arp, sia possibile riinviare dati al suddetto host.\\ le informazioni nella cache possoni però diventare obsolete, per questo un timer ne fa scadere la validità.\\
+\subsection{Protocolli di address resolution} 
+\subsub{ARP} %address resolution protocol (daje, scrivilo da qualche parte!)
+Due host Internet possono comunicare solamente conoscendo il reciproco indirizzo fisico (MAC address), che è specifico di ogni macchina e quindi non individuabile dall'esterno.\\
+L' host A, per sapere l' indirizzo fisico di B, invierà una richiesta ARP a tutti gli host (contenente ip di B e il MAC address di A), B vedendo una chiamata con il suo IP, risponde segnando il MAC address di A in una cache di consultazione e riinviando il proprio mac address ad A.\\
+La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover reinviare una richiesta ARP, sia possibile reinviare dati al suddetto host.\\ Le informazioni nella cache possono però diventare obsolete, per questo un timer ne fa scadere la validità.\\
 %immagine
-occorre considerare alcuni problemi:\\
+Occorre considerare alcuni problemi:\\
 \begin {itemize}
-\item il dover aggiornare la cache ogni tot tempo può portare ad un ritardo(jitter).\\
-\item impatto sull' operatività di altri protocolli in presenza di richieste arp pendenti.\\
+\item il dover aggiornare la cache ogni tot tempo può portare ad un ritardo (jitter);
+\item l'impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.
 \end{itemize}
-\subsub{rarp} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
-\'e un protocollo appartenente al tcp/ip che consente, al contrario dell' arp, di risalire al proprio indirizzo ip dal mac address.\\
-\'e utilizzato ad ogni avvio dagli host diskless(senza memoria secondaria) per determinare il proprio indirizzo ip, chiedendolo a dei particolari server rarp che contengono le informazioni in specifici file di configurazione
+\subsub{RARP} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
+\'E un protocollo appartenente al TCP/IP che consente, al contrario dell'ARP, di risalire al proprio indirizzo IP dal MAC address.\\
+\'E utilizzato ad ogni avvio dagli host diskless (senza memoria secondaria) per determinare il proprio indirizzo IP, chiedendolo a dei particolari server RARP che contengono le informazioni in specifici file di configurazione.
 
 \sub{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
