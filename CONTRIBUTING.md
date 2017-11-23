@@ -5,10 +5,19 @@ vari rami verranno riuniti il più spesso possibile da harisont.
 
 ## Se conosci il latex
 * Utilizza ` \code{} ` per parti di codice e comandi da terminale menzionati nel testo;
-* Utilizza ` \vedi{NOME_SOTTOSEZIONE} ` per creare un riferimenti all'interno del testo.
+* Utilizza ` \vedi{Nome_sottosezione} ` (si rispettino eventuali maiuscole iniziali) per creare riferimenti all'interno del 
+testo.
+* Inserisci le immagini in uno dei due modi seguenti:
+```
+\image[nomefile.ext][scale=0.x]{Descrizione} %senza bordo
+\boximage[nomefile.ext][scale=0.x]{Descrizione} %con bordo
+```
+(NB: l'immagine deve essere salvata nella cartella 
+`images`);
+* Se hai bisogno di creare una piccola sezione *all'interno di una sotto-sottosezione*, utilizza il tag `\paragraph{titolo_paragrafo}`.
 
 ## Se non conosci il latex
-Allega un file .txt (no altri formati) in cui spieghi in quale sezione vada incollato il paragrafo scritto.
+Invia un file .txt (no altri formati) a uzkamascio@gmail.com contenente il testo e le indicazioni sulla sezione in cui collocarlo.
  
 ## Precisazioni su Git e GitHub
 * Per creare un tuo branch (da farsi una sola volta) utilizzare i seguenti comandi:
@@ -24,3 +33,4 @@ Allega un file .txt (no altri formati) in cui spieghi in quale sezione vada inco
 .gitignore li ignora `
 	1. ` $git commit -a -m "Breve messaggio di commit in cui spieghi il tuo lavoro" `
 	2. ` $git push //carica online il tuo lavoro `
+

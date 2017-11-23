@@ -224,13 +224,20 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
 \boximage[ask_psk_fsk.png][scale=0.3]{Confronto tra codifiche ASK, FSK, e PSK}
 \begin{itemize} 
-\item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: per garantire la massima protezione dal rumore e dalle interferenze, vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$. 
+\item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: quando la modulante cambia stato (transizione 0-1 o 1-0), il segnale modulato cambia fase. Per garantire la massima protezione dal rumore e dalle interferenze, solitamente vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$;
+\item \textbf{4-PSK} e \textbf{4-QPSK}: i bit del segnale in input suddivisi coppie da un convertitore, che genera così due segnali separati; vi sono inoltre due modulatori e due portanti con frequenza identica, ma in quadratura\footnote{L'espressione \textit{in quadratura} indica semplicemente una sfasatura di \ang{90}: i due segnali sono ortogonali, cosicché si evitano le interferenze}. I due segnali modulati, detti I (\textit{Infase}) e Q (\textit{Quadratura}), poi sommati, cambiano dunque fase a seconda del valore della coppia di bit in input e il segnale in uscita può avere quattro distinti valori di fase (le due varianti differiscono per la posizione delle quattro fasi utilizzate, che nella 4-PSK sono poste sugli assi cartesiani, mentre nella 4-QPSK sono sfasate di $\ang{45}$);
+\boximage[qpsk.png][scale=0.4]{Esempio di distribuzione delle fasi nella modulazione 4-QPSK}
+\item \textbf{8-PSK}: analoga alla 4-PSK, comporta l'utilizzo non di coppie ma di terne di bit;
 \item \textbf{DPSK} (Differential Phase-Shift Keying) 
+\item \textbf{2-DPSK};
+\item \textbf{4-DPSK};
+\item \textbf{8-DPSK}.
 \end{itemize} 
-\item \textbf{QAM} (Quadrature Amplitude Modulation) 
-\item \textbf{Trellis} 
+\item \textbf{QAM} (Quadrature Amplitude Modulation);
+\item \textbf{Trellis}. 
 \end{itemize}
-
+\para{Diagramma a costellazione}
+Rappresentazione grafica teorica di un segnale modulato secondo uno degli schemi di modulazione digitale. Il segnale viene mostrato su un piano bidimensionale in cui I e Q sono gli assi cartesiani e i punti in cui un vettore può trovarsi vengono rappresentati con dei punti. Se c’è rumore, attorno al punto ideale si creano delle aree utili per capire di che tipo sia il rumore. 
 \sub{Alterazioni del segnale}
 \subsub{Attenuazione}
 \subsub{Distorsione}
@@ -362,7 +369,7 @@ In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul
 \subsub{Rete a dorsale}
 I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un' interruzione in qualunque punto della dorsale compromette tutta la rete.
 \subsub{Rete ad albero} La trasmissione avviene in modo gerarchico tra i nodi padre e figlio, fino ad arrivare alla \textit{root} dalla quale dipende tutto il funzionamento della rete.
-\subsub{Rete a stella} Tutti i dispositivi sono connessi ad un HUB (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
+\subsub{Rete a stella} Tutti i dispositivi sono connessi ad un \italic{hub} (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
 \subsub{Rete ad anello} Le informazioni vengono passate da un dispositivo all'altro in modo ciclico, la trasmissione è unidirezionale anche se questo si può ovviare con un secondo anello in direzione opposta. Questa topologia era tipica delle \vedi{LAN} TokenRing, ora viene utilizzata principalmente nelle \vedi{MAN} in fibra ottica.
 \subsub{Rete a maglia} In inglese \textit{mesh}, è una rete in cui ogni dispositivo può essere connesso ad ogni altro dispositivo ottenendo di fatto un grafo connesso. \'E la topologia di rete meno vulnerabile, ma è poco utilizzata nelle reti cablate a causa dei costi. \'E diffusa invece nelle \vedi{WLAN}, spesso nella versione \textit{ad hoc}, dove i collegamenti nascono e muoiono dinamicamente. In questa topologia il \vedi{Routing} viene effettuato da ogni nodo.
 
@@ -377,22 +384,22 @@ Il protocollo IP definisce inoltre l'esatto formato dei dati e svolge funzioni d
 \paragraph{Header} 
 L'header del datagram IPv4 contiene i seguenti campi: 
 \begin{itemize}
-\item \textbf{Version}: versione IP del datagram. 
-\item \textbf{HL} (Header Length): lunghezza dell'header in parole da 32 bit
-\item \textbf{TOS} (Type Of Service) o Differentiated services: indicazioni sulla corretta gestione del datagram, volte a trattare in modo differente i diversi servizi, quasi del tutto inutilizzate
-\item \textbf{Total lenght}: lunghezza totale del datagram
+\item \textbf{Version}: versione IP del datagram;
+\item \textbf{HL} (Header Length): lunghezza dell'header in parole da 32 bit;
+\item \textbf{TOS} (Type Of Service) o Differentiated services: indicazioni sulla corretta gestione del datagram, volte a trattare in modo differente i diversi servizi, quasi del tutto inutilizzate;
+\item \textbf{Total lenght}: lunghezza totale del datagram;
 \item campi che controllano la frammentazione e il riassemblaggio dei datagram:
 \begin{itemize}
-\item \textbf{Identification}: indicazione del pacchetto cui appartiene il datagram
-\item \textbf{IP flags}
-\item \textbf{Offset del frammento}
+\item \textbf{Identification}: indicazione del pacchetto cui appartiene il datagram,
+\item \textbf{IP flags},
+\item \textbf{Offset del frammento}.
 \end{itemize}
-\item \textbf{TTL} (Time To Leave): duarata per cui il datagram permane in transito, espressa in secondi
-\item \textbf{Protocol}: indicazione di quale protocollo di più alto livello ha generato il blocco dei dati
-\item \textbf{Header checksum}: sequenza di bit che utilizzata per verificare l'integrità dei dati contenuti nell'header
-\item \textbf{Source address}: \vedi{Indirizzo IP} di provenienza
-\item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione
-\item \textbf{opzioni} (campo opzionale, utilizzato per test e debugging)
+\item \textbf{TTL} (Time To Leave): duarata per cui il datagram permane in transito, espressa in secondi;
+\item \textbf{Protocol}: indicazione di quale protocollo di più alto livello ha generato il blocco dei dati;
+\item \textbf{Header checksum}: sequenza di bit che utilizzata per verificare l'integrità dei dati contenuti nell'header;
+\item \textbf{Source address}: \vedi{Indirizzo IP} di provenienza;
+\item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione;
+\item \textbf{opzioni} (campo opzionale, utilizzato per test e debugging).
 \end{itemize} 
 \boximage[ip-header.png][scale=0.45]{Formato header IPv4}
 
@@ -679,11 +686,142 @@ Il quinto livello del \vedi{Modello di riferimento ISO/OSI} racchiude tutte le a
 Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (ad es. Telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
 \sub{Servizi di rete}
 %Tommaso
-\subsub{Telnet}
-\subsub{FTP} 
-\subsub{SSH} 
-\subsub{BGP} 
-\subsub{DHCP} 
-\subsub{DNS} 
-\subsub{HTTP} 
+\subsub{Telnet} %standard odierno
+Telnet, definto negli \vedi{RFC} 854 e 855, nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}, basato su TCP. Telnet consente di accedere da remoto ad una macchina, emulandone il terminale tramite un \textbf{NVT} (Network Virtual Terminal), che fornisce un'interfaccia standard. Il client ascolta sulla porta predefinita e l'utente stabilisce una connessione utilizzando \vedi{IP}, nome utente e password di un utente del server. Inizialmente, vi é una negoziazione dei parametri, dalla quale dipendono le funzionalità attivate per la sessione. le funzioni di controllo standard sono illustrate in figura. 
+\boximage[nvt.jpg][scale=0.5]{Funzioni di controllo standard}
+
+\ \\L'unico grande problema di Telnet riguarda la sicurezza. Si tratta infatti di un protocollo non criptato: la password, il nome utente e tutte le altre informazioni sono inviate in chiaro. A questa problematica pone rimedio \vedi{SSH}.
+\subsub{Comandi r}
+Progettati per i sistemi BSD Unix e anch'essi basati sul \vedi{TCP}, i comandi r hanno funzionalità analoghe a quelle di \vedi{Telnet}:
+\begin{itemize}
+\item \code{rlogin} (\textit{remote login}) permette di amministrare una serie di macchine autenticandosi una sola volta (\textit{one time login}); 
+\item \code{rsh} (\textit{remote shell}) consente di eseguire da remoto singoli comandi;
+\item \code{rcp} (\textit{remote copy}) abilita alla copia di file attraverso la rete. 
+\end{itemize}
+Anche in questi casi non vi è alcuna forma di crittografia ed \vedi{SSH} sopperisce a questa mancanza.
+
+\subsub{FTP}
+Anche il File Transfer Protocol è basato sul \vedi{TCP}. Ogni trasferimento coinvolge due processi, che si traducono in due connessioni distinte:
+\begin{itemize}
+\item \textbf{PI} (Protocol Interpreter), volto alla trasmissione dei comandi; 
+\item \textbf{DTP} (Data Transfer Protocol), che consiste nel vero e proprio trasferimento. In questa fase client e server si scambiano i ruoli. Ad oggi, gran parte delle richiese FTP non avviene da linea di comando, ma da browser, ad esempio specificando un url.
+\end{itemize}
+Nell'ambito dell'FTP, si parla di \textit{sessione anonima} quando si utilizza il protocollo in sola lettura; in tal caso si usa \code{anonymous} come account.\\
+Un alternativa più leggera all'FTP standard, pensata per l'ambito \vedi{LAN}, è il TFTP (Trivial FTP) utilizzata dalle macchine diskless per ottenere l'immagine del sistema operativo. Essa sfrutta l'\vedi{UDP} al posto del \vedi{TCP}. Anche l'FTP è carente dal punto di vista della sicurezza e le sue funzionalità sono state reimplementate in Open \vedi{SSH}.
+\subsub{SSH}
+Come si è anticipato, \vedi{Telnet}, i \vedi{Comandi r} ed  \vedi{FTP} sono stati rimpiazzati da SSH (Secure SHell), che permette di instradare connessioni TCP in un canale cifrato, accorpandone tutte le funzionalità. Inoltre, con la specifica \code{-x}, SSH permette di trasmettere anche il desktop, funzionalità in precedenza fornita da un programmi appositi. Il vantaggio di SSH è appunto l'impiego di crittografia asimmetrica. 
+Le chiavi pubbliche (\textit{authorized keys}) vengono salvate in un file ASCII del server, mentre il client memorizza i \textit{known hosts}. La chiave privata del client viene controllata alla sua prima connessione con il server.\\ 
+Del protocollo esistono due versioni, SSH1 ed SSH2, tra loro incompatibili.\\
+L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url{www.openssh.com} per i dettagli sulla licenza), comprende una vasta gamma di programmi:
+\begin{itemize}
+\item \code{ssh}, che sostituisce \code{rlogin} e \vedi{Telnet};
+\item \code{scp}, che sostituisce \code{rcp};
+\item \code{sftp}, che sostituisce \vedi{FTP};
+\item \code{ssh-add}, \code{ssh-agent} ed \code{ssh-keygen}, una serie di programmi per la generazione e la gestione delle chiavi;
+\item i demoni \code{sshd} ed \code{sftp-server}.
+\end{itemize}
+\subsub{DHCP} %Discovering ,Offering , Codice 
+\newpage\subsub{DNS}
+Il DNS (Domain Name System) è un servizio utilizzato per associare i nomi degli host (serie di parole separate da punti) ai relativi indirizzi IP (numeri separati da punti); \\ \textbf{Vantaggi: } I primi sono facili da ricordare per l'utente ma non utilizzabili dal computer, mentre con gli ultimi accade l'esatto opposto. \\In oltre è così possibile attribuire più nomi allo stesso indirizzo IP (o viceversa) per rappresentare servizi diversi forniti da uno stesso host (o più host che forniscono lo stesso servizio).\\
+Il DNS prevede:
+\begin{itemize}
+\item \textbf{Spazio dei nomi gerarchico} : basato su un insieme di database distribuiti (garantisce l'aggiornamento a tutta la rete). L'insieme dei nomi viene suddiviso in zone dette domini che possono coprire più host ed essere suddivisi in sotto-domini e così via, formando una struttura ad albero in cui i nodi rappresentano i nomi e:
+\begin{itemize}
+\item I domini di primo livello (\textit{Top Level Domain - \textbf{TLD}}) sono i figli del nodo radice "." e possono essere \textbf{gTLD} (\textit{generic TLD} - .com, .edu), \textbf{ccTLD}(\textit{country-code TLD} - .it, .fr) o \textbf{infrastrutturali} (usati per la risoluzione inversa dei nomi - .arpa). Sono definiti da ICANN (\href{http://newgtlds.icann.org/en/announcements-andmedia/video/applicants}{QUI} è possibile visionare gli ultimi TLD proposti)
+\item I \textit{domini di secondo livello}, in genere, appartengono alle organizzazioni che li hanno registrati e comprendono il loro e il dominio precedente separati da un punto (es. unipg.it).
+\item I successivi \textit{sotto-domini} vengono creati per rendere la gestione del DNS modulare e seguono la stessa logica dei domini di secondo livello.
+\item Infine le foglie corrispondono agli host. 
+\boximage[dns-hierarchy.png][scale=0.8]{Spazio gerarchico dei nomi}
+\end{itemize}
+Quindi, al contrario degli indirizzi IP, in un nome DNS la parte più importante è la prima partendo da destra (appunto, il TLD).
+Ad ogni dominio è associato un resource record (RR), file ASCII che contengono records del database DNS.  %\vedi resource record
+\item \textbf{Server DNS} : per rendere disponibile lo spazio dei nomi e rispondere alle richieste del resolver risolvendo i nomi (name server)
+\item \textbf{Client DNS} : una libreria di funzioni per generare e inviare le richieste sui nomi, interrogando i server DNS (resolver)
+\end{itemize}
+\paragraph{Risoluzione}
+La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
+La risoluzione può essere \textit{statica} (mapping stabilito permanentemente tramite una host table) o \textit{dinamica} (mapping stabilito ad ogni avvio dell'host).\\
+Per associare un nome a un indirizzo IP un client chiama il risolutore, passandone come parametro il nome. \\Il risolutore invia un pacchetto UDB a un server DNS locale (\textit{primary server}) che cerca il nome e se è presente nella sua cache lo restituisce; in caso contrario interroga ricorsivamente i server partendo da un root server del TLD fino ad arrivare ai server autorevoli del nome richiesto (\textit{authoritative server}), i quali invieranno la loro risposta . Ora che l'applicativo conosce l'indirizzo IP, potrà stabilire una connessione TCP con il destinatario o inviargli pacchetti UDP.
+
+\paragraph{BIND} \textit{Berkeley Internet Name Domain} è il più comune demone DNS usato sui sistemi Unix, composto dai principali componenti del DNS come un server DNS (\textbf{named}) e una libreria di risoluzione (\textbf{resolver}), e strumenti per la verifica del corretto funzionamento del server (\textbf{nslookup}).\\
+BIND può essere configurato come 
+\begin{itemize}
+\item \textbf{caching-only} reindirizza ogni richiesta del resolver ad altri server e memorizza il risultato che ritornano in una cache locale
+\item \textbf{authoritative} contiene info su tutta la zona di sua competenza. \\Può essere \textbf{primary} (legge informazioni dagli zone files e gestisce le info riguardanti specifici domini), \textbf{secondary} (scarica i zone files dal primary server e li memorizza localmente nei \textit{zone file transfer}).\\
+\end{itemize}
+Configurazione:
+\begin{itemize}
+\item \textbf{Resolver (/etc/resolv.conf)}: contiene istruzioni per l'esecuzione delle richieste; Si può usare la configurazione di default, altrimenti è necessario specificare:
+\begin{itemize}
+\item \textbf{nameserver \textless IP-address\textgreater}: le richieste saranno inviate all'IP \textit{IP-address}. Si possono specificare al massimo 3 nameserver, nel caso il primo non risponda.
+\item \textbf{domain \textless name\textgreater}: nome del dominio di default che verrà concatenato dopo qualsiasi nome host richiesto che non contiene il carattere punto. Se dopo aver fatto richiesta il resolver fallisce, richiede l'IP dell'host concatenato a un dominio di livello superiore \textit{(es. domain dipmat.unipg.it, richiedo cartesio e il resolver chiede l'IP di cartesio.dipmat.unipg.it. In caso di fallimento, lo richiede di cartesio.unipg.it e così a salire)}.
+\item \textbf{search \textless domain-1, ..., domain-n\textgreater}: come domain ma con la possibilità di avere più domini da provare ad aggiungere al nome host (ma non risale i domini se fallisce).
+\end{itemize}
+\item \textbf{Named}: è necessario configurare più files: 
+\begin{itemize}
+\item \textbf{/etc/named.conf}: parametri generali di configurazione e puntatori ai file dei domini gestiti dal server (ossia gli zone files)
+\begin{itemize}
+\item caching-only: si omettono i comandi di configurazione del primary e secondary server tranne il dominio di loopback.
+\code{primary \quad 0.0.127.IN-ADDR.ARPA \quad /etc/named.local \\ 
+cache \qquad . \qquad \qquad \qquad \qquad \qquad /etc/named.ca}//
+\item primary server: supponendo che il dominio sia \textit{unipg.it} e il primary server \textit{moe}
+\boximage[slide-308.PNG][scale=0.6]{Configurazione primary server}
+\item secondary server: supponendo che il dominio sia \textit{unipg.it} e il primary server \textit{moe}
+\boximage[slide-309.PNG][scale=0.6]{Configurazione primary server}
+\end{itemize}
+\item \textbf{/etc/named.ca}: puntatori ai root domain server. Stabilisce il nome dei root server e i loro indirizzi.
+\code{
+;\\
+; formerly NS1.ISI.EDU\\
+.  \qquad \qquad \qquad \qquad \qquad \quad 3600000  \qquad \qquad  NS  \qquad \qquad B.ROOT-SERVERS.NET.\\
+B.ROOT-SERVERS.NET. \qquad 3600000  \qquad \qquad A  \qquad \qquad 128.9.0.107\\
+...
+}
+\item \textbf{/etc/named.local}: zone file per la traduzione del reverse domain 0.0.127.IN-ADDR.ARPA (lookback). Permette quindi la conversione di 127.0.0.1 nel nome "localhost".
+\boximage[slide-3011.PNG][scale=0.6]{Configurazione named.local}
+\item \textbf{/etc/named.hosts}: zone file per la risoluzione diretta
+\boximage[slide-3012.PNG][scale=0.6]{Configurazione named.host}
+\item \textbf{/etc/named.rev}: zone file per la risoluzione inversa
+\boximage[slide-3013.PNG][scale=0.6]{Configurazione named.rev}
+\end{itemize}
+\item \textbf{Resource Record}: il formato di un RR del DNS è\\
+\code{[name] [ttl] IN type data}\\
+con:
+\begin{itemize}
+\item \textbf{name}
+\item \textbf{time to live}
+\item \textbf{IN}
+\item \textbf{type}
+\item \textbf{data}
+\end {itemize}
+I principali componenti di uno zone file sono chiamati "standard resource record" e sono:
+\begin{itemize}
+\item \textbf{SOA}
+\item \textbf{NS}
+\item \textbf{A}
+\item \textbf{PTR}
+\item \textbf{MX}
+\item \textbf{CNAME}
+\end {itemize}
+\end{itemize}
+\newpage
+
+\newpage
+\subsub{NIS}
+Network Information Service: inizialmente chiamato YP (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
+\subsub{HTTP/HTTPS} 
+\subsub{NFS}
+Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
+Lato server, la condivisione di una cartella con un host specifico è detta \italic{sharing} ed è ottenuta mediante il comando \code{export}.
+NFS si compone dei seguenti programmi:
+\begin{itemize}
+\item \code{nsfd [nserver\footnote{numero di processi da eseguire}]} demone lato server  che gestisce le richieste NSF
+\item \code{biod [nserver]} demone lato server che gestice l'I/O dei client
+\item \code{rcp.locked} demone che gestisce i \italic{lock files} che bloccano istanze multiple di processi specifici
+\item \code{rcp.statd} demone che controlla lo stato della rete
+\item \code{rcp.mountd} demone lato server che risponde alle richieste di mount
+\end{itemize} 
+\subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
+\subsub{NAT}
+Network Address Translation:
 \end{document}
