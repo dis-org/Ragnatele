@@ -1,18 +1,34 @@
 \documentclass[a4paper,11pt]{article}
-\author{Quelli della B1}
+\author{I ragni della B1}
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage{graphicx}
+\usepackage{float}
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{hyperref}
 \usepackage{nameref} 
+\usepackage{siunitx} 
 \graphicspath{{./images/}}
 
 \def\code#1{\texttt{#1}}
 \def\sec#1{\section{#1}\label{#1}} 
 \def\sub#1{\subsection{#1}\label{#1}} 
 \def\subsub#1{\subsubsection{#1}\label{#1}} 
+\def\para#1{\paragraph{#1}\label{#1}}
 \def\vedi#1{\nameref{#1}} 
+\def\italic#1{\textit{#1}}
+\def\image[#1][#2]#3{
+  \begin{figure}[H]
+  \centering
+  \includegraphics[#2]{#1}
+  \caption{#3}
+  \end{figure}}
+\def\boximage[#1][#2]#3{
+  \begin{figure}[H]
+  \centering
+  \fbox{\includegraphics[#2]{#1}}
+  \caption{#3}
+  \end{figure}}
 
 \title{Networking}
 
@@ -23,22 +39,64 @@
 \tableofcontents
 \newpage
 
-\sec{Introduzione}
-%Gioara 
-\sub{Il modello di riferimento ISO/OSI}
-Il modello Open Systems Interconnection (abbreviato in modello ISO/OSI) è stato progettato dall’International Organization for Standardization (ISO) come modello di riferimento per consentire una comunicazione aperta tra diversi sistemi tecnici. Questo punto diventa più chiaro, se si pensa alle origini di Internet: alla fine degli anni ’70 i leader del settore nelle tecnologie di rete si ritrovarono di fronte al problema che le architetture di rete proprietarie si potevano collegare solo tramite dispositivi propri, infatti nessun produttore aveva pensato di costruire componenti hardware o software compatibili con le specificazioni di altri fornitori. Ma un progetto come quello di Internet presuppone alcuni standard per poter rendere possibile una comunicazione comune.
-Il modello lSO/OSI è nato dal tentativo di creare uno standard di questo tipo e offre una base per gli standard di comunicazione, indipendentemente dai fornitori. In base a questo modello, il complesso processo della comunicazione di rete si divide in sette strati, i livelli (in inglese layer). Si parla perciò anche di una comunicazione per livelli. All’interno della comunicazione tra due sistemi devono essere svolti degli specifici compiti su ogni singolo livello, tra questi rientrano ad esempio il controllo della comunicazione, l’indirizzamento del sistema target o la conversione dei pacchetti in segnali fisici. Ma questo funziona solo se tutti i sistemi coinvolti nella comunicazione si attengono a regole precise, stabilite nei protocolli, che si applicano ai singoli livelli o si possono utilizzare su ciascuno di questi (multilivello).
-\\Il modello di riferimento ISO/OSI non è però uno standard di rete concreto, ma descrive in forma astratta quali procedimenti devono essere regolati per far funzionare la comunicazione in una rete.  
-\subsub{I livelli}
-La comunicazione tra due computer può apparire banale agli utenti, ma in realtà durante la trasmissione di dati in una rete devono essere compiuti numerosi compiti e soddisfatte diverse richieste nell’ambito dell’attendibilità, della sicurezza e dell’integrità. Per questo si è deciso di dividere la comunicazione di rete in livelli. Ad ogni livello, strutturato gerarchicamente, sono assegnate delle funzioni specifiche (quindi uno standard copre generalmente solo una parte del modello): ogni livello accede tramite un’interfaccia a quello inferiore e mette a disposizione il servizio del livello superiore.
-\\Questo principio ha due vantaggi decisivi:
+\section*{Introduzione}
+%quattro parole sulla storia del networking
+\sub{Organizzazioni}
+\subsub{IEEE}
+Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare il comitato \vedi{IEEE 802} LAN/MAN Standards Committee, commissione preposta a sviluppare standard per le reti locali e metropolitane. 
+\subsub{CCITT}
+Consultative Committee for International Telephony and Telegraphy: parte della \textbf{ITU} (International Telegraph Union), agenzia dell'ONU specializzata in telecomunicazioni, articola i propri lavori in quadrienni, gli \textit{study periods}, al termine dei quali ha luogo un’assemblea plenaria incaricata di emettere le cosiddette \textit{raccomandazioni}.
+\subsub{ISO}
+International Standards Organization, consulente dell'ONU allo scopo di promuovere a livello globale lo sviluppo di standard, con l’obiettivo di favorire lo scambio internazionale di beni e servizi. Il suo maggior successo nell'ambito delle telecomunicazioni è il concepimento del \vedi{Modello di riferimento ISO/OSI}.
+\subsub{IETF}
+Internet Engineering Task Force: organismo internazionale composto da tecnici, specialisti e ricercatori interessati all'evoluzione tecnica e tecnologica di Internet. Si occupa di sviluppare e promuovere standard Internet, in stretta cooperazione con il \vedi{W3C} e l'\vedi{ISO}. L'iscrizione è a titolo personale e non come rappresentanti di qualche istituzione pubblica o privata. 
+\subsub{IRTF}
+Internet Research Task Force: organizzazione che coordina i diversi gruppi di ricerca in ambito Internet, controllata dall'\textbf{IRSG} (Internet Research Steering Group) e il cui coordinatore è nominato dallo \textbf{IAB} (Internet Activities Board).
+\subsub{W3C}
+World Wide Web Consortium: organizzazione non governativa internazionale che ha come scopo quello di sviluppare tutte le potenzialità del World Wide Web. La principale attività svolta dal W3C consiste nello stabilire standard tecnici per il World Wide Web inerenti sia i linguaggi di marcatura che i protocolli di comunicazione.
+\subsub{IANA}
+Internet Assigned Numbers Authority: ente storico incaricato della gestione dello spazio di indirizzamento IP e dei nomi a dominio, degli \vedi{ASN} e dei numeri di protocollo IP. Nel tempo, IANA ha delegato la gestione locale ad una serie di entità regionali:
 \begin{itemize}
-	\item I compiti e le richieste che devono essere compiuti e soddisfatti all’interno di un livello sono definiti chiaramente. Per ogni livello possono essere sviluppati degli standard indipendenti gli uni dagli altri.
-	\item La chiara divisione tra i singoli livelli fa sì che le modifiche ad uno standard non abbiano alcun effetto sui processi che si svolgono su un altro livello. Introdurre nuovi standard risulta così più semplice.
+\item \textbf{ARIN} per le Americhe;
+\item \textbf{RIPE NCC} per l'Europa;
+\item \textbf{APNIC} per l'Asia e tutta l'area del Pacifico.
 \end{itemize}
-I sette livelli del modello ISO/OSI si dividono in due gruppi in base ai compiti che svolgono: orientati all’applicazione e orientati al trasporto. I processi che si svolgono sui singoli livelli si possono spiegare prendendo ad esempio la trasmissione e-mail da un dispositivo ad un mail server.
+Attualmente, la materia è oggetto di completa ristrutturazione sotto la responsabilità dell’ \vedi{ICANN}, da cui lo IANA è stato assimilato.
+\subsub{ICANN}
+Internet Corporation for Assigned Names and Numbers: organizzazione che ha attualmente la responsabilità della gestione dello spazio di indirizzamento IP (vedi \vedi{IANA}).
+\subsub{GIPI}
+Global Internet Policy Initiative: rete di organizzazioni non governative no-profit che sostiene l’adozione nei paesi in via di sviluppo di piattaforme legislative e politiche per la realizzazione di un’accesso ad Internet aperto e democratico.
+\subsection{Concetto di standard} \label{Standard}
+Si distinguono standard \textit{de iure}, cioè codificati da organizzazioni come quelle di cui sopra, e standard \textit{de facto}, affermatisi spontaneamente per la loro adozione massiccia.
+\subsub{IEEE 802}
+\subsub{RFC}
+Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{rfc-editor.org}.
+\subsection{Nozione di protocollo} %def di protocollo
 
-\sub{Internet protocol suite (TCP/IP)}
+%Gioara 
+\sub{Modello di riferimento ISO/OSI}
+Il modello Open Systems Interconnection (abbreviato in modello ISO/OSI) è stato progettato dalla \vedi{ISO} come modello di riferimento per consentire una comunicazione aperta tra diversi sistemi tecnici. Le motivazioni diventano più chiare se si pensa alle origini di Internet: alla fine degli anni ’70 i leader del settore delle tecnologie di rete si ritrovarono di fronte al problema che le architetture proprietarie si potevano collegare solo tramite dispositivi specifici: nessun produttore aveva pensato di costruire componenti hardware o software compatibili con le specifiche di altri fornitori.
+Il modello lSO/OSI si prefigge dunque di offrire una base teorica per lo sviluppo di standard di comunicazione indipendenti dai fornitori. In base ad esso, il complesso processo della comunicazione di rete si divide in sette livelli (in inglese, \textit{layers}). Nell'ambito della comunicazione tra due sistemi, ad ogni livello devono essere svolti compiti specifici, tra cui il controllo della comunicazione, l’indirizzamento del sistema target o la conversione dei pacchetti in segnali fisici. Questo può funzionare solo se tutti i sistemi coinvolti nella comunicazione si attengono a regole precise, stabilite dai protocolli, che si applicano ad uno o più livelli (si parla in tal caso di protocolli multilivello).
+Il modello di riferimento ISO/OSI non è però uno standard di rete concreto: esso descrive in forma astratta quali procedimenti devono essere regolati per far funzionare la comunicazione in una rete.  
+\paragraph{Vantaggi dell'architettura a livelli}
+La comunicazione tra due computer può apparire banale agli utenti, ma in realtà durante la trasmissione di dati in una rete devono essere compiuti numerosi compiti e soddisfatte diverse richieste nell’ambito dell’attendibilità, della sicurezza e dell’integrità. Per questo si è deciso di dividere la comunicazione di rete in livelli: ognuno accede tramite un’interfaccia a quello inferiore e mette un servizio a disposizione di quello superiore.
+\\Questo approccio ha due vantaggi decisivi:
+\begin{itemize}
+	\item I compiti e le richieste che devono essere compiuti e soddisfatti all’interno di un livello sono definiti chiaramente, cosicché per ogni livello possono essere sviluppati diversi standard, indipendenti gli uni dagli altri;
+	\item La chiara divisione tra i livelli fa sì che le modifiche ad uno standard non abbiano alcun effetto sui processi che si svolgono su un altro livello. Introdurre nuovi standard risulta così più semplice.
+\end{itemize}
+I sette livelli del modello ISO/OSI si dividono inoltre in due gruppi in base ai compiti che svolgono: orientati all’applicazione e orientati al trasporto.
+
+\sub{Internet}
+Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente e a condividere servizi, definita formalmente nel \vedi{RFC} 1122 (originariamente in \vedi{RFC} 760).
+
+\subsub{Intranet}
+Termine utilizzato per indicare l'uso di Internet all'interno di un'azienda, basato sull'utilizzo di una \vedi{LAN}.
+
+\subsub{Extranet}
+Termine che identifica le risorse hardware e software che realizzano la presenza visibile in internet di un'organizzazione.
+
+\subsub{Internet protocol suite (TCP/IP)}
 
 \newpage
 
@@ -47,7 +105,7 @@ Nonostante l'amministratore di rete non abbia la possibilità di influirvi diret
 
 \subsection{Terminologia}
 \subsub{Informazione} 
-L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati. 
+L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati.
 
 \subsub{Codice}
 Al fine di rappresentare l'informazione in maniera tale da renderne più semplice la gestione, un codice associa sequenze di bit a caratteri. I codici che godono della più ampia diffusione sono:
@@ -56,10 +114,10 @@ Al fine di rappresentare l'informazione in maniera tale da renderne più semplic
 \item BCD (Binary-Coded Decimal)
 \item AIKEN 
 \item Gray
-\item EBCDIC (Extended Binary Coded Decimal Code, 8 bit), in uso presso le banche
+\item EBCDIC (Extended Binary Coded Decimal Code) 8 bit, in uso presso le banche
 \end{itemize}
 
-\subsubsection{Segnale}
+\subsub{Segnale}
 Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente un'informazione. Un segnale \textbf{analogico} varia in modo continuo nel tempo ed ha infiniti livelli di intensità; un segnale \textbf{digitale} varia invece in modo discreto e ha solo due livelli di intensità. Ogni tipo di dato può essere rappresentato in entrambe le maniere e può essere convertito da analogico a digitale e viceversa.
 \\\\Fra i segnali analogici assumono particolare rilevanza i \textbf{segnali sinusoidali}, ossia segnali che variano nel tempo secondo una legge del tipo \[u=Usen(\omega t+\Phi )\] dove 
 \begin{itemize}
@@ -72,11 +130,8 @@ va spiegato meglio
 \item $1/t=f$ è detta \textit{frequenza} (misurabile in Hz)\\\\
 \end{itemize}
 La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
-\begin{figure}
-\centering
-\includegraphics[scale=0.5]{segnali_sin.png}
-\caption{Rappresentazione grafica di un segnale sinusoidale}\label{fig. 1}
-\end{figure}
+\
+\boximage[segnali_sin.png][scale=0.5]{Rappresentazione grafica di un segnale sinusoidale}
 
 \subsubsection{Lunghezza d'onda}
 In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f$ (dove $c$ è la velocità di propagazione del segnale).
@@ -85,13 +140,13 @@ In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit
 Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa affermazione, non necessariamente di immediata comprensione, diventa subito chiara se si tiene presente il \textbf{teorema di Fourier}, il quale afferma che un segnale può essere rappresentato come somma di sinusoidi (potenzialmente infinite) con caratteristiche differenti.
 
 \subsub{Ampiezza di banda}
-L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche.
+L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
 
-\subsection{Qualità delle trasmissioni}
+\subsection{Qualità delle trasmissioni} \label{qualita}
 Come già accennato in precedenza, é lo strato fisico che determina in larga parte la qualità delle comunicazioni, valutabile in base a prestazioni e affidabilità. 
 \\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
 \begin{itemize}
-\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi
+\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi 
 \item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
@@ -125,21 +180,56 @@ dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
 \end{itemize}
 
 \sub{Modulazione}
-Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}.
+Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}, tipicamente analogico.
 \subsub{Ad onda continua}
 Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie:
 \begin{itemize}
 \item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante. Per quel che riguarda la trasmissione digitale, lo 0 è associato a bassa potenza e l'1 ad alta potenza.
-\item \textbf{FM} (Frequency Modulation): 
-\item \textbf{PM} (Phase Modulation): 
+\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rafefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
+\item \textbf{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale. 
 \end{itemize}
-\begin{figure}[h]
-\centering
-\includegraphics[scale=0.5]{am_fm_pm.png}
-\caption{Confronto tra tipologie di modulazione ad onda continua}\label{fig. 2}
-\end{figure}
-\subsub{Impulsiva}
-\subsub{Digitale}
+\boximage[am_fm_pm.png][scale=0.5]{Confronto tra tipologie di modulazione ad onda continua}
+
+\subsub{Modulazione impulsiva}
+La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codificata in una serie di impulsi. I principali tipi di modulazione impulsiva sono:
+\begin{itemize}
+\item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM
+\item \textbf{PFM} (Pulse Frequency Modulation), analoga alla FM
+\item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM
+\boximage[pam_pwm_ppm_pcm.png][scale=0.5]{Confronto tra tipologie di modulazione impulsiva}
+
+\item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
+\begin{itemize}
+\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
+\item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'ampiezza è uguale per tutti i sottolivelli; di norma, tuttavia, essa segue una scala logaritmica. Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - si è verificato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze. 
+\item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
+\\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
+\end{itemize}
+\boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
+
+\end{itemize}
+
+\subsub{Modulazioni digitali} 
+Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \textbf{modem}, acronimo per modulatore-demodulatore), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, in prima approssimazione, attraverso una mappatura biunivoca tra sequenze di bit in ingresso ed un insieme di forme d'onda analogiche limitate nel tempo in uscita, dette \textit{simboli}. E' dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
+\begin{itemize} 
+\item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
+\item \textbf{FSK} (Frequency-Shift Keying): la frequenza portante istantanea viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note, l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
+\begin{itemize} 
+\item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{interferenza intersimbolica}) 
+\item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso 
+\item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di apssaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione 
+\item La frequenza d'impulso è solitamente maggiore di quella di intervallo 
+\end{itemize} 
+La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi nei ponti radio e nelle trasmissioni di tipo GSM tra cellulari. 
+\item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
+\boximage[ask_psk_fsk.png][scale=0.3]{Confronto tra codifiche ASK, FSK, e PSK}
+\begin{itemize} 
+\item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: per garantire la massima protezione dal rumore e dalle interferenze, vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$. 
+\item \textbf{DPSK} (Differential Phase-Shift Keying) 
+\end{itemize} 
+\item \textbf{QAM} (Quadrature Amplitude Modulation) 
+\item \textbf{Trellis} 
+\end{itemize}
 
 \sub{Alterazioni del segnale}
 \subsub{Attenuazione}
@@ -152,9 +242,20 @@ Si parla di modulazione ad onda continua nel momento in cui viene modulata una p
 \subsub{Teorema di Nyquist}
 \subsub{Teorema di Shannon}
 \subsubsection{Velocità di modulazione}
-\newpage
-\sec{Livello di Collegamento}
+
+\newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
+In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
+\begin{itemize} 
+\item raggruppare in frame i bit da inviare;
+\item modulare la multiplazione per l'accesso condiviso fra più utenti al canale fisico per evitare conflitti;
+\item controllare gli errori di trasmissione e gestirli;
+\item gestire il flusso di dati.
+\end{itemize}
+\sub{Ethernet} 
+\'E una delle tecnologie per il collegamento LAN più utilizzate al mondo,posto a metà fra il LV 1 e il LV 2 (più in particolare nel sottolivello MAC) del modello ISO.
+\subsub {Ethernet framing}
+
 \sub{Tipi di trasmissione}
 \subsub{Sincrona}
 \subsub{Asincrona}
@@ -164,22 +265,31 @@ Si parla di modulazione ad onda continua nel momento in cui viene modulata una p
 \sub{Controllo degli errori}
 \subsub{Ridondanza}
 
-\sub{Protocolli primario-secondario}
-\subsub{RTS-CTS}
-\subsub{XON-XOF}
-\subsub{ARQ}
-%NB protocolli nel livello di rete?
-\sub{Protocolli internet} 
-\subsub{ARP} 
-\subsub{RARP} 
-\subsub{NDP} 
-\subsub{MAC} 
- 
-\sub{Ethernet} 
-\newpage
+\sub{Tipi di flusso trasmissivo}
+\subsub{Simplex} Flusso monodirezionale. Le trasmissioni radiofoniche ne sono un tipico esempio. 
+\subsub{Half-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in un solo senso alla volta. Le ricetrasmittenti lavorano in questa maniera. 
+\subsub{Full-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in ambo i sensi contemporaneamente, come nella rete telefonica. 
 
+%NB non credo vadano qui...
+%\sub{Protocolli primario-secondario}
+%\subsub{RTS-CTS}
+%\subsub{XON-XOF}
+%\subsub{ARQ}Il protocollo ARQ è di tipo \vedi{Full-Duplex} %missing
+%\subsub{NDP} 
 
-\sec{Livello di Rete}
+\sub{Sottolivelli}
+Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
+\subsub{MAC} Il livello MAC (\textit{Media Access Control}) disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
+\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.
+\subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
+I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
+
+\subsection{Protocolli}
+\subsub{HDLC}
+\subsub{PPP}
+
+\newpage\sec{Livello di Rete}
+
 %Claudio & Giorgio ---------------------------------------------------------------------------------------------------------------------
 \subsection{Terminologia}
 \subsub{Rete}
@@ -189,42 +299,384 @@ Data Terminal Equipment: qualunque dispositivo che è la sorgente o la destinazi
 Un esempio è il Personal Computer (PC). 
 \subsub{DCE}
 Data Circuit-terminating Equipment o Data Communication Equipment: dispositivo intermedio 
-tra \vedi{DTE} e il resto della rete, esegue conversioni di segnale, correzione di errori
-e gestisce il clock dei dispositivi connessi. Può anche essere del \vedi{DTE}. Tipicamente è un Modem-Router.
+tra uno o più \vedi{DTE} e il resto della rete; esegue conversioni di segnale, correzione di errori
+e gestisce il clock dei dispositivi connessi. Può anche essere interno al \vedi{DTE}. Tipicamente è un Modem.
 \subsub{CPE}
-Customer Premises Equipment: ISDN
+Customer Premises Equipment: dispositivo terminale connesso direttamente ad una \vedi{WAN}. Rientrano in questa categoria telefoni, Router e Switch di rete.
+\subsub{IS}
+Intermediate System: dispositivo di rete con funzionalià fino al terzo livello del \vedi{Modello di riferimento ISO/OSI}, come un \vedi{Router} o un  \vedi{Gateway}.
+\subsub{ISP}
+Internet Service Provider: Organizzazione che fornisce accesso ad \vedi{Internet}.
+\subsub{AS}
+Autonomuos System: dominio di \vedi{Routing} gestito dallo stesso \vedi{ISP} nel quale viene applicata la stessa \italic{policy}, può essere di più tipi:
+\begin{itemize}
+\item \textbf{Stub} se connesso solo ad un'altro AS;
+\item \textbf{Multihomed} se connesso a più AS ma senza permettere il \italic{pass-trough}, ovvero il passaggio di traffico diretto ad un altro AS;
+\item \textbf{Transit} se permette il \italic{pass-trough}.
+\end{itemize} 
+Strutturare \vedi{Internet} in AS, suddividendo i router in gruppi, si è rivelato necessario innanzitutto perché se Internet fosse una singola rete, il numero dei suoi router sarebbe tanto grande da rendere insostenibile il traffico, difatti il \textbf{ritardo} (vedi Qualità delle trasmissioni - \vedi{Criteri di valutazione in base alle prestazioni}) e l' \textbf{overhead di gestione} dipendono dal numero di router coinvolti.
+Inoltre è opportuno che le diverse organizzazioni commerciali siano il più possibile autonome nella gestione delle proprie reti.
+L'utilizzo degli AS è definito nell'\vedi{RFC} 1930.
+\para{ASN} Ogni AS è identificato da un ASN (Autonomous System Number) assegnato dall'\vedi{ICANN} ai RIR (Regional Internet Registers), che a loro volta li assegnano alle organizzazioni. 
+Fino al 2007 gli ASN erano costituiti da numeri interi
+a 16 bit (0-65535), denominati \textit{asplain}, poi sostituiti da numeri a 32 bit detti \italic{asdot} (\vedi{RFC} 4893),
+nella forma $x.y$, con $x$ e $y$ numeri interi a 16 bit, dove i numeri $0.y$ coincidono con gli asplain.\\ %cioé y è l'asplain?
+Gli ASN 0, 23456 e 65535 sono riservati e non possono
+essere usati dagli operatori.
+Gli ASN 64512-65534 definiti come privati dall'\vedi{RFC} 
+6996. %qual è la differenza tra privati e riservati, in questo caso?
+\subsub{Router}
+Nodo provvisto di procedure specifiche volte ad effettuare le scelte di \vedi{Routing}. Collega più reti o sottoreti dello stesso tipo. Può essere:
+\begin{itemize}
+\item \textbf{Interior} se opera all'interno di un \vedi{AS}, utilizza protocolli \vedi{IGP};
+\item \textbf{Exterior} se opera tra \vedi{AS} differenti, utilizza protocolli \vedi{EGP}.
+\end{itemize}
+\subsub{Gateway} 
+\vedi{Router} che connette due reti o sottoreti di tipo diverso.
+\sub{Tipologie di comunicazione}
+\subsub{Connection-oriented} 
+Un servizio connection-oriented, di cui è un esempio la rete telefonica, richiede che venga creato un canale di comunicazione -sia esso logico o fisico- prima dell'invio dei dati. Questo metodo è considerato "affidabile", poiché è garantito che i dati arriveranno nell'ordine in cui sono stati inviati. In termini più tecnici, le principali caratteristiche di un servizio connection-oriented sono:
+\begin{itemize}
+\item \textbf{orientamento dello stream}: l'ordine di invio dei byte viene mantenuto;
+\item \textbf{connessione di circuito virtuale}: la trasmissione ha luogo solo quando emittente e destinatario hanno verificato la sussistenza delle condizioni necessarie.
+\end{itemize}
+\subsub{Connectionless}
+In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul destinatario ed è instradato secondo queste ultime, indipendentemente dagli altri. L'ordine di arrivo dei pacchetti è arbitrario.
 
-\sub{Tipologie di rete}
+\newpage
+\sub{Tipologie di rete cablata}
+\subsub{PAN} Personal Area Network: Rete personale che non si estende per più di 10-20 metri. Il termine si riferisce propriamente a reti con connessioni via cavo, ma poiché la gran parte delle reti di dimensioni così piccole è wireless, è sepsso utilizzato come sinonimo di \vedi{WPAN}. 
+\subsub{LAN} Local Area Network: Rete con un raggio limitato ad una abitazione o un edificio. (La prima rete LAN è stata ARKNET nel 1977)
+\subsub{WAN} Wide Area Network: Rete che copre ampie aree geografiche connettendo tra loro più sottoreti locali. 
+\subsub{MAN} Metropolitan Area Network: Rete metropolitana caratterizzata da una velocità di trasmissione molto elevata (tipicamente fibra ottica).
+\subsub{GAN} Global Area Network: \vedi{Internet}.
+
+\sub{Tipologie di rete wireless}
+\subsub{NFC} Near-Field Communication: Lo scambio di informazioni tramite tag elettromagnetici.\\ Portata: 20cm.
+\subsub{BAN} Body Area Network: Rete che collega dispositivi indossabili, raggio di azione inferiore al metro.
+\subsub{WPAN} Wireless Personal Area Network: Rete di dispositivi personali in un raggio inferiore ai 20 metri, ad esempio stampanti Bluetooth.
+\subsub{WLAN} Wireless Local Area Network: LAN ottenuta tramite tegnologie wireless, ad esempio reti WiFi. 
+
+\newpage
+\sub{Topologia delle reti}
+\subsub{Rete a dorsale}
+I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un' interruzione in qualunque punto della dorsale compromette tutta la rete.
+\subsub{Rete ad albero} La trasmissione avviene in modo gerarchico tra i nodi padre e figlio, fino ad arrivare alla \textit{root} dalla quale dipende tutto il funzionamento della rete.
+\subsub{Rete a stella} Tutti i dispositivi sono connessi ad un HUB (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
+\subsub{Rete ad anello} Le informazioni vengono passate da un dispositivo all'altro in modo ciclico, la trasmissione è unidirezionale anche se questo si può ovviare con un secondo anello in direzione opposta. Questa topologia era tipica delle \vedi{LAN} TokenRing, ora viene utilizzata principalmente nelle \vedi{MAN} in fibra ottica.
+\subsub{Rete a maglia} In inglese \textit{mesh}, è una rete in cui ogni dispositivo può essere connesso ad ogni altro dispositivo ottenendo di fatto un grafo connesso. \'E la topologia di rete meno vulnerabile, ma è poco utilizzata nelle reti cablate a causa dei costi. \'E diffusa invece nelle \vedi{WLAN}, spesso nella versione \textit{ad hoc}, dove i collegamenti nascono e muoiono dinamicamente. In questa topologia il \vedi{Routing} viene effettuato da ogni nodo.
+
+\sub{Grid}
+Rete di computer incentrata sulla condivisione dinamica delle risorse nel contesto di calcolo distribuito e HTC (High Troughput Computing).\\ Rispetto ad un vero e proprio cluster di computer, la grid ha una composizione più eterogenea. L'accesso ai dispositivi non si limita al software ma comprende anche l'hardware, ciò è ottenuto utilizzando librerie middleware (\textit{software glue}) che si collocano tra il sistema operativo e lo strato fisico della macchina. La più importante grid europea è EGEE del CERN, bastata sul middleware gLite.%qualche link forse
+ 
+\newpage
+\sub{IP}
+Internet Protocol: fornisce le funzioni necessarie per l'invio di pacchetti di bit detti \textit{Internet datagram} da un host all'altro con un approccio \vedi{Connectionless}, per cui l'affidabilità delle trasmissioni è garantita da servizi di più alto livello, deputati al reinvio degli eventuali pacchetti persi e al ristabilire la loro giusta sequenza (\textbf{consegna best-effort}). 
+Il protocollo IP definisce inoltre l'esatto formato dei dati e svolge funzioni di routing.
+\\Nel contesto del protocollo IP, l'unità fondamentale di trasferimento è detta \textbf{datagram} IP, suddiviso in \textit{header} e blocco di dati.
+\paragraph{Header} 
+L'header del datagram IPv4 contiene i seguenti campi: 
+\begin{itemize}
+\item \textbf{Version}: versione IP del datagram. 
+\item \textbf{HL} (Header Length): lunghezza dell'header in parole da 32 bit
+\item \textbf{TOS} (Type Of Service) o Differentiated services: indicazioni sulla corretta gestione del datagram, volte a trattare in modo differente i diversi servizi, quasi del tutto inutilizzate
+\item \textbf{Total lenght}: lunghezza totale del datagram
+\item campi che controllano la frammentazione e il riassemblaggio dei datagram:
+\begin{itemize}
+\item \textbf{Identification}: indicazione del pacchetto cui appartiene il datagram
+\item \textbf{IP flags}
+\item \textbf{Offset del frammento}
+\end{itemize}
+\item \textbf{TTL} (Time To Leave): duarata per cui il datagram permane in transito, espressa in secondi
+\item \textbf{Protocol}: indicazione di quale protocollo di più alto livello ha generato il blocco dei dati
+\item \textbf{Header checksum}: sequenza di bit che utilizzata per verificare l'integrità dei dati contenuti nell'header
+\item \textbf{Source address}: \vedi{Indirizzo IP} di provenienza
+\item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione
+\item \textbf{opzioni} (campo opzionale, utilizzato per test e debugging)
+\end{itemize} 
+\boximage[ip-header.png][scale=0.45]{Formato header IPv4}
+
+\subsub{Indirizzo IP} Ogni dispositivo connesso ad una rete IP è identificato da un indirizzo IP, univoco in quella rete. Più propriamente l'indirizzo IP viene associato alle interfacce del dispositivo. Un dispositivo con più schede di rete -per esempio un router- può connettersi direttamente a più reti e per ognuna avrà un indirizzo IP.
+
+\paragraph{Indirizzo IPv4}
+Composto da 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
+\boximage[ipaddress.png][scale=0.8]{Suddivisione in classi degli indirizzi IPv4}
+
+\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$.
+
+\ \\Nell'ambito degli indirizzi IPv4 sussistono alcune convenzioni:
+\begin{itemize}
+\item se la parte host di un indirizzo è 0, si sta indicando non un host in particolare, bensì la rete stessa
+\item se la parte host di un indirizzo ha valore 1 su tutti i bit, si sta specificando un \textit{indirizzo broadcast}, utilizzato per inviare pacchetti a tutti gli host della rete
+\item l'indirizzo $0.0.0.0$ indica la \textit{default route}, indicante il gateway di default al fine di instradare pacchetti la cui destinazione non è nella tabella di routing. Si tratta di una scelta poco felice, poiché costituisce uno spreco di spazio d'indirizzamento di classe A
+\item l'indirizzo $127.0.0.1$ è il cosiddetto \textit{loopback address} (\code{localhost}), associato all'\vedi{Interfaccia di rete} virtuale di loopback
+\item gli indirizzi di rete $10.0.0.0/8$, $172.16.0.0/12$, $192.168.0.0/16$ e\\ $169.254.0.0/16$ sono riservati, ossia identificano reti private gestite dai server \vedi{NAT}.
+\end{itemize}
+
+\paragraph{Differenze tra IPv4 e IPv6}
+L’IP versione 4 fornisce anche i servizi di frammentazione e riassemblaggio di datagram, quando la trasmissione avviene attraverso reti con capacità di trasporto di pacchetti più piccola del pacchetto originale (dovuto alle diverse tecnologie di rete del passato). IP versione 6 abolisce questo comportamento, non più necessario. %copiato dalle slide (da rivedere e ampliare)
 
 
-\sub{Topologia di una rete}
-\subsection{Qualità della rete}
-\sub{Routing}
-\subsub{Tabella di routing}
-\code{netstat -nr}
-\sub{Protocolli di routing}
-\subsub{ICMP} 
+\subsub{Interfaccia di rete}
+Ad ogni scheda di rete (hardware) di un dispositivo corrisponde un'interfaccia di rete (software) sulla quale operano protocolli di rete come \vedi{Ethernet}. Esistono anche interfacce virtuali come quella di loopback locale presente in ogni computer (\code{lo} su Unix).
+Quando un'interfaccia virtuale di rete viene configurata ad essa viene assegnato un indirizzo IP, ciò avviene automaticamente attraverso il protocollo \vedi{DHCP} o può essere effettuato manualmente.
+\\Nei sistemi Unix-Linux, il comando per la configurazione manuale dell'IP è \code{ifconfig} (dove "if" sta per "interface"). La sintassi è la seguente:
+\\\\ \code{\$ ifconfig <nome interfaccia> <indirizzo IP> netmask <netmask\\ x.y.z.q> broadcast <indirizzo broadcast>} %forse meglio un esempio?
+\\\\Il comando \code{ifconfig} senza argomenti mostra lo stato delle interfacce.
+\boximage[ifconfig.png][scale=0.45]{Output del comando ifconfig su una macchina Linux}
+
+\sub{IP multicasting} 
+Si parla di IP multicasting quando un datagram è trasmesso ad un gruppo di host identificato da un unico \vedi{Indirizzo IP}. Gli appartenenti al gruppo possono cambiare dinamicamente -un gruppo può essere dunque permanente o transitorio- e si può definire una chiave di accesso che renda selettivo l'ingresso. La gestione delle informazioni relative alla composizione dei gruppi e l'invio in internet dei datagram sono responsabilità dei \textit{multicast agents}, che girano sui router o su host particolari.
 \subsub{IGMP} 
-\subsub{RIP} 
-\subsub{OSPF} 
+Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
 
-\sub{Internet Protocol (IP)} 
+\subsection{Protocolli di address resolution} 
+\subsub{ARP} %address resolution protocol (daje, scrivilo da qualche parte!)
+\textbf{Address Resolution Protocol}: Due host Internet possono comunicare solamente conoscendo il reciproco \vedi{Indirizzo MAC}.\\
+L' host A, per sapere l'indirizzo fisico di B, invierà una richiesta ARP a tutti gli host contenente l'\vedi{Indirizzo IP} di B e il proprio indirizzo MAC; B vedendo la chiamata, risponde scrivendo il MAC address di A in una cache di consultazione e riinviando il proprio MAC address ad A.\\
+La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover reinviare una richiesta ARP, sia possibile reinviare dati al suddetto host. Le informazioni nella cache possono però diventare obsolete, per questo un timer ne fa scadere la validità.\\
+%immagine
+Occorre considerare alcuni problemi:
+\begin {itemize}
+\item il ritardo (\textit{jitter}) provocato degli aggiornamenti della cache;
+\item l'impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.
+\end{itemize}
+\subsub{RARP} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
+\textbf{Reverse ARP}: Consente, al contrario dell'ARP, di risalire al proprio \vedi{Indirizzo IP} dal \vedi{Indirizzo MAC}.\\
+Viene utilizzato ad ogni avvio dagli host diskless (senza memoria secondaria) per determinare il proprio indirizzo IP, chiedendolo a dei particolari server RARP che contengono le informazioni in specifici file di configurazione.\\
+\'E reso obsoleto dal \vedi{DHCP}.
+
+\sub{Routing}
+Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi delle reti \vedi{IP}. Si divide in:
+\begin{itemize}
+\item \textbf{Routing Minimale}: la tabella di routing viene definita al momento della configurazione dell'\vedi{Interfaccia di rete}
+\item \textbf{Routing Statico}: utilizzato quasi solamente per gli host, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \\\\
+\code{\$ route add -net <indirizzo di rete> netmask <netmask\\ x.y.z.q> gw <indirizzo gateway> }.\\\\
+I comandi possono essere salvati in un file di configuarzione eseguito all'avvio della macchina (In Unix-Linux \code{/etc/init.d/rc.local}) 
+\item \textbf{Routing Dinamico}: utilizzato nei router, prevede \vedi{Protocolli di routing}
+\end{itemize}
+\ \\
+Ogni nodo delle rete esegue le seguenti operazioni:
+\begin{itemize}
+\item determina il tipo di classe dell’indirizzo IP 
+\item controlla se la rete di destinazione è locale ed eventualmente
+applica all’indirizzo di destinazione la subnet mask
+\item cerca la rete di destinazione nella \vedi{Tabella di routing} e, se presente, instrada il datagram verso il \vedi{Gateway} corrispondente
+\end{itemize}
+
+\subsub{Tabella di routing}
+Presente in ogni nodo di rete, contiene le informazioni per il routing.\\
+Nella tabella di routing ogni riga rappresenta una "strada", composta da:
+\begin{itemize}
+\item indirizzo dell'host o sottorete di destinazione
+\item indirizzo dell'eventuale prossimo gateway da attraversare 
+\item "distanza" dalla destinazione, detta \vedi{Metric}
+\end{itemize}
+Nei sistemi Unix-Linux si visualizza tramite il comando \code{netstat -r} o \code{route}.
+\boximage[netstat.png][scale=0.48]{Output del comando \code{netstat -r}}
+\ \\\'E possibile utilizzare la specifica \code{-n} per ottenere gli indirizzi di destinazione in forma numerica.
+Il significato delle \italic{flag} è il seguente:
+\begin{itemize}
+\item U indica che l'\vedi{Interfaccia di rete} è attiva (Up)
+\item G indica un uscita verso un'altra rete tramite \vedi{Gateway}
+\item H indica l'accesso diretto ad un host.
+\end{itemize} 
+
+\subsub{Metric}
+Il concetto di distanza tra due nodi di una rete, a seconda del contesto può essere dato da:
+\begin{itemize}
+\item Path Length (o hop-count): numero di nodi da attraversare
+\item Reliability: benché talvolta impostata ad un valore costante, poiché le condizioni della rete cambiano costantemente, l'affidabilità di una connessione è variabile. Essa viene dunque misurata ad intervalli regolari
+\item Load: traffico, anch'esso misurato ad intervalli regolari 
+\item Delay: tempo necessario al router per trasmettere un datagram, misurato in $\mu s$. 
+\item Bandwidth (\vedi{Ampiezza di banda})
+\item Communication cost: numero intero che indica arbitrariamente quanto un percorso sia conveniente. Valori più bassi indicano un percorso migliore. 
+\end{itemize}
+
+\sub{Famiglie di protocolli di routing}
+\boximage[routing.png][scale=0.45]{Protocolli di routing}
+\subsub{IGP}
+Interior Gateway Protocol: famiglia di protocolli per il routing interno ad un \vedi{AS} (\textit{intra-domain routing}), include \vedi{RIP}, IGRP e \vedi{OSPF}.
+\subsub{EGP}
+Exterior Gateway Protocol: famiglia di protocolli per il routing tra due diversi \vedi{AS} (\textit{inter-domain routing}), include EGP (storico), \vedi{BGP} (versione 4 attualmente in uso) e IDRP (OSI Inter-Domain Routing Protocol) che dovebbe rimpiazzare il BGP una volta divenuto obsoleto. 
+\subsub{CIDR}
+Classless Inter-Domain Routing: include \vedi{OSPF}, \vedi{BGP} e IS-IS.
+
+\subsub{Distance-vector}
+Un algoritmo del tipo distance-vector prevede che ogni router mantenga la propria \vedi{Tabella di routing} aggiornata effettuando scambi regolari con gli altri router raggiungibili. Questi aggiornamenti sono in forma di 2-ple del tipo (rete di destinazione, distanza).
+\\La distanza può essere misurata in \italic{hops} o in base al \italic{propagation delay}.
+\\Implementa questo algoritmo il protocollo \vedi{RIP}.
+
+\subsub{Link-State}
+In un protocollo link state ogni nodo della rete acquisisce informazioni sullo stato dei collegamenti adiacenti ed inoltra queste informazioni a tutti gli altri nodi della rete tramite un pacchetto link state.\\
+L'utilizzo di un protocollo link state, presenta diversi vantaggi:
+\\può gestire reti composte da un gran numero di nodi;
+\\converge rapidamente al cammino minimo;
+\\difficilmente genera cammini ciclici;
+\\è facile da comprendere poiché ogni nodo salva la mappa della rete nel \italic{Link-State Database} o  \italic{topological database}.
+\\Appartengono a questa categoria i protocolli \vedi{OSPF} e IS-IS.
+
+
+\sub{Protocolli di routing}
+I protocolli di routing mantengono aggiornata la \vedi{Tabella di routing} di ogni dispositivo che gestiscono tramite lo scambio di appositi messaggi, questi aggiornamenti prevalgono su eventuali configurazioni statiche. Un router può essere gestito da più algoritmi di routing contemporaneamente.
+\subsub{RIP} 
+Routing Information Protocol: Protocollo sviluppato nel 1988 come parte di ARPANET e basato sull'algoritmo di Bellman-Ford; è definito negli RFC 1058 e 1023.
+\\Utilizza UDP come protocollo di trasporto, sulla porta riservata 520.
+\\Misura \vedi{Metric} in \italic{hops} ed ha 15 come limite di distanza su cui effettuare il routing.
+Un numero di hop pari a 16 equivale a infinito ed è usato per indicare le rotte inaccessibili che non verranno aggiunte alla \vedi{Tabella di routing}.
+\\Il RIP ha due forme a seconda dell’utilizzatore:
+\begin{itemize}
+	\item Forma passiva, usata dagli host: riceve messaggi ma non ne invia;
+	\item Forma attiva, usata dai router: riceve ed invia in \italic{broadcast} messaggi.
+\end{itemize}
+Questi messaggi prendono il nome di \italic{routing updates} e consistono nella porzione di \vedi{Tabella di routing} in cui si è trovato un percorso migliore.
+\\I router inviano aggiornamenti in due occasioni:
+\begin{itemize}
+	\item ad ogni clock del \italic{routing-update timer}, cioè a cadenza regolare (abitualmente ogni 30 secondi);
+	\item quando cambia la topologia della rete dei router confinanti.
+\end{itemize}
+Un altro timer utilizzato è il \italic{route timeout}: se una route non viene aggiornata nella tabella entro un tempo limite, viene segnata come \italic{invalid} e successivamente rimossa allo scadere del \italic{route-flush timer}.
+\\\\Rispetto all’\vedi{OSPF}, il RIP converge meno rapidamente ed è potenzialmente più soggetto a \italic{routing loops}.
+Di contro, ha il vantaggio di essere più leggero in termini di risorse utilizzate e risulta più semplice nell’implementazione e nella gestione.
+\\\\Al fine di evitare frequenti cambi nella routing table per percorsi di costo uguale, il RIP impone di mantenere gli istradamenti esistenti finché non ne è presente un altro di costo più basso (isteresi).
+\\\\I problemi legati alla convergenza lenta vengono arginati mediante le seguenti tecniche:
+\begin{itemize}
+	\item \italic{split horizon update}: gli aggiornamenti non vengono propagati ai router che li hanno generati;
+	\item \italic{hold-down timer}: quando un router riceve un messaggio di rete irraggiungibile, questo ignorerà per un certo periodo (di solito 60 secondi) tutti gli aggiornamenti inerenti tale rete;
+	\item \italic{triggered update}: obbliga i router ad annunciare subito la scomparsa di route, ignorando eventuali timer;
+	\item \italic{poison reverse}: la scomparsa di un collegamento nella rete viene annunciata più volte per un certo lasso di tempo;
+\end{itemize}
+\boximage[rip_timers.png][scale=0.5]{Timer usati da RIP e loro durate standard}
+In RIP v1 non sono supportate subnet variabili.
+\\In RIP v2 ogni router invia messaggi di aggiornamento soltanto ai propri \italic{neighbor} (distanza 1 hop) mediante \italic{unicast updates} e non più in broadcast, alleggerendo il traffico.
+\\\\RIP è presente di default sui sistemi Unix/Linux (daemon \textbf{routed}).
+\boximage[rip_es_config.png][scale=0.4]{RIP: Esempio di configurazione}
+
+\newpage\subsub{OSPF} 
+Open Shortest Path First: Protocollo Open Source sviluppato nel 1988 dall’\vedi{IGP} working group di \vedi{IETF}, è basato sull’algoritmo Shortest Path First (Dijkstra
+algorithm), divenuto standard nel 1990 (\vedi{RFC} 1247).\\
+Supporta subnet variabili, routing in base al tipo di servizio ed autenticazione, inoltre esegue il bilanciamento del carico.\\
+L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{aree}: ogni router conserva il \italic{topological database} della sua area, dove salva la lista dei router adiacenti, indicando quelli designati a svolgere il ruolo di hub: \italic{designated routers (DS)} e \italic{backup designated router (BDR)}.\\ Le varie aree sono collegate tra loro dalla cosiddetta \italic{backbone area} (area 0): non è neccessariamente continua ma può essere resa tale virtualmente, definendo \italic{virtual-links} tra router di backbone e router di altre aree, che funzionano come link diretti (la topologia logica può essere diversa da quella fisica).\\ La divisione in aree porta a due tipi diversi di routing: \italic{intra-area} ed \italic{inter-area}e a quattro diversi tipi di router:
+\begin{itemize}
+\item \textbf{Internal Router (IR)}: router interno ad un'area
+\item \textbf{Area Border Router (ABR)}: a confine tra più aree, mantengono il \italic{topological database} di ogni area che collegano.
+\item \textbf{Backbone Router (BR)} router dell'area di backbone
+\item \textbf{AS Boundary Router (ASBR)}: router di confine tra \vedi{AS} 
+\end{itemize}
+
+\paragraph{I pacchetti OSPF}
+L'OSPF utilizza pacchetti di tipo \vedi{Link-State} Advertisement (LSA), in particolare presenta cinque tipi di pacchetto:
+\begin{itemize}
+\item Tipo 1: \vedi{Hello}
+\item Tipo 2: \vedi{Database Description}
+\item Tipo 3: \vedi{Link State Request}
+\item Tipo 4: \vedi{Link State Update}
+\item Tipo 5: \vedi{Link State Acknowledgment}
+\end{itemize}
+
+\paragraph{Header} Comune a tutti i pacchetti, è composto da \textbf{versione} del protocollo OSPF, \textbf{tipo} di pacchetto, \textbf{lunghezza} del pacchetto, \textbf{ID del router}, \textbf{ID dell'area}, \textbf{check-sum} per il controllo degli errori e \textbf{Autenticazione}.
+\newpage\para{Hello}
+Primo pacchetto ad essere inviato quando si abilita l'OSPF su un'interfaccia, esso è il mezzo attraverso il quale i router vengono a conoscenza l'uno dell'altro e viene reinviato periodicamente.
+\boximage[opsf-hello-packet.jpg][scale=0.8]{Pacchetto Hello}
+\begin{itemize}
+\item \textbf{Network Mask}: solo i router che concordano sulla suddivisione della rete si connettono tra loro
+\item \textbf{Hello Interval}: stabilisce l'intervallo in secondi tra i pacchetti \italic{Hello}, se diverso tra due router essi non stabiliranno una connessione.
+\item \textbf{Options}: indica le funzionalità del mittente per verificare che siano compatibili con il destinatario, prima di connettersi
+\item \textbf{Router Priority}: indica la priorità del router
+\item \textbf{Router Dead Interval}: numero di secondi che il mittente aspetterà prima di dichiarare morto il destinatario
+\item \textbf{Designed Router}: indirizzo IP dell'interfaccia del DR conosciuto, se non è ancora stato eletto è $0.0.0.0$.
+\item \textbf{Backup Designed Router}:indirizzo IP dell'interfaccia del BDR conosciuto, se non è ancora stato eletto è $0.0.0.0$.
+\item \textbf{Neighbor}: lista dei router con i quali il mittente è in contatto, serve a generare il \italic{topological database}.
+\end{itemize}
+
+
+\newpage\para{Database Description}
+Utilizzato quando viene stabilito un contatto tra due router al fine di confrontare i pacchetti LSA ricevuti. Uno dei due router assume il ruolo di \italic{master} e l'altro di \italic{slave} e si scambiano una serie di messaggi contenenti gli header dei LSA.
+\boximage[ospf-database-description.jpg][scale=0.9]{Pacchetto Database Description}
+\begin{itemize}
+\item \textbf{Interface MTU}: dimensione in otteti del più grande datagram che il mittente può trasmettere senza frammentazione
+\item \textbf{Options}: indica le funzionalità del mittente per permettere una selezione dei LSA trasmessi, in base alle sue capacità
+\item \textbf{I}: Initial bit, ha valore 1 solo se è il primo pacchetto della serie
+\item \textbf{M}: More bit, ha valore 0 solo se è l'ultimo della serie 
+\item \textbf{MS}: Master/Slave bit, 1 se il mittente è il Master, 0 se è lo Slave
+\item \textbf{DD Sequence Number}: assicura la recezione di tutta la sequenza di pacchetti di Database Description, è impostato dal master nel primo pacchetto e viene incrementato in ogni pacchetto seguente per mantenere la sincronizzazione
+\item \textbf{LSA Headers}: lista di header di pacchetti LSA ricevuti dal mittente
+\end{itemize}
+
+
+\newpage\para{Link State Request}
+Quando, in seguito ad un messaggio di Database Description, un router si accorge di non aver ricevuto uno dei LSA ricevuti dall'altro, richiede che gli venga ritrasmesso tramite un pacchetto LSR.
+\boximage[ospf-link-state-request.jpg][scale=0.8]{Pacchetto Link State Request}
+
+\ \\Dopo l'header si ripetono i seguenti tre campi per ogni pacchetto LSA richiesto: 
+\begin{itemize}
+\item \textbf{Link State Type}: tipo di LSA richiesto
+\item \textbf{Link State ID}: codice identificativo del LSA in funzione del tipo
+\item \textbf{Advertising Router}: ID del router che ha originato l' LSA
+\end{itemize}
+
+\newpage\para{Link State Update}
+Inviato in risposta ad un pacchetto Link State Request, il pacchetto LSU contiene le informazioni degli LSA richiesti. In caso il richiedente non sia cennesso direttamente al mittente, verrà inviato un LSU con le stesse informazioni da router a router fino alla destinazione.
+\boximage[ospf-link-state-update.jpg][scale=0.8]{Pacchetto Link State Update}
+\begin{itemize}
+\item \textbf{Number of LSAs}: numero di LSA contenuti
+\item \textbf{LSAs}: descrizione completa degli LSA 
+\end{itemize}
+
+
+\para{Link State Acknowledgment}
+Usati per confermare la recezione degli LSA via Link State Update, ne contiene la lista degli header.
+\boximage[ospf-link-state-akn.jpg][scale=0.8]{Pacchetto Link State Acknowledgment}
+
+\newpage
+
+\subsub{BGP}
+Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell' \vedi{RFC} 1771 \footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrata più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le policy adottate dal rispettivo \vedi{ISP}. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
+\\Perché due router possano comunicare, devono essere innanzitutto definiti come \textit{BGP neighbors}, detti anche \textit{peers} tramite una configurazione manuale che ha per risultato la creazione di una sessione \vedi{TCP} sulla \vedi{Porta} 179.
+A questo punto, i peer si invieranno l'un l'altro la \vedi{Tabella di routing} in formato \vedi{CIDR} ed una serie di messaggi:
+\boximage[header_bgp.png][scale=0.6]{Header di un messaggio BGP. Il campo \textbf{Marker} contiene un valore riconosciuto da entrambi i peer, importante per sincronizzazione ed autenticazione}
+\begin{itemize}
+\item \textbf{OPEN}: messaggio che i peers si scambiano all'apertura della connessione e negoziarne i parametri; 
+\item \textbf{KEEPALIVE}: conferma dell'apertura della connessione; continua poi ad essere inviato periodicamente da ogni nodo per segnalare la propria attività, in modo tale che la connessione venga mantenuta;
+\item \textbf{UPDATE}: messaggio tramite il quale vengono aggiornate le tabelle di routing dopo il primo scambio. All'aggiornamento, viene modificato il numero di versione della tabella, che deve essere lo stesso per tutti i \textit{peer};
+\item \textbf{NOTIFICATION}: viene trasmesso in condizioni particolari, ad esempio al rilevamento di un errore. Serve inoltre a chiudere una connessione e ad avvisare gli altri router del perché;
+\item \textbf{REFRESH}: richiesta di reinvio delle informazioni di routing. 
+\end{itemize} 
+\boximage[bgp_messages.png][scale=0.5]{La struttura di alcuni messaggi BGP}
+La \vedi{Metric} utilizzata dal BGP è il \textit{communication cost}, assegnata ad ogni nodo dall'amministratore di rete.\\\\
+Una tipologia particolare di \textit{inter-domain routing} è il \textit{pass-through autonomous system routing}, che avviene tra due rotuer BGP che si scambiano traffico tramite un terzo AS che non esegue BGP: esso fa dunque solo da "ponte", in quanto non è né emittente né destinatario delle comunicazioni.
+\paragraph{iBGP} \label{iBGP}
+Come accennato, iBGP sta per "internal BGP" ed è coinvolto nell'\textit{intra-domain routing}. La sua funzione è quella di stabilire quale sia il router ottimale come punto di connessione con gli \vedi{AS} esterni.
+\sub{ICMP} %da spostare prima? Boh. Bah.
+Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
+\boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
+\ \\In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 
+\\I comandi \code{ping} e \code{traceroute} (vedi \vedi{qualita}) sfruttano il protocollo ICMP.
 \newpage
 
 \sec{Livello di trasporto}
+\subsection{Terminologia}
+\subsub{Porta} 
+Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. Le porte $0-1023$ sono quelle raccomandate per i protocolli \vedi{TCP} e \vedi{UDP}.
 
-\sub{Protocolli primario-secondario}
-\subsub{RTS-CTS}
-\subsub{XON-XOF}
-\subsub{ARQ}
-Il protocollo ARQ è di tipo \vedi{Full-Duplex}
-
-\sub{Protocolli} 
-\subsub{TCP} 
+\subsection{Protocolli} 
 \subsub{UDP} 
+L' UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, poco affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle porte.
+
+\subsub{TCP}
+A differenza dell'\vedi{UDP}, il TCP (Transmission Control Protocol) è un protocollo \vedi{Connection-oriented}. La prima definizione del TCP si trova nell'\vedi{RFC} 793, ma le molteplici modifiche che essa ha subito, formalizzate in altrettanti \vedi{RFC}, hanno portato alla necessità di pubblicare un ennesimo \vedi{RFC}, il 4614: una sorta di guida ai documenti sul TCP. Affidabile e di applicabilità generale, è progettato per adattarsi dinamicamente alle peculiarità delle diverse reti che compongono \vedi{Internet}, contribuendo ad isolare le applicazioni dai dettagli di networking. Più specificamente, oltre a quelle di qualsiasi protocollo \vedi{Connection-oriented}, le principali caratteristiche del TCP sono:%
+\begin{itemize}
+\item \textbf{trasferimento bufferizzato}: il trasferimento viene ottimizzato creando pacchetti di dimensione il più possibile simile;
+\item  \textbf{stream non strutturato}: la comprensione della forma dei dati trasmessi sta all'applicazione che utilizza il protocollo in oggetto;
+\item \textbf{connessione \vedi{Full-Duplex}};
+\item affidabilità garantita mediante \textbf{riscontro positivo con ritrasmissione} (\textit{acknowledgement}): alla ricezione di un pacchetto, il destinatario risponde con un "ACK", ossia una conferma di ricezione. Il mittente dovrà poi ritrasmettere i pacchetti persi o, eventualmente, chiudere la connessione.
+
+\end{itemize}
 \newpage
 
 \sec{Livello delle applicazioni}
+Il quinto livello del \vedi{Modello di riferimento ISO/OSI} racchiude tutte le applicazioni dedicate all'utente finale. 
+Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (ad es. Telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
 \sub{Servizi di rete}
 %Tommaso
 \subsub{Telnet}
