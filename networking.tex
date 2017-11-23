@@ -770,8 +770,20 @@ In base alla configurazione i server si suddividono in:
 \end{itemize}
 
 \newpage
+\subsub{NIS}
+Network Information Service: inizialmente chiamato YP (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP/HTTPS} 
 \subsub{NFS}
+Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
+Lato server, la condivisione di una cartella con un host specifico è detta \italic{sharing} ed è ottenuta mediante il comando \code{export}.
+NFS si compone dei seguenti programmi:
+\begin{itemize}
+\item \code{nsfd [nserver\footnote{numero di processi da eseguire}]} demone lato server  che gestisce le richieste NSF
+\item \code{biod [nserver]} demone lato server che gestice l'I/O dei client
+\item \code{rcp.locked} demone che gestisce i \italic{lock files} che bloccano istanze multiple di processi specifici
+\item \code{rcp.statd} demone che controlla lo stato della rete
+\item \code{rcp.mountd} demone lato server che risponde alle richieste di mount
+\end{itemize} 
 \subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
 \subsub{NAT}
 Network Address Translation:
