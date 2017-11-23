@@ -362,7 +362,7 @@ In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul
 \subsub{Rete a dorsale}
 I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un' interruzione in qualunque punto della dorsale compromette tutta la rete.
 \subsub{Rete ad albero} La trasmissione avviene in modo gerarchico tra i nodi padre e figlio, fino ad arrivare alla \textit{root} dalla quale dipende tutto il funzionamento della rete.
-\subsub{Rete a stella} Tutti i dispositivi sono connessi ad un HUB (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
+\subsub{Rete a stella} Tutti i dispositivi sono connessi ad un \italic{hub} (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
 \subsub{Rete ad anello} Le informazioni vengono passate da un dispositivo all'altro in modo ciclico, la trasmissione è unidirezionale anche se questo si può ovviare con un secondo anello in direzione opposta. Questa topologia era tipica delle \vedi{LAN} TokenRing, ora viene utilizzata principalmente nelle \vedi{MAN} in fibra ottica.
 \subsub{Rete a maglia} In inglese \textit{mesh}, è una rete in cui ogni dispositivo può essere connesso ad ogni altro dispositivo ottenendo di fatto un grafo connesso. \'E la topologia di rete meno vulnerabile, ma è poco utilizzata nelle reti cablate a causa dei costi. \'E diffusa invece nelle \vedi{WLAN}, spesso nella versione \textit{ad hoc}, dove i collegamenti nascono e muoiono dinamicamente. In questa topologia il \vedi{Routing} viene effettuato da ogni nodo.
 
@@ -377,22 +377,22 @@ Il protocollo IP definisce inoltre l'esatto formato dei dati e svolge funzioni d
 \paragraph{Header} 
 L'header del datagram IPv4 contiene i seguenti campi: 
 \begin{itemize}
-\item \textbf{Version}: versione IP del datagram. 
-\item \textbf{HL} (Header Length): lunghezza dell'header in parole da 32 bit
-\item \textbf{TOS} (Type Of Service) o Differentiated services: indicazioni sulla corretta gestione del datagram, volte a trattare in modo differente i diversi servizi, quasi del tutto inutilizzate
-\item \textbf{Total lenght}: lunghezza totale del datagram
+\item \textbf{Version}: versione IP del datagram;
+\item \textbf{HL} (Header Length): lunghezza dell'header in parole da 32 bit;
+\item \textbf{TOS} (Type Of Service) o Differentiated services: indicazioni sulla corretta gestione del datagram, volte a trattare in modo differente i diversi servizi, quasi del tutto inutilizzate;
+\item \textbf{Total lenght}: lunghezza totale del datagram;
 \item campi che controllano la frammentazione e il riassemblaggio dei datagram:
 \begin{itemize}
-\item \textbf{Identification}: indicazione del pacchetto cui appartiene il datagram
-\item \textbf{IP flags}
-\item \textbf{Offset del frammento}
+\item \textbf{Identification}: indicazione del pacchetto cui appartiene il datagram,
+\item \textbf{IP flags},
+\item \textbf{Offset del frammento}.
 \end{itemize}
-\item \textbf{TTL} (Time To Leave): duarata per cui il datagram permane in transito, espressa in secondi
-\item \textbf{Protocol}: indicazione di quale protocollo di più alto livello ha generato il blocco dei dati
-\item \textbf{Header checksum}: sequenza di bit che utilizzata per verificare l'integrità dei dati contenuti nell'header
-\item \textbf{Source address}: \vedi{Indirizzo IP} di provenienza
-\item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione
-\item \textbf{opzioni} (campo opzionale, utilizzato per test e debugging)
+\item \textbf{TTL} (Time To Leave): duarata per cui il datagram permane in transito, espressa in secondi;
+\item \textbf{Protocol}: indicazione di quale protocollo di più alto livello ha generato il blocco dei dati;
+\item \textbf{Header checksum}: sequenza di bit che utilizzata per verificare l'integrità dei dati contenuti nell'header;
+\item \textbf{Source address}: \vedi{Indirizzo IP} di provenienza;
+\item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione;
+\item \textbf{opzioni} (campo opzionale, utilizzato per test e debugging).
 \end{itemize} 
 \boximage[ip-header.png][scale=0.45]{Formato header IPv4}
 
@@ -730,12 +730,60 @@ La loro lista completa è disponibile all'indirizzo \url{www.iana.org/domains/ro
 L'\vedi{RFC} 2606 specifica alcuni domini riservati: \code{.example}, \code{.invalid}, \code{.localhost} e \code{.test}. \\
 Ogni regione geografica ed ogni organizzazione hanno una propria autorità responsabile del proprio TDL (per l'Italia l'IIT CNR), la quale delega la gestione tecnico-amministrativa dei vari sottodomini agli enti che ne fanno richiesta. Essi a loro volta possono suddividerne ulteriormente la gestione generando nuovi sotto-sottodomini, e via discorrendo. 
 \para{Nameserver}
-I nameserver, o più precisamente i DNS (\textit{Domain Name Server}), sono distribuiti capillarmente nella rete e contengono una porzione delle associazioni indirizzo-nome. Va notato che indirizzi e nomi sono ovviamente intercambiabili, ma prima di effettuare una connessione, i nomi vengono convertiti in indirizzi (\textit{risoluzione nome-indirizzo IP}). Questo processo avviene nei client tramite la consultazione della \textit{host table}, che può essere configurata staticamente o aggiornata in modo dinamico per l'appunto consultando un nameserver. In quest'ultimo caso sarà sufficiente indicare in un file di configurazione i nameserver di riferimento. 
-\\\\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
-disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo:
+I nameserver, o più precisamente i DNS (\textit{Domain Name Server}), sono distribuiti capillarmente nella rete e contengono una porzione delle associazioni indirizzo-nome nei cosiddetti \vedi{Zone files}. Va notato che indirizzi e nomi sono ovviamente intercambiabili, ma prima di effettuare una connessione, i nomi vengono convertiti in indirizzi (\textit{risoluzione nome-indirizzo IP}). Questo processo avviene nei client tramite la consultazione della \textit{host table}, che può essere configurata staticamente o aggiornata in modo dinamico per l'appunto consultando un nameserver. In quest'ultimo caso sarà sufficiente indicare in un file di configurazione i nameserver di riferimento. 
+\para{Zone files}File di testo che descrivono un sottoinsieme di domini (spesso un singolo dominio), ogni riga viene detta \italic{Resource Record} (RR) e è in forma:
+\image[zone-file.png][scale=0.7]{Formato di un RR.}
+\begin{itemize}
+\item \textbf{name}: nome di dominio (solitamente non univoco)
+\item \textbf{ttl}: tempo permanenza del RR nel database
+\item \textbf{record class}: sempre \code{IN} per Internet. 
+\item \textbf{record type}: come in figura.
+\item \textbf{record data}: campi specifici in base al tipo di record
+\end{itemize}
+\image[rr-types.png][scale=0.35]{Tipi di record RR}
+\boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
+\ \\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
+disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
+
+\paragraph{Configurazione del resolver}
+Il file di configurazione è uno solo \\(\code{/etc/resolv.conf}) le cui voci da inserire sono:
+\begin{itemize}
+\item \code{nameserver <address>}: indirizzo del nameserver (massimo 3 nei sitemi Unix)
+\item \code{domain <name>}: definisce il nome di dominio di default (aggiunto a sinistra di ogni nome che non contiene il carattere punto, in caso di fallimento omette i domini meno significativi fino a concatenare solo il TLD)
+\item \code{search <domain1>, <domain2>, ... <domainN>}: come domain, con la differenza che vengono contatenati per intero uno dopo l'altro finchè non si trova un riscontro.
+\end{itemize}
+
+\paragraph{Configurazione del server}
+In questo capo abbiamo più file:
+\begin{itemize}
+\item \code{named.conf} contenente i parametri generali e i puntatori agli \vedi{Zone files};
+\item \code{named.ca} utilizzato per il caching, contiene i puntatori ai \italic{root domain servers}
+\item \code{named.local} per l'indirizzo di loopback
+\item \code{named.host}
+\item \code{named.rev}
+\end{itemize}
+In base alla configurazione i server si suddividono in:
+\begin{itemize}
+\item \italic{\textbf{caching-only}}: utilizzano solo \code{named.conf}, \code{named.ca} e  \code{named.local}; non avendo un database nameserver redirezionano tutte le richieste su altri server, memorizzando i risultati nella cash locale;
+\item \italic{\textbf{secondary}}: scaricano gli \vedi{Zone files} dal \italic{primary server} e li memorizzano in appositi file detti \italic{zone file transfer};
+\item \italic{\textbf{primary}}: gestiscono le informazioni relative a specifici domini, salvate negli \vedi{Zone files}, confgurati dall'amministratore di rete.
+\end{itemize}
+
 \newpage
+\subsub{NIS}
+Network Information Service: inizialmente chiamato YP (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP/HTTPS} 
 \subsub{NFS}
+Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
+Lato server, la condivisione di una cartella con un host specifico è detta \italic{sharing} ed è ottenuta mediante il comando \code{export}.
+NFS si compone dei seguenti programmi:
+\begin{itemize}
+\item \code{nsfd [nserver\footnote{numero di processi da eseguire}]} demone lato server  che gestisce le richieste NSF
+\item \code{biod [nserver]} demone lato server che gestice l'I/O dei client
+\item \code{rcp.locked} demone che gestisce i \italic{lock files} che bloccano istanze multiple di processi specifici
+\item \code{rcp.statd} demone che controlla lo stato della rete
+\item \code{rcp.mountd} demone lato server che risponde alle richieste di mount
+\end{itemize} 
 \subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
 \subsub{NAT}
 Network Address Translation:
