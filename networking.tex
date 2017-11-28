@@ -224,13 +224,20 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
 \boximage[ask_psk_fsk.png][scale=0.3]{Confronto tra codifiche ASK, FSK, e PSK}
 \begin{itemize} 
-\item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: per garantire la massima protezione dal rumore e dalle interferenze, vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$. 
+\item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: quando la modulante cambia stato (transizione 0-1 o 1-0), il segnale modulato cambia fase. Per garantire la massima protezione dal rumore e dalle interferenze, solitamente vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$;
+\item \textbf{4-PSK} e \textbf{4-QPSK}: i bit del segnale in input suddivisi coppie da un convertitore, che genera così due segnali separati; vi sono inoltre due modulatori e due portanti con frequenza identica, ma in quadratura\footnote{L'espressione \textit{in quadratura} indica semplicemente una sfasatura di \ang{90}: i due segnali sono ortogonali, cosicché si evitano le interferenze}. I due segnali modulati, detti I (\textit{Infase}) e Q (\textit{Quadratura}), poi sommati, cambiano dunque fase a seconda del valore della coppia di bit in input e il segnale in uscita può avere quattro distinti valori di fase (le due varianti differiscono per la posizione delle quattro fasi utilizzate, che nella 4-PSK sono poste sugli assi cartesiani, mentre nella 4-QPSK sono sfasate di $\ang{45}$);
+\boximage[qpsk.png][scale=0.4]{Esempio di distribuzione delle fasi nella modulazione 4-QPSK}
+\item \textbf{8-PSK}: analoga alla 4-PSK, comporta l'utilizzo non di coppie ma di terne di bit;
 \item \textbf{DPSK} (Differential Phase-Shift Keying) 
+\item \textbf{2-DPSK};
+\item \textbf{4-DPSK};
+\item \textbf{8-DPSK}.
 \end{itemize} 
-\item \textbf{QAM} (Quadrature Amplitude Modulation) 
-\item \textbf{Trellis} 
+\item \textbf{QAM} (Quadrature Amplitude Modulation);
+\item \textbf{Trellis}. 
 \end{itemize}
-
+\para{Diagramma a costellazione}
+Rappresentazione grafica teorica di un segnale modulato secondo uno degli schemi di modulazione digitale. Il segnale viene mostrato su un piano bidimensionale in cui I e Q sono gli assi cartesiani e i punti in cui un vettore può trovarsi vengono rappresentati con dei punti. Se c’è rumore, attorno al punto ideale si creano delle aree utili per capire di che tipo sia il rumore. 
 \sub{Alterazioni del segnale}
 \subsub{Attenuazione}
 \subsub{Distorsione}
