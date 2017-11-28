@@ -255,6 +255,19 @@ In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello 
 \sub{Ethernet} 
 \'E una delle tecnologie per il collegamento LAN più utilizzate al mondo,posto a metà fra il LV 1 e il LV 2 (più in particolare nel sottolivello MAC) del modello ISO.
 \subsub {Ethernet framing}
+Nonostante eststano diversi tipi di ethernet, la struttura del pacchetto è la stessa.
+%immagine
+\'E strutturato come segue:
+\begin{itemize}
+    \item \italic{Preamble}(preambolo): di 7 byte, ognuno dei quali ha valore: 10101010, servono a svegliare il ricevente ed a sincronizzarlo con l' emittente
+    \item  \italic{Start Frame Delimiter}(SFD): di 1 byte, ha valore: 10101011, i due bit finali ad 1 avvisano dell' arrivo di un messaggio importante, é protetto da codifica Manchester
+    \italic{Start Frame Delimiter}
+    \item \italic{Destination MAC Address}(indirizzo destinazione):si 6 byte, condiene l' indirizzo fisico del ricevente, se non corrisponde il pacchetto viene scartato al \vedi{Livello Fisico}.
+    \item \italic{Source MAC Address} (indirizzo sorgente): di 6 byte.
+    \item \italic{Ether Type}(campo tipo):   
+        
+    \end{itemize}
+    
 
 \sub{Tipi di trasmissione}
 \subsub{Sincrona}
