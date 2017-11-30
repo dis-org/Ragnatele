@@ -225,19 +225,24 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \boximage[ask_psk_fsk.png][scale=0.3]{Confronto tra codifiche ASK, FSK, e PSK}
 \begin{itemize} 
 \item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: quando la modulante cambia stato (transizione 0-1 o 1-0), il segnale modulato cambia fase. Per garantire la massima protezione dal rumore e dalle interferenze, solitamente vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$;
-\item \textbf{4-PSK} e \textbf{4-QPSK}: i bit del segnale in input suddivisi coppie da un convertitore, che genera così due segnali separati; vi sono inoltre due modulatori e due portanti con frequenza identica, ma in quadratura\footnote{L'espressione \textit{in quadratura} indica semplicemente una sfasatura di \ang{90}: i due segnali sono ortogonali, cosicché si evitano le interferenze}. I due segnali modulati, detti I (\textit{Infase}) e Q (\textit{Quadratura}), poi sommati, cambiano dunque fase a seconda del valore della coppia di bit in input e il segnale in uscita può avere quattro distinti valori di fase (le due varianti differiscono per la posizione delle quattro fasi utilizzate, che nella 4-PSK sono poste sugli assi cartesiani, mentre nella 4-QPSK sono sfasate di $\ang{45}$);
+\item \textbf{4-PSK} e \textbf{4-QPSK}: i bit del segnale in input vengono suddivisi in coppie da un convertitore, che genera così due segnali separati; vi sono inoltre due modulatori e due portanti con frequenza identica, ma in quadratura\footnote{L'espressione \textit{in quadratura} indica semplicemente una sfasatura di \ang{90}: i due segnali sono ortogonali, cosicché si evitano le interferenze}. I due segnali modulati, detti I (\textit{Infase}) e Q (\textit{Quadratura}), poi sommati, cambiano dunque fase a seconda del valore della coppia di bit in input e il segnale in uscita può avere quattro distinti valori di fase (le due varianti differiscono per la posizione delle quattro fasi utilizzate, che nella 4-PSK sono poste sugli assi cartesiani, mentre nella 4-QPSK sono sfasate di $\ang{45}$);
 \boximage[qpsk.png][scale=0.4]{Esempio di distribuzione delle fasi nella modulazione 4-QPSK}
 \item \textbf{8-PSK}: analoga alla 4-PSK, comporta l'utilizzo non di coppie ma di terne di bit;
-\item \textbf{DPSK} (Differential Phase-Shift Keying) 
+\item \textbf{DPSK} (Differential Phase-Shift Keying): analoga alla PSK, ma sono i salti di fase, e non i valori assoluti, a codificare i bit.
 \item \textbf{2-DPSK};
 \item \textbf{4-DPSK};
 \item \textbf{8-DPSK}.
 \end{itemize} 
-\item \textbf{QAM} (Quadrature Amplitude Modulation);
-\item \textbf{Trellis}. 
+\item \textbf{QAM} (Quadrature Amplitude Modulation): combinazione di ASK e PSK;
+\item \textbf{Trellis}: vi è un cambio di stato sempre e soltanto in presenza di un bit 1. Il nome di questo tipo di modulazione deriva dal fatto che l'andamento temporale del segnale può essere rappresentato mediante un diagramma, visivamente simile ad un traliccio (in inglese, \textit{trellis}).
+\boximage[trellis.png][scale=0.3]{Diagramma a traliccio}
 \end{itemize}
 \para{Diagramma a costellazione}
 Rappresentazione grafica teorica di un segnale modulato secondo uno degli schemi di modulazione digitale. Il segnale viene mostrato su un piano bidimensionale in cui I e Q sono gli assi cartesiani e i punti in cui un vettore può trovarsi vengono rappresentati con dei punti. Se c’è rumore, attorno al punto ideale si creano delle aree utili per capire di che tipo sia il rumore. 
+\boximage[constellation.png][scale=0.3]{Diagramma a costellazione}
+\para{Vettore errore}
+Il vettore errore rappresenta la differenza tra il punto teorico in cui si sarebbe dovuto trovare il segnale nel \vedi{Diagramma a costellazione} e la sua posizione reale. Ciò che interessa maggiormente del vettore errore è il suo modulo, utile a valutare la qualità della modulazione, detto anche \textbf{EVM} (Error Vector Magnitude). Esso è espresso in percentuale o in $dB$, come rapporto tra il valore quadratico medio della potenza del vettore errore e il valore quadratico medio della potenza del segnale di riferimento. In questo caso, l'EVM può avere -ed è auspicabile che abbia- valore negativo. %da riformulare
+Per la misurazione dell'EVM esistono strumenti hardware e software, tutti quanti basati sulla demodulazione del segnale ed il confronto con quello ideale.
 \sub{Alterazioni del segnale}
 \subsub{Attenuazione}
 \subsub{Distorsione}
@@ -778,7 +783,7 @@ In base alla configurazione i server si suddividono in:
 
 \newpage
 \subsub{NIS}
-Network Information Service: inizialmente chiamato YP (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
+Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP/HTTPS} 
 \subsub{NFS}
 Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
