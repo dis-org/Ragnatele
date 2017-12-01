@@ -228,12 +228,9 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \item \textbf{4-PSK} e \textbf{4-QPSK}: i bit del segnale in input vengono suddivisi in coppie da un convertitore, che genera così due segnali separati; vi sono inoltre due modulatori e due portanti con frequenza identica, ma in quadratura\footnote{L'espressione \textit{in quadratura} indica semplicemente una sfasatura di \ang{90}: i due segnali sono ortogonali, cosicché si evitano le interferenze}. I due segnali modulati, detti I (\textit{Infase}) e Q (\textit{Quadratura}), poi sommati, cambiano dunque fase a seconda del valore della coppia di bit in input e il segnale in uscita può avere quattro distinti valori di fase (le due varianti differiscono per la posizione delle quattro fasi utilizzate, che nella 4-PSK sono poste sugli assi cartesiani, mentre nella 4-QPSK sono sfasate di $\ang{45}$);
 \boximage[qpsk.png][scale=0.4]{Esempio di distribuzione delle fasi nella modulazione 4-QPSK}
 \item \textbf{8-PSK}: analoga alla 4-PSK, comporta l'utilizzo non di coppie ma di terne di bit;
-\item \textbf{DPSK} (Differential Phase-Shift Keying): analoga alla PSK, ma sono i salti di fase, e non i valori assoluti, a codificare i bit.
-\item \textbf{2-DPSK};
-\item \textbf{4-DPSK};
-\item \textbf{8-DPSK}.
+\item \textbf{DPSK} (Differential Phase-Shift Keying): analoga alla PSK, ma sono i salti di fase, e non i valori assoluti, a codificare i bit. Ne esistono diverse varianti, quali la 2-DPSK, la 4-DPSK e la 8-DPSK;
 \end{itemize} 
-\item \textbf{QAM} (Quadrature Amplitude Modulation): combinazione di ASK e PSK;
+\item \textbf{QAM} (Quadrature Amplitude Modulation): combinazione di ASK e PSK, consiste nel modulare in ampiezza portanti in quadratura di uguale frequenza. Varianti della QAM particolarmente rilevanti sono la 16-QAM e la 64-QAM, usata nell'A\vedi{DSL};
 \item \textbf{Trellis}: vi è un cambio di stato sempre e soltanto in presenza di un bit 1. Il nome di questo tipo di modulazione deriva dal fatto che l'andamento temporale del segnale può essere rappresentato mediante un diagramma, visivamente simile ad un traliccio (in inglese, \textit{trellis}).
 \boximage[trellis.png][scale=0.3]{Diagramma a traliccio}
 \end{itemize}
@@ -241,13 +238,18 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 Rappresentazione grafica teorica di un segnale modulato secondo uno degli schemi di modulazione digitale. Il segnale viene mostrato su un piano bidimensionale in cui I e Q sono gli assi cartesiani e i punti in cui un vettore può trovarsi vengono rappresentati con dei punti. Se c’è rumore, attorno al punto ideale si creano delle aree utili per capire di che tipo sia il rumore. 
 \boximage[constellation.png][scale=0.3]{Diagramma a costellazione}
 \para{Vettore errore}
-Il vettore errore rappresenta la differenza tra il punto teorico in cui si sarebbe dovuto trovare il segnale nel \vedi{Diagramma a costellazione} e la sua posizione reale. Ciò che interessa maggiormente del vettore errore è il suo modulo, utile a valutare la qualità della modulazione, detto anche \textbf{EVM} (Error Vector Magnitude). Esso è espresso in percentuale o in $dB$, come rapporto tra il valore quadratico medio della potenza del vettore errore e il valore quadratico medio della potenza del segnale di riferimento. In questo caso, l'EVM può avere -ed è auspicabile che abbia- valore negativo. %da riformulare
+Il vettore errore rappresenta la differenza tra il punto teorico in cui si sarebbe dovuto trovare il segnale nel \vedi{Diagramma a costellazione} e la sua posizione reale. Ciò che interessa maggiormente del vettore errore è il suo modulo, utile a valutare la qualità della modulazione, detto anche \textbf{EVM} (Error Vector Magnitude). Esso è espresso in percentuale o in $dB$, come rapporto tra il valore quadratico medio della potenza del vettore errore e il  \href{<https://it.wikipedia.org/wiki/Valore_efficace>}{valore quadratico medio}\footnote{Si noti che il concetto di valore quadratico medio non coincide con quello di scarto quadratico medio} della potenza del segnale di riferimento. In questo caso, l'EVM può avere -ed è auspicabile che abbia- valore negativo. %da riformulare
 Per la misurazione dell'EVM esistono strumenti hardware e software, tutti quanti basati sulla demodulazione del segnale ed il confronto con quello ideale.
 \sub{Alterazioni del segnale}
-\subsub{Attenuazione}
-\subsub{Distorsione}
-\subsub{Rumore}
-\subsub{Interferenza}
+L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento del suddetto, i principali dei quali sono: %Claudio perdonami, non credo che nessuno vorrà mai fare riferimenti a queste parole
+\begin{itemize}
+\item \textbf{Attenuazione}: perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale; vi si pone rimedio tramite dispositivi come gli amplificatori;
+\item \textbf{Distorsione}: cambiamento di forma del segnale, si verifica quando esso è composto da varie frequenze e dipende dal ritardo all'arrivo delle singole componenti;
+\item \textbf{Rumore}: insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
+\item \textbf{Interferenza}: sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interfernza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) è invece causata dai limiti della banda, e provoca un "arrotondamento" dei segnali rettangolari provenienti da un DTE.
+\end{itemize}
+
+\sub{DSL} %ovviamente non va qua, ma lo strato è quello
 
 \subsection{Limiti alla velocità di trasferimento}
 \subsub{Classificazione dei canali trasmissivi}
