@@ -1,15 +1,16 @@
 \documentclass[a4paper,11pt]{article}
-\author{I ragni della B1}
+
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage{graphicx}
-\usepackage{float}
+\usepackage{float} %per posizione assoluta delle immagini [H]
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
-\usepackage{hyperref}
 \usepackage{nameref} 
 \usepackage{siunitx} 
+
 \graphicspath{{./images/}}
 
+%defines-----------------------------------
 \def\code#1{\texttt{#1}}
 \def\sec#1{\section{#1}\label{#1}} 
 \def\sub#1{\subsection{#1}\label{#1}} 
@@ -29,8 +30,10 @@
   \fbox{\includegraphics[#2]{#1}}
   \caption{#3}
   \end{figure}}
+%------------------------------------------
 
 \title{Networking}
+\author{I ragni della B1}
 
 \begin{document}
 
@@ -43,7 +46,7 @@
 %quattro parole sulla storia del networking
 \sub{Organizzazioni}
 \subsub{IEEE}
-Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare il comitato \vedi{IEEE 802} LAN/MAN Standards Committee, commissione preposta a sviluppare standard per le reti locali e metropolitane. 
+Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare il comitato \vedi{IEEE 802} \textit{LAN/MAN Standards Committee} (LMSC), commissione preposta a sviluppare standard per le reti locali e metropolitane. 
 \subsub{CCITT}
 Consultative Committee for International Telephony and Telegraphy: parte della \textbf{ITU} (International Telegraph Union), agenzia dell'ONU specializzata in telecomunicazioni, articola i propri lavori in quadrienni, gli \textit{study periods}, al termine dei quali ha luogo un’assemblea plenaria incaricata di emettere le cosiddette \textit{raccomandazioni}.
 \subsub{ISO}
@@ -69,8 +72,19 @@ Global Internet Policy Initiative: rete di organizzazioni non governative no-pro
 \subsection{Concetto di standard} \label{Standard}
 Si distinguono standard \textit{de iure}, cioè codificati da organizzazioni come quelle di cui sopra, e standard \textit{de facto}, affermatisi spontaneamente per la loro adozione massiccia.
 \subsub{IEEE 802}
+Famiglia di protocolli e servizi standardizzati dall'\vedi{IEEE} 802 \italic{LAN/MAN Standards Committee} (LMSC): situati ai due livelli più bassi del \vedi{Modello di riferimento ISO/OSI}, sono dedicati alle reti che utilizzano pacchetti di lunghezza variabile. \'E qui che vengono definiti i sottolivelli \vedi{MAC} e \vedi {LLC}.\\Gli standard sono numerati in base al gruppo di lavoro che li ha prodotti, e quindi alla loro area di ricerca, alcuni esempi:
+\begin{itemize}
+\item IEEE 802.1 \vedi{LAN}
+\item IEEE 802.3 \vedi{Ethernet}
+\item IEEE 802.5 TokenRing
+\item IEEE 802.11 \vedi{WLAN}
+\item IEEE 802.15 \vedi{WPAN}
+\item IEEE 802.16 Broadband Wireless Access, conosciuto anche come \textit{Wireless\vedi{MAN}} (WiMAX)
+
+\end{itemize}
+Una lista completa dei gruppi di lavoro e degli standard è reperibile sul sito ufficiale dello LMSC: \url{www.ieee802.org}. 
 \subsub{RFC}
-Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{rfc-editor.org}.
+Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{www.rfc-editor.org}.
 \subsection{Nozione di protocollo} %def di protocollo
 
 %Gioara 
@@ -277,7 +291,7 @@ Nonostante esistano diversi tipi di ethernet, la struttura del pacchetto è la s
     \item  \italic{Start Frame Delimiter}(SFD): di 1 byte, ha valore: 10101011, i due bit finali ad 1 avvisano dell' arrivo di un messaggio importante, é protetto da codifica Manchester
     \item \italic{Destination MAC Address}(indirizzo destinazione):di 6 byte, condiene l' indirizzo fisico del ricevente, se non corrisponde il pacchetto viene scartato al \vedi{Livello Fisico}.
     \item \italic{Source MAC Address} (indirizzo sorgente): di 6 byte.
-    \item \italic{Ether Type}(campo tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi(IEEE) 802.3, la lunghezza del campo dati.
+    \item \italic{Ether Type}(campo tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi{IEEE 802}.3, la lunghezza del campo dati.
     \item \italic{PayLoad}(campo dati): da 46 a 1500 byte, contiene i dati reali, i dati troppo grandi vengono divisi in pacchetti mentre ai dati troppo piccoli viene aggiunto un riempitivo (padding) della lunghezza necessaria.
     \item \italic{Frame Check Sequence}(controllo a ridondanza ciclica): di 4 byte, verifica la presenza di errori, il ricevente calcola il FCS tramite un algoritmo per poi confrontarlo con quello presente nel frame. 
 \end{itemize}
@@ -770,7 +784,7 @@ I nameserver, o più precisamente i DNS (\textit{Domain Name Server}), sono dist
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
 \ \\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
-disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
+disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
 
 \paragraph{Configurazione del resolver}
 Il file di configurazione è uno solo \\(\code{/etc/resolv.conf}) le cui voci da inserire sono:
