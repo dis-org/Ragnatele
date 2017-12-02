@@ -1,15 +1,16 @@
 \documentclass[a4paper,11pt]{article}
-\author{I ragni della B1}
+
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage{graphicx}
-\usepackage{float}
+\usepackage{float} %per posizione assoluta delle immagini [H]
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
-\usepackage{hyperref}
 \usepackage{nameref} 
 \usepackage{siunitx} 
+
 \graphicspath{{./images/}}
 
+%defines-----------------------------------
 \def\code#1{\texttt{#1}}
 \def\sec#1{\section{#1}\label{#1}} 
 \def\sub#1{\subsection{#1}\label{#1}} 
@@ -29,8 +30,10 @@
   \fbox{\includegraphics[#2]{#1}}
   \caption{#3}
   \end{figure}}
+%------------------------------------------
 
 \title{Networking}
+\author{I ragni della B1}
 
 \begin{document}
 
@@ -43,7 +46,7 @@
 %quattro parole sulla storia del networking
 \sub{Organizzazioni}
 \subsub{IEEE}
-Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare il comitato \vedi{IEEE 802} LAN/MAN Standards Committee, commissione preposta a sviluppare standard per le reti locali e metropolitane. 
+Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare il comitato \vedi{IEEE 802} \textit{LAN/MAN Standards Committee} (LMSC), commissione preposta a sviluppare standard per le reti locali e metropolitane. 
 \subsub{CCITT}
 Consultative Committee for International Telephony and Telegraphy: parte della \textbf{ITU} (International Telegraph Union), agenzia dell'ONU specializzata in telecomunicazioni, articola i propri lavori in quadrienni, gli \textit{study periods}, al termine dei quali ha luogo un’assemblea plenaria incaricata di emettere le cosiddette \textit{raccomandazioni}.
 \subsub{ISO}
@@ -69,8 +72,19 @@ Global Internet Policy Initiative: rete di organizzazioni non governative no-pro
 \subsection{Concetto di standard} \label{Standard}
 Si distinguono standard \textit{de iure}, cioè codificati da organizzazioni come quelle di cui sopra, e standard \textit{de facto}, affermatisi spontaneamente per la loro adozione massiccia.
 \subsub{IEEE 802}
+Famiglia di protocolli e servizi standardizzati dall'\vedi{IEEE} 802 \italic{LAN/MAN Standards Committee} (LMSC): situati ai due livelli più bassi del \vedi{Modello di riferimento ISO/OSI}, sono dedicati alle reti che utilizzano pacchetti di lunghezza variabile. \'E qui che vengono definiti i sottolivelli \vedi{MAC} e \vedi {LLC}.\\Gli standard sono numerati in base al gruppo di lavoro che li ha prodotti, e quindi alla loro area di ricerca, alcuni esempi:
+\begin{itemize}
+\item IEEE 802.1 \vedi{LAN}
+\item IEEE 802.3 \vedi{Ethernet}
+\item IEEE 802.5 TokenRing
+\item IEEE 802.11 \vedi{WLAN}
+\item IEEE 802.15 \vedi{WPAN}
+\item IEEE 802.16 Broadband Wireless Access, conosciuto anche come \textit{Wireless\vedi{MAN}} (WiMAX)
+
+\end{itemize}
+Una lista completa dei gruppi di lavoro e degli standard è reperibile sul sito ufficiale dello LMSC: \url{www.ieee802.org}. 
 \subsub{RFC}
-Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{rfc-editor.org}.
+Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{www.rfc-editor.org}.
 \subsection{Nozione di protocollo} %def di protocollo
 
 %Gioara 
@@ -119,19 +133,19 @@ Al fine di rappresentare l'informazione in maniera tale da renderne più semplic
 
 \subsub{Segnale}
 Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente un'informazione. Un segnale \textbf{analogico} varia in modo continuo nel tempo ed ha infiniti livelli di intensità; un segnale \textbf{digitale} varia invece in modo discreto e ha solo due livelli di intensità. Ogni tipo di dato può essere rappresentato in entrambe le maniere e può essere convertito da analogico a digitale e viceversa.
-\\\\Fra i segnali analogici assumono particolare rilevanza i \textbf{segnali sinusoidali}, ossia segnali che variano nel tempo secondo una legge del tipo \[u=Usen(\omega t+\Phi )\] dove 
+\\\\Fra i segnali analogici assumono particolare rilevanza i \textbf{segnali sinusoidali}, ossia segnali che variano nel tempo secondo una legge del tipo \[u=Usen(\omega t+\varphi )\] dove 
 \begin{itemize}
 \item $u$ è l'ampiezza istantanea
 \item $U$ è l'ampiezza massima
-\item $\omega $ è la velocità angolare 
-va spiegato meglio
-\item $\Phi $ è lo sfasamento rispetto all'origine
-\item l'intervallo di tempo impiegato dall'onda per tornare allo stesso livello d'intensità è detto \textit{periodo}.
-\item $1/t=f$ è detta \textit{frequenza} (misurabile in Hz)\\\\
+\item $\omega $ è la \textit{velocità angolare}, ovvero la variazione dell'angolo nel tempo, espressa in radianti al secondo
+\item $\varphi $ è lo sfasamento rispetto all'origine, detto \textit{fase} ed espresso in radianti
+\item $t$ è il tempo (variabile)
+\item $T$ è l'intervallo di tempo (in secondi) impiegato dall'onda per tornare allo stesso livello d'intensità, detto \textit{periodo}.
+\item $1/T=f$ è detta \textit{frequenza}, misurata in Hz ($1/s $)\\\\
 \end{itemize}
 La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
 \
-\boximage[segnali_sin.png][scale=0.5]{Rappresentazione grafica di un segnale sinusoidale}
+\boximage[segnali_sin.png][scale=0.8]{Rappresentazione grafica di un segnale sinusoidale}
 
 \subsubsection{Lunghezza d'onda}
 In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f$ (dove $c$ è la velocità di propagazione del segnale).
@@ -277,7 +291,7 @@ Nonostante esistano diversi tipi di ethernet, la struttura del pacchetto è la s
     \item  \italic{Start Frame Delimiter}(SFD): di 1 byte, ha valore: 10101011, i due bit finali ad 1 avvisano dell' arrivo di un messaggio importante, é protetto da codifica Manchester
     \item \italic{Destination MAC Address}(indirizzo destinazione):di 6 byte, condiene l' indirizzo fisico del ricevente, se non corrisponde il pacchetto viene scartato al \vedi{Livello Fisico}.
     \item \italic{Source MAC Address} (indirizzo sorgente): di 6 byte.
-    \item \italic{Ether Type}(campo tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi(IEEE) 802.3, la lunghezza del campo dati.
+    \item \italic{Ether Type}(campo tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi{IEEE 802}.3, la lunghezza del campo dati.
     \item \italic{PayLoad}(campo dati): da 46 a 1500 byte, contiene i dati reali, i dati troppo grandi vengono divisi in pacchetti mentre ai dati troppo piccoli viene aggiunto un riempitivo (padding) della lunghezza necessaria.
     \item \italic{Frame Check Sequence}(controllo a ridondanza ciclica): di 4 byte, verifica la presenza di errori, il ricevente calcola il FCS tramite un algoritmo per poi confrontarlo con quello presente nel frame. 
 \end{itemize}
@@ -741,36 +755,31 @@ L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url
 \item i demoni \code{sshd} ed \code{sftp-server}.
 \end{itemize}
 \subsub{DHCP} %Discovering ,Offering , Codice 
-\newpage\subsub{DNS}
-Il DNS (\textit{Domain Name System}) è un sistema gerarchico e distribuito tramite il quale vengono associati nomi di dominio (testuali) ad indirizzi \vedi{IP} (numerici). Lo spazio di indirizzamento è suddiviso per organizzazione e non dipende in alcun modo dalla topologia della rete; ogni organizzazione può in tal modo gestire liberamente lo spazio ad essa riservato. Il DNS specifica inoltre le funzionalità tecniche del servizio di database essenziale per il suo funzionamento definendo il protocollo DNS, che specifica come i vari nameserver comunichino fra loro.
-\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ quando questo modello diventò insostenibile nel 1983, assieme a Paul Mockapetris e Craig Partridge, idearono il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
 
-\para{Nome di dominio} un nome di dominio è costituito da una serie di stringhe separate da punti, la gerarchia procede da destra verso sinistra. La prima stringa da destra è detta pertanto TLD (\italic{Top Level Domain}). 
-\image[dns.png][scale=0.35]{Gerarchia dei domini}
-I TDL sono definiti da \vedi{ICANN} e suddivisi in tre categorie:
+\newpage\subsub{DNS}
+Il DNS(\textit{Domain Name System}) è un servizio utilizzato per associare i nomi degli host (serie di parole separate da punti) ai relativi indirizzi  \vedi{IP} (numeri separati da punti); \\ \textbf{Vantaggi: } I primi sono facili da ricordare per l'utente ma non utilizzabili dal computer, mentre con gli ultimi accade l'esatto opposto. \\In oltre è così possibile attribuire più nomi allo stesso indirizzo IP (o viceversa) per rappresentare servizi diversi forniti da uno stesso host (o più host che forniscono lo stesso servizio).\\
+\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ quando questo modello diventò insostenibile nel 1983, assieme a Paul Mockapetris e Craig Partridge, idearono il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
+\paragraph{Composizione DNS} Il DNS prevede:
 \begin{itemize}
-\item \textbf{ccTLD} (\textit{country code TLD}), lista delle sigle dei paesi del mondo;
-\item \textbf{gTLD} (\textit{generic TLD}), usati da particolari organizzazione (ad es. \code{.com}, \code{.edu}, \code{.gov}...);
-\item \textbf{Infrastrutturali} (\code{.arpa}, utilizzato nella risoluzione inversa dei nomi).
-\end{itemize}
-La loro lista completa è disponibile all'indirizzo \url{www.iana.org/domains/root/db}.
-L'\vedi{RFC} 2606 specifica alcuni domini riservati: \code{.example}, \code{.invalid}, \code{.localhost} e \code{.test}. \\
-Ogni regione geografica ed ogni organizzazione hanno una propria autorità responsabile del proprio TDL (per l'Italia l'IIT CNR), la quale delega la gestione tecnico-amministrativa dei vari sottodomini agli enti che ne fanno richiesta. Essi a loro volta possono suddividerne ulteriormente la gestione generando nuovi sotto-sottodomini, e via discorrendo. 
-\para{Nameserver}
-I nameserver, o più precisamente i DNS (\textit{Domain Name Server}), sono distribuiti capillarmente nella rete e contengono una porzione delle associazioni indirizzo-nome nei cosiddetti \vedi{Zone files}. Va notato che indirizzi e nomi sono ovviamente intercambiabili, ma prima di effettuare una connessione, i nomi vengono convertiti in indirizzi (\textit{risoluzione nome-indirizzo IP}). Questo processo avviene nei client tramite la consultazione della \textit{host table}, che può essere configurata staticamente o aggiornata in modo dinamico per l'appunto consultando un nameserver. In quest'ultimo caso sarà sufficiente indicare in un file di configurazione i nameserver di riferimento. 
-\para{Zone files}File di testo che descrivono un sottoinsieme di domini (spesso un singolo dominio), ogni riga viene detta \italic{Resource Record} (RR) e è in forma:
-\image[zone-file.png][scale=0.7]{Formato di un RR.}
+\item \textbf{Spazio dei nomi gerarchico} : basato su un insieme di database distribuiti (garantisce l'aggiornamento a tutta la rete). L'insieme dei nomi viene suddiviso in zone dette domini che possono coprire più host ed essere suddivisi in sotto-domini e così via, formando una struttura ad albero in cui i nodi rappresentano i nomi e:
 \begin{itemize}
-\item \textbf{name}: nome di dominio (solitamente non univoco)
-\item \textbf{ttl}: tempo permanenza del RR nel database
-\item \textbf{record class}: sempre \code{IN} per Internet. 
-\item \textbf{record type}: come in figura.
-\item \textbf{record data}: campi specifici in base al tipo di record
+\item I domini di primo livello (\textit{Top Level Domain - \textbf{TLD}}) sono i figli del nodo radice "." e possono essere \\\textbf{gTLD} (\textit{generic TLD} - .com, .edu), \\\textbf{ccTLD}(\textit{country-code TLD} - .it, .fr) \\\textbf{infrastrutturali} (usati per la risoluzione inversa dei nomi - .arpa). \\Sono definiti da ICANN (\href{http://newgtlds.icann.org/en/announcements-andmedia/video/applicants}{QUI} è possibile visionare gli ultimi TLD proposti).\\
+In oltre ogni regione geografica ed ogni organizzazione hanno una propria autorità responsabile del proprio TDL (per l'Italia l'IIT CNR), la quale delega la gestione tecnico-amministrativa dei vari sottodomini agli enti che ne fanno richiesta, e così via per i sottodomini dei livelli successivi.
+\item I \textit{domini di secondo livello}, in genere, appartengono alle organizzazioni che li hanno registrati e comprendono il loro e il dominio precedente separati da un punto (es. unipg.it).
+\item I successivi \textit{sotto-domini} vengono creati per rendere la gestione del DNS modulare e seguono la stessa logica dei domini di secondo livello.
+\item Infine le foglie corrispondono agli host. 
+\image[dns.png][scale=0.35]{Spazio gerarchico dei nomi}
 \end{itemize}
+
+Quindi, al contrario degli indirizzi IP, in un nome DNS la parte più importante è la prima partendo da destra (appunto, il TLD).
+Ad ogni dominio è associato un resource record (RR), file ASCII che contengono records del database DNS.  %\vedi resource record
+\item \textbf{Server DNS} : per rendere disponibile lo spazio dei nomi e rispondere alle richieste del resolver risolvendo i nomi (name server)
+\item \textbf{Client DNS} : una libreria di funzioni per generare e inviare le richieste sui nomi, interrogando i server DNS (resolver)
+
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
 \ \\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
-disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
+disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
 
 \paragraph{Configurazione del resolver}
 Il file di configurazione è uno solo \\(\code{/etc/resolv.conf}) le cui voci da inserire sono:
@@ -778,25 +787,155 @@ Il file di configurazione è uno solo \\(\code{/etc/resolv.conf}) le cui voci da
 \item \code{nameserver <address>}: indirizzo del nameserver (massimo 3 nei sitemi Unix)
 \item \code{domain <name>}: definisce il nome di dominio di default (aggiunto a sinistra di ogni nome che non contiene il carattere punto, in caso di fallimento omette i domini meno significativi fino a concatenare solo il TLD)
 \item \code{search <domain1>, <domain2>, ... <domainN>}: come domain, con la differenza che vengono contatenati per intero uno dopo l'altro finchè non si trova un riscontro.
-\end{itemize}
 
-\paragraph{Configurazione del server}
-In questo capo abbiamo più file:
-\begin{itemize}
-\item \code{named.conf} contenente i parametri generali e i puntatori agli \vedi{Zone files};
-\item \code{named.ca} utilizzato per il caching, contiene i puntatori ai \italic{root domain servers}
-\item \code{named.local} per l'indirizzo di loopback
-\item \code{named.host}
-\item \code{named.rev}
 \end{itemize}
-In base alla configurazione i server si suddividono in:
+\paragraph{Risoluzione}
+La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
+La risoluzione può essere \textit{statica} (mapping stabilito permanentemente tramite una host table) o \textit{dinamica} (mapping stabilito ad ogni avvio dell'host).\\
+Per associare un nome a un indirizzo IP un client chiama il risolutore, passandone come parametro il nome. \\Il risolutore invia un pacchetto \vedi{UDP} a un server DNS locale (\textit{primary server}) che cerca il nome e se è presente nella sua cache lo restituisce; in caso contrario interroga ricorsivamente i server partendo da un root server del TLD fino ad arrivare ai server autorevoli del nome richiesto (\textit{authoritative server}), i quali invieranno la loro risposta . Ora che l'applicativo conosce l'indirizzo IP, potrà stabilire una connessione \vedi{TCP} con il destinatario o inviargli pacchetti UDP.
+
+\paragraph{BIND} \textit{Berkeley Internet Name Domain} è il più comune demone DNS usato sui sistemi Unix, composto dai principali componenti del DNS come un server DNS (\textbf{named}) e una libreria di risoluzione (\textbf{resolver}), e strumenti per la verifica del corretto funzionamento del server (\textbf{nslookup}).\\
+BIND può essere configurato come 
 \begin{itemize}
-\item \italic{\textbf{caching-only}}: utilizzano solo \code{named.conf}, \code{named.ca} e  \code{named.local}; non avendo un database nameserver redirezionano tutte le richieste su altri server, memorizzando i risultati nella cash locale;
+\item \italic{\textbf{caching-only}} reindirizza ogni richiesta del resolver ad altri server e memorizza il risultato che ritornano in una cache locale
+\item \textbf{authoritative} contiene info su tutta la zona di sua competenza. Può essere 
+\begin{itemize}
 \item \italic{\textbf{secondary}}: scaricano gli \vedi{Zone files} dal \italic{primary server} e li memorizzano in appositi file detti \italic{zone file transfer};
 \item \italic{\textbf{primary}}: gestiscono le informazioni relative a specifici domini, salvate negli \vedi{Zone files}, confgurati dall'amministratore di rete.
 \end{itemize}
+\end{itemize}
+Di seguito, le \textbf{Configurazioni} del \textbf{Resolver}, del \textbf{Named} e degli \textbf{Zone files} di BIND:
+\paragraph{Resolver} \textbf{(/etc/resolv.conf)}: contiene istruzioni per l'esecuzione delle richieste; Si può usare la configurazione di default, altrimenti è necessario specificare:
+\begin{itemize}
+\item \textbf{nameserver \textless IP-address\textgreater}: le richieste saranno inviate all'IP \textit{IP-address}. Si possono specificare al massimo 3 nameserver, nel caso il primo non risponda.
+\item \textbf{domain \textless name\textgreater}: nome del dominio di default che verrà concatenato a sinistra di ogni nome host che non contiene il carattere punto (in caso di fallimento omette i domini meno significativi fino a concatenare solo il TLD).
+\item \textbf{search \textless domain-1, ..., domain-n\textgreater}: come domain ma con la possibilità di avere più domini da provare ad aggiungere al nome host (ma non risale i domini se fallisce).
+\end{itemize}
 
+\paragraph{Named} (Server): è necessario configurare più files: 
+\begin{itemize}
+\item \textbf{/etc/named.conf}: parametri generali di configurazione e puntatori ai file dei domini gestiti dal server (ossia gli zone files)
+\begin{itemize}
+\item caching-only: si omettono i comandi di configurazione del primary e secondary server tranne il dominio di loopback.
+\code{primary \quad 0.0.127.IN-ADDR.ARPA \quad /etc/named.local \\ 
+cache \qquad . \qquad \qquad \qquad \qquad \qquad /etc/named.ca}//
+\item primary server: supponendo che il dominio sia \textit{unipg.it} e il primary server \textit{moe}
+\code{\begin{tabbing}
+\hspace*{8cm} \= \kill
+directory \>/etc\\
+\hspace*{3cm} \= \hspace*{5cm} \= \kill
+primary \> unipg.it \> named.hosts\\ 
+primary \> 250.141.IN-ADDR.ARPA \> named.rev\\ 
+primary \> 0.0.127.IN-ADDR.ARPA \> named.local\\
+cache \> . \> named.ca
+\end{tabbing}
+}
+\textit{2. il server locale è il primary server per [unipg.it] con zonefile [named.host]}\\
+\textit{3. puntatore a [named.rev]. Il server locale è il primary server per il reverse domain [205.141.IN-ADDR.ARPA]}\\
+\item secondary server: supponendo che il dominio sia \textit{unipg.it} e il primary server \textit{moe}
+\code{\begin{tabbing}
+\hspace*{10cm} \= \kill
+directory \>/etc\\
+\hspace*{2,5cm} \= \hspace*{4,5cm} \= \hspace*{3cm} \=\kill
+secondary \> unipg.it \>141.250.1.1 \> unipg.it.hosts\\ 
+secondary \> 250.141.IN-ADDR.ARPA \> 141.250.1.1 \> 250.141.rev\\ 
+primary \> 0.0.127.IN-ADDR.ARPA \>  \>named.local\\
+cache \> . \>  \qquad  \qquad \qquad \qquad named.ca
+\end{tabbing}
+}
+\textit{2. server locale scarica info su  [unipg.it] dal server con IP [141.250.1.1] e memorizza nel file [unipg.it.hosts]}\\
+\textit{3. il server locale è il secondary server per il reverse domain [250.141.IN-ADDR.ARPA]. I suoi dati vanno scaricati dal server con IP [141.250.1.1] e memorizzati nel file [/etc/250.141.rev]}
+\end{itemize}
+\item \textbf{/etc/named.ca}: puntatori ai root domain server. Stabilisce il nome dei root server e i loro indirizzi.
+\code{
+;\\
+; formerly NS1.ISI.EDU\\
+.  \qquad \qquad \qquad \qquad \qquad \quad 3600000  \qquad \qquad  NS  \qquad \qquad B.ROOT-SERVERS.NET.\\
+B.ROOT-SERVERS.NET. \qquad 3600000  \qquad \qquad A  \qquad \qquad 128.9.0.107\\
+...
+}
+\item \textbf{/etc/named.local}: zone file per la traduzione del reverse domain 0.0.127.IN-ADDR.ARPA (lookback). Permette quindi la conversione di 127.0.0.1 nel nome "localhost".
+\code{\begin{tabbing}
+\hspace*{1cm} \= \hspace*{1cm} \= \hspace*{2cm} \= \hspace*{2cm} \=  \kill
+\$TTL \> 86400 \>\>\>\\
+@ \> IN \> SOA \> localhost. \> root.localhost. (\\
+\> \> \> 2014030101 \> ; Serial\\
+\> \> \> 10800 \> ; Refresh after 3 hours\\
+\> \> \> 3600 \> ; Retry after 1 hour\\
+\> \> \>  604800 \> ; Expire after 1 week\\
+\> \> \> 86400 ) \> ; Minimum TTL of 1 day\\
+\> IN \> NS \> localhost.\> \\
+1 \> IN \> PTR \> localhost.\\
+\end{tabbing}}
+\italic{Dove ad @ verrà sostituito il nome del dominio corrispondente a questo file, e 1 rappresenta l'ultimo numero dell'IP 127.0.0.1 (i primi tre sono in 0.0.127.IN-ADDR.ARPA)}
+\item \textbf{/etc/named.hosts}: zone file per la risoluzione diretta\\
+\code{
+@ IN SOA moe.unipg.it. root.moe.unipg.it. (
+\begin{tabbing}
+\hspace*{6cm} \= \hspace*{3cm} \= \kill
+\>2014030101 \>; Serial\\
+\>10800 \>; Refresh\\
+\>3600 \>; Retry\\
+\>604800 \>; Expire\\
+\>86400 ) \>; Minimum\\
+\hspace*{0,5cm} \= \hspace*{5cm} \= \kill
+ \italic{//Name servers}\>\>\\
+\>\> IN NS moe.unipg.it.\\
+ \>plant\> IN NS pack.plant.unipg.it.\\
+ \italic{//Mail server}\>\>\\
+ \>\>IN MX 10 moe.unipg.it.\\
+ \>\>IN MX 20 larry.unipg.it.\\
+\>localhost\> IN A 127.0.0.1\\
+ \italic{//Name to IP mapping}\>\>\\
+\>moe.unipg.it.\> IN A 141.250.1.1\\
+\>larry.unipg.it. \>IN A 141.250.1.2\\
+\>omniw.unipg.it. \>IN A 141.250.1.40\\
+ \italic{//Alias}\>\>\\
+\>www \>IN CNAME moe.unipg.it.\\
+//interface specific name\>\>\\
+\>ns133.unipg.it. \>IN A 141.250.5.51\\
+\end{tabbing}}
+\item \textbf{/etc/named.rev}: zone file per la risoluzione inversa\\
+\code{
+@ IN SOA moe.unipg.it. root.moe.unipg.it. (
+\begin{tabbing}
+\hspace*{6cm} \= \hspace*{3cm} \= \kill
+\>2014030101 \>; Serial\\
+\>10800 \>; Refresh\\
+\>3600 \>; Retry\\
+\>604800 \>; Expire\\
+\>86400 ) \>; Minimum\\
+\hspace*{0,5cm} \= \hspace*{5cm} \= \kill
+\italic{//Name server}\\
+\>250.141.in-addr.arpa.\> IN NS moe.unipg.it.\\
+\>250.141.in-addr.arpa.\> IN NS larry.unipg.it.\\
+//Address point to canonical names\\
+\>1.1.250.141.in-addr.arpa.\> IN PTR moe.unipg.it.\\
+\>2.1.250.141.in-addr.arpa. \>IN PTR larry.unipg.it\\
+\end{tabbing}}
+\end{itemize}
+
+\para{Zone files}File di testo che descrivono un sottoinsieme di domini (spesso un singolo dominio), ogni riga viene detta \italic{Resource Record} (RR) ed è della forma:
+\image[zone-file.png][scale=0.7]{Formato di un RR.}
+con:
+\begin{itemize}
+\item \textbf{name}: nome di dominio (in genere si usa @ per riferirlo al dominio definito nello zone file)
+\item \textbf{ttl (time to live)}: tempo di permanenza del RR nella cache di un sistema remoto
+\item \textbf{record class}: sempre \code{IN}, indica che il record è un INternet DNS RR
+\item \textbf{record type}: il tipo di RR (v. standard resource record)
+\item \textbf{record data}: info specifiche del tipo di RR
+\end {itemize}
+I principali componenti di uno zone file sono chiamati "standard resource record" e sono:
+\begin{itemize}
+\item \textbf{SOA} (Start of authority): segna l'inizio di un zone file (in genere è il primo record usato e ne esiste uno per zone file), definendo parametri specifici per questo zone file [data]
+\item \textbf{NS} (Name Server): nome del server \italic{[record data]} che ha autorità su questo dominio \italic{[name]}
+\item \textbf{A} (Address record): associa l'hostname \italic{[name]} ad un indirizzo IP \italic{[record data]}
+\item \textbf{PTR} (domain name PoinTR): associa gli indirizzi IP \italic{[name]} ad un nome di host \italic{[record data]}
+\item \textbf{MX} (Mail eXchanger): definisce il server \italic{[record data]} che gestisce la posta per un host o un dominio \italic{[name]}
+\item \textbf{CNAME} (Canonical NAME): definisce un alias per il nome di un host
+\end{itemize}
 \newpage
+
 \subsub{NIS}
 Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP/HTTPS} 
