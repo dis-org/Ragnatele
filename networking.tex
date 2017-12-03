@@ -587,7 +587,7 @@ Di contro, ha il vantaggio di essere più leggero in termini di risorse utilizza
 	\item \italic{triggered update}: obbliga i router ad annunciare subito la scomparsa di route, ignorando eventuali timer;
 	\item \italic{poison reverse}: la scomparsa di un collegamento nella rete viene annunciata più volte per un certo lasso di tempo;
 \end{itemize}
-\boximage[rip_timers.png][scale=0.5]{Timer usati da RIP e loro durate standard}
+\image[rip_timers.png][scale=0.5]{Timer usati da RIP e loro durate standard}
 In RIP v1 non sono supportate subnet variabili.
 \\In RIP v2 ogni router invia messaggi di aggiornamento soltanto ai propri \italic{neighbor} (distanza 1 hop) mediante \italic{unicast updates} e non più in broadcast, alleggerendo il traffico.
 \\\\RIP è presente di default sui sistemi Unix/Linux (daemon \textbf{routed}).
@@ -757,24 +757,26 @@ L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url
 \subsub{DHCP} %Discovering ,Offering , Codice 
 
 \newpage\subsub{DNS}
-Il DNS(\textit{Domain Name System}) è un servizio utilizzato per associare i nomi degli host (serie di parole separate da punti) ai relativi indirizzi  \vedi{IP} (numeri separati da punti); \\ \textbf{Vantaggi: } I primi sono facili da ricordare per l'utente ma non utilizzabili dal computer, mentre con gli ultimi accade l'esatto opposto. \\In oltre è così possibile attribuire più nomi allo stesso indirizzo IP (o viceversa) per rappresentare servizi diversi forniti da uno stesso host (o più host che forniscono lo stesso servizio).\\
-\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ quando questo modello diventò insostenibile nel 1983, assieme a Paul Mockapetris e Craig Partridge, idearono il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
-\paragraph{Composizione DNS} Il DNS prevede:
+Il DNS (\textit{Domain Name System}) è un servizio utilizzato per associare i nomi degli host, più semplici da ricordare per l'utente, ai relativi indirizzi  \vedi{IP}. In tal modo è inoltre possibile attribuire più nomi allo stesso indirizzo IP (o viceversa) per rappresentare servizi diversi forniti da uno stesso host (o più host che forniscono lo stesso servizio).
+\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ nel 1983, quando questo modello diventò insostenibile, assieme a Paul Mockapetris e Craig Partridge ideò il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
+\paragraph{Spazio dei nomi gerarchico} basato su un insieme di database distribuiti, garantisce l'aggiornamento di tutta la rete. L'insieme dei nomi viene suddiviso in zone dette domini che possono coprire più host ed essere suddivise in sotto-domini e così via, formando una struttura ad albero in cui i nodi rappresentano i nomi:
 \begin{itemize}
-\item \textbf{Spazio dei nomi gerarchico} : basato su un insieme di database distribuiti (garantisce l'aggiornamento a tutta la rete). L'insieme dei nomi viene suddiviso in zone dette domini che possono coprire più host ed essere suddivisi in sotto-domini e così via, formando una struttura ad albero in cui i nodi rappresentano i nomi e:
+\item I domini di primo livello o \textbf{TLD} (\textit{Top Level Domain}) sono i figli del nodo radice ".", suddivisi in: 
 \begin{itemize}
-\item I domini di primo livello (\textit{Top Level Domain - \textbf{TLD}}) sono i figli del nodo radice "." e possono essere \\\textbf{gTLD} (\textit{generic TLD} - .com, .edu), \\\textbf{ccTLD}(\textit{country-code TLD} - .it, .fr) \\\textbf{infrastrutturali} (usati per la risoluzione inversa dei nomi - .arpa). \\Sono definiti da ICANN (\href{http://newgtlds.icann.org/en/announcements-andmedia/video/applicants}{QUI} è possibile visionare gli ultimi TLD proposti).\\
-In oltre ogni regione geografica ed ogni organizzazione hanno una propria autorità responsabile del proprio TDL (per l'Italia l'IIT CNR), la quale delega la gestione tecnico-amministrativa dei vari sottodomini agli enti che ne fanno richiesta, e così via per i sottodomini dei livelli successivi.
-\item I \textit{domini di secondo livello}, in genere, appartengono alle organizzazioni che li hanno registrati e comprendono il loro e il dominio precedente separati da un punto (es. unipg.it).
+\item \textbf{gTLD} (\textit{generic TLD}), ad esempio .com, .edu...
+\item \textbf{ccTLD} (\textit{country-code TLD}) ad esempio .it, .fr, .uk...),
+\item \textbf{infrastrutturali}: .arpa, usato per la risoluzione inversa dei nomi. 
+\end{itemize}
+Essi sono assegnati da \vedi{ICANN} alle organizzioni o alle autorità responsabili locali (per l'Italia l'IIT CNR). La lista completa dei è disponibile all'indirizzo \url{www.iana.org/domains/root/db}.
+\item I domini di secondo livello, in genere, appartengono alle organizzazioni che li hanno registrati e comprendono il loro e il dominio precedente separati da un punto (es. unipg.it).
 \item I successivi \textit{sotto-domini} vengono creati per rendere la gestione del DNS modulare e seguono la stessa logica dei domini di secondo livello.
 \item Infine le foglie corrispondono agli host. 
 \image[dns.png][scale=0.35]{Spazio gerarchico dei nomi}
 \end{itemize}
 Quindi, al contrario degli indirizzi IP, in un nome DNS la parte più importante è la prima partendo da destra (appunto, il TLD).
 Ad ogni dominio è associato un resource record (RR), file ASCII che contengono records del database DNS.  %\vedi resource record
-\item \textbf{Server DNS} : per rendere disponibile lo spazio dei nomi e rispondere alle richieste del resolver risolvendo i nomi (name server)
-\item \textbf{Client DNS} : una libreria di funzioni per generare e inviare le richieste sui nomi, interrogando i server DNS (resolver)
-\end{itemize}
+\paragraph{Server DNS} per rendere disponibile lo spazio dei nomi e rispondere alle richieste del resolver risolvendo i nomi (name server)
+\paragraph{Client DNS} una libreria di funzioni per generare e inviare le richieste sui nomi, interrogando i server DNS (resolver)
 
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
