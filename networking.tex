@@ -263,13 +263,18 @@ L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento
 \item \textbf{Interferenza}: sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interfernza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) è invece causata dai limiti della banda, e provoca un "arrotondamento" dei segnali rettangolari provenienti da un DTE.
 \end{itemize}
 
-\sub{DSL} %ovviamente non va qua, ma lo strato è quello
-
 \subsection{Limiti alla velocità di trasferimento}
-\subsub{Classificazione dei canali trasmissivi}
+Un parametro interessante in ambito di comunicazione dati è la velocità di trasferimento, espressa in $bit/sec$. Preliminarmente, occorre intendersi sul tipo di canale interessato, distinguendo:
+\begin{itemize}
+\item canali \textit{perfetti}, cioè senza alcun tipo di distorsione;
+\item canali \textit{ideali}, con solo un ritardo costante nella propagazione;
+\item canali \textit{reali}, con alterazioni in funzione della frequenza dei segnali che li attraversano.
+\end{itemize}
 \subsub{Teorema di Nyquist}
 \subsub{Teorema di Shannon}
 \subsubsection{Velocità di modulazione}
+
+\sub{DSL} %ovviamente non va qua, ma lo strato è quello
 
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
