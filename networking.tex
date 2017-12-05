@@ -261,7 +261,7 @@ L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento
 \subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
 \subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interfernza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) è invece causata dai limiti della banda, e provoca un "arrotondamento" dei segnali rettangolari provenienti da un DTE.
 
-\subsection{Limiti alla velocità di trasferimento}
+\subsection{Velocità di trasferimento}
 Un parametro interessante in ambito di comunicazione dati è la velocità di trasferimento o \textit{bitrate}, espressa in $bit/sec$. Preliminarmente, occorre intendersi sul tipo di canale interessato, distinguendo:
 \begin{itemize}
 \item canali \textit{perfetti}, cioè senza alcun tipo di distorsione;
@@ -278,7 +278,10 @@ Afferma che la massima velocità alla quale è possibile trasmettere senza error
 \[B\log_{2}(1+\textbf{SNR})\]
 dove $B$ è l'\vedi{Ampiezza di banda} e \textbf{SNR} è il rapporto segnale-\vedi{Rumore}.
 \subsubsection{Velocità di modulazione}
-
+La velocità di modulazione, espressa in $baud=\frac{simboli}{sec}$, indica il numero di simboli trasmessi nell'unità di tempo\footnote{Non si confonda il baud con i $bps=bit/sec$: un simbolo può essere composto da più bit.}. Più in particolare, in un sistema di comunicazione digitale, si parla di \textit{baud rate}.
+Velocità di trasferimento e di modulazione sono in relazione 
+\[v_{m}=\frac{v_{t}}{\log_{2}m}\]
+dove $v_{m}$ è la velocità di modulazione, $v_{t}$ la velocità di trasferimento ed m il numero di livelli.
 \sub{DSL} %ovviamente non va qua, ma lo strato è quello
 
 \newpage\sec{Livello di Collegamento}
