@@ -754,7 +754,48 @@ L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url
 \item \code{ssh-add}, \code{ssh-agent} ed \code{ssh-keygen}, una serie di programmi per la generazione e la gestione delle chiavi;
 \item i demoni \code{sshd} ed \code{sftp-server}.
 \end{itemize}
-\subsub{DHCP} %Discovering ,Offering , Codice 
+\subsub{DHCP} %può contenere tracce di Tasso
+Il protocollo DHCP (Dynamic Host Configuration Protocol) permette agli \italic{host} di una rete locale di ricevere ad ogni richiesta di accesso a una rete IP tutte le informazioni di configurazione necessarie a connettersi ed operare.
+\\Non è utilizzato per la configurazione dei router.
+\\\\  Il DHCP si basa sul modello \italic{client-server}:
+\begin{itemize}
+	\item \textbf{client}:  host che necessita un indirizzo IP per collegarsi alla sottorete;
+	\item \textbf{server}:  host designato all'assegnazione degli indirizzi ai client che li richiedono. Anche un \italic{router} può assolvere, tra le altre cose, tale ruolo.
+\end{itemize}
+È un protocollo nato come complemento del \textbf{BOOTP} (Bootstrap protocol, RFC 821), il quale raccoglie informazioni per la configurazione degli host sfruttando l'\vedi{UDP} (sulla porta 67 del server e 68 del client) ed assegna gli indirizzi IP tramite messaggi \italic{broadcast}.
+\\Il DHCP lo estende (RFC 1534) aggiungendo nuove opzioni di configurazione e la possibilità di allocare automaticamente gli indirizzi di rete
+\\Infatti è possibile scegliere fra 3 metodi di assegnamento:
+\begin{itemize}
+	\item \italic{automatic allocation}: i client che si connettono ricevono dal server un indirizzo IP permanente;
+	\item \italic{dynamic allocation}: ad ogni nuova connessione il client riceve un indirizzo IP, il quale ha un tempo di validità (\italic{lease}), al cui termine ritorna nella \italic{pool} degli indirizzi disponibili. Ciò permette di riutilizzare indirizzi non più in uso dai client;
+	\item \italic{manual allocation}: il DHCP si limita a comunicare al client l'indirizzo scelto per lui dall'amministratore di rete.
+\end{itemize}
+Il DHCP permette di riservare indirizzi IP per specifici client tramite l'associazione al relativo \vedi{Indirizzo MAC} (\italic{DHCP Client Reservation}).
+\\\\Il processo di assegnamento degli indirizzi si divide in 4 fasi:
+\begin{itemize}
+	\item[1.] \italic{Discovering}: il client chiede che gli venga assegnato un indirizzo tramite il messaggio \code{DHCPDISCOVER};
+	\item[2.] \italic{Offering}: i server che ricevono la richiesta rispondono (se hanno indirizzi liberi a disposizione) con il messaggio \code{DHCPOFFER};
+	\item[3.] \italic{Requesting}: una volta ricevute le offerte dei server, il client le valuta e risponde con \code{DHCPREQUEST} per comunicare quale ha scelto;
+	\item[4.] \italic{Acknowledgment}: se l'assegnamento è avvenuto con successo, il server invia al client la conferma tramite \code{DHCPACK}; in caso di errori viene invece inviato il messaggio \code{DHCPNACK} (\italic{negative acknowlegment}).
+\end{itemize}
+Si noti che, nella fase 1, il client non ha ancora configurato completamente l'\vedi{Internet protocol suite TCP/IP} in quanto è sprovvisto di indirizzo IP.
+\\Inoltre la richiesta deve essere inviata in \italic{broadcast} dal momento che anche l'indirizzo IP del server è ancora sconosciuto: perciò il messaggio avrà come mittente 0.0.0.0 e 255.255.255.255 come destinatario.
+\\\\Step di configurazione di un server DHCP :
+\begin{itemize}
+	\item[1.] Installazione del software (dipende dal sistema operativo del server);
+	\item[2.] Configurazione della pool di indirizzi: definizione degli intervalli di indirizzi assegnabili ed eventuale \italic{tempo di lease};
+	\item[3.] Definizione delle opzioni con cui verranno configurati i client nel momento in cui ricevono un indirizzo IP (ad esempio la forma della \italic{subnet mask}, l'elenco dei router della rete, l'elenco degli indirizzi dei DNS server accesibili ...).
+\end{itemize}
+In reti con più segmenti si può evitare di definire un server per ogni sottorete ricorrendo ai \textbf{DHCP Relay Agent}: è sufficiente configurarne uno per ogni segmento di rete al fine di rilevare i pacchetti inviati in \italic{broadcast} (\code{DHCPDISCOVER} o \code{DHCPREQUEST}) ed inoltrarli ai server di destinazione, aggiungendo ad ogni pacchetto il proprio indirizzo.\\
+
+Il DHCP presenta dei considerevoli problemi di sicurezza.
+Infatti, l'assenza di autenticazione e di cifratura nei messaggi sono il punto debole del protocollo: è possible sovraccaricare di richieste i server tramite attacco \italic{DoS}, esaurendo gli indirizzi disponibili (\italic{address starvation}) e lasciando sprovvisti i client legittimi. 
+\\Inoltre, un host malevolo può assumere il ruolo di server DHCP, controllando di conseguenza gli assegnamenti di indirizzi: da questa posizione può, quando un client richiede un nuovo indirizzo IP, cambiare il \italic{gateway} di default del bersaglio con il proprio indirizzo ed effettuare attacchi \italic{man in the middle}.\\
+
+\boximage[dhcpd.png][scale=0.52]{Esempio di configurazione tramite \code{dhcpd}}
+Nei sistemi Unix, una possibile implementazione del DHCP è rappresentata dal demone ISCDHCPd (Internet Software Consortium
+Dynamic Host Configuration Protocol daemon), la cui configurazione viene eseguita mediante un file di testo
+chiamato \code{dhcpd.conf}.
 
 \newpage\subsub{DNS}
 Il DNS(\textit{Domain Name System}) è un servizio utilizzato per associare i nomi degli host (serie di parole separate da punti) ai relativi indirizzi  \vedi{IP} (numeri separati da punti); \\ \textbf{Vantaggi: } I primi sono facili da ricordare per l'utente ma non utilizzabili dal computer, mentre con gli ultimi accade l'esatto opposto. \\In oltre è così possibile attribuire più nomi allo stesso indirizzo IP (o viceversa) per rappresentare servizi diversi forniti da uno stesso host (o più host che forniscono lo stesso servizio).\\
