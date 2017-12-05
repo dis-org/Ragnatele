@@ -255,23 +255,28 @@ Rappresentazione grafica teorica di un segnale modulato secondo uno degli schemi
 Il vettore errore rappresenta la differenza tra il punto teorico in cui si sarebbe dovuto trovare il segnale nel \vedi{Diagramma a costellazione} e la sua posizione reale. Ciò che interessa maggiormente del vettore errore è il suo modulo, utile a valutare la qualità della modulazione, detto anche \textbf{EVM} (Error Vector Magnitude). Esso è espresso in percentuale o in $dB$, come rapporto tra il valore quadratico medio della potenza del vettore errore e il  \href{<https://it.wikipedia.org/wiki/Valore_efficace>}{valore quadratico medio}\footnote{Si noti che il concetto di valore quadratico medio non coincide con quello di scarto quadratico medio} della potenza del segnale di riferimento. In questo caso, l'EVM può avere -ed è auspicabile che abbia- valore negativo. %da riformulare
 Per la misurazione dell'EVM esistono strumenti hardware e software, tutti quanti basati sulla demodulazione del segnale ed il confronto con quello ideale.
 \sub{Alterazioni del segnale}
-L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento del suddetto, i principali dei quali sono: %Claudio perdonami, non credo che nessuno vorrà mai fare riferimenti a queste parole
-\begin{itemize}
-\item \textbf{Attenuazione}: perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale; vi si pone rimedio tramite dispositivi come gli amplificatori;
-\item \textbf{Distorsione}: cambiamento di forma del segnale, si verifica quando esso è composto da varie frequenze e dipende dal ritardo all'arrivo delle singole componenti;
-\item \textbf{Rumore}: insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
-\item \textbf{Interferenza}: sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interfernza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) è invece causata dai limiti della banda, e provoca un "arrotondamento" dei segnali rettangolari provenienti da un DTE.
-\end{itemize}
+L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento del suddetto. %Claudio perdonami, non credo che nessuno vorrà mai fare riferimenti a queste parole
+\subsub{Attenuazione} Perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale; vi si pone rimedio tramite dispositivi come gli amplificatori;
+\subsub{Distorsione} Cambiamento di forma del segnale, si verifica quando esso è composto da varie frequenze e dipende dal ritardo all'arrivo delle singole componenti;
+\subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
+\subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interfernza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) è invece causata dai limiti della banda, e provoca un "arrotondamento" dei segnali rettangolari provenienti da un DTE.
 
 \subsection{Limiti alla velocità di trasferimento}
-Un parametro interessante in ambito di comunicazione dati è la velocità di trasferimento, espressa in $bit/sec$. Preliminarmente, occorre intendersi sul tipo di canale interessato, distinguendo:
+Un parametro interessante in ambito di comunicazione dati è la velocità di trasferimento o \textit{bitrate}, espressa in $bit/sec$. Preliminarmente, occorre intendersi sul tipo di canale interessato, distinguendo:
 \begin{itemize}
 \item canali \textit{perfetti}, cioè senza alcun tipo di distorsione;
 \item canali \textit{ideali}, con solo un ritardo costante nella propagazione;
 \item canali \textit{reali}, con alterazioni in funzione della frequenza dei segnali che li attraversano.
 \end{itemize}
-\subsub{Teorema di Nyquist}
-\subsub{Teorema di Shannon}
+La massima velocità di trasferimento, detta anche \textit{max data rate}, può essere calcolata sia in funzione del numero di livelli, sia in funzione del \vedi{Rumore}.
+\subsub{Condizione di Nyquist}
+Stabilisce che la massima velocità di trasferimento su un canale di banda $B$ con $m$ livelli è
+\[2B\log_{2}m\]
+
+\subsub{Teorema di Shannon-Hartley}
+Afferma che la massima velocità alla quale è possibile trasmettere senza errore è
+\[B\log_{2}(1+\textbf{SNR})\]
+dove $B$ è l'\vedi{Ampiezza di banda} e \textbf{SNR} è il rapporto segnale-\vedi{Rumore}.
 \subsubsection{Velocità di modulazione}
 
 \sub{DSL} %ovviamente non va qua, ma lo strato è quello
