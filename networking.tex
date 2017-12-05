@@ -43,7 +43,26 @@
 \newpage
 
 \section*{Introduzione}
-%quattro parole sulla storia del networking
+La comunicazione, intesa come scambio di informazioni, può avvenire solo se l'emittente e il ricevente concordano sull'interpretazione del messaggio trasmesso. In altre parole, devono esistere una serie di regole comuni, che permettano di risalire al significato del messaggio, in quanto la stessa informazione può e deve assumere forme diverse, anche a seconda del canale di comunicazione.
+In informatica questo insieme di regole, definito formalmente, è detto \textbf{protocollo di comunicazione}. \\Se i partecipanti alla comunicazione sono molteplici, sarà necessario definire un sistema di comunicazione utilizzato da tutti, che indichi quali protocolli utilizzare in quali situazioni. \'E a questo che servono gli \textbf{standard}.
+
+\sub{Gli standard}
+Si distinguono standard \textit{de iure}, cioè codificati dalle \vedi{Organizzazioni} preposte, e standard \textit{de facto}, affermatisi spontaneamente per la loro adozione massiccia.
+\subsub{IEEE 802}
+Famiglia di protocolli e servizi standardizzati dall'\vedi{IEEE} 802 \italic{LAN/MAN Standards Committee} (LMSC): situata ai due livelli più bassi del \vedi{Modello di riferimento ISO/OSI}, si dedica alle reti che utilizzano pacchetti di lunghezza variabile. \'E qui che vengono definiti i sottolivelli \vedi{MAC} e \vedi {LLC}. \\Gli standard sono numerati in base al gruppo di lavoro che li ha prodotti.
+\\I gruppi più importanti sono:
+\begin{itemize}
+\item IEEE 802.1 \vedi{LAN}
+\item IEEE 802.3 \vedi{Ethernet}
+\item IEEE 802.5 TokenRing
+\item IEEE 802.11 \vedi{WLAN}
+\item IEEE 802.15 \vedi{WPAN}
+\item IEEE 802.16 Broadband Wireless Access, conosciuto anche come \textit{Wireless\vedi{MAN}} (WiMAX)
+\end{itemize}
+Una lista completa dei gruppi di lavoro e dei loro standard è reperibile sul sito ufficiale dello LMSC: \url{www.ieee802.org}. 
+\subsub{RFC}
+Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{www.rfc-editor.org}. 
+
 \sub{Organizzazioni}
 \subsub{IEEE}
 Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare il comitato \vedi{IEEE 802} \textit{LAN/MAN Standards Committee} (LMSC), commissione preposta a sviluppare standard per le reti locali e metropolitane. 
@@ -69,26 +88,8 @@ Attualmente, la materia è oggetto di completa ristrutturazione sotto la respons
 Internet Corporation for Assigned Names and Numbers: organizzazione che ha attualmente la responsabilità della gestione dello spazio di indirizzamento IP (vedi \vedi{IANA}).
 \subsub{GIPI}
 Global Internet Policy Initiative: rete di organizzazioni non governative no-profit che sostiene l’adozione nei paesi in via di sviluppo di piattaforme legislative e politiche per la realizzazione di un’accesso ad Internet aperto e democratico.
-\subsection{Concetto di standard} \label{Standard}
-Si distinguono standard \textit{de iure}, cioè codificati da organizzazioni come quelle di cui sopra, e standard \textit{de facto}, affermatisi spontaneamente per la loro adozione massiccia.
-\subsub{IEEE 802}
-Famiglia di protocolli e servizi standardizzati dall'\vedi{IEEE} 802 \italic{LAN/MAN Standards Committee} (LMSC): situati ai due livelli più bassi del \vedi{Modello di riferimento ISO/OSI}, sono dedicati alle reti che utilizzano pacchetti di lunghezza variabile. \'E qui che vengono definiti i sottolivelli \vedi{MAC} e \vedi {LLC}.\\Gli standard sono numerati in base al gruppo di lavoro che li ha prodotti, e quindi alla loro area di ricerca, alcuni esempi:
-\begin{itemize}
-\item IEEE 802.1 \vedi{LAN}
-\item IEEE 802.3 \vedi{Ethernet}
-\item IEEE 802.5 TokenRing
-\item IEEE 802.11 \vedi{WLAN}
-\item IEEE 802.15 \vedi{WPAN}
-\item IEEE 802.16 Broadband Wireless Access, conosciuto anche come \textit{Wireless\vedi{MAN}} (WiMAX)
 
-\end{itemize}
-Una lista completa dei gruppi di lavoro e degli standard è reperibile sul sito ufficiale dello LMSC: \url{www.ieee802.org}. 
-\subsub{RFC}
-Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{www.rfc-editor.org}.
-\subsection{Nozione di protocollo} %def di protocollo
-
-%Gioara 
-\sub{Modello di riferimento ISO/OSI}
+\newpage\sub{Modello di riferimento ISO/OSI}
 Il modello Open Systems Interconnection (abbreviato in modello ISO/OSI) è stato progettato dalla \vedi{ISO} come modello di riferimento per consentire una comunicazione aperta tra diversi sistemi tecnici. Le motivazioni diventano più chiare se si pensa alle origini di Internet: alla fine degli anni ’70 i leader del settore delle tecnologie di rete si ritrovarono di fronte al problema che le architetture proprietarie si potevano collegare solo tramite dispositivi specifici: nessun produttore aveva pensato di costruire componenti hardware o software compatibili con le specifiche di altri fornitori.
 Il modello lSO/OSI si prefigge dunque di offrire una base teorica per lo sviluppo di standard di comunicazione indipendenti dai fornitori. In base ad esso, il complesso processo della comunicazione di rete si divide in sette livelli (in inglese, \textit{layers}). Nell'ambito della comunicazione tra due sistemi, ad ogni livello devono essere svolti compiti specifici, tra cui il controllo della comunicazione, l’indirizzamento del sistema target o la conversione dei pacchetti in segnali fisici. Questo può funzionare solo se tutti i sistemi coinvolti nella comunicazione si attengono a regole precise, stabilite dai protocolli, che si applicano ad uno o più livelli (si parla in tal caso di protocolli multilivello).
 Il modello di riferimento ISO/OSI non è però uno standard di rete concreto: esso descrive in forma astratta quali procedimenti devono essere regolati per far funzionare la comunicazione in una rete.  
@@ -110,7 +111,8 @@ Termine utilizzato per indicare l'uso di Internet all'interno di un'azienda, bas
 \subsub{Extranet}
 Termine che identifica le risorse hardware e software che realizzano la presenza visibile in internet di un'organizzazione.
 
-\subsub{Internet protocol suite (TCP/IP)}
+\sub{Internet protocol suite TCP/IP}
+Detto a volte Stack TCP/IP
 
 \newpage
 
