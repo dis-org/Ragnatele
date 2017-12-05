@@ -156,25 +156,34 @@ sudo pacman -Syu
 \subsub{Ampiezza di banda}
 L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
 \subsub{Modem} 
-Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzionalità di \vedi{Modulazione} in trasmissioni analogiche \textit{e} digitali. Risulta particolarmente utile, ad esempio, nel momento in cui si presenta la necessità di trasmettere i segnali digitali sulla linea telefonica e viceversa (si parla in tal caso di \textbf{modem fonico}). Altri tipi di modem sono:
+Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzionalità di \vedi{Modulazione} in trasmissioni analogiche \textit{e} digitali. Esistono svariati tipi di modem:
 \begin{itemize}
-\item \textbf{modem ISDN} (128 kbps);
-\item \textbf{modem xDLS} (640 kbps-100 Mbps);
-\item \textbf{modem per PLC} (Power Line Communications), comunicazioni su linea elettrica (640 kbps-200 Mbps);
-\item \textbf{modem GPRS, UMTS e HSDPA}, spesso integrati nei cellulari o come PC card;
-\item \textbf{modem in banda base}, utilizzati per scopi industriali su linee private o noleggiate, che mettono in comunicazione diretta due utenti su doppino telefonico.
+\item \textbf{\vedi{Modem in banda fonica}};
+\item \textbf{Modem ISDN} (128 kbps);
+\item \textbf{Modem xDLS} (640 kbps-100 Mbps);
+\item \textbf{Modem per PLC} (Power Line Communications), comunicazioni su linea elettrica (640 kbps-200 Mbps);
+\item \textbf{Modem GPRS, UMTS e HSDPA}, spesso integrati nei cellulari o come PC card;
+\item \textbf{Modem in banda base}, utilizzati per scopi industriali su linee private o noleggiate, che mettono in comunicazione diretta due utenti su doppino telefonico.
 \end{itemize}
 Ognuno dei modem suddetti può essere inoltre \textbf{interno} o \textbf{esterno} al \vedi{DTE}. Tra i modem \textbf{esterni}, in base al tipo di collegamento al DTE, si distinguono:
 \begin{itemize}
-\item \textbf{modem seriali}, collegati con cavo seriale alle porte COM1 o COM2;
-\item \textbf{modem paralleli}, , collegati con cavo parallelo alle porte LPT1 o LP2;
+\item \textbf{Modem seriali}, collegati con cavo seriale alle porte COM1 o COM2;
+\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2;
 \boximage[hw_ports.jpg][scale=0.5]{Porte seriali e parallele}
-\item \textbf{modem USB}.
+\item \textbf{Modem USB}.
 \end{itemize}
 Tra i modem \textbf{interni} si distinguono invece:
 \begin{itemize}
-\item \textbf{modem PCI}, che lavorano appunto sul BUS PCI (Perifperal Component Interconnect);
+\item \textbf{Modem PCI}, che lavorano appunto sul BUS PCI (Perifperal Component Interconnect);
 \item \textbf{modem PCMCIA, PC card o Express card}, utilizzati esclusivamente nei portatili;
+\end{itemize}
+\para{Modem in banda fonica}
+Si utilizza quando si presenta la necessità di trasmettere i segnali digitali sulla linea telefonica e viceversa. Occorre notare che la banda disponibile sulla linea telefonica solamente $4 kHz$, il che rende inefficiente la trasmissione del segnale digitale su di essa; in particolare per via dell'\vedi{Attenuazione} delle alte frequenze e per la scarsissima velocità di trasferimento. Un modem fonico opera dunque una \vedi{Modulazione digitale} volta a comprimere il la banda dei segnali emessi dal \vedi{DTE}.
+Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \vedi{CCITT}:
+\begin{itemize} %parte carente che non so se tagliare del tutto o migliorare; non credo mi sarà mai utile nella vita
+\item FSK V.21: primo modem al mondo, risalente ai primi anni '80;
+\item QAM V.29;
+\item QAM V.32, che utilizza una variante della QAM, la TCM, ed implementa la \textit{soppressione dell'eco}. %da spiegare sia la Trellis Code Modulation, sia la soppressione dell'eco
 \end{itemize}
 \subsection{Qualità delle trasmissioni} \label{qualita}
 Come già accennato in precedenza, é lo strato fisico che determina in larga parte la qualità delle comunicazioni, valutabile in base a prestazioni e affidabilità. 
@@ -242,7 +251,7 @@ La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codi
 \boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
 
 \end{itemize}
-\subsub{Modulazioni digitali} 
+\subsub{Modulazione digitale} 
 Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, in prima approssimazione, attraverso una mappatura biunivoca tra sequenze di bit in ingresso ed un insieme di forme d'onda analogiche limitate nel tempo in uscita, dette \textit{simboli}. E' dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
 \begin{itemize} 
 \item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
