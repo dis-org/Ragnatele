@@ -326,6 +326,13 @@ Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
 
 \subsection{Protocolli}
+I protocolli di secondo livello si dividono in due principali categorie:
+\begin{itemize}
+	\item\textbf{Asincroni}: detti anche \textbf{start/stop}, sono i primi ad essere stati sviluppati.\\
+	Cose
+	\item\textbf{Sincroni}:
+\end{itemize}
+\subsub{BSC}
 \subsub{HDLC}
 \subsub{PPP}
 
@@ -792,7 +799,7 @@ Il DHCP presenta dei considerevoli problemi di sicurezza.
 Infatti, l'assenza di autenticazione e di cifratura nei messaggi sono il punto debole del protocollo: è possible sovraccaricare di richieste i server tramite attacco \italic{DoS}, esaurendo gli indirizzi disponibili (\italic{address starvation}) e lasciando sprovvisti i client legittimi. 
 \\Inoltre, un host malevolo può assumere il ruolo di server DHCP, controllando di conseguenza gli assegnamenti di indirizzi: da questa posizione può, quando un client richiede un nuovo indirizzo IP, cambiare il \italic{gateway} di default del bersaglio con il proprio indirizzo ed effettuare attacchi \italic{man in the middle}.\\
 
-\boximage[dhcpd.png][scale=0.52]{Esempio di configurazione tramite \code{dhcpd}}
+\boximage[dhcpd.png][scale=0.51]{Esempio di configurazione tramite \code{dhcpd}}
 Nei sistemi Unix, una possibile implementazione del DHCP è rappresentata dal demone ISCDHCPd (Internet Software Consortium
 Dynamic Host Configuration Protocol daemon), la cui configurazione viene eseguita mediante un file di testo
 chiamato \code{dhcpd.conf}.
