@@ -344,7 +344,7 @@ Nonostante esistano diversi tipi di ethernet, la struttura del pacchetto è la s
 \'E strutturato come segue:
 \begin{itemize}
     \item \italic{Preamble}(preambolo): di 7 byte, ognuno dei quali ha valore: 10101010, servono a svegliare il ricevente ed a sincronizzarlo con l' emittente, non fa quindi parte del vero frame ma avvisa che a breve ne arriva uno 
-    \item  \italic{Start Frame Delimiter}(SFD): di 1 byte, ha valore: 10101011, i due bit finali ad 1 avvisano dell' arrivo di un messaggio importante, é protetto da codifica Manchester, come sopra non fa veramente parte del frame ma ne avvisa l' arrivo
+    \item  \italic{Start Frame Delimiter}(SFD): di 1 byte, ha valore: 10101011, i due bit finali ad 1 avvisano dell' arrivo di un messaggio importante, é protetto da codifica Manchester(spiegata in \vedi{Encoding}), come sopra non fa veramente parte del frame ma ne avvisa l' arrivo
     \item \italic{Destination MAC Address}(indirizzo destinazione):di 6 byte, condiene l' indirizzo fisico del ricevente, se non corrisponde il pacchetto viene scartato al \vedi{Livello Fisico}.
     \item \italic{Source MAC Address} (indirizzo sorgente): di 6 byte.
     \item \italic{Ether Type}(campo tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi{IEEE 802}.3, la lunghezza del campo dati.
@@ -355,11 +355,17 @@ Nonostante esistano diversi tipi di ethernet, la struttura del pacchetto è la s
 
 \sub{Tipi di trasmissione}
 \subsub{Sincrona}
-
+si intende una comunicazione scandita da un clock che sincronizza trasmettitore e ricevitore i dati vengono raggruppati in blocchi e trasmessi secondo il tempo dato dal clock. il ricevitore deve avere un sincronismo a bit 
 \subsub{Asincrona}
 si intende una comunicazione in cui il ricevente sta a riposo fin che non riceve un segnale di start, che precede il messaggio,
 alla fine del messaggio viene inviato un segnale di stop che, se non seguito da altri messaggi, rimanda a riposo il ricevente.
-Questo metodo è molto buono in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona(governata da un clock), ma il segnale di start e quello di stop incidono di circa il 30\% su i bit trasmessi.
+Questo metodo è molto buono in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona(governata da un clock), ma il segnale di start e quello di stop incidono di circa il 30\% su i bit trasmessi.  
+\subsub{Encoding}
+\para{NRZ(Not Reduced Zero)}
+\para{RZ(Return to Zero)}
+\para{Mancester}
+\para{AMI(Alternative Mark Inversion)}
+\subsub{Scrambling}
 \subsub{Orientata al carattere}
 \subsub{Orientata al bit}
 
