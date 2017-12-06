@@ -851,7 +851,7 @@ Il DHCP permette di riservare indirizzi IP per specifici client tramite l'associ
 	\item[3.] \italic{Requesting}: una volta ricevute le offerte dei server, il client le valuta e risponde con \code{DHCPREQUEST} per comunicare quale ha scelto;
 	\item[4.] \italic{Acknowledgment}: se l'assegnamento è avvenuto con successo, il server invia al client la conferma tramite \code{DHCPACK}; in caso di errori viene invece inviato il messaggio \code{DHCPNACK} (\italic{negative acknowlegment}).
 \end{itemize}
-Si noti che, nella fase 1, il client non ha ancora configurato completamente l'\vedi{Internet protocol suite TCP/IP} in quanto è sprovvisto di indirizzo IP.
+Si noti che, nella fase 1, il client non ha ancora configurato completamente l'\vedi{Internet protocol suite (TCP/IP)} in quanto è sprovvisto di indirizzo IP.
 \\Inoltre la richiesta deve essere inviata in \italic{broadcast} dal momento che anche l'indirizzo IP del server è ancora sconosciuto: perciò il messaggio avrà come mittente 0.0.0.0 e 255.255.255.255 come destinatario.
 \\\\Step di configurazione di un server DHCP :
 \begin{itemize}
