@@ -130,11 +130,11 @@ L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\
 \subsub{Codice}
 Al fine di rappresentare l'informazione in maniera tale da renderne più semplice la gestione, un codice associa sequenze di bit a caratteri. I codici che godono della più ampia diffusione sono:
 \begin{itemize}
-\item ASCII (American Standard Code for Information Interchange, 7 bit estesi a 1 byte)
-\item BCD (Binary-Coded Decimal)
-\item AIKEN 
-\item Gray
-\item EBCDIC (Extended Binary Coded Decimal Code) 8 bit, in uso presso le banche
+\item ASCII (American Standard Code for Information Interchange, 7 bit estesi a 1 byte);
+\item BCD (Binary-Coded Decimal);
+\item AIKEN;
+\item Gray;
+\item EBCDIC (Extended Binary Coded Decimal Code) 8 bit, in uso presso le banche.
 \end{itemize}
 
 \subsub{Segnale}
@@ -161,36 +161,7 @@ Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa afferm
 sudo pacman -Syu
 \subsub{Ampiezza di banda}
 L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
-\subsub{Modem} 
-Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzionalità di \vedi{Modulazione} in trasmissioni analogiche \textit{e} digitali. Esistono svariati tipi di modem:
-\begin{itemize}
-\item \textbf{\vedi{Modem in banda fonica}};
-\item \textbf{Modem ISDN} (128 kbps);
-\item \textbf{Modem xDLS} (640 kbps-100 Mbps);
-\item \textbf{Modem per PLC} (Power Line Communications), comunicazioni su linea elettrica (640 kbps-200 Mbps);
-\item \textbf{Modem GPRS, UMTS e HSDPA}, spesso integrati nei cellulari o come PC card;
-\item \textbf{Modem in banda base}, utilizzati per scopi industriali su linee private o noleggiate, che mettono in comunicazione diretta due utenti su doppino telefonico.
-\end{itemize}
-Ognuno dei modem suddetti può essere inoltre \textbf{interno} o \textbf{esterno} al \vedi{DTE}. Tra i modem \textbf{esterni}, in base al tipo di collegamento al DTE, si distinguono:
-\begin{itemize}
-\item \textbf{Modem seriali}, collegati con cavo seriale alle porte COM1 o COM2;
-\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2;
-\boximage[hw_ports.jpg][scale=0.5]{Porte seriali e parallele}
-\item \textbf{Modem USB}.
-\end{itemize}
-Tra i modem \textbf{interni} si distinguono invece:
-\begin{itemize}
-\item \textbf{Modem PCI}, che lavorano appunto sul BUS PCI (Perifperal Component Interconnect);
-\item \textbf{modem PCMCIA, PC card o Express card}, utilizzati esclusivamente nei portatili;
-\end{itemize}
-\para{Modem in banda fonica}
-Si utilizza quando si presenta la necessità di trasmettere i segnali digitali sulla linea telefonica e viceversa. Occorre notare che la banda disponibile sulla linea telefonica solamente $4 kHz$, il che rende inefficiente la trasmissione del segnale digitale su di essa; in particolare per via dell'\vedi{Attenuazione} delle alte frequenze e per la scarsissima velocità di trasferimento. Un modem fonico opera dunque una \vedi{Modulazione digitale} volta a comprimere il la banda dei segnali emessi dal \vedi{DTE}.
-Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \vedi{CCITT}:
-\begin{itemize} %parte carente che non so se tagliare del tutto o migliorare; non credo mi sarà mai utile nella vita
-\item FSK V.21: primo modem al mondo, risalente ai primi anni '80;
-\item QAM V.29;
-\item QAM V.32, che utilizza una variante della QAM, la TCM, ed implementa la \textit{soppressione dell'eco}. %da spiegare sia la Trellis Code Modulation, sia la soppressione dell'eco
-\end{itemize}
+
 \subsection{Qualità delle trasmissioni} \label{qualita}
 Come già accennato in precedenza, é lo strato fisico che determina in larga parte la qualità delle comunicazioni, valutabile in base a prestazioni e affidabilità. 
 \\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
@@ -199,7 +170,7 @@ Come già accennato in precedenza, é lo strato fisico che determina in larga pa
 \item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
-
+\para{DSL}
 \subsub{Criteri di valutazione in base alle prestazioni}
 \begin{itemize}
 \item \textbf{ritardo}: tempo necessario per il transito dei dati
@@ -279,7 +250,7 @@ La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi
 \item \textbf{DPSK} (Differential Phase-Shift Keying): analoga alla PSK, ma sono i salti di fase, e non i valori assoluti, a codificare i bit. Ne esistono diverse varianti, quali la 2-DPSK, la 4-DPSK e la 8-DPSK;
 \end{itemize} 
 \item \textbf{QAM} (Quadrature Amplitude Modulation): combinazione di ASK e PSK, consiste nel modulare in ampiezza portanti in quadratura di uguale frequenza. Varianti della QAM particolarmente rilevanti sono la 16-QAM e la 64-QAM, usata nell'A\vedi{DSL};
-\item \textbf{Trellis}: vi è un cambio di stato sempre e soltanto in presenza di un bit 1. Il nome di questo tipo di modulazione deriva dal fatto che l'andamento temporale del segnale può essere rappresentato mediante un diagramma, visivamente simile ad un traliccio (in inglese, \textit{trellis}).
+\item \textbf{TCM} (Trellis Coded Modulation): simile alla QAM, assicura una maggiore immunità dal rumore e un minor tasso di errore aumentando la ridondanza della trasmissione. Vi è un cambio di stato sempre e soltanto in presenza di un bit 1. Il nome di questo tipo di modulazione deriva dal fatto che l'andamento temporale del segnale può essere rappresentato mediante un diagramma, visivamente simile ad un traliccio (in inglese, \textit{trellis}). %verificare attendibilità fonti
 \boximage[trellis.png][scale=0.3]{Diagramma a traliccio}
 \end{itemize}
 \para{Diagramma a costellazione}
@@ -316,7 +287,45 @@ La velocità di modulazione, espressa in $baud=\frac{simboli}{sec}$, indica il n
 Velocità di trasferimento e di modulazione sono in relazione 
 \[v_{m}=\frac{v_{t}}{\log_{2}m}\]
 dove $v_{m}$ è la velocità di modulazione, $v_{t}$ la velocità di trasferimento ed m il numero di livelli.
-\sub{DSL} %ovviamente non va qua, ma lo strato è quello
+
+\subsub{Modem} 
+Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzionalità di \vedi{Modulazione} in trasmissioni analogiche \textit{e} digitali. Esistono svariati tipi di modem:
+\begin{itemize}
+\item \textbf{\vedi{Modem in banda fonica}};
+\item \textbf{Modem ISDN} (128 kbps);
+\item \textbf{Modem xDLS} (640 kbps-100 Mbps);
+\item \textbf{Modem per PLC} (Power Line Communications), comunicazioni su linea elettrica (640 kbps-200 Mbps);
+\item \textbf{Modem GPRS, UMTS e HSDPA}, spesso integrati nei cellulari o come PC card;
+\item \textbf{Modem in banda base}, utilizzati per scopi industriali su linee private o noleggiate, che mettono in comunicazione diretta due utenti su doppino telefonico.
+\end{itemize}
+Ognuno dei modem suddetti può essere inoltre \textbf{interno} o \textbf{esterno} al \vedi{DTE}. Tra i modem \textbf{esterni}, in base al tipo di collegamento al DTE, si distinguono:
+\begin{itemize}
+\item \textbf{Modem seriali}, collegati con cavo seriale alle porte COM1 o COM2;
+\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2;
+\boximage[hw_ports.jpg][scale=0.5]{Porte seriali e parallele}
+\item \textbf{Modem USB}.
+\end{itemize}
+Tra i modem \textbf{interni} si distinguono invece:
+\begin{itemize}
+\item \textbf{Modem PCI}, che lavorano appunto sul BUS PCI (Perifperal Component Interconnect);
+\item \textbf{Modem PCMCIA, PC card o Express card}, utilizzati esclusivamente nei portatili.
+\end{itemize}
+\para{Modem in banda fonica}
+Si utilizza quando si presenta la necessità di trasmettere i segnali digitali sulla linea telefonica e viceversa. Occorre notare che la banda disponibile sulla linea telefonica solamente $4 kHz$, il che rende inefficiente la trasmissione del segnale digitale su di essa; in particolare per via dell'\vedi{Attenuazione} delle alte frequenze e per la scarsissima velocità di trasferimento. Un modem fonico opera dunque una \vedi{Modulazione digitale} volta a comprimere la banda dei segnali emessi dal \vedi{DTE}.
+Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \vedi{CCITT}:
+\begin{itemize} %parte carente che non so se tagliare del tutto o migliorare; non credo mi sarà mai utile nella vita
+\item FSK V.21: primo modem al mondo, risalente ai primi anni '80;
+\item QAM V.29;
+\item QAM V.32, che utilizza in realtà la TCM, ed implementa la soppressione dell'eco. %non si capisce come funzioni la soppressione dell'eco, quindi non l'ho scritto
+\item Modem V.34: utilizzato per collegamenti in cui entrambe le terminazioni della linea sono analogiche, sfrutta completamente la banda disponibile;
+\item Modem V.90: modem asimmetrico pensato per migliorare il V.34 dando la priorità alla velocità di ricezione piuttosto che a quella di trasmissione;
+\item Modem V.92: si tratta dello standard oggi più utilizzato, che ha introdotto nuove funzionalità quali:
+\begin{itemize}
+\item \textit{quick connect}, che riduce notevolmente il tempo di negoziazione dei parametri per la connessione;
+\item MOH \textit{Modem On Hold}, che consente di interrompere temporaneamente la connessione;
+\item PCM upstream, che permette di effettuare trasmissioni digitali a più alta velocità (fino a $48 kbit/s$) sulle linee telefoniche analogiche.
+\end{itemize}
+\end{itemize}
 
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
@@ -331,7 +340,7 @@ In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello 
 \'E una delle tecnologie per il collegamento LAN più utilizzate al mondo,posto a metà fra il LV 1 e il LV 2 (più in particolare nel sottolivello MAC) del modello ISO.
 \subsub {Ethernet framing}
 Nonostante esistano diversi tipi di ethernet, la struttura del pacchetto è la stessa.
-\image[etherframe.png][scale=0.5]{frame eternet di tipo 2(fra i più comuni)}
+\image[etherframe.png][scale=0.35]{Frame ethernet di tipo 2 (fra i più comuni).}
 \'E strutturato come segue:
 \begin{itemize}
     \item \italic{Preamble}(preambolo): di 7 byte, ognuno dei quali ha valore: 10101010, servono a svegliare il ricevente ed a sincronizzarlo con l' emittente, non fa quindi parte del vero frame ma avvisa che a breve ne arriva uno 
