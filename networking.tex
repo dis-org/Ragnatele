@@ -1068,5 +1068,24 @@ NFS si compone dei seguenti programmi:
 \end{itemize} 
 \subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
 \subsub{NAT}
-Network Address Translation:
+Network Address Translation
+Il termine NAT indica un servizio svolto da un router.
+ Ogni messaggio TCP/IP è caratterizzato da un specifica di provenienza ed una specifica di destinazione.
+ Ciascuna di queste è composta da due parti:
+ \begin{itemize}
+ 	\item L’indirizzo IP che identifica il nodo di rete (solitamente rappresentato mediante quattro cifre decimali comprese fra 0 e 255, ad esempio:
+ 	195.204.33.12) 
+ 	\item Il port, che identifica, all’interno del particolare nodo di rete, quale programma riceve effettivamente il messaggio.
+ \end{itemize}
+ 
+ Nel funzionamento base della rete Internet,ciascun nodo viene univocamente identificato mediante il suo numero IP1 e non può essere contemporaneamente usato da alcun altro nodo in nessun punto della rete.
+ La funzione NAT consiste nel “mascherare” dietro un unico indirizzo IP un’intera LAN.
+ Il meccanismo di funzionamento è
+ piuttosto semplice: a tutti i nodi della LAN vengono assegnati numeri in modo arbitrario, quindi anche utilizzando insiemi di numeri già utilizzati da altre
+ LAN. All’interno della LAN questi numeri funzionano
+ perfettamente: i nodi sono in grado di comunicare fra loro usando questi indirizzi.
+ Il problema nasce quando un nodo interno alla LAN deve
+ comunicare con l’esterno: il suo indirizzo entrerebbe infatti in conflitto con qualche altro nodo di rete che usa lo stesso numero. Il router allora effettua
+ una “traduzione dell’indirizzo”, ovvero cambia la specifica di provenienza dell’indirizzo assegnando un nuovo numero di port (che non sia già
+ utilizzato) e cambiando il numero IP nel numero ufficialmente assegnato.
 \end{document}
