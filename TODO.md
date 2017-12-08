@@ -14,8 +14,6 @@
   + Tipi di trasmissione
     + Encoding #
     + ...
-  + Sottolivelli
-    + LLC
   + Protocolli di secondo livello
     + BSC #
     + HDLC #
@@ -31,6 +29,8 @@
   + Qualità delle trasmissioni 
   + ...
 + Livello di Collegamento
+  + Sottolivelli
+    + LLC
 + Livello di Rete #
 + Livello di Trasporto
 + Livello delle Applicazioni
