@@ -1,4 +1,4 @@
-#### Come modificare quetso file:
+#### Come modificare questo file:
 + Aggiungi alle scalette gli argomenti da fare/rivedere.
 + Prima di lavorare ad un argomento controlla non lo stia facendo qualcun'altro.
 + Quando lavori ad un argomento elencato marcalo con # e scrivi cosa stai facendo nella tabella a piè di pagina.
@@ -7,6 +7,7 @@
 ### Cosa c'è da fare
 + Livello Fisico
   + Modem
+  + Protocolli
     + ADSL #
   + Protocolli di primo livello
 + Livello di Collegamento
