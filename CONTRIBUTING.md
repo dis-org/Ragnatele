@@ -35,8 +35,7 @@ Ci trovi al DMI UniPG.
 	2. ` $git pull ` in ogni altro caso
 * Per condividere il tuo lavoro (ad ogni modifica importante)
 	1. ` $git status ` controlla lo stato delle cose
-	2. `$git add . ` traccia tutti i file: non preoccuparti di eventuali file intermedi ottenuti in compilazione, il 
-` .gitignore ` li ignora
+	2. `$git add . ` se devi aggiungere immagini
 	1. ` $git commit -a -m "Breve messaggio di commit in cui spieghi il tuo lavoro" `
 	2. ` $git push ` carica online il tuo lavoro
 
