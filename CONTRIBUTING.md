@@ -17,6 +17,7 @@ testo, equivale a ` \nameref{} `.
 * Ugualmente, se hai bisogno di creare una piccola sezione non indicizzata *all'interno di una sotto-sottosezione*, utilizza il tag `\para{titolo_paragrafo}`.
 * `\image[nomefile.ext][scale=0.x]{Descrizione}`inserisce un'immagine.
 * `\boximage[nomefile.ext][scale=0.x]{Descrizione}` inserisce un'immagine riquadrata.
+
 (NB: le immagini devono essere salvate nella cartella `images/`);
 
 ### Se stai facendo un fork con l'intenzione di aprire una pull-request
