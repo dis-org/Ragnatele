@@ -23,7 +23,7 @@
   + Servizi di rete 
     + SNMP #
     + HTTP
-  + Posta elettronica
+  + Posta elettronica #
 
 ### Cosa va rivisto
 + Livello Fisico
@@ -55,4 +55,4 @@
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Routing            |
 | Giorgio Mazza      | Shizen39     | metric   | scrittura | DNS                |
-| Tommaso Ricci      | Batto1300    | Tommaso  | revisione | Servizi di rete    |
+| Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
