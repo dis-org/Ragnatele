@@ -27,17 +27,17 @@ Ci trovi al DMI UniPG.
 
 ### Se fai parte della Disorganizzazione
 * Per creare un tuo branch (da farsi una sola volta) utilizzare i seguenti comandi:
-	1. ` $git branch nome_branch //creazione branch `
-	2. ` $git checkout nome_branch //il nuovo branch viene impostato come tuo spazio di lavoro `
-	3. ` $git push --set-upstream origin *nome_branch* //creazione branch online, su GitHub `
+	1. ` $git branch nome_branch ` creazione branch 
+	2. ` $git checkout nome_branch ` imposta il nuovo branch come tuo spazio di lavoro 
+	3. ` $git push --set-upstream origin *nome_branch* ` crea il branch su GitHub
 * Prima di fare modifiche:
-	1. ` $git pull origin master //se harisont ha comunicato di aver effettuato il merge `
-	2. ` $git pull //in ogni altro caso `
+	1. ` $git pull origin master ` quando harisont ha effettuato il merge
+	2. ` $git pull ` in ogni altro caso
 * Per condividere il tuo lavoro (ad ogni modifica importante)
-	1. ` $git status //controlla lo stato delle cose `
-	2. `$git add . //traccia tutti i file: non preoccuparti di eventuali file intermedi ottenuti in compilazione, il 
-.gitignore li ignora `
+	1. ` $git status ` controlla lo stato delle cose
+	2. `$git add . ` traccia tutti i file: non preoccuparti di eventuali file intermedi ottenuti in compilazione, il 
+` .gitignore ` li ignora
 	1. ` $git commit -a -m "Breve messaggio di commit in cui spieghi il tuo lavoro" `
-	2. ` $git push //carica online il tuo lavoro `
+	2. ` $git push ` carica online il tuo lavoro
 
 [TODO.md]: https://github.com/Disorganizzazione/Ragnatele/blob/master/TODO.md
