@@ -40,4 +40,5 @@ Ci trovi al DMI UniPG.
 	1. ` $git commit -a -m "Breve messaggio di commit in cui spieghi il tuo lavoro" `
 	2. ` $git push ` carica online il tuo lavoro
 * Apri la pull-request su GitHub
+
 [TODO.md]: https://github.com/Disorganizzazione/Ragnatele/blob/master/TODO.md
