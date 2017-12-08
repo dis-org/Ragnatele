@@ -9,10 +9,9 @@ Nel file [TODO.md] trovi la lista degli argomenti da rivedere, da aggiungere e q
 Invia un file .txt (no altri formati) a uzkamascio@gmail.com contenente il testo e le indicazioni sulla sezione in cui collocarlo.
 
 ### Comandi di LaTeX personalizzati
-* ` \italic{} ` per parti di codice e comandi da terminale menzionati nel testo, equivale a ` \textit{} `.;
+* ` \italic{} ` equivale a ` \textit{} `;
 * ` \code{} ` per parti di codice e comandi da terminale menzionati nel testo, equivale a ` \texttt{} `.;
-* ` \vedi{Nome_sottosezione} ` (si rispettino eventuali maiuscole iniziali) per creare riferimenti all'interno del 
-testo, equivale a ` \nameref{} `.
+* ` \vedi{Nome_sottosezione} ` (si rispettino eventuali maiuscole iniziali) per creare riferimenti interni equivale a ` \nameref{} `.
 * ` \sec{} `, ` \sub{} ` e ` \subsub{} ` per creare sezioni e sottosezioni con label.
 * Ugualmente, se hai bisogno di creare una piccola sezione non indicizzata *all'interno di una sotto-sottosezione*, utilizza il tag `\para{titolo_paragrafo}`.
 * `\image[nomefile.ext][scale=0.x]{Descrizione}`inserisce un'immagine.
