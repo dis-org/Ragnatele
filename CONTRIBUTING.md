@@ -31,12 +31,13 @@ Ci trovi al DMI UniPG.
 	2. ` $git checkout nome_branch ` imposta il nuovo branch come tuo spazio di lavoro 
 	3. ` $git push --set-upstream origin *nome_branch* ` crea il branch su GitHub
 * Prima di fare modifiche:
-	1. ` $git pull origin master ` quando harisont ha effettuato il merge
-	2. ` $git pull ` in ogni altro caso
-* Per condividere il tuo lavoro (ad ogni modifica importante)
+	1. ` $git pull origin master ` per allinearti con il master branch
+	1. modifica il [TODO.md] direttamente da GitHub (assicurati di essere sul master branch)
+* Quando hai finito di fare quello che stavi facendo:
 	1. ` $git status ` controlla lo stato delle cose
-	2. `$git add . ` se devi aggiungere immagini
+	2. ` $git add . ` se devi aggiungere immagini
+	1.  modifica il [TODO.md] localmente
 	1. ` $git commit -a -m "Breve messaggio di commit in cui spieghi il tuo lavoro" `
 	2. ` $git push ` carica online il tuo lavoro
-
+* Apri la pull-request su GitHub
 [TODO.md]: https://github.com/Disorganizzazione/Ragnatele/blob/master/TODO.md
