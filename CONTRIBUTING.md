@@ -15,12 +15,9 @@ Invia un file .txt (no altri formati) a uzkamascio@gmail.com contenente il testo
 testo, equivale a ` \nameref{} `.
 * ` \sec{} `, ` \sub{} ` e ` \subsub{} ` per creare sezioni e sottosezioni con label.
 * Ugualmente, se hai bisogno di creare una piccola sezione non indicizzata *all'interno di una sotto-sottosezione*, utilizza il tag `\para{titolo_paragrafo}`.
-* Inserisci le immagini in uno dei due modi seguenti:
-```
-\image[nomefile.ext][scale=0.x]{Descrizione} %senza bordo
-\boximage[nomefile.ext][scale=0.x]{Descrizione} %con bordo
-```
-(NB: l'immagine deve essere salvata nella cartella `images`);
+* `\image[nomefile.ext][scale=0.x]{Descrizione}`inserisce un'immagine.
+* `\boximage[nomefile.ext][scale=0.x]{Descrizione}` inserisce un'immagine riquadrata.
+(NB: le immagini devono essere salvate nella cartella `images/`);
 
 ### Se stai facendo un fork con l'intenzione di aprire una pull-request
 Prima di cominciare comunicaci chi sei e su che parte vuoi lavorare aprendo una pull-request del [TODO.md].
