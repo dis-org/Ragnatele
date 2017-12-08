@@ -36,9 +36,9 @@ Ci trovi al DMI UniPG.
 * Quando hai finito di fare quello che stavi facendo:
 	1. ` $git status ` controlla lo stato delle cose
 	2. ` $git add . ` se devi aggiungere immagini
-	1. modifica il [TODO.md] direttamente da GitHub (assicurati di essere sul master branch)
 	1. ` $git commit -a -m "Breve messaggio di commit in cui spieghi il tuo lavoro" `
 	2. ` $git push ` carica online il tuo lavoro
-* Apri la pull-request su GitHub
+	1. modifica il [TODO.md] direttamente da GitHub (assicurati di essere sul master branch)
+	4. Apri la pull-request su GitHub
 
 [TODO.md]: https://github.com/Disorganizzazione/Ragnatele/blob/master/TODO.md
