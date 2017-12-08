@@ -31,8 +31,8 @@ Ci trovi al DMI UniPG.
 	2. ` $git checkout nome_branch ` imposta il nuovo branch come tuo spazio di lavoro 
 	3. ` $git push --set-upstream origin *nome_branch* ` crea il branch su GitHub
 * Prima di fare modifiche:
-	1. ` $git pull origin master ` per allinearti con il master branch
 	1. modifica il [TODO.md] direttamente da GitHub (assicurati di essere sul master branch)
+	1. ` $git pull origin master ` per allinearti con il master branch
 * Quando hai finito di fare quello che stavi facendo:
 	1. ` $git status ` controlla lo stato delle cose
 	2. ` $git add . ` se devi aggiungere immagini
