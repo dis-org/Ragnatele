@@ -31,9 +31,8 @@
   + Qualità delle trasmissioni 
   + ...
 + Livello di Collegamento
-  + ...
++ Livello di Rete #
 + Livello di Trasporto
-  + ...
 + Livello delle Applicazioni
   + Servizi di rete #
     + DNS #
@@ -51,6 +50,6 @@
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
-| Gioara Cuccu       | Gio93k       | border   |           |                    |
+| Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
 | Giorgio Mazza      | Shizen39     | metric   | scrittura | DNS                |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
