@@ -13,6 +13,7 @@
 + Livello di Collegamento
   + Tipi di trasmissione
     + Encoding #
+    + Hub e switch 
     + ...
   + Protocolli di secondo livello
     + BSC #
