@@ -12,13 +12,15 @@
   + Protocolli di primo livello
 + Livello di Collegamento
   + Tipi di trasmissione
-    + Encoding #
-    + Hub e switch 
+    + Encoding # 
     + ...
   + Protocolli di secondo livello
     + BSC #
     + HDLC #
     + PPP #
+  + Dispositivi
+    + Hub
+    + Switch
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP #
