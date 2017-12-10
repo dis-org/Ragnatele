@@ -407,6 +407,30 @@ I protocolli di secondo livello si dividono in due principali categorie:
 \subsub{HDLC}
 \subsub{PPP}
 
+\sub{Dispositivi}  %2° livello -> bridge e switch (hub è al 1°, è un repeater)
+Nel secondo livello OSI troviamo dispositivi di rete plug-and-play ed \textit{"intelligenti"}, che non si limitano alla sola replicazione del segnale ma sono in grado di riconoscere, nei segnali elettrici che ricevono dal mezzo trasmissivo, i dati organizzati in \textbf{frame}; Agiscono quindi sui frame ricevuti, gestendoli ed instradandoli, il tutto in modo trasparente.
+\subsub{Bridge} Un bridge \textit{(ponte)} è un dispositivo di rete munito di porte con cui è collegato a diversi \textbf{\textit{segmenti di rete}} (generalmente due o più LAN) da cui riceve dati e li instrada selettivamente verso una porta destinataria
+\para{Funzionamento} Quando riceve un pacchetto su una porta, riconosce i frame, estrae gli indirizzi sorgente e destinazione e cerca di capire dall'indirizzo del \textit{destinatario} se questi si trova nello \textbf{stesso segmento} del \textit{mittente} oppure no \textbf{\textit{(Filtering)}}. Nel primo caso non inoltra il frame (il destinatario condivide lo stesso bus). \\Nel secondo caso il bridge inoltra il frame verso il \textit{segmento del destinatario} \textbf{\textit{(Forwarding)}}; Se non sa dove si trova, il bridge inoltra il frame su tutte le porte \textbf{\textit{(Flooding)}}. \\Per instradare i frames, il bridge mantiene una tabella (di \textbf{forwarding}) di indirizzi MAC per ogni porta, così è in grado di capire verso quale porta, e quindi quale segmento, inoltrare il frame. 
+\para{Tipologie} In base alle tipologie delle due reti si distinguono:
+\begin{itemize}
+\item \textbf{Transparent Bridge}: collega 2 LAN Ethernet o IEEE 802.3
+\item \textbf{Source Routing Bridge}: collega 2 LAN Token Ring
+\item \textbf{Translational Bridge}: collega 2 LAN di tipo diverso (deve adattarsi alle diverse regole trasmissive)
+\end{itemize}
+%img [Ciascun segmento di rete, collegato ad una porta di un bridge, costituisce un \textbf{dominio di collisione} \footnote{insieme di nodi che concorrono per accedere allo stesso mezzo trasmissivo per successivamente trasmettere} separato]
+
+\subsub{Switch} Uno switch \textit{(commutatore)} è un dispositivo molto simile al bridge, ma a differenza di quest'ultimo è collegato direttamente agli \textbf{\textit{host}} ed ha un numero di porte nettamente superiore.
+\para{Funzionamento} la funzione di instradamento è implementata mantenendo in un \textbf{buffer locale} tutti gli \textit{indirizzi MAC} degli host connessi alla rete, suddivisi per \textit{porta dello switch}.\\
+L'instradamento è analogo al bridge, ma nel caso in cui lo switch invia il pacchetto a tutte le porte (Flooding), il nodo destinatario -ricevuto il pacchetto- risponderà facendo sapere allo switch la sua porta ed il suo MAC address.\\
+Infine usando lo switch, non sono possibili collisioni ed è possibile usare la modalità \textbf{full duplex} (trasmissione contemporanea)
+%img [lo switch riduce la rete in un insieme di \textbf{domini di collisione} di dimensioni minime (al limite costituiti ognuno da un singolo host)]
+%implementazione LAN con switch???
+\end{itemize}
+
+
+
+
+
 \newpage\sec{Livello di Rete}
 
 %Claudio & Giorgio ---------------------------------------------------------------------------------------------------------------------
