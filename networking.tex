@@ -151,7 +151,7 @@ Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente
 \end{itemize}
 La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
 \
-\boximage[segnali_sin.png][scale=0.8]{Rappresentazione grafica di un segnale sinusoidale}
+\boximage[segnali_sin.png][scale=0.5]{Rappresentazione grafica di un segnale sinusoidale}
 
 \subsubsection{Lunghezza d'onda}
 In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f$ (dove $c$ è la velocità di propagazione del segnale).
@@ -170,7 +170,6 @@ Come già accennato in precedenza, é lo strato fisico che determina in larga pa
 \item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
-\para{DSL}
 \subsub{Criteri di valutazione in base alle prestazioni}
 \begin{itemize}
 \item \textbf{ritardo}: tempo effettivo necessario per il transito dei dati;
@@ -293,7 +292,7 @@ Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzional
 \begin{itemize}
 \item \textbf{\vedi{Modem in banda fonica}};
 \item \textbf{Modem ISDN} (128 kbps);
-\item \textbf{Modem xDLS} (640 kbps-100 Mbps);
+\item \textbf{Modem x\vedi{DSL}} (640 kbps-100 Mbps);
 \item \textbf{Modem per PLC} (Power Line Communications), comunicazioni su linea elettrica (640 kbps-200 Mbps);
 \item \textbf{Modem GPRS, UMTS e HSDPA}, spesso integrati nei cellulari o come PC card;
 \item \textbf{Modem in banda base}, utilizzati per scopi industriali su linee private o noleggiate, che mettono in comunicazione diretta due utenti su doppino telefonico.
@@ -326,6 +325,11 @@ Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \
 \item PCM upstream, che permette di effettuare trasmissioni digitali a più alta velocità (fino a $48 kbit/s$) sulle linee telefoniche analogiche.
 \end{itemize}
 \end{itemize}
+\subsub{Protocolli di primo livello}
+\para{DSL}
+Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su doppino telefonico, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa come \textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
+Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza vengono tripartite, consentendo di utilizzare  allo stesso tempo un'unica linea telefonica sia per il servizio ADSL che per le chiamate telefoniche. L'ADSL è generalmente installata solo per brevi distanze dalla centrale telefonica (l'ultimo miglio), o comunque meno di 4 km.
+\boximage[adsl_band.jpg][scale=0.4]{Tripartizione della banda tramite splitter}
 
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
@@ -392,7 +396,7 @@ Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast
 \subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
 
-\subsection{Protocolli}
+\subsection{Protocolli di secondo livello}
 I protocolli di secondo livello si dividono in due principali categorie:
 \begin{itemize}
 	\item\textbf{Asincroni}: detti anche \textbf{start/stop}, sono i primi ad essere stati sviluppati.\\
@@ -768,7 +772,7 @@ Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC}
 \subsub{Porta} 
 Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. Le porte $0-1023$ sono quelle raccomandate per i protocolli \vedi{TCP} e \vedi{UDP}.
 
-\subsection{Protocolli} 
+\subsection{Protocolli di trasporto} 
 \subsub{UDP} 
 L' UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, poco affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle porte.
 
