@@ -6,10 +6,7 @@
 
 ### Cosa c'è da fare
 + Livello Fisico
-  + Modem
-  + Protocolli
-    + ADSL #
-  + Protocolli di primo livello
+  + Interfacce di rete #
 + Livello di Collegamento
   + Tipi di trasmissione
     + Encoding # 
@@ -48,7 +45,7 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Aranna Masciolini  | harisont     | hub      | scrittura | ADSL               |
+| Aranna Masciolini  | harisont     | hub      | scrittura | interfacce di rete |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
