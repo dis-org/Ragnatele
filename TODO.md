@@ -18,9 +18,9 @@
     + BSC #
     + HDLC #
     + PPP #
-  + Dispositivi
-    + Hub
-    + Switch
+  + Dispositivi #
+    + Hub #
+    + Switch #
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP #
@@ -38,7 +38,6 @@
 + Livello di Trasporto
 + Livello delle Applicazioni
   + Servizi di rete #
-    + DNS #
     + NAT
     + DHCP
 
@@ -54,5 +53,5 @@
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | scrittura | DNS                |
+| Giorgio Mazza      | Shizen39     | metric   | scrittura | Dispositivi 2° liv |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
