@@ -4,6 +4,7 @@ nell'indice, sentendoti libero di aggiungervi eventuali argomenti mancanti.
 
 ## Da dove cominciare
 Nel file [TODO.md] trovi la lista degli argomenti da rivedere, da aggiungere e quelli sui quali stanno lavorando gli altri.
+Ricordati inoltre di verificare che le fonti da cui hai attinto siano incluse nel [README.md] e, in caso contrario, aggiungile alla lista.
 
 ### Se non usi GitHub o non conosci il LaTeX
 Invia un file .txt (no altri formati) a uzkamascio@gmail.com contenente il testo e le indicazioni sulla sezione in cui collocarlo.
