@@ -889,23 +889,13 @@ Ad ogni dominio è associato un resource record (RR), file ASCII che contengono 
 
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
-\ \\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
-disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
 
-\paragraph{Configurazione del resolver}
-Il file di configurazione è uno solo \\(\code{/etc/resolv.conf}) le cui voci da inserire sono:
-\begin{itemize}
-\item \code{nameserver <address>}: indirizzo del nameserver (massimo 3 nei sitemi Unix)
-\item \code{domain <name>}: definisce il nome di dominio di default (aggiunto a sinistra di ogni nome che non contiene il carattere punto, in caso di fallimento omette i domini meno significativi fino a concatenare solo il TLD)
-\item \code{search <domain1>, <domain2>, ... <domainN>}: come domain, con la differenza che vengono contatenati per intero uno dopo l'altro finchè non si trova un riscontro.
-
-\end{itemize}
 \paragraph{Risoluzione}
 La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
-La risoluzione può essere \textit{statica} (mapping stabilito permanentemente tramite una host table) o \textit{dinamica} (mapping stabilito ad ogni avvio dell'host).\\
-Per associare un nome a un indirizzo IP un client chiama il risolutore, passandone come parametro il nome. \\Il risolutore invia un pacchetto \vedi{UDP} a un server DNS locale (\textit{primary server}) che cerca il nome e se è presente nella sua cache lo restituisce; in caso contrario interroga ricorsivamente i server partendo da un root server del TLD fino ad arrivare ai server autorevoli del nome richiesto (\textit{authoritative server}), i quali invieranno la loro risposta . Ora che l'applicativo conosce l'indirizzo IP, potrà stabilire una connessione \vedi{TCP} con il destinatario o inviargli pacchetti UDP.
+La risoluzione può essere \textbf{statica} (mapping stabilito permanentemente tramite una host table) o \textbf{dinamica} (mapping stabilito ad ogni avvio dell'host).\\
+Per eseguire la risoluzione il client chiama il risolutore, passandone come parametro il nome. \\Questo invia un pacchetto \vedi{UDP} a un server DNS locale (\textit{primary server}) che cerca il nome e se è presente nella sua cache lo restituisce; in caso contrario interroga ricorsivamente i server partendo da un root server del TLD fino ad arrivare ai server autorevoli del nome richiesto (\textit{authoritative server}), i quali invieranno la loro risposta al client.
 
-\paragraph{BIND} \textit{Berkeley Internet Name Domain} è il più comune demone DNS usato sui sistemi Unix, composto dai principali componenti del DNS come un server DNS (\textbf{named}) e una libreria di risoluzione (\textbf{resolver}), e strumenti per la verifica del corretto funzionamento del server (\textbf{nslookup}).\\
+\paragraph{BIND} \textit{Berkeley Internet Name Domain} è l'implementazione più comune del DNS su ambiente Unix ed è disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND è composto da una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.\\
 BIND può essere configurato come 
 \begin{itemize}
 \item \italic{\textbf{caching-only}} reindirizza ogni richiesta del resolver ad altri server e memorizza il risultato che ritornano in una cache locale
@@ -1045,6 +1035,17 @@ I principali componenti di uno zone file sono chiamati "standard resource record
 \item \textbf{MX} (Mail eXchanger): definisce il server \italic{[record data]} che gestisce la posta per un host o un dominio \italic{[name]}
 \item \textbf{CNAME} (Canonical NAME): definisce un alias per il nome di un host
 \end{itemize}
+\paragraph{Comandi:} Per avviare il servizio DNS si usa\\ \code{named [\begin{tabbing}
+\hspace*{1cm} \= \hspace*{2,5cm} \= \kill
+\> -c configfile \> \textit{//path di named.conf (default: /etc/named.conf)}\\
+\> -d level \> \textit{//attiva il debug, salvando i log in \$dir/named.run}\\
+\> -p port \> \textit{//porta a cui deve rispondere il servizio (default: 53)}\\
+\> -n ncpus \> \textit{//per sfruttare i sistemi multiprocessore}\\
+\> -t directory \> \textit{//cambio di directory dopo aver letto named.conf}\\
+\> -u user \> \textit{//utente che esegue named}\\] \end{tabbing}}
+Per avviare un tool di debugging (\textbf{dig}) si usa\\
+\code{dig @server hostname}\\
+e permette di interrogare un nameserver per ottenere informazioni  e verificarne la configurazione.
 \newpage
 
 \subsub{NIS}
