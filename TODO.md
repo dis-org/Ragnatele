@@ -17,12 +17,10 @@
     + BSC #
     + HDLC #
     + PPP #
-  + Dispositivi #
-    + Switch #
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP #
-    + HTTP
+    + HTTP #
     + NAT
   + Posta elettronica #
 
@@ -51,5 +49,5 @@
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | scrittura | Dispositivi 2° liv |
+| Giorgio Mazza      | Shizen39     | metric   | scrittura | HTTP               |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
