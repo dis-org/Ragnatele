@@ -299,10 +299,9 @@ Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzional
 \end{itemize}
 Ognuno dei modem suddetti può essere inoltre \textbf{interno} o \textbf{esterno} al \vedi{DTE}. Tra i modem \textbf{esterni}, in base al tipo di collegamento al DTE, si distinguono:
 \begin{itemize}
-\item \textbf{Modem seriali}, collegati con cavo seriale alle porte COM1 o COM2;
-\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2;
-\boximage[hw_ports.jpg][scale=0.5]{Porte seriali e parallele}
-\item \textbf{Modem USB}.
+\item \textbf{Modem seriali}, collegati con cavo seriale alle porte COM1 o COM2 (vedi \vedi{RS-232});
+\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfaccia parallela});
+\item \textbf{Modem \vedi{USB}}.
 \end{itemize}
 Tra i modem \textbf{interni} si distinguono invece:
 \begin{itemize}
@@ -332,7 +331,28 @@ Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza veng
 \boximage[adsl_band.jpg][scale=0.4]{Tripartizione della banda tramite splitter}
 Le velocità teoriche ottenibili sono dell'ordine degli 8Mbit/s per quel che riguarda il downstream e 800kbit/s per quanto riguarda l'upstream, ma lo stato delle linee e della bassa qualità del doppino le porta a circa 1,5Mbit/s in download e 256kbit/s in upload.
 Nonostante il fatto che le linee guida siano dettate dallo standard ANSI T1.423 Issue 1, categorie 1 e 2, questa tecnologia non é ancora totalmente standardizzata: ogni produttore di modem per ADSL propone la propria variante.
+\sub{Interfacce hardware} 
+Dal punto di vista fisico, un'interfaccia o porta è caratterizzata da un canale di trasmissione, identificato da un mezzo trasmissivo (ad esempio un cavo), due connettori e due porte o \textit{slot} poste agli estremi della trasmissione; dal punto di vista logico, da una modalità di trasmissione (seriale o parallela). 
+\subsub{Interfaccia parallela}
+Ormai obsoleta, sostituita in gran parte dei casi dall'interfaccia\vedi{USB}, originariamente monodirezionale, è stata impiegata soprattutto per collegare i \vedi{DTE} alle stampanti, ma le più di recente ne è stato sviluppato uno standard bidirezionale che permette anche il collegamento di dispositivi di input.
+Consente di trasferire 8 bit in parallelo nello standard \textbf{TTL}\footnote{Transistor-Transistor Logic: prima tecnologia di circuiti integrati diffusa su scala globale}.
+La porta parallela del DTE è un connettore femmina detto "a vaschetta" o DB 25, con 25 pin, mentre sulle periferiche è presente un connettore differente, detto Centronics, dal nome del primo costruttore. Alle due porte corrispondono chiaramente due diversi connettori maschio.
+\boximage[parallel.png][scale=0.5]{I due diversi connettori maschio dell'interfaccia parallela}
+Sul DTE si trovavano tipicamente da una a tre porte parallele, dette \textbf{LPT} (\textit{Line Printer Terminal}) 1, 2 e 3, a ciascuna delle quali sono assegnati uno specifico interrupt (IRQ 7 per LPT1) e tre indirizzi riservati contigui:
+\begin{itemize}
+\item il \textbf{registro dati}, contenente gli 8 bit da trasmettere;
+\item il \textbf{registro di stato}, accessibile in sola lettura e solo per cinque dei suoi bit, volti a descrivere lo stato della stampante;
+\item il \textbf{registro di controllo}, in sola scrittura, che mette a disposizione altri 4 bit.
+\end{itemize}
 
+\subsub{Interfacce seriali}
+\para{RS-232}
+L'RS-232 è uno standard che definisce per la realizzazione di una trasmissione seriale tra un \vedi{DTE} e un \vedi{DCE}, in modalità sia sincrona che asincrona. Dal momento che il numero di linee effettivamente utilizzate varia sensibilmente a seconda del tipo di collegamento e dei modem eventualmente impiegati, per questa interfaccia esistono due diversi tipi di connettore: quello a 25 pin e quello ridotto, a 9 pin, sufficiente per molte applicazioni.
+\boximage[rs232.jpg][scale=0.5]{Uso di ogni linea nei due tipi di connettore RS-232}
+\para{USB}
+Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l' USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare collegamenti senza necessità di spegnere le macchine, che riconoscono automaticamente le periferiche (si definisce pertanto un'interfaccia \textit{plug-and-play}).
+Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferiche collegate ad albero, attraverso  \vedi{Hub}. Supporta fino a un massimo di 127 periferiche per gestore, ma nel computo vanno inclusi anche gli hub e il gestore stesso. Attualmente, la massima velocità di trasmissione reale raggiunta è 7,2 Gbps (versione USB 3.1).
+%in realtà, siccome l'USB si usa molto, si potrebbe anche approfondire (le slides però dicono poco), lo faccio? 
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
 In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
@@ -553,11 +573,6 @@ L'instradamento è analogo al bridge, ma nel caso in cui lo switch invia il pacc
 Infine usando lo switch, non sono possibili collisioni ed è possibile usare la modalità \textbf{full duplex} (trasmissione contemporanea)
 %img [lo switch riduce la rete in un insieme di \textbf{domini di collisione} di dimensioni minime (al limite costituiti ognuno da un singolo host)]
 %implementazione LAN con switch???
-\end{itemize}
-
-
-
-
 
 \newpage\sec{Livello di Rete}
 
