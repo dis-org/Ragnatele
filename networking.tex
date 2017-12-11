@@ -344,13 +344,15 @@ Sul DTE si trovavano tipicamente da una a tre porte parallele, dette \textbf{LPT
 \item il \textbf{registro di stato}, accessibile in sola lettura e solo per cinque dei suoi bit, volti a descrivere lo stato della stampante;
 \item il \textbf{registro di controllo}, in sola scrittura, che mette a disposizione altri 4 bit.
 \end{itemize}
+
 \subsub{Interfacce seriali}
 \para{RS-232}
 L'RS-232 è uno standard che definisce per la realizzazione di una trasmissione seriale tra un \vedi{DTE} e un \vedi{DCE}, in modalità sia sincrona che asincrona. Dal momento che il numero di linee effettivamente utilizzate varia sensibilmente a seconda del tipo di collegamento e dei modem eventualmente impiegati, per questa interfaccia esistono due diversi tipi di connettore: quello a 25 pin e quello ridotto, a 9 pin, sufficiente per molte applicazioni.
 \boximage[rs232.jpg][scale=0.5]{Uso di ogni linea nei due tipi di connettore RS-232}
-
 \para{USB}
-
+Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l' USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare collegamenti senza necessità di spegnere le macchine, che riconoscono automaticamente le periferiche (si definisce pertanto un'interfaccia \textit{plug-and-play}).
+Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferiche collegate ad albero, attraverso  \vedi{Hub}. Supporta fino a un massimo di 127 periferiche per gestore, ma nel computo vanno inclusi anche gli hub e il gestore stesso. Attualmente, la massima velocità di trasmissione reale raggiunta è 7,2 Gbps (versione USB 3.1).
+%in realtà, siccome l'USB si usa molto, si potrebbe anche approfondire (le slides però dicono poco), lo faccio? 
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
 In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
