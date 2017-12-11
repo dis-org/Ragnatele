@@ -6,6 +6,8 @@
 
 ### Cosa c'è da fare
 + Livello Fisico
+  + Dispositivi
+    + Hub #
   + Interfacce di rete #
 + Livello di Collegamento
   + Tipi di trasmissione
@@ -16,7 +18,6 @@
     + HDLC #
     + PPP #
   + Dispositivi #
-    + Hub #
     + Switch #
 + Livello delle Applicazioni
   + Servizi di rete 
