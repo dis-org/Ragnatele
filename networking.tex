@@ -399,13 +399,139 @@ I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
 \subsection{Protocolli di secondo livello}
 I protocolli di secondo livello si dividono in due principali categorie:
 \begin{itemize}
-	\item\textbf{Asincroni}: detti anche \textbf{start/stop}, sono i primi ad essere stati sviluppati.\\
-	Cose
-	\item\textbf{Sincroni}:
+	\item\textbf{\vedi{Asincrona}}:
+	consentono soltanto trasmissioni di caratteri singoli.
+	\\L'asincronia è dovuta al fatto che l'intervallo di tempo tra l'invio di due caratteri non è precisabile. È comunque obbligatorio definire un \italic{bit time} di durata del carattere.
+	\\I protocolli asincroni sono detti anche \textbf{start/stop}: ogni carattere è composto da un \textit{bit di start}, dal bit del carattere vero e proprio che si vuole trasmettere, da un bit di parità (volto al controllo dell'errore) e da uno o due \textit{bit di stop}.
+	\\L'utilizzo di questi bit in forma, rispettivamente, di \textit{header} e \textit{trailer} consente al ricevente di distinguere i singoli byte trasmessi.
+	%si potrebbe aggiungere l'approfondimento sul protocollo XMODEM, ma anche no
+	\item\textbf{\vedi{Sincrona}}:
+	mittente e destinatario sincronizzano i loro clock grazie a particolari caratteri.
+	\\A loro volta si suddividono a seconda della trasmissione:
+	\begin{itemize}
+		\item[-]\vedi{Orientata al carattere}: utilizzano il carattere di sincronismo SYN.
+		\\La lunghezza del frame dipende dal protocollo utilizzato.
+		\\Appartiene a questa tipologia il protocollo \vedi{BSC}.
+		\item[-]\vedi{Orientata al bit}: la sincronia è garantita da 2 byte detti \italic{flag} posti uno all'inizio e l'altro alla fine del pacchetto.
+		\\Appartiene a questa tipologia il protocollo \vedi{HDLC}.
+	\end{itemize}
+	
 \end{itemize}
 \subsub{BSC}
+Introdotto dalla IBM, il Binary Synchronous Communication è un protocollo sincrono orientato al carattere. Il flusso trasmissivo è di tipo \vedi{Half-Duplex} con velocità tra 1200 e 19200 bps.
+\\Il frame è composto da circa cento byte, divisi tra messaggio da trasmettere e caratteri di controllo.
+\\La codifica binaria utilizzata può essere ASCII, EBCDIC (Extended Binary Coded Decimal Interchange Code) oppure SBT (Six Bit Transcode).
+\\In base alla rete su cui opera, il BSC si classifica in:
+\begin{itemize}
+	\item BSC1: rete dedicata punto-punto;
+	\item BSC2: rete commutata punto-punto;
+	\item BSC3: rete multipunto.
+\end{itemize}
+Nei due casi di rete punto-punto il trasmettitore invia caratteri di
+sincronismo (PAD o SYN) seguiti da ENQ; dato che i \vedi{DTE} sono sia trasmettitori che riceventi, possono entrare in contesa qualora entrambi cercassero di trasmettere nello stesso momento: uno dei due diventerà una
+stazione primaria che ripete l'invio, mentre l'altro sarà una stazione
+secondaria che dovrà rinunciare. Il ricevente risponderà con ACK se è pronto, oppure NAK se non può acquisire i dati. Il collegamento viene terminato con il messaggio EOT.
+\\Nel caso di rete multi-punto l'elaborazione centrale effettua un'interrogazione ciclica (\italic{pollic}) per individuare il terminale a cui collegarsi (il protocollo deve conoscere gli indirizzi del destinatario).
+
+\boximage[BSC_codes.png][scale=0.8]{caratteri di controllo nel BSC}
+
+L’efficienza del protocollo BSC non è molto elevata sia per il tipo di trasmissione half-duplex, sia per la presenza di un alto numero di caratteri di controllo, che sottraggono capacità di rappresentazione ai caratteri del messaggio vero e proprio.
+
 \subsub{HDLC}
+Il protocollo High Level Data Link Control costituisce lo standard ISO per trasmissioni sincrone \vedi{Full-Duplex}; è orientato ai bit e utilizzato su reti di grandi dimensioni.
+\\Prevede 3 tipi di terminali:
+\begin{itemize}
+	\item Stazione primaria: detta anche \italic{master}, ha il compito di controllare il collegamento inviando i comandi di controllo;
+	\item Stazione secondaria: agisce in base ai comandi della stazione primaria e può spedire soltanto pacchetti di risposta;
+	\item Stazione combinata: ha le caratteristiche di entrambi i terminali sopra: può inviare sia comandi sia risposte.
+\end{itemize}
+
+La connessione fra mittente e destinatario è detta \textbf{bilanciata} se sono entrambi stazioni combinate; al contrario, se vi è una stazione primaria che comunica con una o più stazioni secondarie si parla di connessione \textbf{sbilanciata}: in questo caso il protocollo lavora in modalità \vedi{Half-Duplex} ed i messaggi inviati dal master prendono il nome di \italic{command}, mentre quelli delle stazioni secondarie sono detti \italic{response}.
+\\Nello specifico, HDLC può lavorare in 3 diverse modalità:
+\begin{itemize}
+	\item \textbf{NRM} (Normal Response Mode): connessione half-duplex sbilanciata.
+	\\Le stazioni secondarie possono trasmettere anche senza autorizzazione esplicita del master;
+	\item \textbf{ABM} (Asynchronous Balanced Mode): bilanciata full-duplex tra due stazioni paritetiche;
+	\item \textbf{ARM} (Asynchronous Response Mode): come NRM ma limitata a due stazioni.
+\end{itemize}
+
+Il protocollo HDLC prevede che, a seconda delle necessità, le stazioni possano scambiarsi \textit{frame} di 3 tipologie:
+\begin{itemize}
+	\item \textbf{I-frame}: il tipo \italic{\textbf{I}nformation} è usato per trasportare i dati dal \vedi{Livello di Rete}. Può contenere, in aggiunta, comandi per il controllo del flusso e degli errori;
+	
+	\item \textbf{S-frame}: il tipo \italic{\textbf{S}upervisory} è usato esclusivamente per controllare il flusso e gli errori;
+	
+	\item \textbf{U-frame}: il tipo \italic{\textbf{U}nnumbered} fornisce funzioni di	controllo aggiuntive, come informazioni per iniziare/terminare la connessione, ma è usato anche per l'invio di dati in modalità \italic{connectionless}.
+\end{itemize}
+
+I frame sono divisi nei seguenti sottocampi:
+\begin{itemize}
+	\item \textbf{flag}: due sequenze di 8 bit \code{01111110} utilizzate come inizio e fine della trasmissione. La stessa sequenza viene trasmessa continuamente dalle stazioni in \italic{idle} al fine di garantire sincronizzazione.
+	\\La forma del flag rende necessario ricorrere alla tecnica del \italic{bit stuffing}, cioè aggiungere un bit a \code{0} in mezzo ad un flusso troppo lungo di bit a \code{1}, al fine di non interpretare messaggi con sei o più \code{1} consecutivi come flag.
+	Sarà compito del ricevente rimuovere il bit \code{0} che viene inserito dopo cinque bit \code{1} consecutivi, così da ricostruire correttamente il messaggio;
+	\item \textbf{indirizzo}: è un campo di 8 bit che può essere anche esteso previa decisione tra le stazioni: identifica la stazione che ha trasmesso o che deve ricevere il frame;
+	\item \textbf{controllo}: 8 bit o 16 bit contenenti informazioni di controllo o definizione del pacchetto. La struttura di questo campo varia in base al tipo di frame (N.B: il bit a sinistra è il meno significativo):
+	\begin{itemize}
+		\item[-]\italic{Information}: la forma è \code{0SSSPRRR}, dove \code{SSS} conta i frame trasmessi, \code{RRR} conta quelli ricevuti.
+		\\\code{P} è detto bit P/F (\italic{Poll/Final}) e, nelle connessioni \textbf{sbilanciate}, è posto a \code{1} nel frame in cui il master invita la stazione secondaria a trasmettere (\italic{poll}), la quale utilizzerà \code{P}=\code{1} solo nell'ultimo frame che invia (\italic{final}).
+		Nelle connessioni \textbf{bilanciate} il bit P/F posto a \code{1} equivale alla richiesta (o alla relativa risposta) di \textit{acknowledgment} del frame;
+		
+		\item[-]\italic{Supervisory}: la forma è \code{10TTPRRR}, in cui i primi due bit sono fissi ed identificano il tipo S-frame; \code{P} ha lo scopo visto in precedenza.
+		\\I due bit \code{TT} comunicano che:
+		\begin{itemize}
+			\item[00]= \italic{Received Ready}: sono stati ricevuti tutti i frame, la stazione è pronta a ricevere;
+			\item[01]= \italic{Reject}: c'è stato un problema di acquisizione, è necessario ritrasmettere tutti i frame a partire da \code{RRR};
+			\item[10]= \italic{Receive Not Ready}: la stazione non può ricevere;
+			\item[11]= \italic{Selective Reject}: invito a rinviare il frame numero \code{RRR}.
+		\end{itemize}
+		
+		\item[-]\italic{Unnumbered}: la forma è \code{11MMPMMM}.
+		I possibili messaggi per avviare e controllare la connessione sono mostrati in figura:
+		\boximage[hdlc_uframe.jpg][scale=0.6]{Comandi di controllo  più comuni negli U-frame}
+		 
+	\end{itemize}
+	\item \textbf{campo informativo}: contiene i dati significativi da trasmettere. La lunghezza è arbitraria in quanto sarà poi il flag di chiusura ad identificare la fine del pacchetto.
+	\\N.B: questo campo è assente nei S-frame;
+	\item \textbf{campo FCS} (Frame Check Sequence): 16 o 32 bit utilizzati per rilevare evenutuali errori di trasmissione.
+\end{itemize}
+\boximage[hdlc_frames.png][scale=0.62]{Struttura dei frame in HDLC con differenze nel campo di controllo in base alla tipologia di pacchetto}
+%immagine frame
+
+\subsub{SDLC}
+HDLC deriva da SDLC (Synchronous Data Link Control), un protocollo definito da IBM negli anni '70.
+Rispetto ad HDLC, il protocollo SDLC:
+\begin{itemize}
+	\item ha il campo FCS di 8 bit;
+	\item supporta configurazioni a loop, come il token ring;
+	\item può lavorare solo in NRM;
+\end{itemize}
+
 \subsub{PPP}
+Il Point-to-Point Protocol è, come intuibile, un protocollo usato nelle connessioni punto-punto e trova la sua più ampia diffusione in ambito \vedi{WAN}.
+\\Si può definire un'estensione del protocollo \vedi{HDLC} in quanto il funzionamento è analogo (RFC 1662). Utilizza solo \textbf{U-frame}, la cui struttura differisce da quelli in HDLC nei seguenti campi:
+\begin{itemize}
+	\item \textbf{indirizzo}: i suoi 8 bit sono sempre \code{11111111} dal momento che le trasmissioni avvengono esclusivamente in \textit{broadcast};
+	\item \textbf{controllo}: solo 8 bit che, mentre in HDLC hanno struttura \code{11MMPMMM}, in PPP sono del valore fisso \code{11000000} e rappresentano il comando UI (\textit{unnambered information}), ovvero un messaggio che contiene dati;
+	\item \textbf{campo informativo}: la lunghezza è limitata tra 0 e 1500 ottetti ma può essere ampliata facendo uso del campo supplementare \textbf{padding}.
+\end{itemize}
+Inoltre, il PPP prevede un secondo campo che non compare in HDLC: 
+\begin{itemize}
+	\item \textbf{protocol}: fatto di 1 o 2 \textit{byte}, serve ad identificare il protocollo incapsulato nel frame.
+\end{itemize}
+
+\boximage[PPP_frame.png][scale=0.6]{Struttura dei frame in PPP}
+
+Per le operazioni del \vedi{Livello di Collegamento} il PPP si avvale del protocollo LCP (Link Control Protocol), mentre per le negoziazioni con il \vedi{Livello di Rete} impiega protocolli del tipo NCP (Network Control Protocol).
+\\Di seguito sono specificate le fasi di una connessione in PPP:
+\begin{itemize}
+	\item[1.] \textbf{Definizione della connessione}: avviene il tentativo di connessione tramite LCP (Link Control Protocol), che provvederà a gestire i pacchetti di configurazione scambiati tra gli host interessati.
+	
+	\item[2.] \textbf{Autenticazione} (opzionale): permette alle parti di autenticarsi prima di stabilire la connessione, se lo prevedono.
+	
+	\item[3.] \textbf{Configurazione protocollo di rete}: ogni protocollo viene configurato separatamente tramite il proprio NCP (Network Control Protocol). Avviene inoltre la chiusura dei protocolli del \vedi{Livello di Rete}.
+	
+	\item[4.] \textbf{Terminazione}: la connessione viene interrotta. Può accadere a seguito del fallimento della fase 2, oppure se la connessione cade improvvisamente o se l'utente decide volontariamente di interromperla.
+\end{itemize}
 
 \newpage\sec{Livello di Rete}
 
