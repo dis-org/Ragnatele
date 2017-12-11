@@ -827,6 +827,8 @@ L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url
 \item \code{sftp}, che sostituisce \vedi{FTP};
 \item \code{ssh-add}, \code{ssh-agent} ed \code{ssh-keygen}, una serie di programmi per la generazione e la gestione delle chiavi;
 \item i demoni \code{sshd} ed \code{sftp-server}.
+\boximage[ssh_example.png][scale=0.5]{Connessione SSH ad un instanza Linux Amazon, notare la sintassi ssh -i ChiavePrivata NomeUtente@IndirizzoIp}
+
 \end{itemize}
 \subsub{DHCP} %può contenere tracce di Tasso
 Il protocollo DHCP (Dynamic Host Configuration Protocol) permette agli \italic{host} di una rete locale di ricevere ad ogni richiesta di accesso a una rete IP tutte le informazioni di configurazione necessarie a connettersi ed operare.
@@ -895,6 +897,7 @@ Ad ogni dominio è associato un resource record (RR), file ASCII che contengono 
 
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
+
 \ \\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
 disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
 
@@ -1087,6 +1090,35 @@ Il termine NAT indica un servizio svolto da un router.
  perfettamente: i nodi sono in grado di comunicare fra loro usando questi indirizzi.
  Il problema nasce quando un nodo interno alla LAN deve
  comunicare con l’esterno: il suo indirizzo entrerebbe infatti in conflitto con qualche altro nodo di rete che usa lo stesso numero. Il router allora effettua
- una “traduzione dell’indirizzo”, ovvero cambia la specifica di provenienza dell’indirizzo assegnando un nuovo numero di port (che non sia già
- utilizzato) e cambiando il numero IP nel numero ufficialmente assegnato.
+ una “traduzione dell’indirizzo”, ovvero cambia la specifica di provenienza dell’indirizzo assegnando un nuovo numero di port (che non sia giàutilizzato) e cambiando il numero IP nel numero ufficialmente assegnato.
+ 
+ \subsub {Posta Elettronica}
+La Posta Elettronica \'e composta da due programmi il Mail User Agent ed il Programma di Trasporto. Il primo \'e un interfaccia verso l'applicazione utilizzata il secondo \'e
+
+
+ 
+ 
+ 
+ 
+ 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 \end{document}
