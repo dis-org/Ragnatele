@@ -17,7 +17,6 @@
   + Servizi di rete 
     + SNMP #
     + HTTP #
-    + NAT
   + Posta elettronica #
 
 ### Cosa va rivisto
@@ -32,6 +31,7 @@
 + Livello delle Applicazioni
   + Servizi di rete #
     + DHCP
+    + NAT
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
