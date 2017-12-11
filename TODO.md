@@ -13,10 +13,6 @@
   + Tipi di trasmissione
     + Encoding # 
     + ...
-  + Protocolli di secondo livello
-    + BSC #
-    + HDLC #
-    + PPP #
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP #
