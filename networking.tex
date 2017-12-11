@@ -537,7 +537,7 @@ Per le operazioni del \vedi{Livello di Collegamento} il PPP si avvale del protoc
 
 \sub{Dispositivi}  %2° livello -> bridge e switch (hub è al 1°, è un repeater)
 Nel secondo livello OSI troviamo dispositivi di rete plug-and-play ed \textit{"intelligenti"}, che non si limitano alla sola replicazione del segnale ma sono in grado di riconoscere, nei segnali elettrici che ricevono dal mezzo trasmissivo, i dati organizzati in \textbf{frame}; Agiscono quindi sui frame ricevuti, gestendoli ed instradandoli, il tutto in modo trasparente.
-\subsub{Bridge} Un bridge \textit{(ponte)} è un dispositivo di rete munito di porte con cui è collegato a diversi \textbf{\textit{segmenti di rete}} (generalmente due o più LAN) da cui riceve dati e li instrada selettivamente verso una porta destinataria
+\subsub{Bridge} Un bridge \textit{(ponte)} è un dispositivo di rete munito di porte con cui è collegato a diversi \textbf{\textit{segmenti di rete}} (generalmente due o più LAN) da cui riceve dati e li instrada selettivamente verso una porta destinataria. Questi segmenti rappresentano i \textbf{domini di collisione}\footnote{insieme di nodi che concorrono per accedere allo stesso mezzo trasmissivo per successivamente trasmettere} della rete.
 \para{Funzionamento} Quando riceve un pacchetto su una porta, riconosce i frame, estrae gli indirizzi sorgente e destinazione e cerca di capire dall'indirizzo del \textit{destinatario} se questi si trova nello \textbf{stesso segmento} del \textit{mittente} oppure no \textbf{\textit{(Filtering)}}. Nel primo caso non inoltra il frame (il destinatario condivide lo stesso bus). \\Nel secondo caso il bridge inoltra il frame verso il \textit{segmento del destinatario} \textbf{\textit{(Forwarding)}}; Se non sa dove si trova, il bridge inoltra il frame su tutte le porte \textbf{\textit{(Flooding)}}. \\Per instradare i frames, il bridge mantiene una tabella (di \textbf{forwarding}) di indirizzi MAC per ogni porta, così è in grado di capire verso quale porta, e quindi quale segmento, inoltrare il frame. 
 \para{Tipologie} In base alle tipologie delle due reti si distinguono:
 \begin{itemize}
@@ -545,16 +545,21 @@ Nel secondo livello OSI troviamo dispositivi di rete plug-and-play ed \textit{"i
 \item \textbf{Source Routing Bridge}: collega 2 LAN Token Ring
 \item \textbf{Translational Bridge}: collega 2 LAN di tipo diverso (deve adattarsi alle diverse regole trasmissive)
 \end{itemize}
-%img [Ciascun segmento di rete, collegato ad una porta di un bridge, costituisce un \textbf{dominio di collisione} \footnote{insieme di nodi che concorrono per accedere allo stesso mezzo trasmissivo per successivamente trasmettere} separato]
+\image[Bridge-net.png][scale=0.5]{ciascun segmento di rete, collegato ad una porta di un bridge, costituisce un \textit{dominio di collisione} separato}
 
 \subsub{Switch} Uno switch \textit{(commutatore)} è un dispositivo molto simile al bridge, ma a differenza di quest'ultimo è collegato direttamente agli \textbf{\textit{host}} ed ha un numero di porte nettamente superiore.
 \para{Funzionamento} la funzione di instradamento è implementata mantenendo in un \textbf{buffer locale} tutti gli \textit{indirizzi MAC} degli host connessi alla rete, suddivisi per \textit{porta dello switch}.\\
 L'instradamento è analogo al bridge, ma nel caso in cui lo switch invia il pacchetto a tutte le porte (Flooding), il nodo destinatario -ricevuto il pacchetto- risponderà facendo sapere allo switch la sua porta ed il suo MAC address.\\
 Infine usando lo switch, non sono possibili collisioni ed è possibile usare la modalità \textbf{full duplex} (trasmissione contemporanea)
-%img [lo switch riduce la rete in un insieme di \textbf{domini di collisione} di dimensioni minime (al limite costituiti ognuno da un singolo host)]
-%implementazione LAN con switch???
+\image[Switched-net.png][scale=0.5]{lo switch riduce la rete in un insieme di \textit{domini di collisione} di dimensioni minime (al limite costituiti ognuno da un singolo host)}
+\para{Implementazione LAN} Una LAN può essere implementata con i seguenti apparati switch (switching LAN):
+\begin{itemize}
+\item 10baseT Switch \textit{(IEEE802.3)}: ogni porta implementa un Dominio di Collisione separato
+\item 100baseT Switch \textit{(IEEE802.3u)}: ogni porta implementa un segmento di rete FastEthernet usando un cavo \textit{Unshielded twisted Pair (UTP)}
+\item 1000baseCX Switch \textit{(IEEE802.3z, IEEE802.3ab)}: ogni porta implementa un segmento di rete Gigabit Ethernet usando un cavo in rame \textit{Shilded Twisted Pair (STP)}
+\item 1GbaseCX4 Switch\textit{(IEEE802.3ae, IEEE802.3ah)}: ogni porta implementa un segmento di rete 10 Gigabit Ethernet usando un cavo in rame \textit{STP}
 \end{itemize}
-
+\para{Virtual LANs} Implicito nella switching LAN vi è il concetto di Virtual LAN (\textbf{VLAN}), grazie al quale è possibile partizionare una rete locale basata su switch, in più \textit{reti locali logicamente separate} tra di loro (ma che condividono la stessa rete fisica).
 
 
 
