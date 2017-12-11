@@ -23,6 +23,7 @@
   + Servizi di rete 
     + SNMP #
     + HTTP
+    + NAT
   + Posta elettronica #
 
 ### Cosa va rivisto
@@ -36,7 +37,6 @@
 + Livello di Trasporto
 + Livello delle Applicazioni
   + Servizi di rete #
-    + NAT
     + DHCP
 
 ### Chi sta facendo cosa
