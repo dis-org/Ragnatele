@@ -1229,6 +1229,34 @@ e permette di interrogare un nameserver per ottenere informazioni  e verificarne
 \subsub{NIS}
 Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP} 
+HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} \footnote{diverse tipologie di informazioni integrate tra loro} distribuita nella rete ed acceduta mediante \textit{hyperlinks} \footnote{documenti relazionati tra loro in una struttura tale da consentire la navigazione mediante \textit{links} per passare da un documento all'altro})
+\paragraph{Storia} HTTP è utilizzato dal World Wide Web dal 1990, e da allora è stato aggiornato a diverse versioni:
+\begin{itemize}
+\item \textbf{HTTP/0.9}: semplice protocollo per il trasferimento di dati grezzi sulla rete Internet, gestito dal W3C
+\item \textbf{HTTP/1.0} (RFC 1945): consente il trasferimento di messaggi di tipo MIME, %VEDI MIME
+ma aveva ancora delle limitazioni dovute alla diffusione del WWWW 
+\item \textbf{HTTP/1.1}: versione consolidata del protocollo, usato per 15 anni per lo sviluppo del Web
+\item \textbf{HTTP/2} (RFC 7540): nuovo standard, sviluppato da Google e basato sul protocollo SPDY/2.
+\end{itemize}
+\paragraph{Funzionamento} HTTP fornisce un insieme di \textbf{metodi di richiesta} e fornisce attraverso l'\textit{Unified Resource Location} (URL), \textit{Identifier} (URI) o \textit{Name} (URN), un modo per \textbf{identificare} la risorsa richiesta da quel metodo. \\
+L'HTTP ha un'architettura di tipo client/server e comprende due tipi di messaggi: di richiesta e di risposta.
+\begin{itemize}
+\item \textbf{HTTP Request} inviato dal client verso un server, è composto da:
+\begin{itemize}
+\item \textbf{request line}: riga di richiesta composta dal metodo di richiesta \textit{(GET, POST, HEAD, PUT, DELETE, TRACE, OPTIONS, CONNECT)}, l'URI \textit{(indica la risorsa richiesta, es pagina web)} e la versione del protocollo.
+\item \textbf{header}: informazioni aggiuntive, tra cui l'Host \textit{(nameserver a cui si riferisce l'URL)} e l'User-Agent \textit{(tipo di client)}
+\item riga vuota
+\item \textbf{body}: corpo del messaggio
+\end{itemize}
+\item \textbf{HTTP Response} inviato dal server, è di tipo testuale ed è composto da:
+\begin{itemize}
+\item \textbf{status line}: riga di stato che riporta un codice a tre cifre per identificare lo stato della risposta \textit{(1xx Informational, 2xx Successful, 3xx Redirection, 4xx Client error, 5xx Server error)}
+\item \textbf{header}: Server \textit{(indica il tipo di server)}, Content-Type \textit{(il tipo di contenuto restituito in codifica MIME, es. text/html, text/plain...)}
+\item riga vuota
+\item \textbf{body}: contenuto della risposta
+\end{itemize}
+\end{itemize}
+
 \subsub{NFS}
 Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
 Lato server, la condivisione di una cartella con un host specifico è detta \italic{sharing} ed è ottenuta mediante il comando \code{export}.
