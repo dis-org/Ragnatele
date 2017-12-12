@@ -389,8 +389,11 @@ alla fine del messaggio viene inviato un segnale di stop che, se non seguito da 
 Questo metodo è molto buono in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona(governata da un clock), ma il segnale di start e quello di stop incidono di circa il 30\% su i bit trasmessi.  
 \subsub{Encoding}
 \para{NRZ(Not Reduced Zero)}
+Codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso, richiede circuiti semplici ed ha una buona resistenza agli errori, unico problema e che con lunghe trasmissioni si rischia di perdere la sincronia
 \para{RZ(Return to Zero)}
+Questa codifica è estremamente simile all' NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero, il clock ha frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronia ma ha un più alto rischio di errore.
 \para{Manchester}
+
 \para{AMI(Alternative Mark Inversion)}
 \subsub{Scrambling}
 \subsub{Orientata al carattere}
