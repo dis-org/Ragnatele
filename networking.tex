@@ -1093,11 +1093,24 @@ Il termine NAT indica un servizio svolto da un router.
  una “traduzione dell’indirizzo”, ovvero cambia la specifica di provenienza dell’indirizzo assegnando un nuovo numero di port (che non sia giàutilizzato) e cambiando il numero IP nel numero ufficialmente assegnato.
  
  \subsub {Posta Elettronica}
-La Posta Elettronica \'e composta da due programmi il Mail User Agent ed il Programma di Trasporto. Il primo \'e un interfaccia verso l'applicazione utilizzata il secondo \'e
+La Posta Elettronica \'e composta da due programm:i il Mail User Agent ed il Programma di Trasporto. Il primo \'e un interfaccia verso l'applicazione utilizzata \'e composto da:
+ \begin{itemize}
+ 	\item Composizione 
+ 	\item Visualizzazione
+ 	\item Eliminazione
+ \end{itemize}
+ Per Composizione si intende la composizione del messaggio stesso ma anche all'automatizzazione  di scrittura e gestione delle mail.\newline
+ Per Visualizzazione ci si riferisce ai processi di visualizzazione del messaggio stesso, di archiviazione e di interazione con il sistema.\newline
+ Per Eliminazione si intende il processo di gestione dello spazio eliminando mail irrilevanti\newline
+ Il Programma di Trasporto (Sendmail) si interessa di:
+ \begin{itemize}
+	\item Trasferimento
+	\item Notifica all'utente
+ \end{itemize}
+ Per trasferimento si intende il meccanismo con il quale il messaggio viene trasmesso: quando il Mail User Agent spedisce il messaggio viene attivata una sessione con il server di destinazione, le mail vengono trasferite secondo il protocollo SMTP(Simple Mail Transfer Protocol).\newline 
+ Per Notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
+ I protocolli principali utilizzati per interagire con il protocollo di trasporto sono POP3 (Post Office Protocol) e IMAP (Internet Message Access Protocol). %spiega i due protocolli 
 
-
- 
- 
  
  
  
