@@ -20,11 +20,9 @@
 
 ### Cosa va rivisto
 + Livello Fisico
-  + Qualità delle trasmissioni 
-  + ...
+  + Qualità delle trasmissioni #
+  + ... #
 + Livello di Collegamento
-  + Sottolivelli #
-    + LLC
 + Livello di Rete #
 + Livello di Trasporto
 + Livello delle Applicazioni
@@ -44,5 +42,5 @@
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | revisione | Sottolivelli DLL   |
+| Giorgio Mazza      | Shizen39     | metric   | revisione | Qualità trasmiss...|
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
