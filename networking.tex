@@ -167,13 +167,15 @@ Come già accennato in precedenza, é lo strato fisico che determina in larga pa
 \\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
 \begin{itemize}
 \item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi 
-\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
+\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione (hops)
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
 \subsub{Criteri di valutazione in base alle prestazioni}
+Questi concernano le applicazioni \textbf{real-time} \textit{(come lo streaming in diretta)}, dove è prioritario ricevere i pacchetti con il minimo ritardo al prezzo di qualche perdita di dati (generalmente non percepita). Per tali ragioni si preferisce l'uso del protocollo \vedi{UDP}.
 \begin{itemize}
 \item \textbf{ritardo}: tempo effettivo necessario per il transito dei dati;
 \item \textbf{tempo di risposta}: tempo che intercorre tra il momento in cui viene effettuata una richiesta e il momento in cui si ottiene una risposta;
+\item \textbf{banda}: quantità massima di dati che possono essere trasferiti in un dato periodo di tempo; rappresenta la massima velocità della rete;
 \item \textbf{throughput}: quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete;
 \item \textbf{latenza}: tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
 \begin{itemize}
@@ -183,8 +185,11 @@ Come già accennato in precedenza, é lo strato fisico che determina in larga pa
 \item \textbf{tempo di attesa} nelle code di rete, dipendente dal traffico.
 \end{itemize}
 \subsubsection{Criteri di valutazione in base all'affidabilità}
-\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnari in ricezione
-\item \textbf{packet loss}: pacchetti persi.
+Questi concernano le applicazioni \textbf{non real-time} \textit{ (come il file transfer)} dove diventa importante l'affidabilità del trasferimento in quanto in caso di \textit{packet loss}, in genere è richiesto il ri-trasferimento di tutto il pacchetto. Alcuni di questi criteri sono soddisfatti dai protocolli usati (es. \vedi{TCP}).
+\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnati in ricezione
+\item \textbf{packet corrupted}: percentuale di pacchetti errati, ossia consegnati a destinazione ma \textit{corrotti} in quanto con la trasmissione hanno subito la variazione di uno o più bit (anche per cause fisiche quali \vedi{Rumore} o \vedi{Interferenza}). Possono essere corretti o ne è richiesta la ritrasmissione.
+\item \textbf{packet loss}: percentuale di pacchetti che la rete non riesce a consegnare in quanto corrotti o perchè arrivano quando i buffer di un router sono pieni. Ne è richiesta la ritrasmissione.
+\item \textbf{out-of-order}: sequenza di pacchetti ricevuta in un ordine diverso da quello con qui è stato inviato (es. instradati su percorsi diversi)
 \end{itemize}
 
 \sub{Filtri}
