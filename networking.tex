@@ -418,7 +418,7 @@ Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast
 \subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
 \para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
-In base all'implementazione, il LLC prevede 3 diversi servizi al livello superiore:
+In base all'implementazione, il LLC prevede 3 diversi servizi fornibili al livello superiore:
 \begin{itemize}
 \item \textbf{LLC1}: servizio \textit{non} orientato alla connessione, non è prevista alcuna forma di \textit{conferma}, di \textit{correzione errori} ne di \textit{controllo del flusso}.
 \item \textbf{LLC2}: servizio \textit{orientato alla connessione} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC}.
