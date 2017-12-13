@@ -16,7 +16,6 @@
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP #
-    + HTTP #
   + Posta elettronica #
 
 ### Cosa va rivisto
@@ -24,7 +23,7 @@
   + Qualità delle trasmissioni 
   + ...
 + Livello di Collegamento
-  + Sottolivelli
+  + Sottolivelli #
     + LLC
 + Livello di Rete #
 + Livello di Trasporto
@@ -45,5 +44,5 @@
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | scrittura | HTTP               |
+| Giorgio Mazza      | Shizen39     | metric   | revisione | Sottolivelli DLL   |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
