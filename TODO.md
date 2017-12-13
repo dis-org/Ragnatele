@@ -18,10 +18,14 @@
   + Servizi di rete 
     + SNMP #
   + Posta elettronica #
++ Sicurezza di rete #
+  + Contromisure 
+    + Firewall #
+    + TCP wrapper ?
+    + Package filtering ?
 
 ### Cosa va rivisto
 + Livello Fisico
-  + Qualità delle trasmissioni #
   + ... #
 + Livello di Collegamento
 + Livello di Rete #
@@ -43,5 +47,5 @@
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | revisione | Qualità trasmiss...|
+| Giorgio Mazza      | Shizen39     | metric   | scrittura | Sicurezza di rete  |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
