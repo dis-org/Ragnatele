@@ -413,10 +413,18 @@ Questo metodo è molto buono in caso di comunicazioni irregolari senza la precis
 
 \sub{Sottolivelli}
 Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
-\subsub{MAC} Il livello MAC (\textit{Media Access Control}) disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
-\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.
+\subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
+\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.\\E' utilizzato per l'instradamento diretto in reti locali, per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
 \subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
+\para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
+In base all'implementazione, il LLC prevede 3 diversi servizi al livello superiore:
+\begin{itemize}
+\item \textbf{LLC1}: servizio \textit{non} orientato alla connessione, non è prevista alcuna forma di \textit{conferma}, di \textit{correzione errori} ne di \textit{controllo del flusso}.
+\item \textbf{LLC2}: servizio \textit{orientato alla connessione} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC}.
+\item \textbf{LLC3}: servizio alternativo al LLC1 in quanto è \textit{non} orientato alla connessione, ma prevede una \textit{conferma di ricezione} (acknowledge - ACK) per i frame inviati e garantisce la \textit{consegna ordinata} dei dati.
+\end{itemize}
+
 
 \subsection{Protocolli di secondo livello}
 I protocolli di secondo livello si dividono in due principali categorie:
