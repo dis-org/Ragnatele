@@ -203,8 +203,8 @@ Sovente capita che l'informazione debba essere convertita in maniera idonea ad e
 \subsub{Ad onda continua}
 Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie:
 \begin{itemize}
-\item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante. Per quel che riguarda la trasmissione digitale, lo 0 è associato a bassa potenza e l'1 ad alta potenza.
-\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rafefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
+\item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante. Per quel che riguarda la trasmissione digitale, lo 0 è associato a bassa potenza e l'1 ad alta potenza;
+\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rafefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo;
 \item \textbf{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale. 
 \end{itemize}
 \boximage[am_fm_pm.png][scale=0.5]{Confronto tra tipologie di modulazione ad onda continua}
@@ -212,14 +212,14 @@ Si parla di modulazione ad onda continua nel momento in cui viene modulata una p
 \subsub{Modulazione impulsiva}
 La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codificata in una serie di impulsi. I principali tipi di modulazione impulsiva sono:
 \begin{itemize}
-\item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM
-\item \textbf{PFM} (Pulse Frequency Modulation), analoga alla FM
-\item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM
-\boximage[pam_pwm_ppm_pcm.png][scale=0.5]{Confronto tra tipologie di modulazione impulsiva}
+\item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM;
+\item \textbf{PFM} (Pulse Frequency Modulation), analoga alla FM;
+\item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM.
+\boximage[pam_pwm_ppm_pcm.png][scale=0.4]{Confronto tra tipologie di modulazione impulsiva}
 
 \item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
 \begin{itemize}
-\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
+\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$;
 \item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'ampiezza è uguale per tutti i sottolivelli; di norma, tuttavia, essa segue una scala logaritmica. Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - si è verificato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze. 
 \item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
 \\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
@@ -233,10 +233,10 @@ Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}
 \item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
 \item \textbf{FSK} (Frequency-Shift Keying): la frequenza portante istantanea viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note, l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
 \begin{itemize} 
-\item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{interferenza intersimbolica}) 
-\item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso 
-\item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di apssaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione 
-\item La frequenza d'impulso è solitamente maggiore di quella di intervallo 
+\item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{interferenza intersimbolica}); 
+\item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso; 
+\item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di apssaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione;
+\item La frequenza d'impulso è solitamente maggiore di quella di intervallo.
 \end{itemize} 
 La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi nei ponti radio e nelle trasmissioni di tipo GSM tra cellulari. 
 \item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
@@ -358,8 +358,8 @@ Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferich
 La \vedi{IEEE} 1394, ideata da Apple nel 1968 per essere utilizzata nei PC e nota anche cpn i nomi commerciali \textbf{FireWire} ed \textbf{iLink}, attribuitigli rispettivamente dalla stessa Apple e da Sony, è un'interfaccia bidirezionale in grado di gestire fino a 63 dispositivi sulla stessa linea ad alta velocità miscelando dati sincroni ed asincroni. Come la \vedi{USB}, consente di collegare e scollegare i dispositivi "a caldo" tramite due diversi tipi di connettore, l'uno a quattro pin, senza alimentazione, l'altro a 6, con alimentazione da 8 a 30 V.
 \\Il limite principale di tale interfaccia è la portata, limitata a pochi metri, portati a 100 con lo standard IEEE 1394b.
 \para{RS422}
-Progettato per connettere direttamente due apparecchiature -siano esse DTE o DCE- con alta immunità ai disturbi anche a distanze considerevoli (tipicamente fino a 1200 m) e a velocità considerevoli (anche oltre ai 10 Mbps), è uno standard molto diffuso specie in ambito industriale.
-
+Utilizzato principalmente per realizzare collegamenti punto-a-punto tra due apparecchiature -siano esse DTE o DCE- con alta immunità ai disturbi anche a distanze considerevoli (tipicamente fino a 1200 m) e a velocità considerevoli (anche oltre ai 10 Mbps), è uno standard molto diffuso specie in ambito industriale.
+Prevede, per ogni coppia di fili, trasmissione unidirezionale e non reversibile. Pertanto, per realizzare una connessione \vedi{Full-Duplex}, si utilizzano due coppie di fili.
 
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
