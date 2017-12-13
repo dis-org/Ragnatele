@@ -8,6 +8,7 @@
 + Livello Fisico
   + Dispositivi
     + Hub #
+  + Mezzi trasmissivi
   + Interfacce di rete #
 + Livello di Collegamento
   + Tipi di trasmissione
@@ -37,7 +38,7 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Aranna Masciolini  | harisont     | hub      | scrittura | interfacce di rete |
+| Aranna Masciolini  | harisont     | hub      | scrittura | Mezzi trasmissivi  |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
