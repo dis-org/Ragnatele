@@ -7,7 +7,7 @@
 ### Cosa c'è da fare
 + Livello Fisico
   + Dispositivi
-    + Hub #
+    + Hub
   + Mezzi trasmissivi
   + Interfacce di rete #
 + Livello di Collegamento
@@ -21,10 +21,6 @@
     + SNMP #
   + Posta elettronica #
 + Sicurezza di rete #
-  + Contromisure 
-    + Firewall #
-    + TCP wrapper ?
-    + Package filtering ?
 
 ### Cosa va rivisto
 + Livello Fisico
