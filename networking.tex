@@ -168,13 +168,15 @@ Come già accennato in precedenza, é lo strato fisico che determina in larga pa
 \\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
 \begin{itemize}
 \item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi 
-\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
+\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione (hops)
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
 \subsub{Criteri di valutazione in base alle prestazioni}
+Questi concernano le applicazioni \textbf{real-time} \textit{(come lo streaming in diretta)}, dove è prioritario ricevere i pacchetti con il minimo ritardo al prezzo di qualche perdita di dati (generalmente non percepita). Per tali ragioni si preferisce l'uso del protocollo \vedi{UDP}.
 \begin{itemize}
 \item \textbf{ritardo}: tempo effettivo necessario per il transito dei dati;
 \item \textbf{tempo di risposta}: tempo che intercorre tra il momento in cui viene effettuata una richiesta e il momento in cui si ottiene una risposta;
+\item \textbf{banda}: quantità massima di dati che possono essere trasferiti in un dato periodo di tempo; rappresenta la massima velocità della rete;
 \item \textbf{throughput}: quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete;
 \item \textbf{latenza}: tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
 \begin{itemize}
@@ -184,8 +186,11 @@ Come già accennato in precedenza, é lo strato fisico che determina in larga pa
 \item \textbf{tempo di attesa} nelle code di rete, dipendente dal traffico.
 \end{itemize}
 \subsubsection{Criteri di valutazione in base all'affidabilità}
-\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnari in ricezione
-\item \textbf{packet loss}: pacchetti persi.
+Questi concernano le applicazioni \textbf{non real-time} \textit{ (come il file transfer)} dove diventa importante l'affidabilità del trasferimento in quanto in caso di \textit{packet loss}, in genere è richiesto il ri-trasferimento di tutto il pacchetto. Alcuni di questi criteri sono soddisfatti dai protocolli usati (es. \vedi{TCP}).
+\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnati in ricezione
+\item \textbf{packet corrupted}: percentuale di pacchetti errati, ossia consegnati a destinazione ma \textit{corrotti} in quanto con la trasmissione hanno subito la variazione di uno o più bit (anche per cause fisiche quali \vedi{Rumore} o \vedi{Interferenza}). Possono essere corretti o ne è richiesta la ritrasmissione.
+\item \textbf{packet loss}: percentuale di pacchetti che la rete non riesce a consegnare in quanto corrotti o perchè arrivano quando i buffer di un router sono pieni. Ne è richiesta la ritrasmissione.
+\item \textbf{out-of-order}: sequenza di pacchetti ricevuta in un ordine diverso da quello con qui è stato inviato (es. instradati su percorsi diversi)
 \end{itemize}
 
 \sub{Filtri}
@@ -427,10 +432,18 @@ Questo metodo è molto buono in caso di comunicazioni irregolari senza la precis
 
 \sub{Sottolivelli}
 Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
-\subsub{MAC} Il livello MAC (\textit{Media Access Control}) disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
-\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.
+\subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
+\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.\\E' utilizzato per l'instradamento diretto in reti locali, per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
 \subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
+\para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
+In base all'implementazione, il LLC prevede 3 diversi servizi fornibili al livello superiore:
+\begin{itemize}
+\item \textbf{LLC1}: servizio \textit{non} orientato alla connessione, non è prevista alcuna forma di \textit{conferma}, di \textit{correzione errori} ne di \textit{controllo del flusso}.
+\item \textbf{LLC2}: servizio \textit{orientato alla connessione} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC}.
+\item \textbf{LLC3}: servizio alternativo al LLC1 in quanto è \textit{non} orientato alla connessione, ma prevede una \textit{conferma di ricezione} (acknowledge - ACK) per i frame inviati e garantisce la \textit{consegna ordinata} dei dati.
+\end{itemize}
+
 
 \subsection{Protocolli di secondo livello}
 I protocolli di secondo livello si dividono in due principali categorie:
@@ -1244,6 +1257,34 @@ e permette di interrogare un nameserver per ottenere informazioni  e verificarne
 \subsub{NIS}
 Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP} 
+HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} \footnote{diverse tipologie di informazioni integrate tra loro} distribuita nella rete ed acceduta mediante \textit{hyperlinks} \footnote{documenti relazionati tra loro in una struttura tale da consentire la navigazione mediante \textit{links} per passare da un documento all'altro})
+\paragraph{Storia} HTTP è utilizzato dal World Wide Web dal 1990, e da allora è stato aggiornato a diverse versioni:
+\begin{itemize}
+\item \textbf{HTTP/0.9}: semplice protocollo per il trasferimento di dati grezzi sulla rete Internet, gestito dal W3C
+\item \textbf{HTTP/1.0} (RFC 1945): consente il trasferimento di messaggi di tipo MIME, %VEDI MIME
+ma aveva ancora delle limitazioni dovute alla diffusione del WWWW 
+\item \textbf{HTTP/1.1}: versione consolidata del protocollo, usato per 15 anni per lo sviluppo del Web
+\item \textbf{HTTP/2} (RFC 7540): nuovo standard, sviluppato da Google e basato sul protocollo SPDY/2.
+\end{itemize}
+\paragraph{Funzionamento} HTTP fornisce un insieme di \textbf{metodi di richiesta} e fornisce attraverso l'\textit{Unified Resource Location} (URL), \textit{Identifier} (URI) o \textit{Name} (URN), un modo per \textbf{identificare} la risorsa richiesta da quel metodo. \\
+L'HTTP ha un'architettura di tipo client/server e comprende due tipi di messaggi: di richiesta e di risposta.
+\begin{itemize}
+\item \textbf{HTTP Request} inviato dal client verso un server, è composto da:
+\begin{itemize}
+\item \textbf{request line}: riga di richiesta composta dal metodo di richiesta \textit{(GET, POST, HEAD, PUT, DELETE, TRACE, OPTIONS, CONNECT)}, l'URI \textit{(indica la risorsa richiesta, es pagina web)} e la versione del protocollo.
+\item \textbf{header}: informazioni aggiuntive, tra cui l'Host \textit{(nameserver a cui si riferisce l'URL)} e l'User-Agent \textit{(tipo di client)}
+\item riga vuota
+\item \textbf{body}: corpo del messaggio
+\end{itemize}
+\item \textbf{HTTP Response} inviato dal server, è di tipo testuale ed è composto da:
+\begin{itemize}
+\item \textbf{status line}: riga di stato che riporta un codice a tre cifre per identificare lo stato della risposta \textit{(1xx Informational, 2xx Successful, 3xx Redirection, 4xx Client error, 5xx Server error)}
+\item \textbf{header}: Server \textit{(indica il tipo di server)}, Content-Type \textit{(il tipo di contenuto restituito in codifica MIME, es. text/html, text/plain...)}
+\item riga vuota
+\item \textbf{body}: contenuto della risposta
+\end{itemize}
+\end{itemize}
+
 \subsub{NFS}
 Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
 Lato server, la condivisione di una cartella con un host specifico è detta \italic{sharing} ed è ottenuta mediante il comando \code{export}.
