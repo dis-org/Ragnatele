@@ -28,7 +28,8 @@
 
 ### Cosa va rivisto
 + Livello Fisico
-  + ... #
+  + Filtri
+  + ... 
 + Livello di Collegamento
 + Livello di Rete #
 + Livello di Trasporto
