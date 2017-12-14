@@ -29,7 +29,7 @@
 + Livello di Rete #
 + Livello di Trasporto
 + Livello delle Applicazioni
-  + Servizi di rete #
+  + Servizi di rete
     + DHCP
     + NAT
 
