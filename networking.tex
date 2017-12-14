@@ -62,7 +62,8 @@ Famiglia di protocolli e servizi standardizzati dall'\vedi{IEEE} 802 \italic{LAN
 Una lista completa dei gruppi di lavoro e dei loro standard è reperibile sul sito ufficiale dello LMSC: \url{www.ieee802.org}. 
 \subsub{RFC}
 Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{www.rfc-editor.org}. 
-
+\subsub{ASN.1} 
+Abstract Syntax Notation One (da non confondere con l'\vedi{ASN}). 
 \sub{Organizzazioni}
 \subsub{IEEE}
 Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare il comitato \vedi{IEEE 802} \textit{LAN/MAN Standards Committee} (LMSC), commissione preposta a sviluppare standard per le reti locali e metropolitane. 
@@ -1248,7 +1249,18 @@ NFS si compone dei seguenti programmi:
 \item \code{rcp.statd} demone che controlla lo stato della rete
 \item \code{rcp.mountd} demone lato server che risponde alle richieste di mount
 \end{itemize} 
-\subsub{SNMP} %problemi sicurezza, v3, Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI) 
+\subsub{SNMP}  %Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI)
+Simple Network Management Protocol: protocollo per la gestione di reti internet che permette ad un programma detto \italic{manager} di accedere e modificare, attraverso \vedi{UDP} sulle porte $161$ e $162$, alcune informazioni elementari dei vari dispositivi di rete, detti \italic{agents}. Le informazioni ricevute degli \italic{agents}, dette 
+oggetti (in inglese \italic{managed objects}), vengono raccolte in un archivio chiamato \vedi{MIB}.
+\\Ne esistono più versioni:
+\begin{itemize}
+\item SNMPv1 definito nell \vedi{RFC} 1157;
+\item SNMPv2p definito negli RFC 1441, 445, 1446, 1448, 1449;
+\item SNMPv2 definito negli RFC che vanno dal 1901 fino al 1910;
+\item SNMPv3 defintio negli RFC 2026 e 2200, che rimedia alle carenze in merito a sicurezza e privacy delle versioni precedenti, tramite un sistema di autenticazione e strumenti di controllo degli accessi.
+\end{itemize}
+\para{MIB} Da non confondere con il film Man in Black.
+\para{SMI} Structure of Management Information.
 \subsub{NAT}
 Network Address Translation
 Il termine NAT indica un servizio svolto da un router.
