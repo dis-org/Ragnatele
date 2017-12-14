@@ -14,7 +14,7 @@
     + Encoding # 
     + ...
   + Protocolli di secondo livello
-    + ATM
+    + ATM #
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP #
@@ -43,7 +43,7 @@
 | Aranna Masciolini  | harisont     | hub      | scrittura | Mezzi trasmissivi  |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
-| Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
+| Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
 | Giorgio Mazza      | Shizen39     | metric   | scrittura | Sicurezza di rete  |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
