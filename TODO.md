@@ -8,8 +8,7 @@
 + Livello Fisico
   + Dispositivi
     + Hub
-  + Mezzi trasmissivi
-  + Interfacce di rete #
+  + Mezzi trasmissivi #
 + Livello di Collegamento
   + Tipi di trasmissione
     + Encoding # 
