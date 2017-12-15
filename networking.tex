@@ -1303,4 +1303,98 @@ Il termine NAT indica un servizio svolto da un router.
  comunicare con l’esterno: il suo indirizzo entrerebbe infatti in conflitto con qualche altro nodo di rete che usa lo stesso numero. Il router allora effettua
  una “traduzione dell’indirizzo”, ovvero cambia la specifica di provenienza dell’indirizzo assegnando un nuovo numero di port (che non sia già
  utilizzato) e cambiando il numero IP nel numero ufficialmente assegnato.
+\newpage
+\sub{Sicurezza di rete}
+\subsub{Minacce}
+Accessi non autorizzati\\
+Accesso ad informazioni\\
+Negazione di servizi
+.....\\
+Esistono diversi modi per proteggere una rete, come l'oscuramento, l'hardening e il firewalling.
+\subsub{Oscuramento}
+Per oscuramento si intende garantire la sicurezza nascondendo le risorse di rete mediante strumenti come \vedi{NAT}, IP Masquerading, \vedi{SSH} (per le connessioni), GPG (per la validazione di utenti e servizi) e trasmissioni crittografate.
+\paragraph{Encryption} limita gli accessi ai dati trasmessi sulle reti: il contenuto viene crittografato, spedito e in ricezione de-crittografato.\\
+Si usano i comandi UNIX \code{crypt} e \code{des}.
+\subsub{Hardening} 
+Per hardening si intende la gestione della sicurezza \textit{a livello del singolo host};
+\paragraph{Monitoraggio} prevede l'uso dei comandi UNIX:
+\begin{itemize}
+\item \textbf{ps -aux} per controllare i processi attivi nel sistema e chi li ha generati
+\item \textbf{who} per vedere chi è collegato al sistema
+\item \textbf{ls -lR} per creare periodicamente una lista sulle informazioni di ogni file di sistema e confrontarla (con \code{diff}) con quella precedente
+\item \textbf{last} per vedere il contenuto del file /usr/adm/wtmp (registro dei collegamenti avvenuti al sistema)
+\end{itemize}
+\paragraph{TCP-wrapper} consentono di limitare l'accesso ai servizi basandosi sull'IP e l'hostname del client. \\
+Le richieste verso l'host su cui gira un wrapper TCP vengono elaborate da un servizio di autenticazione, che verifica che l'indirizzo del chiamante sia incluso nell'elenco di \textit{/etc/hosts.allow}: se è così permette l'accesso, altrimenti verifica non sia incluso in \textit{/etc/hosts.deny}.\\
+In entrambi files è ache possibile definire delle \textbf{regole di filtraggio}, che hanno effetto \textit{dal basso verso l'alto} e quelle di hosts.allow hanno la precedenza su quelle di hosts.deny.\\
+Il formato delle regole è:\\
+\code{<elenco-servizi> : <elenco-client> [: spawn <comando-shell>]}\\
+E le seguenti keyworks sono uste per specificare host o gruppi di host: ALL \textit{(tutti i client/servizi)}, LOCAL \textit{(tutti gli host locali)}, KNOWN \textit{(host riconosciuti dal sistema)}, UNKNOWN \textit{(host non riconosciuti)}, PARANOID \textit{(host il cui nome non corrisponde all'indirizzo)}.\\
+In oltre \code{spawn} permette di eseguire normali comandi da shell qualora una richiesta entrante soddisfa una regola. Esempio in hosts.deny: \\ \code{\# rifiuta *.example.com e scrive in connections.log alcune info}\\ \code{ALL : .example.com : spawn (/bin/echo \\ \%a from \%h attempted to access \%p >> /var/log/connections.log)}\\
+Alcuni codici speciali sono: \textbf{\%c} \textit{(info generali del client)}, \textbf{\%s} \textit{(info generali del server)}, \textbf{\%a/\%A} \textit{(IP del client/Server)}, \textbf{\%h/\%H} \textit{(hostname del client/Server)}, \textbf{\%u} \textit{(username)}, \textbf{\%p} \textit{(PID del processo server)}
+\paragraph{xinetd} demone che estende le funzionalità di \textit{inetd}, infatti non gestisce solo l'accesso ai servizi di rete ma controlla anche i servizi stessi a Livello Applicazione.\\
+Viene configurato mediante \textit{/etc/xinetd.conf} ed altri file per ogni servizio presenti nella directory \textit{/etc/xinetd.d} (inclusa nel .conf mediante \textit{includedir}). 
+\begin{itemize}
+\item \textbf{xinetd.conf}: file principale del demone, definisce le regole generali.
+\code{
+defaults \{ \\
+instances = 60 \#max num di istanze per ogni servizio\\
+log\_type = SYSLOG authpriv \#tipo di logging\\
+log\_on\_success = HOST PID \#info di log\\
+log\_on\_failure = HOST\\
+cps = 25 30 \#max connessioni per sec - wait time \} \\
+includedir /etc/xinetd.d \#directory per i singoli servizi
+}
+\item \textbf{xinetd.d}: regole definite direttamente nei file di configurazione dei servizi (xinetd.d). Permette il controllo sugli accessi mediante le opzioni: \textbf{only\_from} (gli host specificati possono usare il servizio), \textbf{no\_access} (impedisce l'accesso a tali host), \textbf{access\_time} (fascia oraria in cui un servizio è utilizzabile HH:MM-HH:MM)
+\item \textbf{Funzioni}: Permette di impostare per il server una configurazione \textit{firewall-like}, attraverso due funzioni definibili per ogni servizio:  \textbf{bind} (collega un servizio ad un IP, ossia accetta le richieste per il servizio inoltrate solo a quell'IP) e \textbf{redirect} (le richieste per questo servizio saranno redirette verso l'hostname o IP specificato come parametro)
+\item \textbf{Trips}: è possibile difendersi contro alcuni attacchi al sistema come il port-scanning o il DoS.\\
+Mentre per quest'ultimo si limitano le risorse impegnare dalle connessioni con i client, per il port-scanning si definiscono dei \textbf{Sensori} si servizi che non si vogliono attivi sul server ed impostare sul relativo file di configurazione:\\
+\code{
+flags = SENSOR\\
+deny\_time = 20 \#può anche valere FOREVER (fino al riavvio di xinetd) o NEVER (accetta)\\
+disable = no
+}
+\end{itemize}
+
+\subsub{Firewalling}
+Per firewalling si intende la gestione della sicurezza \textit{a livello di rete/sottorete}.
+\paragraph{Firewall} Sistema hardware e/o software che controlla gli accessi alle risorse del sistema \textit{(host o rete locale)}, filtrando il traffico che quest'ultimo scambia con l'esterno \textit{(rete esterna, internet)}.\\
+Nella \textit{rete interna} ci saranno i servizi di base (come \vedi{NFS}, \vedi{NIS}, LDAP ecc..) rivolti agli utenti della sottorete interna; Nella \textit{rete esterna} dovranno essere presenti i servizi di networking (come \vedi{DNS}, SMPT, \vedi{FTP} ecc..) rivolti sia ad utenti interni che esterni (esposti a rischi).\\
+Nonostante permetta di isolare la rete dal mondo esterno, non è in grado di proteggerla da attacchi interni o condotti da linee da lui non controllate.
+\paragraph{Packet Filtering} Metodo con il quale un firewall limita il traffico di rete. \\
+Per ogni pacchetto ricevuto/inviato viene analizzata l'intestazione dei pacchetti (Header IP, Header TCP/UDP) e sottoposta a delle regole contenute in \textit{tabelle}, e se ne soddisfa una decide che \textit{azione prendere}.
+\begin{itemize}
+\item Le regole di filtraggio sono definite mediante \textbf{TABLES} (lista di regole) 
+\begin{itemize}
+\item \textit{filter} (regola il firewalling)
+\item \textit{nat} (regola le attività di natting)
+\item \textit{mangle} (interviene sull'alterazione dei pacchetti)
+\end{itemize}
+ad ognuna delle quali vengono collegate le \textbf{CHAINS} (operazioni da fare sul pacchetto)
+\begin{itemize}
+\item \textit{INPUT} riguarda i pacchetti destinati al sistema
+\item \textit{OUTPUT} riguarda i pacchetti originati dal sistema e destinati ad uscire
+\item \textit{FORWARD} riguarda i pacchetti che attraversano il sistema, con IP e destinazione esterni.
+\end{itemize}
+\item Le azioni da prendere sono \textbf{allow} se lo lascia passare, \textbf{deny} se lo blocca e lo rimanda al mittente o \textbf{drop} se lo blocca e lo scarta
+\end{itemize}
+In Linux, \textit{\textbf{NetFilter}} è il filtro di pacchetti  implementato nel kernel, la cui interfaccia è rappresentata da \code{iptables} (che sostituisce l'\code{ipchains} dei vecchi kernel). La differenza sostanziale è che \textit{ipchains} è uno \textbf{stateless firewall} (filtra i pacchetti controllando i flag SYN, senza considerare il contesto di quelli ricevuti prima), mentre \textit{iptables} è uno \textbf{stateful firewall} (tiene traccia delle connessioni mediante tabelle di richieste precedenti)
+\begin{itemize}
+\item NetFilter è quindi in grado di stabilire il \textbf{contesto} del pacchetto: \textbf{NEW} (appartiene ad una nuova connessione), \textbf{ESTABLISHED} (ad una connessione esistente), \textbf{RELATED} (legato ad una connessione esistente) o \textbf{INVALID} (pacchetto sospetto, non legato ad alcuna connessione stabilita).
+\end{itemize}
+%Il packet filtering opera al Livello di Rete, non si preoccupa quindi delle applicazioni che generano il traffico. Un esempio di firewall che lavora anche a Livello Applicazione è il \textbf{\textit{server proxy}}.
+\paragraph{Architetture} è possibile configurare un firewall in diverse modalità:
+\begin{itemize}
+\item \textbf{Screening router}: Il firewall opera un routing filtrato sul traffico tra gli host interni e l'esterno \textit{(firewall-router o screening-router)}. Sistema basilare usato nelle sottoreti.
+\item \textbf{Dual-homed host}: Un host con almeno due interfacce di rete divide il traffico di rete e garantisce i servizi base di rete. Sistema economico ma a \textit{single point of failure}
+\item \textbf{Screened host}: Oltre al firewall-router, il traffico tra la rete interna ed esterna passa attraverso un host della rete interna \textit{(Bastion Host)} il quale fornisce servizi di base.\\ Lo \textit{screening-router} accetta solo pacchetti da e verso il Bastion Host. L'hardening del \textit{Bastion Host} deve essere molto curato, in quanto rappresenta il \textit{single point of failure} della rete.
+\item \textbf{Screened sub-net}: Viene creata una \textit{rete intermedia} (\textbf{DMZ} - De-Militarized Zone) usando un router \textit{esterno} ed uno \textit{interno}; Il/i Bastion Host risiedono nella DMZ rimanendo isolati dalla rete interna, non rappresentando più un punto critico., come anche i servizi più vulnerabili; Il \textit{firewall-router esterno} si limita ad un filtraggio di base in modo da garantire ampia fruibilità dei servizi, mentre quello \textit{interno} opera un maggior controllo.
+\end{itemize}
+
+
+
+
+
+
+ 
 \end{document}
