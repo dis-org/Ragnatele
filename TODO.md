@@ -7,29 +7,29 @@
 ### Cosa c'è da fare
 + Livello Fisico
   + Dispositivi
-    + Hub #
-  + Interfacce di rete #
+    + Hub
+  + Mezzi trasmissivi #
 + Livello di Collegamento
   + Tipi di trasmissione
     + Encoding # 
     + ...
+  + Protocolli di secondo livello
+    + ATM #
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP #
-    + HTTP #
   + Posta elettronica #
++ Sicurezza di rete #
 
 ### Cosa va rivisto
 + Livello Fisico
-  + Qualità delle trasmissioni 
-  + ...
-+ Livello di Collegamento
-  + Sottolivelli
-    + LLC
+  + Filtri #
+  + ... #
++ Livello di Collegamento #
 + Livello di Rete #
 + Livello di Trasporto
 + Livello delle Applicazioni
-  + Servizi di rete #
+  + Servizi di rete
     + DHCP
     + NAT
 
@@ -40,10 +40,11 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Aranna Masciolini  | harisont     | hub      | scrittura | interfacce di rete |
+| Aranna Masciolini  | harisont     | hub      | scrittura | Mezzi trasmissivi  |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
-| Francesco Bultrini | frabulous    | ramoso   | scrittura | BSC, HDLC, PPP     |
+| Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
+|                    |              |          | revisione | Livelli 1 e 2      |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | scrittura | HTTP               |
+| Giorgio Mazza      | Shizen39     | metric   | scrittura | Sicurezza di rete  |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
