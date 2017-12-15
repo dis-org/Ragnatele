@@ -1242,9 +1242,9 @@ NFS si compone dei seguenti programmi:
 \item \code{rcp.mountd} demone lato server che risponde alle richieste di mount
 \end{itemize} 
 \subsub{SNMP}  %Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI)
-Simple Network Management Protocol: protocollo per la gestione di reti internet che permette ad un programma detto \italic{manager} di accedere e modificare, attraverso \vedi{UDP} sulle porte $161$ e $162$, alcune informazioni elementari dei vari dispositivi di rete, detti \italic{agents}. Le informazioni ricevute degli \italic{agents}, dette 
-oggetti (in inglese \italic{managed objects}), vengono raccolte in un archivio chiamato \vedi{MIB}.
-\\Ne esistono più versioni:
+Simple Network Management Protocol: protocollo per la gestione di reti internet che permette ad uno o più \vedi{DTE} detti \italic{manager} di accedere e modificare, attraverso \vedi{UDP} sulle porte $161$ e $162$, alcune informazioni elementari dei vari dispositivi di rete, detti \italic{agents}. Le informazioni gestiste nei vari \italic{agents}, dette 
+oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse chiamato \vedi{MIB} (Management Information Base).
+\\Esistono più versioni del protocollo:
 \begin{itemize}
 \item SNMPv1 definito nell \vedi{RFC} 1157;
 \item SNMPv2p definito negli RFC 1441, 445, 1446, 1448, 1449;
