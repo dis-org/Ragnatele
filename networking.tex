@@ -159,7 +159,7 @@ In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit
 
 \subsub{Spettro}
 Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa affermazione, non necessariamente di immediata comprensione, diventa subito chiara se si tiene presente il \textbf{teorema di Fourier}, il quale afferma che un segnale può essere rappresentato come somma di sinusoidi (potenzialmente infinite) con caratteristiche differenti.
-sudo pacman -Syu
+
 \subsub{Ampiezza di banda}
 L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
 
@@ -168,13 +168,15 @@ Come già accennato in precedenza, é lo strato fisico che determina in larga pa
 \\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
 \begin{itemize}
 \item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi 
-\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione
+\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione (hops)
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
 \subsub{Criteri di valutazione in base alle prestazioni}
+Questi concernano le applicazioni \textbf{real-time} \textit{(come lo streaming in diretta)}, dove è prioritario ricevere i pacchetti con il minimo ritardo al prezzo di qualche perdita di dati (generalmente non percepita). Per tali ragioni si preferisce l'uso del protocollo \vedi{UDP}.
 \begin{itemize}
 \item \textbf{ritardo}: tempo effettivo necessario per il transito dei dati;
 \item \textbf{tempo di risposta}: tempo che intercorre tra il momento in cui viene effettuata una richiesta e il momento in cui si ottiene una risposta;
+\item \textbf{banda}: quantità massima di dati che possono essere trasferiti in un dato periodo di tempo; rappresenta la massima velocità della rete;
 \item \textbf{throughput}: quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete;
 \item \textbf{latenza}: tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
 \begin{itemize}
@@ -184,8 +186,11 @@ Come già accennato in precedenza, é lo strato fisico che determina in larga pa
 \item \textbf{tempo di attesa} nelle code di rete, dipendente dal traffico.
 \end{itemize}
 \subsubsection{Criteri di valutazione in base all'affidabilità}
-\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnari in ricezione
-\item \textbf{packet loss}: pacchetti persi.
+Questi concernano le applicazioni \textbf{non real-time} \textit{ (come il file transfer)} dove diventa importante l'affidabilità del trasferimento in quanto in caso di \textit{packet loss}, in genere è richiesto il ri-trasferimento di tutto il pacchetto. Alcuni di questi criteri sono soddisfatti dai protocolli usati (es. \vedi{TCP}).
+\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnati in ricezione
+\item \textbf{packet corrupted}: percentuale di pacchetti errati, ossia consegnati a destinazione ma \textit{corrotti} in quanto con la trasmissione hanno subito la variazione di uno o più bit (anche per cause fisiche quali \vedi{Rumore} o \vedi{Interferenza}). Possono essere corretti o ne è richiesta la ritrasmissione.
+\item \textbf{packet loss}: percentuale di pacchetti che la rete non riesce a consegnare in quanto corrotti o perchè arrivano quando i buffer di un router sono pieni. Ne è richiesta la ritrasmissione.
+\item \textbf{out-of-order}: sequenza di pacchetti ricevuta in un ordine diverso da quello con qui è stato inviato (es. instradati su percorsi diversi)
 \end{itemize}
 
 \sub{Filtri}
@@ -204,8 +209,8 @@ Sovente capita che l'informazione debba essere convertita in maniera idonea ad e
 \subsub{Ad onda continua}
 Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie:
 \begin{itemize}
-\item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante. Per quel che riguarda la trasmissione digitale, lo 0 è associato a bassa potenza e l'1 ad alta potenza.
-\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rafefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
+\item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante. Per quel che riguarda la trasmissione digitale, lo 0 è associato a bassa potenza e l'1 ad alta potenza;
+\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rafefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo;
 \item \textbf{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale. 
 \end{itemize}
 \boximage[am_fm_pm.png][scale=0.5]{Confronto tra tipologie di modulazione ad onda continua}
@@ -213,14 +218,14 @@ Si parla di modulazione ad onda continua nel momento in cui viene modulata una p
 \subsub{Modulazione impulsiva}
 La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codificata in una serie di impulsi. I principali tipi di modulazione impulsiva sono:
 \begin{itemize}
-\item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM
-\item \textbf{PFM} (Pulse Frequency Modulation), analoga alla FM
-\item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM
-\boximage[pam_pwm_ppm_pcm.png][scale=0.5]{Confronto tra tipologie di modulazione impulsiva}
+\item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM;
+\item \textbf{PFM} (Pulse Frequency Modulation), analoga alla FM;
+\item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM.
+\boximage[pam_pwm_ppm_pcm.png][scale=0.4]{Confronto tra tipologie di modulazione impulsiva}
 
 \item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
 \begin{itemize}
-\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
+\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$;
 \item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'ampiezza è uguale per tutti i sottolivelli; di norma, tuttavia, essa segue una scala logaritmica. Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - si è verificato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze. 
 \item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
 \\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
@@ -234,10 +239,10 @@ Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}
 \item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
 \item \textbf{FSK} (Frequency-Shift Keying): la frequenza portante istantanea viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note, l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
 \begin{itemize} 
-\item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{interferenza intersimbolica}) 
-\item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso 
-\item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di apssaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione 
-\item La frequenza d'impulso è solitamente maggiore di quella di intervallo 
+\item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{interferenza intersimbolica}); 
+\item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso; 
+\item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di apssaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione;
+\item La frequenza d'impulso è solitamente maggiore di quella di intervallo.
 \end{itemize} 
 La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi nei ponti radio e nelle trasmissioni di tipo GSM tra cellulari. 
 \item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
@@ -352,8 +357,21 @@ L'RS-232 è uno standard che definisce per la realizzazione di una trasmissione 
 \boximage[rs232.jpg][scale=0.5]{Uso di ogni linea nei due tipi di connettore RS-232}
 \para{USB}
 Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l' USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare collegamenti senza necessità di spegnere le macchine, che riconoscono automaticamente le periferiche (si definisce pertanto un'interfaccia \textit{plug-and-play}).
+I connettori USB sono molteplici (tipi A, B e C con rispettive varianti miniaturizzate), ma con quattro poli ed uguali funzionalità.
+Un'estensione dell'USB, chiamata USB-OTG (On-The-Go), consente a una singola porta di fungere sia da dispositivo sia da controllore, semplificando le connessioni USB dei piccoli dispositivi.
 Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferiche collegate ad albero, attraverso  \vedi{Hub}. Supporta fino a un massimo di 127 periferiche per gestore, ma nel computo vanno inclusi anche gli hub e il gestore stesso. Attualmente, la massima velocità di trasmissione reale raggiunta è 7,2 Gbps (versione USB 3.1).
-%in realtà, siccome l'USB si usa molto, si potrebbe anche approfondire (le slides però dicono poco), lo faccio? 
+\para{IEEE 1394}
+La \vedi{IEEE} 1394, ideata da Apple nel 1968 per essere utilizzata nei PC e nota anche cpn i nomi commerciali \textbf{FireWire} ed \textbf{iLink}, attribuitigli rispettivamente dalla stessa Apple e da Sony, è un'interfaccia bidirezionale in grado di gestire fino a 63 dispositivi sulla stessa linea ad alta velocità miscelando dati sincroni ed asincroni. Come la \vedi{USB}, consente di collegare e scollegare i dispositivi "a caldo" tramite due diversi tipi di connettore, l'uno a quattro pin, senza alimentazione, l'altro a 6, con alimentazione da 8 a 30 V.
+\\Il limite principale di tale interfaccia è la portata, limitata a pochi metri, portati a 100 con lo standard IEEE 1394b.
+\para{RS422}
+Utilizzato principalmente per realizzare collegamenti punto-a-punto tra due apparecchiature -siano esse DTE o DCE- con alta immunità ai disturbi anche a distanze considerevoli (tipicamente fino a 1200 m) e a velocità considerevoli (anche oltre ai 10 Mbps), è uno standard molto diffuso specie in ambito industriale.
+Prevede, per ogni coppia di fili, trasmissione unidirezionale e non reversibile. Pertanto, per realizzare una connessione \vedi{Full-Duplex}, si utilizzano due coppie di fili. 
+\sub{Mezzi trasmissivi}
+Le diverse reti utilizzate per l'accesso ad internet sfruttano mezzi trasmissivi differenti.
+\subsub{Doppino telefonico}
+Un \textit{doppino ritorto} (detto anche \textit{coppia bifilare}) è un tipo di cablaggio composto da una coppia di conduttori in rame isolati ritorti, utilizzato nella \textbf{rete di accesso} -termine con cui si indica la parte di rete destinata al collegamento fra la sede dei singoli utenti finali fino alla prima centrale di commutazione, e più in generale al collegamento tra un utente e il suo provider- alla \textbf{PSTN} (\textit{Public Switched Telephone Network}).
+I doppini sono utilizzati anche, in un intreccio di quattro coppie, per trasmettere dati in una rete locale, attraverso il protocollo \vedi{Ethernet}.
+\sub{Fibra ottica}
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
 In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
@@ -388,14 +406,20 @@ alcuni caratteri inviati all' inizio della trasmissione.Vi sono ovviamente vari 
 si intende una comunicazione in cui il ricevente sta a riposo fin che non riceve un segnale di start, che precede il messaggio,
 alla fine del messaggio viene inviato un segnale di stop che, se non seguito da altri messaggi, rimanda a riposo il ricevente.
 Questo metodo è molto buono in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona(governata da un clock), ma il segnale di start e quello di stop incidono di circa il 30\% su i bit trasmessi.  
-\subsub{Encoding}
-\para{NRZ(Not Reduced Zero)}
-\para{RZ(Return to Zero)}
-\para{Manchester}
-\para{AMI(Alternative Mark Inversion)}
-\subsub{Scrambling}
 \subsub{Orientata al carattere}
 \subsub{Orientata al bit}
+\sub{Scrambling}
+\sub{Encoding}
+\subsub{NRZ(Not Reduced Zero)}
+Codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso, richiede circuiti semplici ed ha una buona resistenza agli errori, unico problema e che con lunghe trasmissioni si rischia di perdere la sincronia
+\subsub{RZ(Return to Zero)}
+Questa codifica è estremamente simile all' NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero, il clock ha frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronia ma ha un più alto rischio di errore.
+\subsub{Manchester}
+questa codifica si consiste nel dividere il periodo di una cifra in due associando allo zero logico il una transizione dal basso verso l' alto,
+mentre all' uno logico una transizione dall' alto verso il basso, in tutti e due i casi la transizione avviene a metà del bit.
+Questo necessita quindi di raddoppiare la banda per trasmettere un informazione, poichè da ogni 2 bit trasferiti si ricava un bit di informazione
+in questo caso con lunghe trasmissioni non si perde la sincronia ed è anche abbastanza robusto agli errori, richiede però cei circuiti più complessi dell NRZ e del RZ.
+\subsub{AMI(Alternative Mark Inversion)}
 
 \sub{Controllo degli errori} 
 \subsub{Ridondanza}
@@ -414,10 +438,18 @@ Questo metodo è molto buono in caso di comunicazioni irregolari senza la precis
 
 \sub{Sottolivelli}
 Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
-\subsub{MAC} Il livello MAC (\textit{Media Access Control}) disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni.
-\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.
+\subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
+\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.\\E' utilizzato per l'instradamento diretto in reti locali, per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
 \subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
+\para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
+In base all'implementazione, il LLC prevede 3 diversi servizi fornibili al livello superiore:
+\begin{itemize}
+\item \textbf{LLC1}: servizio \textit{non} orientato alla connessione, non è prevista alcuna forma di \textit{conferma}, di \textit{correzione errori} ne di \textit{controllo del flusso}.
+\item \textbf{LLC2}: servizio \textit{orientato alla connessione} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC}.
+\item \textbf{LLC3}: servizio alternativo al LLC1 in quanto è \textit{non} orientato alla connessione, ma prevede una \textit{conferma di ricezione} (acknowledge - ACK) per i frame inviati e garantisce la \textit{consegna ordinata} dei dati.
+\end{itemize}
+
 
 \subsection{Protocolli di secondo livello}
 I protocolli di secondo livello si dividono in due principali categorie:
@@ -558,29 +590,22 @@ Per le operazioni del \vedi{Livello di Collegamento} il PPP si avvale del protoc
 
 \sub{Dispositivi}  %2° livello -> bridge e switch (hub è al 1°, è un repeater)
 Nel secondo livello OSI troviamo dispositivi di rete plug-and-play ed \textit{"intelligenti"}, che non si limitano alla sola replicazione del segnale ma sono in grado di riconoscere, nei segnali elettrici che ricevono dal mezzo trasmissivo, i dati organizzati in \textbf{frame}; Agiscono quindi sui frame ricevuti, gestendoli ed instradandoli, il tutto in modo trasparente.
-\subsub{Bridge} Un bridge \textit{(ponte)} è un dispositivo di rete munito di porte con cui è collegato a diversi \textbf{\textit{segmenti di rete}} (generalmente due o più LAN) da cui riceve dati e li instrada selettivamente verso una porta destinataria. Questi segmenti rappresentano i \textbf{domini di collisione}\footnote{insieme di nodi che concorrono per accedere allo stesso mezzo trasmissivo per successivamente trasmettere} della rete.
-\para{Funzionamento} Quando riceve un pacchetto su una porta, riconosce i frame, estrae gli indirizzi sorgente e destinazione e cerca di capire dall'indirizzo del \textit{destinatario} se questi si trova nello \textbf{stesso segmento} del \textit{mittente} oppure no \textbf{\textit{(Filtering)}}. Nel primo caso non inoltra il frame (il destinatario condivide lo stesso bus). \\Nel secondo caso il bridge inoltra il frame verso il \textit{segmento del destinatario} \textbf{\textit{(Forwarding)}}; Se non sa dove si trova, il bridge inoltra il frame su tutte le porte \textbf{\textit{(Flooding)}}. \\Per instradare i frames, il bridge mantiene una tabella (di \textbf{forwarding}) di indirizzi MAC per ogni porta, così è in grado di capire verso quale porta, e quindi quale segmento, inoltrare il frame. 
+\subsub{Bridge} Un bridge \textit{(ponte)} è un dispositivo di rete munito di porte con cui è collegato a diversi \textbf{\textit{segmenti di rete}} (generalmente due o più LAN) da cui riceve dati e li instrada selettivamente verso una porta destinataria
+\paragraph{Funzionamento} Quando riceve un pacchetto su una porta, riconosce i frame, estrae gli indirizzi sorgente e destinazione e cerca di capire dall'indirizzo del \textit{destinatario} se questi si trova nello \textbf{stesso segmento} del \textit{mittente} oppure no \textbf{\textit{(Filtering)}}. Nel primo caso non inoltra il frame (il destinatario condivide lo stesso bus). \\Nel secondo caso il bridge inoltra il frame verso il \textit{segmento del destinatario} \textbf{\textit{(Forwarding)}}; Se non sa dove si trova, il bridge inoltra il frame su tutte le porte \textbf{\textit{(Flooding)}}. \\Per instradare i frames, il bridge mantiene una tabella (di \textbf{forwarding}) di indirizzi MAC per ogni porta, così è in grado di capire verso quale porta, e quindi quale segmento, inoltrare il frame. 
 \para{Tipologie} In base alle tipologie delle due reti si distinguono:
 \begin{itemize}
 \item \textbf{Transparent Bridge}: collega 2 LAN Ethernet o IEEE 802.3
 \item \textbf{Source Routing Bridge}: collega 2 LAN Token Ring
 \item \textbf{Translational Bridge}: collega 2 LAN di tipo diverso (deve adattarsi alle diverse regole trasmissive)
 \end{itemize}
-\image[Bridge-net.png][scale=0.5]{ciascun segmento di rete, collegato ad una porta di un bridge, costituisce un \textit{dominio di collisione} separato}
+%img [Ciascun segmento di rete, collegato ad una porta di un bridge, costituisce un \textbf{dominio di collisione} \footnote{insieme di nodi che concorrono per accedere allo stesso mezzo trasmissivo per successivamente trasmettere} separato]
 
 \subsub{Switch} Uno switch \textit{(commutatore)} è un dispositivo molto simile al bridge, ma a differenza di quest'ultimo è collegato direttamente agli \textbf{\textit{host}} ed ha un numero di porte nettamente superiore.
-\para{Funzionamento} la funzione di instradamento è implementata mantenendo in un \textbf{buffer locale} tutti gli \textit{indirizzi MAC} degli host connessi alla rete, suddivisi per \textit{porta dello switch}.\\
+\paragraph{Funzionamento} la funzione di instradamento è implementata mantenendo in un \textbf{buffer locale} tutti gli \textit{indirizzi MAC} degli host connessi alla rete, suddivisi per \textit{porta dello switch}.\\
 L'instradamento è analogo al bridge, ma nel caso in cui lo switch invia il pacchetto a tutte le porte (Flooding), il nodo destinatario -ricevuto il pacchetto- risponderà facendo sapere allo switch la sua porta ed il suo MAC address.\\
 Infine usando lo switch, non sono possibili collisioni ed è possibile usare la modalità \textbf{full duplex} (trasmissione contemporanea)
-\image[Switched-net.png][scale=0.5]{lo switch riduce la rete in un insieme di \textit{domini di collisione} di dimensioni minime (al limite costituiti ognuno da un singolo host)}
-\para{Implementazione LAN} Una LAN può essere implementata con i seguenti apparati switch (switching LAN):
-\begin{itemize}
-\item 10baseT Switch \textit{(IEEE802.3)}: ogni porta implementa un Dominio di Collisione separato
-\item 100baseT Switch \textit{(IEEE802.3u)}: ogni porta implementa un segmento di rete FastEthernet usando un cavo \textit{Unshielded twisted Pair (UTP)}
-\item 1000baseCX Switch \textit{(IEEE802.3z, IEEE802.3ab)}: ogni porta implementa un segmento di rete Gigabit Ethernet usando un cavo in rame \textit{Shilded Twisted Pair (STP)}
-\item 1GbaseCX4 Switch\textit{(IEEE802.3ae, IEEE802.3ah)}: ogni porta implementa un segmento di rete 10 Gigabit Ethernet usando un cavo in rame \textit{STP}
-\end{itemize}
-\para{Virtual LANs} Implicito nella switching LAN vi è il concetto di Virtual LAN (\textbf{VLAN}), grazie al quale è possibile partizionare una rete locale basata su switch, in più \textit{reti locali logicamente separate} tra di loro (ma che condividono la stessa rete fisica).
+%img [lo switch riduce la rete in un insieme di \textbf{domini di collisione} di dimensioni minime (al limite costituiti ognuno da un singolo host)]
+%implementazione LAN con switch???
 
 \newpage\sec{Livello di Rete}
 
@@ -1000,6 +1025,8 @@ L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url
 \item \code{sftp}, che sostituisce \vedi{FTP};
 \item \code{ssh-add}, \code{ssh-agent} ed \code{ssh-keygen}, una serie di programmi per la generazione e la gestione delle chiavi;
 \item i demoni \code{sshd} ed \code{sftp-server}.
+\boximage[ssh_example.png][scale=0.5]{Connessione SSH ad un instanza Linux Amazon, notare la sintassi ssh -i ChiavePrivata NomeUtente@IndirizzoIp}
+
 \end{itemize}
 \subsub{DHCP} %può contenere tracce di Tasso
 Il protocollo DHCP (Dynamic Host Configuration Protocol) permette agli \italic{host} di una rete locale di ricevere ad ogni richiesta di accesso a una rete IP tutte le informazioni di configurazione necessarie a connettersi ed operare.
@@ -1068,6 +1095,12 @@ Ad ogni dominio è associato un resource record (RR), file ASCII che contengono 
 
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
+<<<<<<< HEAD
+
+\ \\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
+disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
+=======
+>>>>>>> 97636dc20b77169616b3873a0f5cb1b1ea62f446
 
 \paragraph{Risoluzione}
 La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
@@ -1230,6 +1263,34 @@ e permette di interrogare un nameserver per ottenere informazioni  e verificarne
 \subsub{NIS}
 Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP} 
+HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} \footnote{diverse tipologie di informazioni integrate tra loro} distribuita nella rete ed acceduta mediante \textit{hyperlinks} \footnote{documenti relazionati tra loro in una struttura tale da consentire la navigazione mediante \textit{links} per passare da un documento all'altro})
+\paragraph{Storia} HTTP è utilizzato dal World Wide Web dal 1990, e da allora è stato aggiornato a diverse versioni:
+\begin{itemize}
+\item \textbf{HTTP/0.9}: semplice protocollo per il trasferimento di dati grezzi sulla rete Internet, gestito dal W3C
+\item \textbf{HTTP/1.0} (RFC 1945): consente il trasferimento di messaggi di tipo MIME, %VEDI MIME
+ma aveva ancora delle limitazioni dovute alla diffusione del WWWW 
+\item \textbf{HTTP/1.1}: versione consolidata del protocollo, usato per 15 anni per lo sviluppo del Web
+\item \textbf{HTTP/2} (RFC 7540): nuovo standard, sviluppato da Google e basato sul protocollo SPDY/2.
+\end{itemize}
+\paragraph{Funzionamento} HTTP fornisce un insieme di \textbf{metodi di richiesta} e fornisce attraverso l'\textit{Unified Resource Location} (URL), \textit{Identifier} (URI) o \textit{Name} (URN), un modo per \textbf{identificare} la risorsa richiesta da quel metodo. \\
+L'HTTP ha un'architettura di tipo client/server e comprende due tipi di messaggi: di richiesta e di risposta.
+\begin{itemize}
+\item \textbf{HTTP Request} inviato dal client verso un server, è composto da:
+\begin{itemize}
+\item \textbf{request line}: riga di richiesta composta dal metodo di richiesta \textit{(GET, POST, HEAD, PUT, DELETE, TRACE, OPTIONS, CONNECT)}, l'URI \textit{(indica la risorsa richiesta, es pagina web)} e la versione del protocollo.
+\item \textbf{header}: informazioni aggiuntive, tra cui l'Host \textit{(nameserver a cui si riferisce l'URL)} e l'User-Agent \textit{(tipo di client)}
+\item riga vuota
+\item \textbf{body}: corpo del messaggio
+\end{itemize}
+\item \textbf{HTTP Response} inviato dal server, è di tipo testuale ed è composto da:
+\begin{itemize}
+\item \textbf{status line}: riga di stato che riporta un codice a tre cifre per identificare lo stato della risposta \textit{(1xx Informational, 2xx Successful, 3xx Redirection, 4xx Client error, 5xx Server error)}
+\item \textbf{header}: Server \textit{(indica il tipo di server)}, Content-Type \textit{(il tipo di contenuto restituito in codifica MIME, es. text/html, text/plain...)}
+\item riga vuota
+\item \textbf{body}: contenuto della risposta
+\end{itemize}
+\end{itemize}
+
 \subsub{NFS}
 Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
 Lato server, la condivisione di una cartella con un host specifico è detta \italic{sharing} ed è ottenuta mediante il comando \code{export}.
@@ -1272,6 +1333,48 @@ Il termine NAT indica un servizio svolto da un router.
  perfettamente: i nodi sono in grado di comunicare fra loro usando questi indirizzi.
  Il problema nasce quando un nodo interno alla LAN deve
  comunicare con l’esterno: il suo indirizzo entrerebbe infatti in conflitto con qualche altro nodo di rete che usa lo stesso numero. Il router allora effettua
- una “traduzione dell’indirizzo”, ovvero cambia la specifica di provenienza dell’indirizzo assegnando un nuovo numero di port (che non sia già
- utilizzato) e cambiando il numero IP nel numero ufficialmente assegnato.
+ una “traduzione dell’indirizzo”, ovvero cambia la specifica di provenienza dell’indirizzo assegnando un nuovo numero di port (che non sia giàutilizzato) e cambiando il numero IP nel numero ufficialmente assegnato.
+ 
+ \subsub {Posta Elettronica}
+La Posta Elettronica \'e composta da due programm:i il Mail User Agent ed il Programma di Trasporto. Il primo \'e un interfaccia verso l'applicazione utilizzata \'e composto da:
+ \begin{itemize}
+ 	\item Composizione 
+ 	\item Visualizzazione
+ 	\item Eliminazione
+ \end{itemize}
+ Per Composizione si intende la composizione del messaggio stesso ma anche all'automatizzazione  di scrittura e gestione delle mail.\newline
+ Per Visualizzazione ci si riferisce ai processi di visualizzazione del messaggio stesso, di archiviazione e di interazione con il sistema.\newline
+ Per Eliminazione si intende il processo di gestione dello spazio eliminando mail irrilevanti\newline
+ Il Programma di Trasporto (Sendmail) si interessa di:
+ \begin{itemize}
+	\item Trasferimento
+	\item Notifica all'utente
+ \end{itemize}
+ Per trasferimento si intende il meccanismo con il quale il messaggio viene trasmesso: quando il Mail User Agent spedisce il messaggio viene attivata una sessione con il server di destinazione, le mail vengono trasferite secondo il protocollo SMTP(Simple Mail Transfer Protocol).\newline 
+ Per Notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
+ I protocolli principali utilizzati per interagire con il protocollo di trasporto sono POP3 (Post Office Protocol) e IMAP (Internet Message Access Protocol). %spiega i due protocolli 
+
+ 
+ 
+ 
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
 \end{document}
