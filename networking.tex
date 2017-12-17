@@ -370,8 +370,20 @@ Prevede, per ogni coppia di fili, trasmissione unidirezionale e non reversibile.
 Le diverse reti utilizzate per l'accesso ad internet sfruttano mezzi trasmissivi differenti.
 \subsub{Doppino telefonico}
 Un \textit{doppino ritorto} (detto anche \textit{coppia bifilare}) è un tipo di cablaggio composto da una coppia di conduttori in rame isolati ritorti, utilizzato nella \textbf{rete di accesso} -termine con cui si indica la parte di rete destinata al collegamento fra la sede dei singoli utenti finali fino alla prima centrale di commutazione, e più in generale al collegamento tra un utente e il suo provider- alla \textbf{PSTN} (\textit{Public Switched Telephone Network}).
-I doppini sono utilizzati anche, in un intreccio di quattro coppie, per trasmettere dati in una rete locale, attraverso il protocollo \vedi{Ethernet}.
-\sub{Fibra ottica}
+I doppini sono utilizzati anche, in un intreccio di quattro coppie, per trasmettere dati in una rete locale, attraverso il protocollo \vedi{Ethernet}. %inserire pagina 260 delle slides, se si riesce a decrittarla
+\subsub{Fibra ottica}
+Le fibre ottiche sono filamenti di materiali vetrosi o polimerici, realizzati in modo da poter condurre al loro interno la luce (propagazione guidata). Disponibili sotto forma di cavi, presentano numerosi vantaggi: sono flessibili, immuni ai disturbi elettrici ed alle condizioni atmosferiche più estreme e poco sensibili alle variazioni di temperatura.
+Le architetture di rete che utilizzano la fibra ottica come mezzo trasmissivo sono indicate genericamente con l'acronimo \textbf{FTTx} (\textit{Fiber To The x}). In particolare, FTTH\footnote{A Perugia si utilizzano attualmente due diverse soluzioni: oltre a FTTH è disponibile la fibra al cabinato (FTTC)} (\textit{Fiber To The Home}) indica le reti in cui il collegamento in fibra ottica raggiunge la singola unità abitativa. È la soluzione più costosa, ma garantisce la massima velocità di trasmissione. 
+Elementi principali di una rete FTTx sono:
+\begin{itemize}
+\item \textbf{OLT} (\textit{Optical Line Termination});
+\item \textbf{ONT} (\textit{Optical Network Termination});
+\item \textbf{ONU} (\textit{Optical Network Unit}).
+\end{itemize}
+\paragraph{Reti AON} Le reti AON (Active Optical Network) sono strutture point-to-point, nel senso che ogni utente ha il proprio ONT. Nelle AON si utilizzano componenti attivi, come amplificatori, ripetitori o circuiti di sagomatura. La loro topologia è solitamente a stella (vedi \vedi{Rete a stella}).
+\paragraph{Reti PON} Le reti PON (Passive Optical Network)
+utilizzano solo componenti passivi. In una rete di questo tipo, una singola fibra da un terminale di linea ottica (OLT) dell'ufficio centrale è collegata a terminali di rete ottica (ONT) o unità di rete ottica (ONU) presso la sede del cliente. La topologia è solitamente ad albero (vedi \vedi{Rete ad albero}).
+
 \newpage\sec{Livello di Collegamento}
 %Filippo---------------------------------------------------------------------------------------------------------------------
 In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
