@@ -19,7 +19,6 @@
   + Servizi di rete 
     + SNMP #
   + Posta elettronica #
-+ Sicurezza di rete #
 
 ### Cosa va rivisto
 + Livello Fisico
@@ -29,7 +28,7 @@
 + Livello di Rete #
 + Livello di Trasporto
 + Livello delle Applicazioni
-  + Servizi di rete
+  + Servizi di rete #
     + DHCP
     + NAT
 
@@ -46,5 +45,5 @@
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
 |                    |              |          | revisione | Livelli 1 e 2      |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | scrittura | Sicurezza di rete  |
+| Giorgio Mazza      | Shizen39     | metric   | revisione | Servizi di rete    |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
