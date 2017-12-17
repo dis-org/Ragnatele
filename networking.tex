@@ -419,9 +419,12 @@ si intende una comunicazione in cui il ricevente sta a riposo fin che non riceve
 alla fine del messaggio viene inviato un segnale di stop che, se non seguito da altri messaggi, rimanda a riposo il ricevente.
 Questo metodo è molto buono in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona(governata da un clock), ma il segnale di start e quello di stop incidono di circa il 30\% su i bit trasmessi.  
 \subsub{Orientata al carattere}
-\subsub{Orientata al bit}
-\sub{Scrambling}
+è utilizzato nelle trasmissioni testuali, per esempio i file ASCII. In assenza dei bit di start e stop la sincronizzazione è ottenuta tramite una serie di caratteri, inizialmente la sincronizzazione è a bit e ricerca, negli 8 bit consegutivi un carattere SYN se non lo trova controlla bit a bit, una volta trovato il carattere ha aquisito il sincronismo a carattere e ricerca il carattere STX che sancisce l' inizio della trasmissione, che continua fino al carattere ETX che termina la
+trasmissione. Nel caso la trasmissione contenga caratteri qualunque e dunque i caatteri di inizio e fine possono esser simulati dai dati si fa precedere ad i caratteri STX e ETX da un DLE(carattere di controllo), all' interno dei dati viene eseguito un byte stuffing(tecnica usata nella sincronizzazione a bit che consiste nell' aggiungere uno zero ogni 5 uno consegutivi) sostituendo eventuali DLE simulati con 2 DLE   
 
+\subsub{Orientata al bit}
+ Questa tecnica è preferibile sia quando i dati non sono organizzati in caratteri sia per non dipendere da caratteri di controllo.
+ la sincronizzazione di basa su degli idle bytes 011111111 nei periodi di inattività e dei flag bytes 01111110 per indicare inizio e fine della trasmissione,il rischio di simulare il flag nella trasmissione è scongiurato dall' utilizzo del bit stuffing
 \sub{Encoding}
 \subsub{NRZ(Not Reduced Zero)}
 Codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso, richiede circuiti semplici ed ha una buona resistenza agli errori, unico problema e che con lunghe trasmissioni si rischia di perdere la sincronia
@@ -435,6 +438,8 @@ in questo caso con lunghe trasmissioni non si perde la sincronia ed è anche abb
 \subsub{AMI(Alternative Mark Inversion)}
 La codifica AMI utilizza 3 stati: +V, 0, -V, in cui lo zero logico è uguale allo stato 0 mentre l' uno logico si alterna fra +V e -V.
 Questa codifica è usata nel PMC (Pulse Code Modulation). 
+\subsub{Scrambling}
+lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasmissioni di lunga distanza, consiste nel mescolare in modo "intelligente" i bit per mantenere attiva la linea, è utilizzata nella, mai vista, codifica 2B1Q(two Binary, one Quaternary)
 \sub{Controllo degli errori} 
 \subsub{Ridondanza}
 
