@@ -13,10 +13,9 @@
 + Livello Fisico
   + Dispositivi
     + Hub
-  + Mezzi trasmissivi #
 + Livello di Collegamento
   + Tipi di trasmissione
-    + Encoding # 
+    + Encoding (introduzione)
     + ...
   + Protocolli di secondo livello
     + ATM #
@@ -27,14 +26,10 @@
   + Posta elettronica #
 
 ### Cosa va rivisto
-+ Livello Fisico
-  + Filtri #
-  + ... #
-+ Livello di Collegamento #
-+ Livello di Rete #
++ Livello di Rete
 + Livello di Trasporto
 + Livello delle Applicazioni
-  + Servizi di rete #
+  + Servizi di rete 
     + DHCP
     + NAT
 
@@ -45,11 +40,10 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Aranna Masciolini  | harisont     | hub      | scrittura | Mezzi trasmissivi  |
+| Aranna Masciolini  | harisont     | hub      |           |                    |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
-| Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
+| Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
-|                    |              |          | revisione | Livelli 1 e 2      |
-| Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | revisione | Servizi di rete    |
+| Gioara Cuccu       | Gio93k       | border   |           |                    |
+| Giorgio Mazza      | Shizen39     | metric   |           |                    |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
