@@ -43,7 +43,7 @@
 \newpage
 
 \section*{Introduzione}
-La comunicazione, intesa come scambio di informazioni, può avvenire solo se l'emittente e il ricevente concordano sull'interpretazione del messaggio trasmesso. In altre parole, devono esistere una serie di regole comuni, che permettano di risalire al significato del messaggio, in quanto la stessa informazione può e deve assumere forme diverse, anche a seconda del canale di comunicazione.
+La comunicazione, intesa come scambio di informazioni, può avvenire solo se l'emittente e il ricevente concordano sull'interpretazione del messaggio trasmesso. In altre parole, deve esistere una serie di regole comuni che permetta di risalire al significato del messaggio, in quanto la stessa informazione può e deve assumere forme diverse, anche a seconda del canale di comunicazione.
 In ambito di telecomunicazioni questo insieme di regole, definito formalmente, è detto \textbf{protocollo di comunicazione}. \\Se i partecipanti alla comunicazione sono molteplici, sarà necessario definire un sistema di comunicazione utilizzato da tutti, che indichi quali protocolli utilizzare in quali situazioni. \'E a questo che servono gli \textbf{standard}.
 
 \sub{Gli standard}
@@ -143,65 +143,56 @@ Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente
 \\\\Fra i segnali analogici assumono particolare rilevanza i \textbf{segnali sinusoidali}, ossia segnali che variano nel tempo secondo una legge del tipo \[u=Usen(\omega t+\varphi )\] dove 
 \begin{itemize}
 \item $u$ è l'ampiezza istantanea
-\item $U$ è l'ampiezza massima
+\item $U$ è l'ampiezza massima 
 \item $\omega $ è la \textit{velocità angolare}, ovvero la variazione dell'angolo nel tempo, espressa in radianti al secondo
 \item $\varphi $ è la \textit{fase}, ossia lo sfasamento rispetto all'origine, espresso in radianti
 \item $t$ è il tempo (variabile)
-\item $T$ è l'intervallo di tempo (in secondi) impiegato dall'onda per tornare allo stesso livello d'intensità, detto \textit{periodo}.
+\item $T$ è il \textit{periodo}, cioè l'intervallo di tempo (in secondi) impiegato dall'onda per effettuare un'oscillazione completa.
 \item $1/T=f$ è detta \textit{frequenza}, misurata in Hz ($1/s $)\\\\
 \end{itemize}
-La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo.
+La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo in un secondo.
 \
 \boximage[segnali_sin.png][scale=0.5]{Rappresentazione grafica di un segnale sinusoidale}
 
 \subsubsection{Lunghezza d'onda}
-In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f$ (dove $c$ è la velocità di propagazione del segnale).
+In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f =cT$ (dove $c$ è la velocità di propagazione del segnale).
 
 \subsub{Spettro}
 Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa affermazione, non necessariamente di immediata comprensione, diventa subito chiara se si tiene presente il \textbf{teorema di Fourier}, il quale afferma che un segnale può essere rappresentato come somma di sinusoidi (potenzialmente infinite) con caratteristiche differenti.
+
+\boximage[fourier.png][scale=0.6]{Esempio di funzione composta da tre sinusoidi semplici.}
 
 \subsub{Ampiezza di banda}
 L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
 
 \subsection{Qualità delle trasmissioni} \label{qualita}
-Come già accennato in precedenza, é lo strato fisico che determina in larga parte la qualità delle comunicazioni, valutabile in base a prestazioni e affidabilità. 
-\\Vi sono numerosi strumenti software per valutare la qualità di una rete, quali:
+Vi sono numerosi strumenti software per valutare la qualità di una rete in base a prestazioni e affidabilità, quali:
 \begin{itemize}
-\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto e riporta statistiche sui pacchetti persi 
-\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione (hops)
+\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto inviando pacchetti \vedi{ICMP} e riporta statistiche sui pacchetti persi;
+\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione;
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
 \subsub{Criteri di valutazione in base alle prestazioni}
-Questi concernano le applicazioni \textbf{real-time} \textit{(come lo streaming in diretta)}, dove è prioritario ricevere i pacchetti con il minimo ritardo al prezzo di qualche perdita di dati (generalmente non percepita). Per tali ragioni si preferisce l'uso del protocollo \vedi{UDP}.
-\begin{itemize}
-\item \textbf{ritardo}: tempo effettivo necessario per il transito dei dati;
-\item \textbf{tempo di risposta}: tempo che intercorre tra il momento in cui viene effettuata una richiesta e il momento in cui si ottiene una risposta;
-\item \textbf{banda}: quantità massima di dati che possono essere trasferiti in un dato periodo di tempo; rappresenta la massima velocità della rete;
-\item \textbf{throughput}: quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete;
-\item \textbf{latenza}: tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
+\para{Throughput}Quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete.
+\para{Latenza}Detta anche ritardo, è il tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
 \begin{itemize}
 \item \textbf{tempo di propagazione}: tempo di transito sulla rete per arrivare dal mittente al destinatario;
 \item \textbf{tempo di trasmissione}: tempo necessario per immettere i bit sulla rete, ossia $\frac{dim_{m}}{v}$, dove $dim_{m}$ è la dimensione del messaggio e $v$ la velocità trasmissiva;
-\item \textbf{tempo di inoltro}: tempo necessario ai nodi per consegnare il messaggio in transito, non legato al traffico ma solo ad hardware e software;
+\item \textbf{tempo di elaborazione (o di inoltro)}: tempo necessario ai nodi per consegnare il messaggio in transito, non legato al traffico ma solo ad hardware e software;
 \item \textbf{tempo di attesa} nelle code di rete, dipendente dal traffico.
 \end{itemize}
 \subsubsection{Criteri di valutazione in base all'affidabilità}
-Questi concernano le applicazioni \textbf{non real-time} \textit{ (come il file transfer)} dove diventa importante l'affidabilità del trasferimento in quanto in caso di \textit{packet loss}, in genere è richiesto il ri-trasferimento di tutto il pacchetto. Alcuni di questi criteri sono soddisfatti dai protocolli usati (es. \vedi{TCP}).
-\item \textbf{jitter}: variabilità del ritardo con cui i pacchetti vengono consegnati in ricezione
-\item \textbf{packet corrupted}: percentuale di pacchetti errati, ossia consegnati a destinazione ma \textit{corrotti} in quanto con la trasmissione hanno subito la variazione di uno o più bit (anche per cause fisiche quali \vedi{Rumore} o \vedi{Interferenza}). Possono essere corretti o ne è richiesta la ritrasmissione.
-\item \textbf{packet loss}: percentuale di pacchetti che la rete non riesce a consegnare in quanto corrotti o perchè arrivano quando i buffer di un router sono pieni. Ne è richiesta la ritrasmissione.
-\item \textbf{out-of-order}: sequenza di pacchetti ricevuta in un ordine diverso da quello con qui è stato inviato (es. instradati su percorsi diversi)
-\end{itemize}
+\para{Jitter}Variabilità del ritardo con cui i pacchetti vengono consegnati in ricezione.
+\para{Packet loss}Percentuale dei pacchetti non giunti a destinazione.
 
 \sub{Filtri}
 Un filtro è un sistema che tratta le varie componenti del segnale in modo diverso a seconda della loro frequenza.
-\\E' opportuna innanzitutto una distinzione tra filtri \textit{passivi} ed \textit{attivi}: i primi sono costituiti solamente da resistenze e condensatori, mentre i secondi includono altre componenti, come i transistor e gli amplificatori. Inoltre, a seconda del comportamento, si distinguono quattro tipi di filtri:
+\\È opportuna innanzitutto una distinzione tra filtri \textit{passivi} ed \textit{attivi}: i primi sono costituiti solamente da resistenze e condensatori, mentre i secondi includono altre componenti, come i transistor e gli amplificatori. Inoltre, a seconda del comportamento, si distinguono quattro tipi di filtri:
 \begin{itemize}
-\item \textbf{filtro passa basso}: permette il passaggio delle frequenze al di sotto di una determinata \textit{frequenza di taglio}, definita come \[\frac{v_{out}}{v_{in}}=\frac{1}{(2)^{1/2}}\]
-dove $v_{in}$ è il segnale in ingresso e $v_{out}$ il segnale in uscita.
-\item \textbf{filtro passa alto}: complementare al filtro passa basso, permette il passaggio delle frequenze al di sopra della frequenza di taglio, definita come sopra
-\item \textbf{filtro passa banda}: composizione di un filtro passa basso e un filtro passa alto
-\item \textbf{filtro elimina banda}: complemento del filtro passa banda, blocca le frequenze comprese tra due frequenze di taglio.
+\item \textbf{filtro passa basso}: permette il passaggio delle frequenze al di sotto di una determinata \textit{frequenza di taglio};
+\item \textbf{filtro passa alto}: complementare al filtro passa basso, permette il passaggio delle frequenze al di sopra della frequenza di taglio;
+\item \textbf{filtro passa banda}: composizione di un filtro passa basso e un filtro passa alto: permette il passaggio delle frequenze comprese tra le frequenze di taglio dei due filtri;
+\item \textbf{filtro elimina banda}: complemento del filtro passa banda, blocca le frequenze comprese tra le due frequenze di taglio.
 \end{itemize}
 
 \sub{Modulazione}
@@ -209,29 +200,30 @@ Sovente capita che l'informazione debba essere convertita in maniera idonea ad e
 \subsub{Ad onda continua}
 Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie:
 \begin{itemize}
-\item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante. Per quel che riguarda la trasmissione digitale, lo 0 è associato a bassa potenza e l'1 ad alta potenza;
-\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rafefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo;
+\item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante;
+\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rarefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
 \item \textbf{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale. 
 \end{itemize}
 \boximage[am_fm_pm.png][scale=0.5]{Confronto tra tipologie di modulazione ad onda continua}
 
 \subsub{Modulazione impulsiva}
-La modulazione impulsiva è un tipo di modulazione in cui l'informazione è codificata in una serie di impulsi. I principali tipi di modulazione impulsiva sono:
+La modulazione impulsiva è un tipo di modulazione in cui la modulante è una sinusoide, mentre la portante è una serie di impulsi\footnote{}. I principali tipi di modulazione impulsiva sono:
 \begin{itemize}
+\boximage[pam_pwm_ppm_pcm.png][scale=0.5]{Confronto tra tipologie di modulazione impulsiva}
 \item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM;
-\item \textbf{PFM} (Pulse Frequency Modulation), analoga alla FM;
-\item \textbf{PPM} (Pulse Phase Modulation), analoga alla PM.
-\boximage[pam_pwm_ppm_pcm.png][scale=0.4]{Confronto tra tipologie di modulazione impulsiva}
-
-\item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare un gran più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala. La PCM costa di tre fasi distinte:
+\item \textbf{PWM} (Pulse Width Modulation), dove la durata dell'impulso cambia in base all'ampiezza della modulante;
+\item \textbf{PPM} (Pulse Position Modulation), analoga alla PM;
+\item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
+\\La PCM costa di tre fasi distinte:
 \begin{itemize}
-\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli di tempo regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$;
-\item \textbf{quantizzazione}: conversione di un segnale a valori continui in uno a valori discreti. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'ampiezza è uguale per tutti i sottolivelli; di norma, tuttavia, essa segue una scala logaritmica. Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - si è verificato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze. 
+\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
+\\Il campionamento si realizza per mezzo della PAM.
+\item \textbf{quantizzazione}: discretizzazione dell'ampiezza del segnale campionato. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'intervallo è diviso in pari uguali; di norma, tuttavia, la suddivisione segue una scala logaritmica.
+\\Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - è dimostrato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze nella riproduzione dei suoni. 
 \item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
 \\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
 \end{itemize}
 \boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
-
 \end{itemize}
 \subsub{Modulazione digitale} 
 Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, in prima approssimazione, attraverso una mappatura biunivoca tra sequenze di bit in ingresso ed un insieme di forme d'onda analogiche limitate nel tempo in uscita, dette \textit{simboli}. E' dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
@@ -1113,13 +1105,8 @@ Ad ogni dominio è associato un resource record (RR), file ASCII che contengono 
 
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
-<<<<<<< HEAD
-
 \ \\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
 disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
-=======
->>>>>>> 97636dc20b77169616b3873a0f5cb1b1ea62f446
-
 \paragraph{Risoluzione}
 La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
 La risoluzione può essere \textbf{statica} (mapping stabilito permanentemente tramite una host table) o \textbf{dinamica} (mapping stabilito ad ogni avvio dell'host).\\
