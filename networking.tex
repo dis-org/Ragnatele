@@ -226,7 +226,7 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
 \end{itemize}
 \subsub{Modulazione digitale} 
-Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, facendo corrispondere ad ogni sequenza di bit in input un'univoca forma d'onda analogica limitata nel tempo in uscita, detta \textit{simbolo}. E' dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
+Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, facendo corrispondere ad ogni sequenza di bit in input un'univoca forma d'onda analogica limitata nel tempo in uscita, detta \textit{simbolo}. \'E dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
 \begin{itemize} 
 \item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
 \item \textbf{FSK} (Frequency-Shift Keying): la frequenza portante istantanea viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
@@ -355,15 +355,15 @@ I connettori USB sono molteplici (tipi A, B e C con rispettive varianti miniatur
 Un'estensione dell'USB, chiamata USB-OTG (On-The-Go), consente a una singola porta di fungere sia da dispositivo sia da controllore, semplificando le connessioni USB dei piccoli dispositivi.
 Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferiche collegate ad albero, attraverso  \vedi{Hub}. Supporta fino a un massimo di 127 periferiche per gestore, ma nel computo vanno inclusi anche gli hub e il gestore stesso. Attualmente, la massima velocità di trasmissione reale raggiunta è 7,2 Gbps (versione USB 3.1).
 \para{IEEE 1394}
-La \vedi{IEEE} 1394, ideata da Apple nel 1968 per essere utilizzata nei PC e nota anche cpn i nomi commerciali \textbf{FireWire} ed \textbf{iLink}, attribuitigli rispettivamente dalla stessa Apple e da Sony, è un'interfaccia bidirezionale in grado di gestire fino a 63 dispositivi sulla stessa linea ad alta velocità miscelando dati sincroni ed asincroni. Come la \vedi{USB}, consente di collegare e scollegare i dispositivi "a caldo" tramite due diversi tipi di connettore, l'uno a quattro pin, senza alimentazione, l'altro a 6, con alimentazione da 8 a 30 V.
-\\Il limite principale di tale interfaccia è la portata, limitata a pochi metri, portati a 100 con lo standard IEEE 1394b.
+La \vedi{IEEE} 1394, ideata da Apple nel 1968 per essere utilizzata nei PC e nota anche con i nomi commerciali \textbf{FireWire} ed \textbf{iLink}, attribuitile rispettivamente dalla stessa Apple e da Sony, è un'interfaccia bidirezionale in grado di gestire fino a 63 dispositivi sulla stessa linea ad alta velocità, miscelando dati sincroni ed asincroni. Come la \vedi{USB}, consente di collegare e scollegare i dispositivi a caldo tramite due diversi tipi di connettore, l'uno a quattro pin, senza alimentazione, l'altro a 6, con alimentazione da 8 a 30 V.
+Il limite principale di tale interfaccia è la portata, limitata a pochi metri, portati a 100 con lo standard IEEE 1394b.
 \para{RS422}
-Utilizzato principalmente per realizzare collegamenti punto-a-punto tra due apparecchiature -siano esse DTE o DCE- con alta immunità ai disturbi anche a distanze considerevoli (tipicamente fino a 1200 m) e a velocità considerevoli (anche oltre ai 10 Mbps), è uno standard molto diffuso specie in ambito industriale.
+Utilizzato principalmente per realizzare collegamenti punto-a-punto tra due apparecchiature -siano esse DTE o DCE- con alta immunità ai disturbi anche a distanze considerevoli (tipicamente fino a 1200 m) e a velocità anche superiori a 10 Mbps, è uno standard molto diffuso specie in ambito industriale.
 Prevede, per ogni coppia di fili, trasmissione unidirezionale e non reversibile. Pertanto, per realizzare una connessione \vedi{Full-Duplex}, si utilizzano due coppie di fili. 
 \sub{Mezzi trasmissivi}
 Le diverse reti utilizzate per l'accesso ad internet sfruttano mezzi trasmissivi differenti.
 \subsub{Doppino telefonico}
-Un \textit{doppino ritorto} (detto anche \textit{coppia bifilare}) è un tipo di cablaggio composto da una coppia di conduttori in rame isolati ritorti, utilizzato nella \textbf{rete di accesso} -termine con cui si indica la parte di rete destinata al collegamento fra la sede dei singoli utenti finali fino alla prima centrale di commutazione, e più in generale al collegamento tra un utente e il suo provider- alla \textbf{PSTN} (\textit{Public Switched Telephone Network}).
+Un \textit{doppino ritorto} (detto anche \textit{coppia bifilare}) è un tipo di cablaggio composto da una coppia di conduttori in rame isolati ritorti, utilizzato nella \textbf{rete di accesso}\footnote{Termine con cui si indica la parte di rete destinata al collegamento fra la sede dei singoli utenti finali fino alla prima centrale di commutazione, e più in generale al collegamento tra un utente e il suo provider.} alla \textbf{PSTN} (\textit{Public Switched Telephone Network}).
 I doppini sono utilizzati anche, in un intreccio di quattro coppie, per trasmettere dati in una rete locale, attraverso il protocollo \vedi{Ethernet}. %inserire pagina 260 delle slides, se si riesce a decrittarla
 \subsub{Fibra ottica}
 Le fibre ottiche sono filamenti di materiali vetrosi o polimerici, realizzati in modo da poter condurre al loro interno la luce (propagazione guidata). Disponibili sotto forma di cavi, presentano numerosi vantaggi: sono flessibili, immuni ai disturbi elettrici ed alle condizioni atmosferiche più estreme e poco sensibili alle variazioni di temperatura.
@@ -373,7 +373,7 @@ Elementi principali di una rete FTTx sono:
 \item \textbf{OLT} (\textit{Optical Line Termination}): gestisce il flusso di dati; si trova presso il provider;
 \item \textbf{ONT} (\textit{Optical Network Termination}) ed \textbf{ONU} (\textit{Optical Network Unit}): interfacce di rete presso l'utente finale.
 \end{itemize}
-\paragraph{Reti AON} Le reti AON (Active Optical Network) sono strutture P2P (point-to-point), nel senso che ogni utente ha il proprio tratto di fibra, che giunge direttamente al proprio ONT. Nelle AON si utilizzano componenti attivi, come amplificatori, ripetitori router o switch. La loro topologia è solitamente a stella (vedi \vedi{Rete a stella}). Garantisce, a costi elevati, la massima velocità di trasmissione.
+\paragraph{Reti AON} Le reti AON (Active Optical Network) sono strutture P2P (point-to-point), nel senso che ogni utente ha il proprio tratto di fibra, che giunge direttamente al proprio ONT. Nelle AON si utilizzano componenti attivi, come amplificatori, ripetitori, router o switch. La loro topologia è solitamente a stella (vedi \vedi{Rete a stella}). Garantisce, a costi elevati, la massima velocità di trasmissione.
 \paragraph{Reti PON} Le reti PON (Passive Optical Network)
 utilizzano solo componenti passivi e sono caratterizzate da una topologia ad albero (vedi \vedi{Rete ad albero}). In esse, tratti di fibra vengono condivisi tra più utenti, e solo alla fine uno splitter ottico suddivide il segnale in più segnali uguali ma di potenza minore in modo da distribuirlo.
 
@@ -387,49 +387,46 @@ In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello 
 \item gestire il flusso di dati.
 \end{itemize}
 \sub{Ethernet} 
-\'E una delle tecnologie per il collegamento LAN più utilizzate al mondo,posto a metà fra il LV 1 e il LV 2 (più in particolare nel sottolivello MAC) del modello ISO.
+\'E una delle tecnologie per il collegamento LAN più utilizzate al mondo, posto a metà fra il primo e il secondo livello (più in particolare nel sottolivello MAC) del modello ISO.
 \subsub {Ethernet framing}
-Nonostante esistano diversi tipi di ethernet, la struttura del pacchetto è la stessa.
+Nonostante esistano diversi tipi di ethernet, la struttura del frame è la stessa.
 \image[etherframe.png][scale=0.35]{Frame ethernet di tipo 2 (fra i più comuni).}
-\'E strutturato come segue:
+\ \\\'E strutturato come segue:
 \begin{itemize}
-    \item \italic{Preamble}(preambolo): di 7 byte, ognuno dei quali ha valore: 10101010, servono a svegliare il ricevente ed a sincronizzarlo con l' emittente, non fa quindi parte del vero frame ma avvisa che a breve ne arriva uno 
-    \item  \italic{Start Frame Delimiter}(SFD): di 1 byte, ha valore: 10101011, i due bit finali ad 1 avvisano dell' arrivo di un messaggio importante, é protetto da codifica \vedi{Manchester}, come sopra non fa veramente parte del frame ma ne avvisa l' arrivo
-    \item \italic{Destination MAC Address}(indirizzo destinazione):di 6 byte, condiene l' indirizzo fisico del ricevente, se non corrisponde il pacchetto viene scartato al \vedi{Livello Fisico}.
-    \item \italic{Source MAC Address} (indirizzo sorgente): di 6 byte.
-    \item \italic{Ether Type}(campo tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi{IEEE 802}.3, la lunghezza del campo dati.
-    \item \italic{PayLoad}(campo dati): da 46 a 1500 byte, contiene i dati reali, i dati troppo grandi vengono divisi in pacchetti mentre ai dati troppo piccoli viene aggiunto un riempitivo (padding) della lunghezza necessaria.
-    \item \italic{Frame Check Sequence}(controllo a ridondanza ciclica): di 4 byte, verifica la presenza di errori, il ricevente calcola il FCS tramite un algoritmo per poi confrontarlo con quello presente nel frame. 
+    \item \italic{Preamble} (preambolo): sette byte ognuno dei quali ha valore \code{10101010}, servono a svegliare il ricevente ed a sincronizzarlo con l'emittente, non fa quindi parte del vero frame ma avvisa che a breve ne arriverà uno; 
+    \item  \italic{Start Frame Delimiter} (SFD): ulteriore byte non appartenente al frame, ha valore \code{10101011} se il messaggio in arrivo è importante, altrimenti ha lo stesso valore dei byte del preambolo. \'E protetto da codifica \vedi{Manchester};
+    \item \italic{Destination MAC Address} (indirizzo destinazione): di 6 byte, contiene l'indirizzo fisico del ricevente; se esso non corrisponde il frame viene scartato al \vedi{Livello Fisico}.
+    \item \italic{Source MAC Address} (indirizzo sorgente): di 6 byte, contiene l'indirizzo fisico del mittente.
+    \item \italic{Ether Type} (tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi{IEEE 802}.3, la lunghezza del campo dati.
+    \item \italic{PayLoad} (campo dati): da 46 a 1500 byte, contiene i dati reali, i dati troppo grandi vengono divisi in più frame mentre ai dati troppo piccoli viene aggiunto un riempitivo (padding) della lunghezza necessaria.
+    \item \italic{Frame Check Sequence} (controllo a ridondanza ciclica): di 4 byte, verifica la presenza di errori, il ricevente calcola il FCS tramite un algoritmo per poi confrontarlo con quello presente nel frame. 
 \end{itemize}
     
 
 \sub{Tipi di trasmissione}
 \subsub{Sincrona}
-si intende una comunicazione scandita da un clock che sincronizza trasmettitore e ricevitore i dati vengono raggruppati in blocchi e trasmessi secondo il tempo dato dal clock. il ricevitore deve avere un sincronismo a bit, cioè deve esser in grado di estrarre singoli bit dal flusso di dati in ricezione(che viene chiamata trama),ma deve avere anche il sincronismo di carattere cioè esser in grado di estrarre interi caratteri dal flusso di bit, cosa che, generalmente, viene assicurata da
-alcuni caratteri inviati all' inizio della trasmissione.Vi sono ovviamente vari metodi per assicurare la sincronizzazione tipo il PLL(Phase Lock Loop molto utilizzato), o l' \vedi{AMI(Alternative Mark Inversion)}
+Con il termine sincrona si indica una comunicazione scandita da un clock che sincronizza trasmettitore e ricevitore; i dati vengono raggruppati in blocchi e trasmessi secondo il tempo dato dal clock. Il ricevitore ha sia il sincronismo a bit, cioè è in grado di estrarre singoli bit dal flusso di dati in ricezione, sia il sincronismo di carattere, può cioè estrarre interi caratteri dal flusso di bit, cosa che, generalmente, viene assicurata da alcuni caratteri inviati all'inizio della trasmissione.\\ Vi sono vari metodi per assicurare la sincronizzazione, ad esempio il PLL (Phase Lock Loop molto utilizzato) o l'\vedi{AMI}.
 \subsub{Asincrona}
-si intende una comunicazione in cui il ricevente sta a riposo fin che non riceve un segnale di start, che precede il messaggio,
-alla fine del messaggio viene inviato un segnale di stop che, se non seguito da altri messaggi, rimanda a riposo il ricevente.
-Questo metodo è molto buono in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona(governata da un clock), ma il segnale di start e quello di stop incidono di circa il 30\% su i bit trasmessi.  
+In una comunicazione asincrona il ricevente sta a riposo fin che non riceve un segnale di start, che precede il messaggio. Alla fine del messaggio viene inviato un segnale di stop che, se non seguito da altri messaggi, rimanda a riposo il ricevente. Questo metodo è molto buono in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona, ma il segnale di start e quello di stop rappresentano circa il $30\%$ dei bit trasmessi.  
 \subsub{Orientata al carattere}
-è utilizzato nelle trasmissioni testuali, per esempio i file ASCII. In assenza dei bit di start e stop la sincronizzazione è ottenuta tramite una serie di caratteri, inizialmente la sincronizzazione è a bit e ricerca, negli 8 bit consegutivi un carattere SYN se non lo trova controlla bit a bit, una volta trovato il carattere ha aquisito il sincronismo a carattere e ricerca il carattere STX che sancisce l' inizio della trasmissione, che continua fino al carattere ETX che termina la
-trasmissione. Nel caso la trasmissione contenga caratteri qualunque e dunque i caatteri di inizio e fine possono esser simulati dai dati si fa precedere ad i caratteri STX e ETX da un DLE(carattere di controllo), all' interno dei dati viene eseguito un byte stuffing(tecnica usata nella sincronizzazione a bit che consiste nell' aggiungere uno zero ogni 5 uno consegutivi) sostituendo eventuali DLE simulati con 2 DLE   
+La trasmissione orientata al carattere, utilizzata per le informazioni testuali, come i file in ASCII, prevede la lettura dei bit a gruppi di otto. \\La sincronizzazione è ottenuta tramite una serie di caratteri di controllo SYN, il primo dei quali viene ricercato spostandosi di un bit alla volta.
+Una volta raggiunta la sincronia si ricerca il carattere di controllo STX che sancisce l'inizio della trasmissione, terminata dal carattere ETX.\\ Per evitare che i dati della trasmissione vengano scambiati per caratteri di controllo si fa precedere ai caratteri STX e ETX, un altro carattere di controllo chiamato DLE (tutti 1 o tutti 0 a seconda del sistema) e in invio viene eseguito il \italic{byte stuffing} dei dati: eventuali occorrenze del carattere DLE nei dati vengono duplicate in modo da renderle riconoscibili.   
 
 \subsub{Orientata al bit}
- Questa tecnica è preferibile sia quando i dati non sono organizzati in caratteri sia per non dipendere da caratteri di controllo.
- la sincronizzazione di basa su degli idle bytes 011111111 nei periodi di inattività e dei flag bytes 01111110 per indicare inizio e fine della trasmissione,il rischio di simulare il flag nella trasmissione è scongiurato dall' utilizzo del bit stuffing
+Questa tecnica è preferibile sia quando i dati non sono organizzati in caratteri, sia per non dipendere da caratteri di controllo.
+La sincronizzazione si basa su degli \textit{idle bytes} (\code{011111111}), inviati nei periodi di inattività, e dei \textit{flag bytes} (\code{01111110}) che indicano l'inizio e fine della trasmissione, il rischio di simulare il flag nella trasmissione è scongiurato dall'utilizzo del \italic{bit stuffing}: durante l'invio dei dati, ogni volta che si incontrano 5 bit uguali a 1 viene aggiunto uno 0 che verrà poi rimosso dal ricevente.
 \sub{Encoding}
-\subsub{NRZ(Not Reduced Zero)}
-Codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso, richiede circuiti semplici ed ha una buona resistenza agli errori, unico problema e che con lunghe trasmissioni si rischia di perdere la sincronia
-\subsub{RZ(Return to Zero)}
-Questa codifica è estremamente simile all' NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero, il clock ha frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronia ma ha un più alto rischio di errore.
+\subsub{NRZ}
+Not Reduced Zero: codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso, richiede circuiti semplici ed ha una buona resistenza agli errori, l'unico problema è che con lunghe trasmissioni si rischia di perdere la sincronia.
+\subsub{RZ}
+Return to Zero: questa codifica è estremamente simile all'NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero, il clock ha frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronizzazione ma ha un più alto rischio di errore.
 \subsub{Manchester}
-questa codifica si consiste nel dividere il periodo di una cifra in due associando allo zero logico il una transizione dal basso verso l' alto,
-mentre all' uno logico una transizione dall' alto verso il basso, in tutti e due i casi la transizione avviene a metà del bit.
+questa codifica si consiste nel dividere il periodo di una cifra in due associando allo zero logico il una transizione dal basso verso l'alto,
+mentre all'uno logico una transizione dall'alto verso il basso, in tutti e due i casi la transizione avviene a metà del bit.
 Questo necessita quindi di raddoppiare la banda per trasmettere un informazione, poichè da ogni 2 bit trasferiti si ricava un bit di informazione
 in questo caso con lunghe trasmissioni non si perde la sincronia ed è anche abbastanza robusto agli errori, richiede però cei circuiti più complessi dell NRZ e del RZ.
-\subsub{AMI(Alternative Mark Inversion)}
-La codifica AMI utilizza 3 stati: +V, 0, -V, in cui lo zero logico è uguale allo stato 0 mentre l' uno logico si alterna fra +V e -V.
+\subsub{AMI}
+Alternative Mark Inversion: codifica che utilizza 3 stati: +V, 0, -V, in cui lo zero logico è uguale allo stato 0 mentre l'uno logico si alterna fra +V e -V.
 Questa codifica è usata nel PMC (Pulse Code Modulation). 
 \subsub{Scrambling}
 lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasmissioni di lunga distanza, consiste nel mescolare in modo "intelligente" i bit per mantenere attiva la linea, è utilizzata nella, mai vista, codifica 2B1Q(two Binary, one Quaternary)
@@ -450,8 +447,8 @@ lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasm
 
 \sub{Sottolivelli}
 Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
-\subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l' accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
-\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.\\E' utilizzato per l'instradamento diretto in reti locali, per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
+\subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l'accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
+\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.\\  utilizzato per l'instradamento diretto in reti locali, per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
 \subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
 \para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
@@ -645,7 +642,7 @@ Autonomuos System: dominio di \vedi{Routing} gestito dallo stesso \vedi{ISP} nel
 \item \textbf{Multihomed} se connesso a più AS ma senza permettere il \italic{pass-trough}, ovvero il passaggio di traffico diretto ad un altro AS;
 \item \textbf{Transit} se permette il \italic{pass-trough}.
 \end{itemize} 
-Strutturare \vedi{Internet} in AS, suddividendo i router in gruppi, si è rivelato necessario innanzitutto perché se Internet fosse una singola rete, il numero dei suoi router sarebbe tanto grande da rendere insostenibile il traffico, difatti il \textbf{ritardo} (vedi Qualità delle trasmissioni - \vedi{Criteri di valutazione in base alle prestazioni}) e l' \textbf{overhead di gestione} dipendono dal numero di router coinvolti.
+Strutturare \vedi{Internet} in AS, suddividendo i router in gruppi, si è rivelato necessario innanzitutto perché se Internet fosse una singola rete, il numero dei suoi router sarebbe tanto grande da rendere insostenibile il traffico, difatti il \textbf{ritardo} (vedi Qualità delle trasmissioni - \vedi{Criteri di valutazione in base alle prestazioni}) e l'\textbf{overhead di gestione} dipendono dal numero di router coinvolti.
 Inoltre è opportuno che le diverse organizzazioni commerciali siano il più possibile autonome nella gestione delle proprie reti.
 L'utilizzo degli AS è definito nell'\vedi{RFC} 1930.
 \para{ASN} Ogni AS è identificato da un ASN (Autonomous System Number) assegnato dall'\vedi{ICANN} ai RIR (Regional Internet Registers), che a loro volta li assegnano alle organizzazioni. 
@@ -691,7 +688,7 @@ In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul
 \newpage
 \sub{Topologia delle reti}
 \subsub{Rete a dorsale}
-I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un' interruzione in qualunque punto della dorsale compromette tutta la rete.
+I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un'interruzione in qualunque punto della dorsale compromette tutta la rete.
 \subsub{Rete ad albero} La trasmissione avviene in modo gerarchico tra i nodi padre e figlio, fino ad arrivare alla \textit{root} dalla quale dipende tutto il funzionamento della rete.
 \subsub{Rete a stella} Tutti i dispositivi sono connessi ad un \italic{hub} (router o swith di rete), più economico da sostituire in caso di rottura. Inoltre, in caso di danni ad un cavo, viene disconnesso solo un terminale. Questa topologia è tipicamente utilizzata per la realizzazione di reti \vedi{LAN}. 
 \subsub{Rete ad anello} Le informazioni vengono passate da un dispositivo all'altro in modo ciclico, la trasmissione è unidirezionale anche se questo si può ovviare con un secondo anello in direzione opposta. Questa topologia era tipica delle \vedi{LAN} TokenRing, ora viene utilizzata principalmente nelle \vedi{MAN} in fibra ottica.
@@ -764,13 +761,13 @@ Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Inter
 \subsection{Protocolli di address resolution} 
 \subsub{ARP} %address resolution protocol (daje, scrivilo da qualche parte!)
 \textbf{Address Resolution Protocol}: Due host Internet possono comunicare solamente conoscendo il reciproco \vedi{Indirizzo MAC}.\\
-L' host A, per sapere l'indirizzo fisico di B, invierà una richiesta ARP a tutti gli host contenente l'\vedi{Indirizzo IP} di B e il proprio indirizzo MAC; B vedendo la chiamata, risponde scrivendo il MAC address di A in una cache di consultazione e riinviando il proprio MAC address ad A.\\
+L'host A, per sapere l'indirizzo fisico di B, invierà una richiesta ARP a tutti gli host contenente l'\vedi{Indirizzo IP} di B e il proprio indirizzo MAC; B vedendo la chiamata, risponde scrivendo il MAC address di A in una cache di consultazione e riinviando il proprio MAC address ad A.\\
 La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover reinviare una richiesta ARP, sia possibile reinviare dati al suddetto host. Le informazioni nella cache possono però diventare obsolete, per questo un timer ne fa scadere la validità.\\
 %immagine
 Occorre considerare alcuni problemi:
 \begin {itemize}
 \item il ritardo (\textit{jitter}) provocato degli aggiornamenti della cache;
-\item l'impatto sull' operatività di altri protocolli in presenza di richieste ARP pendenti.
+\item l'impatto sull'operatività di altri protocolli in presenza di richieste ARP pendenti.
 \end{itemize}
 \subsub{RARP} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
 \textbf{Reverse ARP}: Consente, al contrario dell'ARP, di risalire al proprio \vedi{Indirizzo IP} dal \vedi{Indirizzo MAC}.\\
@@ -956,7 +953,7 @@ Usati per confermare la ricezione degli LSA via Link State Update; ne contengono
 \boximage[ospf-link-state-akn.jpg][scale=0.7]{Struttura di un pacchetto Link State Acknowledgment}
 \newpage
 \subsub{BGP}
-Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell' \vedi{RFC} 1771\footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrata più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le policy adottate dal rispettivo \vedi{ISP}. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
+Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell'\vedi{RFC} 1771\footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrata più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le policy adottate dal rispettivo \vedi{ISP}. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
 \\Perché due router possano comunicare, devono essere innanzitutto definiti come \textit{BGP neighbors}, detti anche \textit{peers} tramite una configurazione manuale che ha per risultato la creazione di una sessione \vedi{TCP} sulla \vedi{Porta} 179.
 A questo punto, i peer si invieranno l'un l'altro la \vedi{Tabella di routing} in formato \vedi{CIDR} ed una serie di messaggi:
 \boximage[header_bgp.png][scale=0.6]{Header di un messaggio BGP. Il campo \textbf{Marker} contiene un valore riconosciuto da entrambi i peer, importante per sincronizzazione ed autenticazione}
@@ -982,11 +979,11 @@ Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC}
 \sec{Livello di trasporto}
 \subsection{Terminologia}
 \subsub{Porta} 
-Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. E' il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. Le porte $0-1023$ sono quelle raccomandate per i protocolli \vedi{TCP} e \vedi{UDP}.
+Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. \'E il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. Le porte $0-1023$ sono quelle raccomandate per i protocolli \vedi{TCP} e \vedi{UDP}.
 
 \subsection{Protocolli di trasporto} 
 \subsub{UDP} 
-L' UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, poco affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle porte.
+L'UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, poco affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle porte.
 
 \subsub{TCP}
 A differenza dell'\vedi{UDP}, il TCP (Transmission Control Protocol) è un protocollo \vedi{Connection-oriented}. La prima definizione del TCP si trova nell'\vedi{RFC} 793, ma le molteplici modifiche che essa ha subito, formalizzate in altrettanti \vedi{RFC}, hanno portato alla necessità di pubblicare un ennesimo \vedi{RFC}, il 4614: una sorta di guida ai documenti sul TCP. Affidabile e di applicabilità generale, è progettato per adattarsi dinamicamente alle peculiarità delle diverse reti che compongono \vedi{Internet}, contribuendo ad isolare le applicazioni dai dettagli di networking. Più specificamente, oltre a quelle di qualsiasi protocollo \vedi{Connection-oriented}, le principali caratteristiche del TCP sono:%
