@@ -416,13 +416,14 @@ Una volta raggiunta la sincronia si ricerca il carattere di controllo STX che sa
 Questa tecnica è preferibile sia quando i dati non sono organizzati in caratteri, sia per non dipendere da caratteri di controllo.
 La sincronizzazione si basa su degli \textit{idle bytes} (\code{011111111}), inviati nei periodi di inattività, e dei \textit{flag bytes} (\code{01111110}) che indicano l'inizio e fine della trasmissione, il rischio di simulare il flag nella trasmissione è scongiurato dall'utilizzo del \italic{bit stuffing}: durante l'invio dei dati, ogni volta che si incontrano 5 bit uguali a 1 viene aggiunto uno 0 che verrà poi rimosso dal ricevente.
 \sub{Encoding}
+\boximage[encoding.jpg][scale=0.35]{Principali codifiche a confronto.}
 \subsub{NRZ}
 Not Reduced Zero: codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso, richiede circuiti semplici ed ha una buona resistenza agli errori, l'unico problema è che con lunghe trasmissioni si rischia di perdere la sincronia.
 \subsub{RZ}
-Return to Zero: questa codifica è estremamente simile all'NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero, il clock ha frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronizzazione ma ha un più alto rischio di errore.
+Return to Zero: questa codifica è estremamente simile all'NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero, il clock ha frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronizzazione ma ha un più alto rischio di errore. Può essere anche a tre livelli (\textit{RZ bipolare}), ed in tal caso il livello inferiore e quello superiore rappresentano l'1, quello intermedio lo 0.
 \subsub{Manchester}
-questa codifica si consiste nel dividere il periodo di una cifra in due associando allo zero logico il una transizione dal basso verso l'alto,
-mentre all'uno logico una transizione dall'alto verso il basso, in tutti e due i casi la transizione avviene a metà del bit.
+Come nella \vedi{RZ}, la frequenza del clock è raddoppiata e allo 0 logico corrisponde una transizione dal basso verso l'alto,
+mentre all'1 logico una transizione dall'alto verso il basso. In tutti e due i casi la transizione avviene a metà dell'impulso.\\
 Questo necessita quindi di raddoppiare la banda per trasmettere un informazione, poichè da ogni 2 bit trasferiti si ricava un bit di informazione
 in questo caso con lunghe trasmissioni non si perde la sincronia ed è anche abbastanza robusto agli errori, richiede però cei circuiti più complessi dell NRZ e del RZ.
 \subsub{AMI}
