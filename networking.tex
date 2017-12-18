@@ -330,10 +330,12 @@ Le velocità teoriche ottenibili sono dell'ordine degli 8Mbit/s per quel che rig
 Nonostante il fatto che le linee guida siano dettate dallo standard ANSI T1.423 Issue 1, categorie 1 e 2, questa tecnologia non é ancora totalmente standardizzata: ogni produttore di modem per ADSL propone la propria variante.
 \sub{Interfacce hardware} 
 Dal punto di vista fisico, un'interfaccia o porta è caratterizzata da un canale di trasmissione, identificato da un mezzo trasmissivo (ad esempio un cavo), due connettori e due porte o \textit{slot} poste agli estremi della trasmissione; dal punto di vista logico, da una modalità di trasmissione (seriale o parallela). 
-\subsub{Interfaccia parallela}
+\subsub{Interfaccie parallele}
+Le interfaccie parallele trasmettono segnali da più pin in contemporanea.
+\para{Interfaccia Centronics}
 Ormai obsoleta, sostituita in gran parte dei casi dall'interfaccia \vedi{USB}, originariamente monodirezionale, è stata impiegata soprattutto per collegare i \vedi{DTE} alle stampanti, ma più di recente ne è stato sviluppato uno standard bidirezionale che permette anche il collegamento di dispositivi di input.
-Consente di trasferire 8 bit in parallelo nello standard \textbf{TTL}\footnote{Transistor-Transistor Logic: prima tecnologia di circuiti integrati diffusa su scala globale}.
-La porta parallela del DTE è un connettore femmina detto "a vaschetta" o DB 25, con 25 pin, mentre sulle periferiche è presente un connettore differente, detto Centronics, dal nome del primo costruttore. Alle due porte corrispondono chiaramente due diversi connettori maschio.
+Tale interfaccia consente di trasferire 8 bit in parallelo nello standard \textbf{TTL}\footnote{Transistor-Transistor Logic: prima tecnologia di circuiti integrati diffusa su scala globale}.
+La porta parallela del DTE è un connettore femmina detto "a vaschetta" o DB 25, con 25 pin, mentre sulle periferiche è presente un connettore differente, chiamato appunto Centronics, dal nome del primo costruttore. Alle due porte corrispondono chiaramente due diversi connettori maschio.
 \boximage[parallel.png][scale=0.5]{I due diversi connettori maschio dell'interfaccia parallela}
 Sul DTE si trovavano tipicamente da una a tre porte parallele, dette \textbf{LPT} (\textit{Line Printer Terminal}) 1, 2 e 3, a ciascuna delle quali sono assegnati uno specifico interrupt (IRQ 7 per LPT1) e tre indirizzi riservati contigui:
 \begin{itemize}
@@ -343,12 +345,13 @@ Sul DTE si trovavano tipicamente da una a tre porte parallele, dette \textbf{LPT
 \end{itemize}
 
 \subsub{Interfacce seriali}
+le interfaccie seriali trasmettono da un solo pin alla volta.
 \para{RS-232}
-L'RS-232 è uno standard che definisce per la realizzazione di una trasmissione seriale tra un \vedi{DTE} e un \vedi{DCE}, in modalità sia sincrona che asincrona. Dal momento che il numero di linee effettivamente utilizzate varia sensibilmente a seconda del tipo di collegamento e dei modem eventualmente impiegati, per questa interfaccia esistono due diversi tipi di connettore: quello a 25 pin e quello ridotto, a 9 pin, sufficiente per molte applicazioni.
+L'RS-232 è uno standard che permette la realizzazione di una trasmissione seriale tra un \vedi{DTE} e un \vedi{DCE}, in modalità sia sincrona che asincrona. Dal momento che il numero di linee effettivamente utilizzate varia sensibilmente a seconda del tipo di collegamento e dei modem eventualmente impiegati, per questa interfaccia esistono due diversi tipi di connettore: quello a 25 pin e quello ridotto, a 9 pin, sufficiente per molte applicazioni.
 \boximage[rs232.jpg][scale=0.5]{Uso di ogni linea nei due tipi di connettore RS-232}
 \para{USB}
-Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l' USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare collegamenti senza necessità di spegnere le macchine, che riconoscono automaticamente le periferiche (si definisce pertanto un'interfaccia \textit{plug-and-play}).
-I connettori USB sono molteplici (tipi A, B e C con rispettive varianti miniaturizzate), ma con quattro poli ed uguali funzionalità.
+Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l'USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare \italic{collegamenti a caldo}, senza necessità di spegnere le macchine, le quali  riconoscono automaticamente le periferiche (interfaccie \textit{plug-and-play}).
+I connettori USB sono molteplici (tipi A, B e C con rispettive varianti miniaturizzate), ma tutti con quattro poli ed uguali funzionalità.
 Un'estensione dell'USB, chiamata USB-OTG (On-The-Go), consente a una singola porta di fungere sia da dispositivo sia da controllore, semplificando le connessioni USB dei piccoli dispositivi.
 Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferiche collegate ad albero, attraverso  \vedi{Hub}. Supporta fino a un massimo di 127 periferiche per gestore, ma nel computo vanno inclusi anche gli hub e il gestore stesso. Attualmente, la massima velocità di trasmissione reale raggiunta è 7,2 Gbps (versione USB 3.1).
 \para{IEEE 1394}
