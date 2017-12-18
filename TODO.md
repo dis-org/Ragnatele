@@ -24,6 +24,9 @@
   + Posta elettronica #
 
 ### Cosa va rivisto
++ Livello di Collegamento
+  + Manchester
+  + ...
 + Livello di Rete
 + Livello di Trasporto
 + Livello delle Applicazioni
