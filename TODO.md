@@ -14,9 +14,7 @@
   + Dispositivi
     + Hub
 + Livello di Collegamento
-  + Tipi di trasmissione
-    + Encoding (introduzione)
-    + ...
+  + Encoding (introduzione)
   + Protocolli di secondo livello
     + ATM #
   + Multiplazione
