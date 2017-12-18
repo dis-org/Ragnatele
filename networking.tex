@@ -226,27 +226,26 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
 \end{itemize}
 \subsub{Modulazione digitale} 
-Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, in prima approssimazione, attraverso una mappatura biunivoca tra sequenze di bit in ingresso ed un insieme di forme d'onda analogiche limitate nel tempo in uscita, dette \textit{simboli}. E' dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
+Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, facendo corrispondere ad ogni sequenza di bit in input un'univoca forma d'onda analogica limitata nel tempo in uscita, detta \textit{simbolo}. E' dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
 \begin{itemize} 
 \item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
-\item \textbf{FSK} (Frequency-Shift Keying): la frequenza portante istantanea viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note, l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
+\item \textbf{FSK} (Frequency-Shift Keying): la frequenza portante istantanea viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
 \begin{itemize} 
 \item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{interferenza intersimbolica}); 
 \item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso; 
-\item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di apssaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione;
-\item La frequenza d'impulso è solitamente maggiore di quella di intervallo.
+\item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di passaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione.
 \end{itemize} 
-La FSK è stata utilizzata nei primi modem V21 e V23 e la si impiega ancora oggi nei ponti radio e nelle trasmissioni di tipo GSM tra cellulari. 
+La FSK è stata utilizzata nei primi modem V.21 e V.23 e la si impiega ancora oggi nei ponti radio e nelle trasmissioni di tipo GSM tra cellulari. 
 \item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
 \boximage[ask_psk_fsk.png][scale=0.3]{Confronto tra codifiche ASK, FSK, e PSK}
 \begin{itemize} 
-\item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: quando la modulante cambia stato (transizione 0-1 o 1-0), il segnale modulato cambia fase. Per garantire la massima protezione dal rumore e dalle interferenze, solitamente vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$;
+\item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: quando la modulante cambia stato, il segnale modulato cambia fase. Per garantire la massima protezione dal rumore e dalle interferenze, solitamente vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$;
 \item \textbf{4-PSK} e \textbf{4-QPSK}: i bit del segnale in input vengono suddivisi in coppie da un convertitore, che genera così due segnali separati; vi sono inoltre due modulatori e due portanti con frequenza identica, ma in quadratura\footnote{L'espressione \textit{in quadratura} indica semplicemente una sfasatura di \ang{90}: i due segnali sono ortogonali, cosicché si evitano le interferenze}. I due segnali modulati, detti I (\textit{Infase}) e Q (\textit{Quadratura}), poi sommati, cambiano dunque fase a seconda del valore della coppia di bit in input e il segnale in uscita può avere quattro distinti valori di fase (le due varianti differiscono per la posizione delle quattro fasi utilizzate, che nella 4-PSK sono poste sugli assi cartesiani, mentre nella 4-QPSK sono sfasate di $\ang{45}$);
 \boximage[qpsk.png][scale=0.4]{Esempio di distribuzione delle fasi nella modulazione 4-QPSK}
 \item \textbf{8-PSK}: analoga alla 4-PSK, comporta l'utilizzo non di coppie ma di terne di bit;
 \item \textbf{DPSK} (Differential Phase-Shift Keying): analoga alla PSK, ma sono i salti di fase, e non i valori assoluti, a codificare i bit. Ne esistono diverse varianti, quali la 2-DPSK, la 4-DPSK e la 8-DPSK;
 \end{itemize} 
-\item \textbf{QAM} (Quadrature Amplitude Modulation): combinazione di ASK e PSK, consiste nel modulare in ampiezza portanti in quadratura di uguale frequenza. Varianti della QAM particolarmente rilevanti sono la 16-QAM e la 64-QAM, usata nell'A\vedi{DSL};
+\item \textbf{QAM} (Quadrature Amplitude Modulation): combinazione di ASK e PSK, consiste nel modulare in ampiezza portanti in quadratura di uguale frequenza. Varianti della QAM particolarmente rilevanti sono la 16-QAM e la 64-QAM, usata nell'	A\vedi{DSL};
 \item \textbf{TCM} (Trellis Coded Modulation): simile alla QAM, assicura una maggiore immunità dal rumore e un minor tasso di errore aumentando la ridondanza della trasmissione. Vi è un cambio di stato sempre e soltanto in presenza di un bit 1. Il nome di questo tipo di modulazione deriva dal fatto che l'andamento temporale del segnale può essere rappresentato mediante un diagramma, visivamente simile ad un traliccio (in inglese, \textit{trellis}). %verificare attendibilità fonti
 \boximage[trellis.png][scale=0.3]{Diagramma a traliccio}
 \end{itemize}
@@ -258,10 +257,11 @@ Il vettore errore rappresenta la differenza tra il punto teorico in cui si sareb
 Per la misurazione dell'EVM esistono strumenti hardware e software, tutti quanti basati sulla demodulazione del segnale ed il confronto con quello ideale.
 \sub{Alterazioni del segnale}
 L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento del suddetto. %Claudio perdonami, non credo che nessuno vorrà mai fare riferimenti a queste parole
-\subsub{Attenuazione} Perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale; vi si pone rimedio tramite dispositivi come gli amplificatori;
+\subsub{Attenuazione} Perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}} = 20\log_{10}\frac{V_{i}}{V_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale, mentre $V_{i}$ e $V_{f}$ sono rispettivamente il potenziale elettrico iniziale e finale; vi si pone rimedio tramite dispositivi come gli amplificatori;
 \subsub{Distorsione} Cambiamento di forma del segnale, si verifica quando esso è composto da varie frequenze e dipende dal ritardo all'arrivo delle singole componenti;
 \subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
-\subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interfernza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) è invece causata dai limiti della banda, e provoca un "arrotondamento" dei segnali rettangolari provenienti da un DTE.
+\subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interferenza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) avviene quando, in seguito alla traduzione, i simboli si sovrappongono sull'asse del tempo; chiaramente questo è legato ai limiti della banda.
+\boximage[isi.png][scale=0.5]{Interferenza intersimbolica}
 
 \subsection{Velocità di trasferimento}
 Un parametro interessante in ambito di comunicazione dati è la velocità di trasferimento o \textit{bitrate}, espressa in $bit/sec$. Preliminarmente, occorre intendersi sul tipo di canale interessato, distinguendo:
@@ -279,14 +279,14 @@ Stabilisce che la massima velocità di trasferimento su un canale di banda $B$ c
 Afferma che la massima velocità alla quale è possibile trasmettere senza errore è
 \[B\log_{2}(1+\textbf{SNR})\]
 dove $B$ è l'\vedi{Ampiezza di banda} e \textbf{SNR} è il rapporto segnale-\vedi{Rumore}.
-\subsubsection{Velocità di modulazione}
+\subsection{Velocità di modulazione}
 La velocità di modulazione, espressa in $baud=\frac{simboli}{sec}$, indica il numero di simboli trasmessi nell'unità di tempo\footnote{Non si confonda il baud con i $bps=bit/sec$: un simbolo può essere composto da più bit.}. Più in particolare, in un sistema di comunicazione digitale, si parla di \textit{baud rate}.
 Velocità di trasferimento e di modulazione sono in relazione 
 \[v_{m}=\frac{v_{t}}{\log_{2}m}\]
 dove $v_{m}$ è la velocità di modulazione, $v_{t}$ la velocità di trasferimento ed m il numero di livelli.
 
-\subsub{Modem} 
-Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzionalità di \vedi{Modulazione} in trasmissioni analogiche \textit{e} digitali. Esistono svariati tipi di modem:
+\sub{Modem} 
+Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzionalità di \vedi{Modulazione} in trasmissioni analogiche e digitali. Esistono svariati tipi di modem:
 \begin{itemize}
 \item \textbf{\vedi{Modem in banda fonica}};
 \item \textbf{Modem ISDN} (128 kbps);
@@ -297,17 +297,16 @@ Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzional
 \end{itemize}
 Ognuno dei modem suddetti può essere inoltre \textbf{interno} o \textbf{esterno} al \vedi{DTE}. Tra i modem \textbf{esterni}, in base al tipo di collegamento al DTE, si distinguono:
 \begin{itemize}
-\item \textbf{Modem seriali}, collegati con cavo seriale alle porte COM1 o COM2 (vedi \vedi{RS-232});
-\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfaccia parallela});
-\item \textbf{Modem \vedi{USB}}.
+\item \textbf{Modem seriali}, collegati con cavo seriale tramite interfaccia \vedi{RS-232} o \vedi{USB};
+\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfaccia parallela}).
 \end{itemize}
 Tra i modem \textbf{interni} si distinguono invece:
 \begin{itemize}
-\item \textbf{Modem PCI}, che lavorano appunto sul BUS PCI (Perifperal Component Interconnect);
+\item \textbf{Modem PCI}, che lavorano appunto sul BUS PCI (Peripheral Component Interconnect);
 \item \textbf{Modem PCMCIA, PC card o Express card}, utilizzati esclusivamente nei portatili.
 \end{itemize}
 \para{Modem in banda fonica}
-Si utilizza quando si presenta la necessità di trasmettere i segnali digitali sulla linea telefonica e viceversa. Occorre notare che la banda disponibile sulla linea telefonica solamente $4 kHz$, il che rende inefficiente la trasmissione del segnale digitale su di essa; in particolare per via dell'\vedi{Attenuazione} delle alte frequenze e per la scarsissima velocità di trasferimento. Un modem fonico opera dunque una \vedi{Modulazione digitale} volta a comprimere la banda dei segnali emessi dal \vedi{DTE}.
+Si utilizza quando si presenta la necessità di trasmettere i segnali digitali sulla linea telefonica e viceversa. Occorre notare che la banda disponibile sulla linea telefonica è solamente di $4 kHz$, il che rende inefficiente la trasmissione del segnale digitale su di essa, in particolare per via dell'\vedi{Attenuazione} delle alte frequenze e per la scarsissima velocità di trasferimento. Un modem fonico opera dunque una \vedi{Modulazione digitale} volta a comprimere la banda dei segnali emessi dal \vedi{DTE}.
 Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \vedi{CCITT}:
 \begin{itemize} %parte carente che non so se tagliare del tutto o migliorare; non credo mi sarà mai utile nella vita
 \item FSK V.21: primo modem al mondo, risalente ai primi anni '80;
@@ -322,9 +321,9 @@ Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \
 \item PCM upstream, che permette di effettuare trasmissioni digitali a più alta velocità (fino a $48 kbit/s$) sulle linee telefoniche analogiche.
 \end{itemize}
 \end{itemize}
-\subsub{Protocolli di primo livello}
-\para{DSL}
-Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su doppino telefonico, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa come \textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
+\sub{Protocolli di primo livello}
+\subsub{DSL}
+Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su \vedi{Doppino telefonico}, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa, l'\textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
 Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza vengono tripartite, consentendo di utilizzare  allo stesso tempo un'unica linea telefonica sia per il servizio ADSL che per le chiamate telefoniche. L'ADSL è generalmente installata solo per brevi distanze dalla centrale telefonica (l'ultimo miglio), o comunque meno di 4 km.
 \boximage[adsl_band.jpg][scale=0.4]{Tripartizione della banda tramite splitter}
 Le velocità teoriche ottenibili sono dell'ordine degli 8Mbit/s per quel che riguarda il downstream e 800kbit/s per quanto riguarda l'upstream, ma lo stato delle linee e della bassa qualità del doppino le porta a circa 1,5Mbit/s in download e 256kbit/s in upload.
@@ -332,7 +331,7 @@ Nonostante il fatto che le linee guida siano dettate dallo standard ANSI T1.423 
 \sub{Interfacce hardware} 
 Dal punto di vista fisico, un'interfaccia o porta è caratterizzata da un canale di trasmissione, identificato da un mezzo trasmissivo (ad esempio un cavo), due connettori e due porte o \textit{slot} poste agli estremi della trasmissione; dal punto di vista logico, da una modalità di trasmissione (seriale o parallela). 
 \subsub{Interfaccia parallela}
-Ormai obsoleta, sostituita in gran parte dei casi dall'interfaccia\vedi{USB}, originariamente monodirezionale, è stata impiegata soprattutto per collegare i \vedi{DTE} alle stampanti, ma le più di recente ne è stato sviluppato uno standard bidirezionale che permette anche il collegamento di dispositivi di input.
+Ormai obsoleta, sostituita in gran parte dei casi dall'interfaccia \vedi{USB}, originariamente monodirezionale, è stata impiegata soprattutto per collegare i \vedi{DTE} alle stampanti, ma più di recente ne è stato sviluppato uno standard bidirezionale che permette anche il collegamento di dispositivi di input.
 Consente di trasferire 8 bit in parallelo nello standard \textbf{TTL}\footnote{Transistor-Transistor Logic: prima tecnologia di circuiti integrati diffusa su scala globale}.
 La porta parallela del DTE è un connettore femmina detto "a vaschetta" o DB 25, con 25 pin, mentre sulle periferiche è presente un connettore differente, detto Centronics, dal nome del primo costruttore. Alle due porte corrispondono chiaramente due diversi connettori maschio.
 \boximage[parallel.png][scale=0.5]{I due diversi connettori maschio dell'interfaccia parallela}
