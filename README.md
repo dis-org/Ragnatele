@@ -11,6 +11,7 @@ Fonti:
 + www.wikipedia.org
 + www.duricomeilmetallo.net (consigliamo al lettore di scaricare il file [Date fondamentali](http://www.duricomeilmetallo.net/home/bbestia/uni/appunti/224/riassunto-architettura-delle-reti/), una cronologia della storia di internet che non abbiamo al momento intenzione di inserire nelle nostre dispense)
 + http://www.di-srv.unisa.it/
++ www.fiberopticshare.com
 + ...
 
 

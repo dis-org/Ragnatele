@@ -19,13 +19,12 @@
   + Servizi di rete 
     + SNMP #
   + Posta elettronica #
-+ Sicurezza di rete #
 
 ### Cosa va rivisto
 + Livello Fisico
-  + Filtri
-  + ... 
-+ Livello di Collegamento
+  + Filtri #
+  + ... #
++ Livello di Collegamento #
 + Livello di Rete #
 + Livello di Trasporto
 + Livello delle Applicazioni
@@ -44,6 +43,7 @@
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     | scrittura | Encoding           |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
+|                    |              |          | revisione | Livelli 1 e 2      |
 | Gioara Cuccu       | Gio93k       | border   | revisione | Livello di Rete    |
-| Giorgio Mazza      | Shizen39     | metric   | scrittura | Sicurezza di rete  |
+| Giorgio Mazza      | Shizen39     | metric   | revisione | Servizi di rete    |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
