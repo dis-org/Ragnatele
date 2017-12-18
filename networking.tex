@@ -1046,8 +1046,7 @@ Il protocollo DHCP (Dynamic Host Configuration Protocol) permette agli \italic{h
 	\item \textbf{server}:  host designato all'assegnazione degli indirizzi ai client che li richiedono. Anche un \italic{router} può assolvere, tra le altre cose, tale ruolo.
 \end{itemize}
 È un protocollo nato come complemento del \textbf{BOOTP} (Bootstrap protocol, RFC 821), il quale raccoglie informazioni per la configurazione degli host sfruttando l'\vedi{UDP} (sulla porta 67 del server e 68 del client) ed assegna gli indirizzi IP tramite messaggi \italic{broadcast}.
-\\Il DHCP lo estende (RFC 1534) aggiungendo nuove opzioni di configurazione e la possibilità di allocare automaticamente gli indirizzi di rete
-\\Infatti è possibile scegliere fra 3 metodi di assegnamento:
+\\Il DHCP lo estende (RFC 1534) aggiungendo nuove opzioni di configurazione, tra cui la scelta fra 3 metodi di assegnamento degli indirizzi:
 \begin{itemize}
 	\item \italic{automatic allocation}: i client che si connettono ricevono dal server un indirizzo IP permanente;
 	\item \italic{dynamic allocation}: ad ogni nuova connessione il client riceve un indirizzo IP, il quale ha un tempo di validità (\italic{lease}), al cui termine ritorna nella \italic{pool} degli indirizzi disponibili. Ciò permette di riutilizzare indirizzi non più in uso dai client;
@@ -1056,13 +1055,12 @@ Il protocollo DHCP (Dynamic Host Configuration Protocol) permette agli \italic{h
 Il DHCP permette di riservare indirizzi IP per specifici client tramite l'associazione al relativo \vedi{Indirizzo MAC} (\italic{DHCP Client Reservation}).
 \\\\Il processo di assegnamento degli indirizzi si divide in 4 fasi:
 \begin{itemize}
-	\item[1.] \italic{Discovering}: il client chiede che gli venga assegnato un indirizzo tramite il messaggio \code{DHCPDISCOVER};
-	\item[2.] \italic{Offering}: i server che ricevono la richiesta rispondono (se hanno indirizzi liberi a disposizione) con il messaggio \code{DHCPOFFER};
-	\item[3.] \italic{Requesting}: una volta ricevute le offerte dei server, il client le valuta e risponde con \code{DHCPREQUEST} per comunicare quale ha scelto;
+	\item[1.] \italic{Discovering}: il client chiede che gli venga assegnato un indirizzo tramite il messaggio \code{DHCPDISCOVER} inviato in \textit{broadcast};
+	\item[2.] \italic{Offering}: i server che ricevono la richiesta rispondono (se hanno indirizzi liberi a disposizione) con il messaggio \code{DHCPOFFER}, in cui propongono un indirizzo IP e gli altri parametri di configurazione al client;
+	\item[3.] \italic{Requesting}: una volta ricevute le offerte dei server, il client le valuta e risponde con \code{DHCPREQUEST} (sempre in broadcast) per comunicare quale server ha scelto;
 	\item[4.] \italic{Acknowledgment}: se l'assegnamento è avvenuto con successo, il server invia al client la conferma tramite \code{DHCPACK}; in caso di errori viene invece inviato il messaggio \code{DHCPNACK} (\italic{negative acknowlegment}).
 \end{itemize}
-Si noti che, nella fase 1, il client non ha ancora configurato completamente l'\vedi{Internet protocol suite (TCP/IP)} in quanto è sprovvisto di indirizzo IP.
-\\Inoltre la richiesta deve essere inviata in \italic{broadcast} dal momento che anche l'indirizzo IP del server è ancora sconosciuto: perciò il messaggio avrà come mittente 0.0.0.0 e 255.255.255.255 come destinatario.
+Si noti che, nella fase 1, il client non ha ancora configurato completamente l'\vedi{Internet protocol suite (TCP/IP)} in quanto è sprovvisto di indirizzo IP e il messaggio avrà come mittente 0.0.0.0 e 255.255.255.255 come destinatario.
 \\\\Step di configurazione di un server DHCP :
 \begin{itemize}
 	\item[1.] Installazione del software (dipende dal sistema operativo del server);
@@ -1265,7 +1263,7 @@ e permette di interrogare un nameserver per ottenere informazioni  e verificarne
 \newpage
 
 \subsub{NIS}
-Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages) servizio che permette di definire delle risorse di amministrazione comune ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
+Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages), è un servizio che permette di definire delle risorse di amministrazione comuni ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP} 
 HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} \footnote{diverse tipologie di informazioni integrate tra loro} distribuita nella rete ed acceduta mediante \textit{hyperlinks} \footnote{documenti relazionati tra loro in una struttura tale da consentire la navigazione mediante \textit{links} per passare da un documento all'altro})
 \paragraph{Storia} HTTP è utilizzato dal World Wide Web dal 1990, e da allora è stato aggiornato a diverse versioni:
@@ -1319,25 +1317,19 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse ch
 \para{MIB} Da non confondere con il film Man in Black.
 \para{SMI} Structure of Management Information.
 \subsub{NAT}
-Network Address Translation
-Il termine NAT indica un servizio svolto da un router.
- Ogni messaggio TCP/IP è caratterizzato da un specifica di provenienza ed una specifica di destinazione.
- Ciascuna di queste è composta da due parti:
+Network Address Translation: servizio svolto da un router che permette di modificare gli indirizzi IP contenuti negli header dei pacchetti che transitano all'interno di esso.\\
+ In particolare, ogni messaggio \vedi{TCP}/\vedi{IP} è caratterizzato da un \textbf{indirizzo sorgente} e un \textbf{indirizzo destinazione}, ognuno dei quali è composto da due parti:
  \begin{itemize}
- 	\item L’indirizzo IP che identifica il nodo di rete (solitamente rappresentato mediante quattro cifre decimali comprese fra 0 e 255, ad esempio:
- 	195.204.33.12) 
- 	\item Il port, che identifica, all’interno del particolare nodo di rete, quale programma riceve effettivamente il messaggio.
+ 	\item L'\textit{indirizzo IP} che identifica il nodo di rete
+ 	\item Il \textit{port number} che identifica, all’interno del particolare nodo di rete, quale programma riceve effettivamente il messaggio.
  \end{itemize}
- 
- Nel funzionamento base della rete Internet,ciascun nodo viene univocamente identificato mediante il suo numero IP1 e non può essere contemporaneamente usato da alcun altro nodo in nessun punto della rete.
- La funzione NAT consiste nel “mascherare” dietro un unico indirizzo IP un’intera LAN.
- Il meccanismo di funzionamento è
- piuttosto semplice: a tutti i nodi della LAN vengono assegnati numeri in modo arbitrario, quindi anche utilizzando insiemi di numeri già utilizzati da altre
- LAN. All’interno della LAN questi numeri funzionano
- perfettamente: i nodi sono in grado di comunicare fra loro usando questi indirizzi.
- Il problema nasce quando un nodo interno alla LAN deve
- comunicare con l’esterno: il suo indirizzo entrerebbe infatti in conflitto con qualche altro nodo di rete che usa lo stesso numero. Il router allora effettua
- una “traduzione dell’indirizzo”, ovvero cambia la specifica di provenienza dell’indirizzo assegnando un nuovo numero di port (che non sia giàutilizzato) e cambiando il numero IP nel numero ufficialmente assegnato.
+Le operazioni del router su cui gira NAT dipendono dal tipo di flusso dei pacchetti:
+\begin{itemize}
+\item \textbf{dalla LAN verso l'esterno}: il NAT modifica \textit{l'indirizzo sorgente} (Source-NAT);\\Traduce gli indirizzi della rete privata (globalmente non univoci) in un indirizzo IP pubblico, \textit{dopo} aver effettuato il routing.
+\item \textbf{dall'esterno verso la LAN}: il NAT modifica  \textit{l'indirizzo destinazione} (Destination-NAT);\\
+Traduce l'indirizzo pubblico in uno privato appartenente alla rete interna (redirecting), \textit{prima} del routing stesso.
+\end{itemize}
+I vantaggi del Source-NAT sono la possibilità di avere indirizzi privati già utilizzati da altre LAN senza entrare in eventuali conflitti e il nascondere la rete privata dall'esterno (\textbf{IP Masquerading)} grazie all'indirizzo pubblico.
  
  \subsub {Posta Elettronica}
 La Posta Elettronica \'e composta da due programm:i il Mail User Agent ed il Programma di Trasporto. Il primo \'e un interfaccia verso l'applicazione utilizzata \'e composto da:
