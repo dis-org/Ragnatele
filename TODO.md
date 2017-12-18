@@ -5,6 +5,11 @@
 + Quando hai finito rimuovi l'argomento dalla scaletta e dalla tabella.
 
 ### Cosa c'è da fare
++ Introduzione
+    + Protocolli di base
+      + RTS/CTS
+      + XON/XOF
+      + ARQ
 + Livello Fisico
   + Dispositivi
     + Hub
