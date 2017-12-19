@@ -214,14 +214,14 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \para{PPM} (Pulse Position Modulation), analoga alla PM;
 \para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
 \\La PCM costa di tre fasi distinte:
-\begin{itemize}
+\begin{enumerate}
 \item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
 \\Il campionamento si realizza per mezzo della PAM.
 \item \textbf{quantizzazione}: discretizzazione dell'ampiezza del segnale campionato. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'intervallo è diviso in pari uguali; di norma, tuttavia, la suddivisione segue una scala logaritmica.
 \\Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - è dimostrato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze nella riproduzione dei suoni. 
 \item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
 \\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
-\end{itemize}
+\end{enumerate}
 \boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
 
 \subsub{Modulazione digitale} 
@@ -421,17 +421,18 @@ La sincronizzazione si basa su degli \textit{idle bytes} (\code{011111111}), inv
 \subsub{NRZ}
 Not Reduced Zero: codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso, richiede circuiti semplici ed ha una buona resistenza agli errori, il problema è che su lunghe trasmissioni si perde la sincronia nella trasmissione di lunghe serie di bit di uguale valore.
 \subsub{RZ}
-Return to Zero: questa codifica è estremamente simile all'NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero; il clock ha quindi frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronizzazione ma ha un più alto rischio di errore. Può essere anche a tre livelli (\textit{RZ bipolare}), ed in tal caso il livello inferiore rappresenta lo 0 logico, il livello superiore l'1 logico e a metà di ogni impulso si ritorna al livello intermedio, che non rappresenta di per sé alcun valore logico.
+Return to Zero: questa codifica è estremamente simile all'NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero; il clock ha quindi frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronizzazione ma ha un più alto rischio di errore. Può essere anche a tre livelli (\textit{RZ bipolare}), ed in tal caso il livello inferiore (-V) rappresenta lo 0 logico, il livello superiore (+V) l'1 logico e a metà di ogni impulso si ritorna al livello intermedio (0), che non rappresenta di per sé alcun valore logico.
 \subsub{Manchester}
 Come nella \vedi{RZ}, la frequenza del clock è raddoppiata. Allo 0 logico corrisponde una transizione dal basso verso l'alto,
 mentre all'1 logico una transizione dall'alto verso il basso. In tutti e due i casi la transizione avviene a metà dell'impulso.\\
-Questo necessita quindi di raddoppiare la banda per trasmettere un'informazione, poiché da ogni 2 bit trasferiti si ricava un bit di informazione
-in questo caso con lunghe trasmissioni non si perde la sincronia ed è anche abbastanza robusto agli errori, richiede però dei circuiti più complessi dell NRZ e del RZ.
+
 \subsub{AMI}
-Alternative Mark Inversion: codifica che utilizza 3 stati: +V, 0, -V, in cui lo zero logico è uguale allo stato 0 mentre l'uno logico si alterna fra +V e -V.
-Questa codifica è usata nella modulazione \vedi{PCM}. 
+Alternative Mark Inversion: come la \vedi{RZ} bipolare, utilizza tre stati, con la differenza che lo 0 logico corrisponde allo stato 0 mentre l'1 logico si alterna fra +V e -V.
+Questa codifica è usata nella \vedi{PCM}. 
+
 \subsub{Scrambling}
-Lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasmissioni di lunga distanza, consiste nel mescolare in modo "intelligente" i bit per mantenere attiva la linea, è utilizzata nella -non trattata- codifica 2B1Q (two Binary, one Quaternary).
+Lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasmissioni di lunga distanza, consiste nel mescolare in modo "intelligente" i bit per mantenere attiva la linea, è utilizzata nella codifica 2B1Q (two Binary, one Quaternary).
+
 \sub{Controllo degli errori}
 %concetto di ridondanza 
 \subsub{VRC}
@@ -442,13 +443,6 @@ Lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasm
 \subsub{Simplex} Flusso monodirezionale. Le trasmissioni radiofoniche ne sono un tipico esempio. 
 \subsub{Half-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in un solo senso alla volta. Le ricetrasmittenti lavorano in questa maniera. 
 \subsub{Full-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in ambo i sensi contemporaneamente, come nella rete telefonica. 
-
-%NB non credo vadano qui...
-%\sub{Protocolli primario-secondario}
-%\subsub{RTS-CTS}
-%\subsub{XON-XOF}
-%\subsub{ARQ}Il protocollo ARQ è di tipo \vedi{Full-Duplex} %missing
-%\subsub{NDP} 
 
 \sub{Sottolivelli}
 Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
@@ -1107,8 +1101,6 @@ Ad ogni dominio è associato un resource record (RR), file ASCII che contengono 
 
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
-\ \\L'implementazione più comune del DNS su ambiente Unix è il \italic{Berkeley Internet Name Domain} (\textbf{BIND}) 
-disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND ha una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.
 \paragraph{Risoluzione}
 La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
 La risoluzione può essere \textbf{statica} (mapping stabilito permanentemente tramite una host table) o \textbf{dinamica} (mapping stabilito ad ogni avvio dell'host).\\
