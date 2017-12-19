@@ -766,12 +766,12 @@ Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Inter
 \subsection{Protocolli di address resolution} 
 \subsub{ARP} %address resolution protocol (daje, scrivilo da qualche parte!)
 \textbf{Address Resolution Protocol}: Due host Internet possono comunicare solamente conoscendo il reciproco \vedi{Indirizzo MAC}.\\
-L'host A, per sapere l'indirizzo fisico di B, invierà una richiesta ARP a tutti gli host contenente l'\vedi{Indirizzo IP} di B e il proprio indirizzo MAC; B vedendo la chiamata, risponde scrivendo il MAC address di A in una cache di consultazione e riinviando il proprio MAC address ad A.\\
+L'host A, per sapere l'indirizzo fisico di B, invierà a tutti gli host una richiesta ARP contenente l'\vedi{Indirizzo IP} di B e il proprio indirizzo MAC; B vedendo la chiamata, risponderà scrivendo il MAC address di A in una cache di consultazione e reinviando il proprio MAC address ad A.\\
 La cache di consultazione permette di tenere traccia delle connessioni recenti in modo che, senza dover reinviare una richiesta ARP, sia possibile reinviare dati al suddetto host. Le informazioni nella cache possono però diventare obsolete, per questo un timer ne fa scadere la validità.\\
 %immagine
 Occorre considerare alcuni problemi:
 \begin {itemize}
-\item il ritardo (\vedi{Jitter}) provocato degli aggiornamenti della cache;
+\item il \vedi{Jitter} provocato degli aggiornamenti della cache;
 \item l'impatto sull'operatività di altri protocolli in presenza di richieste ARP pendenti.
 \end{itemize}
 \subsub{RARP} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
