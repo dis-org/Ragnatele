@@ -8,6 +8,8 @@
 \usepackage{nameref} 
 \usepackage{siunitx} 
 
+\setcounter{section}{-1} %per numerare le sezioni partendo da 0
+
 \graphicspath{{./images/}}
 
 %defines-----------------------------------
@@ -42,7 +44,7 @@
 \tableofcontents
 \newpage
 
-\section*{Introduzione}
+\section{Introduzione}
 La comunicazione, intesa come scambio di informazioni, può avvenire solo se l'emittente e il ricevente concordano sull'interpretazione del messaggio trasmesso. In altre parole, deve esistere una serie di regole comuni che permetta di risalire al significato del messaggio, in quanto la stessa informazione può e deve assumere forme diverse, anche a seconda del canale di comunicazione.
 In ambito di telecomunicazioni questo insieme di regole, definito formalmente, è detto \textbf{protocollo di comunicazione}. \\Se i partecipanti alla comunicazione sono molteplici, sarà necessario definire un sistema di comunicazione utilizzato da tutti, che indichi quali protocolli utilizzare in quali situazioni. \'E a questo che servono gli \textbf{standard}.
 
@@ -198,22 +200,19 @@ Un filtro è un sistema che tratta le varie componenti del segnale in modo diver
 \sub{Modulazione}
 Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}, tipicamente analogico.
 \subsub{Ad onda continua}
-Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie:
-\begin{itemize}
-\item \textbf{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante;
-\item \textbf{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rarefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
-\item \textbf{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale. 
-\end{itemize}
+Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie.
+\para{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante;
+\para{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rarefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
+\para{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale.
 \boximage[am_fm_pm.png][scale=0.5]{Confronto tra tipologie di modulazione ad onda continua}
 
 \subsub{Modulazione impulsiva}
-La modulazione impulsiva è un tipo di modulazione in cui la modulante è una sinusoide, mentre la portante è una serie di impulsi\footnote{}. I principali tipi di modulazione impulsiva sono:
-\begin{itemize}
+La modulazione impulsiva è un tipo di modulazione in cui la modulante è una sinusoide, mentre la portante è composta da una serie di impulsi.
 \boximage[pam_pwm_ppm_pcm.png][scale=0.5]{Confronto tra tipologie di modulazione impulsiva}
-\item \textbf{PAM} (Pulse Amplitude Modulation), analoga alla AM;
-\item \textbf{PWM} (Pulse Width Modulation), dove la durata dell'impulso cambia in base all'ampiezza della modulante;
-\item \textbf{PPM} (Pulse Position Modulation), analoga alla PM;
-\item \textbf{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
+\para{PAM} (Pulse Amplitude Modulation), analoga alla AM;
+\para{PWM} (Pulse Width Modulation), dove la durata dell'impulso cambia in base all'ampiezza della modulante;
+\para{PPM} (Pulse Position Modulation), analoga alla PM;
+\para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
 \\La PCM costa di tre fasi distinte:
 \begin{itemize}
 \item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
@@ -224,7 +223,7 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
 \end{itemize}
 \boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
-\end{itemize}
+
 \subsub{Modulazione digitale} 
 Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, facendo corrispondere ad ogni sequenza di bit in input un'univoca forma d'onda analogica limitata nel tempo in uscita, detta \textit{simbolo}. \'E dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
 \begin{itemize} 
@@ -298,7 +297,7 @@ Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzional
 Ognuno dei modem suddetti può essere inoltre \textbf{interno} o \textbf{esterno} al \vedi{DTE}. Tra i modem \textbf{esterni}, in base al tipo di collegamento al DTE, si distinguono:
 \begin{itemize}
 \item \textbf{Modem seriali}, collegati con cavo seriale tramite interfaccia \vedi{RS-232} o \vedi{USB};
-\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfaccia parallela}).
+\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfaccie parallele}).
 \end{itemize}
 Tra i modem \textbf{interni} si distinguono invece:
 \begin{itemize}
@@ -377,8 +376,10 @@ Elementi principali di una rete FTTx sono:
 \paragraph{Reti PON} Le reti PON (Passive Optical Network)
 utilizzano solo componenti passivi e sono caratterizzate da una topologia ad albero (vedi \vedi{Rete ad albero}). In esse, tratti di fibra vengono condivisi tra più utenti, e solo alla fine uno splitter ottico suddivide il segnale in più segnali uguali ma di potenza minore in modo da distribuirlo.
 
+\subsection{Dispositivi}
+\subsub {Hub}
+
 \newpage\sec{Livello di Collegamento}
-%Filippo---------------------------------------------------------------------------------------------------------------------
 In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
 \begin{itemize} 
 \item raggruppare in frame i bit da inviare;
@@ -428,11 +429,14 @@ Questo necessita quindi di raddoppiare la banda per trasmettere un informazione,
 in questo caso con lunghe trasmissioni non si perde la sincronia ed è anche abbastanza robusto agli errori, richiede però cei circuiti più complessi dell NRZ e del RZ.
 \subsub{AMI}
 Alternative Mark Inversion: codifica che utilizza 3 stati: +V, 0, -V, in cui lo zero logico è uguale allo stato 0 mentre l'uno logico si alterna fra +V e -V.
-Questa codifica è usata nel PMC (Pulse Code Modulation). 
+Questa codifica è usata nella modulazione \vedi{PCM}. 
 \subsub{Scrambling}
-lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasmissioni di lunga distanza, consiste nel mescolare in modo "intelligente" i bit per mantenere attiva la linea, è utilizzata nella, mai vista, codifica 2B1Q(two Binary, one Quaternary)
-\sub{Controllo degli errori} 
-\subsub{Ridondanza}
+Lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasmissioni di lunga distanza, consiste nel mescolare in modo "intelligente" i bit per mantenere attiva la linea, è utilizzata nella -non trattata- codifica 2B1Q (two Binary, one Quaternary).
+\sub{Controllo degli errori}
+%concetto di ridondanza 
+\subsub{VRC}
+\subsub{LRC}
+\subsub{CRC}
 
 \sub{Tipi di flusso trasmissivo}
 \subsub{Simplex} Flusso monodirezionale. Le trasmissioni radiofoniche ne sono un tipico esempio. 
@@ -449,7 +453,7 @@ lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasm
 \sub{Sottolivelli}
 Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
 \subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l'accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
-\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno.\\  utilizzato per l'instradamento diretto in reti locali, per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
+\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno utilizzato per l'instradamento diretto in reti locali, ovvero per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
 \subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
 \para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
@@ -483,7 +487,7 @@ I protocolli di secondo livello si dividono in due principali categorie:
 	
 \end{itemize}
 \subsub{BSC}
-Introdotto dalla IBM, il Binary Synchronous Communication è un protocollo sincrono orientato al carattere. Il flusso trasmissivo è di tipo \vedi{Half-Duplex} con velocità tra 1200 e 19200 bps.
+Introdotto dalla IBM, il \textit{Binary Synchronous Communication} è un protocollo sincrono orientato al carattere. Il flusso trasmissivo è di tipo \vedi{Half-Duplex} con velocità tra 1200 e 19200 bps.
 \\Il frame è composto da circa cento byte, divisi tra messaggio da trasmettere e caratteri di controllo.
 \\La codifica binaria utilizzata può essere ASCII, EBCDIC (Extended Binary Coded Decimal Interchange Code) oppure SBT (Six Bit Transcode).
 \\In base alla rete su cui opera, il BSC si classifica in:
@@ -498,9 +502,9 @@ stazione primaria che ripete l'invio, mentre l'altro sarà una stazione
 secondaria che dovrà rinunciare. Il ricevente risponderà con ACK se è pronto, oppure NAK se non può acquisire i dati. Il collegamento viene terminato con il messaggio EOT.
 \\Nel caso di rete multi-punto l'elaborazione centrale effettua un'interrogazione ciclica (\italic{pollic}) per individuare il terminale a cui collegarsi (il protocollo deve conoscere gli indirizzi del destinatario).
 
-\boximage[BSC_codes.png][scale=0.8]{caratteri di controllo nel BSC}
+\boximage[BSC_codes.png][scale=0.75]{caratteri di controllo nel BSC}
 
-L’efficienza del protocollo BSC non è molto elevata sia per il tipo di trasmissione half-duplex, sia per la presenza di un alto numero di caratteri di controllo, che sottraggono capacità di rappresentazione ai caratteri del messaggio vero e proprio.
+\ \\L’efficienza del protocollo BSC non è molto elevata sia per il tipo di trasmissione half-duplex, sia per la presenza di un alto numero di caratteri di controllo, che sottraggono capacità di rappresentazione ai caratteri del messaggio vero e proprio.
 
 \subsub{HDLC}
 Il protocollo High Level Data Link Control costituisce lo standard ISO per trasmissioni sincrone \vedi{Full-Duplex}; è orientato ai bit e utilizzato su reti di grandi dimensioni.
@@ -552,7 +556,7 @@ I frame sono divisi nei seguenti sottocampi:
 		
 		\item[-]\italic{Unnumbered}: la forma è \code{11MMPMMM}.
 		I possibili messaggi per avviare e controllare la connessione sono mostrati in figura:
-		\boximage[hdlc_uframe.jpg][scale=0.6]{Comandi di controllo  più comuni negli U-frame}
+		\boximage[hdlc_uframe.jpg][scale=0.5]{Comandi di controllo  più comuni negli U-frame}
 		 
 	\end{itemize}
 	\item \textbf{campo informativo}: contiene i dati significativi da trasmettere. La lunghezza è arbitraria in quanto sarà poi il flag di chiusura ad identificare la fine del pacchetto.
@@ -563,7 +567,7 @@ I frame sono divisi nei seguenti sottocampi:
 %immagine frame
 
 \subsub{SDLC}
-HDLC deriva da SDLC (Synchronous Data Link Control), un protocollo definito da IBM negli anni '70.
+HDLC deriva da SDLC (Synchronous Data Link Control), un protocollo definito da IBM negli anni '70.\\\\
 Rispetto ad HDLC, il protocollo SDLC:
 \begin{itemize}
 	\item ha il campo FCS di 8 bit;
@@ -573,7 +577,7 @@ Rispetto ad HDLC, il protocollo SDLC:
 
 \subsub{PPP}
 Il Point-to-Point Protocol è, come intuibile, un protocollo usato nelle connessioni punto-punto e trova la sua più ampia diffusione in ambito \vedi{WAN}.
-\\Si può definire un'estensione del protocollo \vedi{HDLC} in quanto il funzionamento è analogo (RFC 1662). Utilizza solo \textbf{U-frame}, la cui struttura differisce da quelli in HDLC nei seguenti campi:
+\\Si può definire un'estensione del protocollo \vedi{HDLC} in quanto il funzionamento è analogo (\vedi{RFC} 1662). Utilizza solo \textbf{U-frame}, la cui struttura differisce da quelli in HDLC nei seguenti campi:
 \begin{itemize}
 	\item \textbf{indirizzo}: i suoi 8 bit sono sempre \code{11111111} dal momento che le trasmissioni avvengono esclusivamente in \textit{broadcast};
 	\item \textbf{controllo}: solo 8 bit che, mentre in HDLC hanno struttura \code{11MMPMMM}, in PPP sono del valore fisso \code{11000000} e rappresentano il comando UI (\textit{unnambered information}), ovvero un messaggio che contiene dati;
@@ -598,7 +602,7 @@ Per le operazioni del \vedi{Livello di Collegamento} il PPP si avvale del protoc
 	\item[4.] \textbf{Terminazione}: la connessione viene interrotta. Può accadere a seguito del fallimento della fase 2, oppure se la connessione cade improvvisamente o se l'utente decide volontariamente di interromperla.
 \end{itemize}
 
-\sub{Dispositivi}  %2° livello -> bridge e switch (hub è al 1°, è un repeater)
+\subsection{Dispositivi}  %2° livello -> bridge e switch (hub è al 1°, è un repeater)
 Nel secondo livello OSI troviamo dispositivi di rete plug-and-play ed \textit{"intelligenti"}, che non si limitano alla sola replicazione del segnale ma sono in grado di riconoscere, nei segnali elettrici che ricevono dal mezzo trasmissivo, i dati organizzati in \textbf{frame}; Agiscono quindi sui frame ricevuti, gestendoli ed instradandoli, il tutto in modo trasparente.
 \subsub{Bridge} Un bridge \textit{(ponte)} è un dispositivo di rete munito di porte con cui è collegato a diversi \textbf{\textit{segmenti di rete}} (generalmente due o più LAN) da cui riceve dati e li instrada selettivamente verso una porta destinataria
 \paragraph{Funzionamento} Quando riceve un pacchetto su una porta, riconosce i frame, estrae gli indirizzi sorgente e destinazione e cerca di capire dall'indirizzo del \textit{destinatario} se questi si trova nello \textbf{stesso segmento} del \textit{mittente} oppure no \textbf{\textit{(Filtering)}}. Nel primo caso non inoltra il frame (il destinatario condivide lo stesso bus). \\Nel secondo caso il bridge inoltra il frame verso il \textit{segmento del destinatario} \textbf{\textit{(Forwarding)}}; Se non sa dove si trova, il bridge inoltra il frame su tutte le porte \textbf{\textit{(Flooding)}}. \\Per instradare i frames, il bridge mantiene una tabella (di \textbf{forwarding}) di indirizzi MAC per ogni porta, così è in grado di capire verso quale porta, e quindi quale segmento, inoltrare il frame. 
@@ -731,7 +735,7 @@ L'header del datagram IPv4 contiene i seguenti campi:
 Composto da 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
 \boximage[ipaddress.png][scale=0.8]{Suddivisione in classi degli indirizzi IPv4}
 
-\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$.
+\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ \ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$.
 
 \ \\Nell'ambito degli indirizzi IPv4 sussistono alcune convenzioni:
 \begin{itemize}
@@ -767,7 +771,7 @@ La cache di consultazione permette di tenere traccia delle connessioni recenti i
 %immagine
 Occorre considerare alcuni problemi:
 \begin {itemize}
-\item il ritardo (\textit{jitter}) provocato degli aggiornamenti della cache;
+\item il ritardo (\vedi{Jitter}) provocato degli aggiornamenti della cache;
 \item l'impatto sull'operatività di altri protocolli in presenza di richieste ARP pendenti.
 \end{itemize}
 \subsub{RARP} %reverse address resolution protocol (daje, scrivilo da qualche parte!)
@@ -1046,7 +1050,7 @@ Il protocollo DHCP (Dynamic Host Configuration Protocol) permette agli \italic{h
 	\item \textbf{client}:  host che necessita un indirizzo IP per collegarsi alla sottorete;
 	\item \textbf{server}:  host designato all'assegnazione degli indirizzi ai client che li richiedono. Anche un \italic{router} può assolvere, tra le altre cose, tale ruolo.
 \end{itemize}
-È un protocollo nato come complemento del \textbf{BOOTP} (Bootstrap protocol, RFC 821), il quale raccoglie informazioni per la configurazione degli host sfruttando l'\vedi{UDP} (sulla porta 67 del server e 68 del client) ed assegna gli indirizzi IP tramite messaggi \italic{broadcast}.
+È un protocollo nato come complemento del \textbf{BOOTP} (Bootstrap protocol, \vedi{RFC} 821), il quale raccoglie informazioni per la configurazione degli host sfruttando l'\vedi{UDP} (sulla porta 67 del server e 68 del client) ed assegna gli indirizzi IP tramite messaggi \italic{broadcast}.
 \\Il DHCP lo estende (RFC 1534) aggiungendo nuove opzioni di configurazione, tra cui la scelta fra 3 metodi di assegnamento degli indirizzi:
 \begin{itemize}
 	\item \italic{automatic allocation}: i client che si connettono ricevono dal server un indirizzo IP permanente;
@@ -1326,9 +1330,8 @@ Network Address Translation: servizio svolto da un router che permette di modifi
  \end{itemize}
 Le operazioni del router su cui gira NAT dipendono dal tipo di flusso dei pacchetti:
 \begin{itemize}
-\item \textbf{dalla LAN verso l'esterno}: il NAT modifica \textit{l'indirizzo sorgente} (Source-NAT);\\Traduce gli indirizzi della rete privata (globalmente non univoci) in un indirizzo IP pubblico, \textit{dopo} aver effettuato il routing.
-\item \textbf{dall'esterno verso la LAN}: il NAT modifica  \textit{l'indirizzo destinazione} (Destination-NAT);\\
-Traduce l'indirizzo pubblico in uno privato appartenente alla rete interna (redirecting), \textit{prima} del routing stesso.
+\item \textbf{dalla LAN verso l'esterno}: il NAT modifica \textit{l'indirizzo sorgente} (Source-NAT): traduce gli indirizzi della rete privata (globalmente non univoci) in un indirizzo IP pubblico, \textit{dopo} aver effettuato il routing;
+\item \textbf{dall'esterno verso la LAN}: il NAT modifica  \textit{l'indirizzo destinazione} (Destination-NAT): traduce l'indirizzo pubblico in uno privato appartenente alla rete interna (redirecting), \textit{prima} del routing stesso.
 \end{itemize}
 I vantaggi del Source-NAT sono la possibilità di avere indirizzi privati già utilizzati da altre LAN senza entrare in eventuali conflitti e il nascondere la rete privata dall'esterno (\textbf{IP Masquerading)} grazie all'indirizzo pubblico.
  
