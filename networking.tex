@@ -121,9 +121,24 @@ Termine che identifica le risorse hardware e software che realizzano la presenza
 Detto anche \italic{Stack TCP/IP}, è la famiglia di protocolli alla base del funzionamento di \vedi{Internet}.
 I protocolli sono divisi in quattro livelli, ripresi in parte dal \vedi{Modello di riferimento ISO/OSI}, questa suddivisione rappresenta lo standard \italic{de facto} per l'architettura di rete.
 \image[tcpipprotocols.png][scale=0.75]{Famiglia dei protocolli TCP/IP}
-
-
-\newpage\sec{Livello Fisico}
+\sub{Protocolli elementari}
+In questa sezione saranno introdotti alcuni semplici protocolli, suddivisi, a seconda della relazione tra i DTE coinvbolti, in:
+\begin{itemize}
+\item protocolli in ambito \textbf{primario-secondario}: \vedi{RTS/CTS}, \vedi{XON-XOFF}, \vedi{ARQ};
+\item protocolli \textbf{peer-to-peer};
+\item protocolli ibridi;
+\end{itemize}
+\subsub{RTS/CTS}
+Il protocollo RTS/CTS (\textit{Request To Send/Clear To Send}, basato sull'interfaccia \vedi{RS-232}, è un protocollo in ambito primario-secondario, originariamente utilizzato con modem \vedi{Half-Duplex}. Esso prevede che la stazione secondaria che voglia trasmettere al \textit{master} (cioè alla stazione primaria) attivi il segnale RTS, che le garantisce il permesso di trasmettere, revocabile in qualsiasi momento, attivando il segnale CTS (la rispondenza tra i due segnali è detta \textit{handshake}). 
+\subsub{XON-XOFF}
+Nel caso del protocollo XON-XOFF, la stazione primaria invia dati ad un terminale (stazione secondaria), che li memorizza. Nel momento in cui il terminale si satura, esso invia il carattere ASCII (vedi \vedi{Codice}) XOFF, cui segue l'interruzione delle trasmissioni. Non appena è nuovamente in grado di ricevere, lo segnala tramite il carattere XON. 
+\subsub{ARQ}
+Il protocollo ARQ (\textit{Automatic Repeat reQuest} o \textit{Automatic Repeat Query}) è di tipo \vedi{Full-Duplex} e sfrutta il concetto di \textit{finestra scorrevole} per trasmettere in modo più efficiente: il messaggio è suddiviso in sequenze di frame, inviati a gruppi. ALla ricezione di un certo numero di frame, il mittente riceve un riscontro da parte del destinatario, il quale indica quali frame sia necessario ritrasmettere tramite una sequenza di \code{0} ed \code{1}. Per quel che riguarda la ritrasmissione, possono essere adottate due metodologie differenti:
+\begin{itemize}
+\item \textit{Go-back-n}: si ricomincia la trasmissione a partire dall'n-esimo frame, il primo danneggiato;
+\item approccio selettivo: vengono ritrasmessi i soli frame danneggiati.
+\end{itemize}
+\newpage\sec{Livello fisico}
 Nonostante l'amministratore di rete non abbia la possibilità di influirvi direttamente, è importante descrivere lo strato fisico poiché esso influenza significativamente le prestazioni della rete.
 
 \subsection{Terminologia}
@@ -170,7 +185,12 @@ L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \texti
 \subsection{Qualità delle trasmissioni} \label{qualita}
 Vi sono numerosi strumenti software per valutare la qualità di una rete in base a prestazioni e affidabilità, quali:
 \begin{itemize}
-\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto inviando pacchetti \vedi{ICMP} e riporta statistiche sui pacchetti persi;
+\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto inviando \textit{echo messages} del protocollo \vedi{ICMP} e riporta le statistiche relative alla trasmissione, in particolare:
+\begin{itemize}
+\item \textit{packet loss}: percentuale di pacchetti persi, se la connessione è buona dovrebbe sempre essere pari a 0;
+\item RTT (\textit{round trip time}): statistiche sul tempo di trasmissione;
+\end{itemize}
+\boximage[ping.png][scale=0.35]{Esempio di output del comando \code{ping}.}
 \item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione;
 \item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
@@ -379,7 +399,7 @@ utilizzano solo componenti passivi e sono caratterizzate da una topologia ad alb
 \subsection{Dispositivi}
 \subsub {Hub}
 
-\newpage\sec{Livello di Collegamento}
+\newpage\sec{Livello di collegamento}
 In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
 \begin{itemize} 
 \item raggruppare in frame i bit da inviare;
@@ -615,7 +635,7 @@ Infine usando lo switch, non sono possibili collisioni ed è possibile usare la 
 %img [lo switch riduce la rete in un insieme di \textbf{domini di collisione} di dimensioni minime (al limite costituiti ognuno da un singolo host)]
 %implementazione LAN con switch???
 
-\newpage\sec{Livello di Rete}
+\newpage\sec{Livello di rete}
 
 %Claudio & Giorgio ---------------------------------------------------------------------------------------------------------------------
 \subsection{Terminologia}
@@ -686,6 +706,7 @@ In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul
 
 \newpage
 \sub{Topologia delle reti}
+\boximage[topo.png][scale=0.5]{Possibili topologie.}
 \subsub{Rete a dorsale}
 I dispositivi sono connessi tutti ad una via di trasmissione principale detta appunto dorsale. Un'interruzione in qualunque punto della dorsale compromette tutta la rete.
 \subsub{Rete ad albero} La trasmissione avviene in modo gerarchico tra i nodi padre e figlio, fino ad arrivare alla \textit{root} dalla quale dipende tutto il funzionamento della rete.
@@ -694,7 +715,7 @@ I dispositivi sono connessi tutti ad una via di trasmissione principale detta ap
 \subsub{Rete a maglia} In inglese \textit{mesh}, è una rete in cui ogni dispositivo può essere connesso ad ogni altro dispositivo ottenendo di fatto un grafo connesso. \'E la topologia di rete meno vulnerabile, ma è poco utilizzata nelle reti cablate a causa dei costi. \'E diffusa invece nelle \vedi{WLAN}, spesso nella versione \textit{ad hoc}, dove i collegamenti nascono e muoiono dinamicamente. In questa topologia il \vedi{Routing} viene effettuato da ogni nodo.
 
 \sub{Grid}
-Rete di computer incentrata sulla condivisione dinamica delle risorse nel contesto di calcolo distribuito e HTC (High Troughput Computing).\\ Rispetto ad un vero e proprio cluster di computer, la grid ha una composizione più eterogenea. L'accesso ai dispositivi non si limita al software ma comprende anche l'hardware, ciò è ottenuto utilizzando librerie middleware (\textit{software glue}) che si collocano tra il sistema operativo e lo strato fisico della macchina. La più importante grid europea è EGEE del CERN, bastata sul middleware gLite.%qualche link forse
+Rete di computer incentrata sulla condivisione dinamica delle risorse, nel contesto di calcolo distribuito e HTC (\textit{High Troughput Computing}).\\ Rispetto ad un vero e proprio cluster di computer, la grid ha una composizione più eterogenea. La condivisione della capacità di calcolo non si limita al software, ma coinvolge anche l'hardware, grazie a librerie \textit{middleware} (\textit{software glue}) che si collocano tra il sistema operativo e lo strato fisico della macchina. La più importante grid europea è EGEE del CERN, bastata sul middleware gLite.%qualche link forse
  
 \newpage
 \sub{IP}
@@ -719,7 +740,7 @@ L'header del datagram IPv4 contiene i seguenti campi:
 \item \textbf{Header checksum}: sequenza di bit che utilizzata per verificare l'integrità dei dati contenuti nell'header;
 \item \textbf{Source address}: \vedi{Indirizzo IP} di provenienza;
 \item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione;
-\item \textbf{opzioni} (campo opzionale, utilizzato per test e debugging).
+\item \textbf{Opzioni} (campo opzionale, utilizzato per test e debugging).
 \end{itemize} 
 \boximage[ip-header.png][scale=0.45]{Formato header IPv4}
 
@@ -969,7 +990,7 @@ Una tipologia particolare di \textit{inter-domain routing} è il \textit{pass-th
 \paragraph{iBGP} \label{iBGP}
 Come accennato, iBGP sta per "internal BGP" ed è coinvolto nell'\textit{intra-domain routing}. La sua funzione è quella di stabilire quale sia il router ottimale come punto di connessione con gli \vedi{AS} esterni.
 \sub{ICMP} %da spostare prima? Boh. Bah.
-Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono:\\
+Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono illustrati in figura.\\
 \boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
 \ \\In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 
 \\I comandi \code{ping} e \code{traceroute} (vedi \vedi{qualita}) sfruttano il protocollo ICMP.
