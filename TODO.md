@@ -6,6 +6,7 @@
 
 ### Cosa c'è da fare
 + Introduzione
+    + Tipi di connessione (point-to-point VS multipunto) (?)
     + Protocolli di base
       + RTS/CTS
       + XON/XOF
