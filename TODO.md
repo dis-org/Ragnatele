@@ -6,10 +6,6 @@
 
 ### Cosa c'è da fare
 + Introduzione
-    + Protocolli di base #
-      + RTS/CTS #
-      + XON/XOF #
-      + ARQ #
 + Livello Fisico
   + Dispositivi
     + Hub
@@ -41,7 +37,7 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Aranna Masciolini  | harisont     | hub      | scrittura | protocolli elem.   |
+| Aranna Masciolini  | harisont     | hub      |           |                    |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
