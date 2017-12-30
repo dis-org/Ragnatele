@@ -30,6 +30,7 @@
   + Servizi di rete 
     + DHCP
     + NAT
+    + sicurezza di rete #
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
@@ -38,7 +39,7 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Aranna Masciolini  | harisont     | hub      |           |                    |
+| Aranna Masciolini  | harisont     | hub      | revisione | sicurezza di rete  |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
