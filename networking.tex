@@ -1430,22 +1430,30 @@ disable = no
 \end{itemize}
 
 \subsub{Firewalling}
-Per firewalling si intende la gestione della sicurezza \textit{a livello di rete/sottorete}.
-\paragraph{Firewall} Sistema hardware e/o software che controlla gli accessi alle risorse del sistema \textit{(host o rete locale)}, filtrando il traffico che quest'ultimo scambia con l'esterno \textit{(rete esterna, internet)}.\\
-Nella \textit{rete interna} ci saranno i servizi di base (come \vedi{NFS}, \vedi{NIS}, LDAP ecc..) rivolti agli utenti della sottorete interna; Nella \textit{rete esterna} dovranno essere presenti i servizi di networking (come \vedi{DNS}, SMPT, \vedi{FTP} ecc..) rivolti sia ad utenti interni che esterni (esposti a rischi).\\
+Per firewalling si intende la gestione della sicurezza a livello di rete o sottorete.
+\para{Firewall} Sistema hardware e/o software che costituisce un intermediario tra la rete locale (o singolo host) ed una o più reti esterne (tipicamente internet), filtrando il traffico. Tipicamente, un firewall è un \vedi{DTE} con più schede di rete che costituisce l'unico punto di collegamento tra le reti coinvolte.\\
+Nella rete interna ci saranno i servizi di base (come \vedi{NFS}, \vedi{NIS}, LDAP etc.) rivolti agli utenti della sottorete interna; nella rete esterna i servizi di networking (ad esempio \vedi{DNS}, SMPT, \vedi{FTP} etc.), rivolti sia ad utenti interni che esterni e dunque esposti a rischi.\\
 Nonostante permetta di isolare la rete dal mondo esterno, non è in grado di proteggerla da attacchi interni o condotti da linee da lui non controllate.
-\paragraph{Packet Filtering} Metodo con il quale un firewall limita il traffico di rete. \\
-In Linux, \textit{\textbf{NetFilter}} è il filtro di pacchetti  implementato nel kernel, la cui interfaccia è rappresentata da \textbf{\code{iptables}}.\\
-iptables contiene alcune \textbf{TABLES}, che rappresentano le liste di regole di filtraggio. Queste contengono le \textbf{CHAINS} (catene in cui i pacchetti vengono controllati), che a loro volta sono formate da molte \textbf{Rules} (composte da un campo \textbf{match} e uno \textbf{target}).\\ Ogni pacchetto attraversa almeno una catena, di cui ogni regola controlla (proceduralmente) se il pacchetto soddisfa il campo \textit{match}: se così accade, il pacchetto subirà il \textit{target} e le regole successive saranno ignorate, altrimenti se il pacchetto raggiunge la fine della catena, verrà instradato.\\
-Le TABLES di iptables sono
+Si distinguono due tipi di firewall:
 \begin{itemize}
-\item \textbf{filter}: regola il firewalling, permette cioè di bloccare i pacchetti o di farli passare (ci passano tutti).\\ CHAINS:
-\begin{itemize}
-\item \textit{INPUT} vi passano i pacchetti destinati al sistema
-\item \textit{OUTPUT} vi passano i pacchetti originati dal sistema e destinati ad uscire
-\item \textit{FORWARD} vi passano i pacchetti con destinazione un altro sistema e non generati generati dallo stesso.
+\item firewall \textbf{stateless}, che prendono decisioni basate esclusivamente sulla specifica connessione;
+\item firewall \textbf{stateful}, più sofisticati, che tengono traccia delle connessioni e prendono dunque decisioni basate anche, ad esempio, su frequenza e circostanze delle varie connessioni.
 \end{itemize}
-\item \textbf{nat}: regola le attività di natting (alt era i paccht t i che creano una nuova connesion) \\ CHAINS:
+\para{Packet Filtering} Metodo con il quale un firewall limita il traffico di rete.\\
+In Linux, a partire dal kernel 2.4, \textit{\textbf{NetFilter}} è il filtro di pacchetti  implementato nel kernel, la cui interfaccia è rappresentata dal comando \code{iptables}.\\
+NetFilter contiene alcune tabelle (\textit{tables}): ogni tabella è associata a un diverso tipo di elaborazione dei pacchetti. Essa contiene dunque una serie di catene (\textit{chains}) di regole di filtraggio, almeno una delle quali viene attraversata sequenzialmente da ogni pacchetto. Una regola in una catena può causare un salto ad un'altra catena. Le regole (\textit{rules} sono composte da un campo \textit{match} ed un campo \textit{target}).
+\\Nel corso dell'attraversamento di una catena, si controlla se il pacchetto soddisfa il campo \textit{match}: se così accade, il pacchetto subirà il \textit{target} e le regole successive saranno ignorate, altrimenti verranno applicate le regole base, definibili a loro volta tramite \code{iptables}.\\
+Le tabelle di iptables sono:
+\begin{itemize}
+\item \textbf{filter}: regolamenta il firewalling vero e proprio, inteso come filtraggio; permette cioè di scartare i pacchetti (\code{DROP}) o farli passare (\code{ACCEPT}).
+Le catene predefinite di suddetta tabella sono:
+\begin{itemize}
+\item \code{INPUT}: vi passano i pacchetti destinati al firewall stesso;
+\item \code{OUTPUT}: vi passano i pacchetti originati dal firewall stesso, diretti altrove;
+\item \code{FORWARD}: vi passano i pacchetti che transitano nel firewall pur provenendo da altri host, diretti altrove;
+\end{itemize}
+\item \textbf{nat}: regola le attività di natting (vedi \vedi{NAT}) 
+\\Le catene predefinite di suddetta tabella sono:
 \begin{itemize}
 \item \textit{PREROUTING} vi passano i pacchetti in entrata (prima della consultazione della tabella di routing)
 \item \textit{POSTROUTING} vi passano i pacchetti in uscita (dopo la consultazione della tabella di routing)
@@ -1470,11 +1478,6 @@ NetFilter è quindi in grado di stabilire il \textbf{contesto} del pacchetto: \t
 \item \textbf{Screened host}: Oltre al firewall-router, il traffico tra la rete interna ed esterna passa attraverso un host della rete interna \textit{(Bastion Host)} il quale fornisce servizi di base.\\ Lo \textit{screening-router} accetta solo pacchetti da e verso il Bastion Host. L'hardening del \textit{Bastion Host} deve essere molto curato, in quanto rappresenta il \textit{single point of failure} della rete.
 \item \textbf{Screened sub-net}: Viene creata una \textit{rete intermedia} (\textbf{DMZ} - De-Militarized Zone) usando un router \textit{esterno} ed uno \textit{interno}; Il/i Bastion Host risiedono nella DMZ rimanendo isolati dalla rete interna, non rappresentando più un punto critico., come anche i servizi più vulnerabili; Il \textit{firewall-router esterno} si limita ad un filtraggio di base in modo da garantire ampia fruibilità dei servizi, mentre quello \textit{interno} opera un maggior controllo.
 \end{itemize}
-
-
-
-
-
-
- 
+\ \\Per una guida pratica alla configurazione di un firewall linux si rimanda a \href{<www.commedia.it/ccontavalli/docs-it/iptables/iptables4dummies.pdf
+>}{IPtables for Fun}.
 \end{document}
