@@ -1442,7 +1442,7 @@ Si distinguono due tipi di firewall:
 \para{Packet Filtering} Metodo con il quale un firewall limita il traffico di rete.\\
 In Linux, a partire dal kernel 2.4, \textit{\textbf{NetFilter}} è il filtro di pacchetti  implementato nel kernel, la cui interfaccia è rappresentata dal comando \code{iptables}.\\
 NetFilter contiene alcune tabelle (\textit{tables}): ogni tabella è associata a un diverso tipo di elaborazione dei pacchetti. Essa contiene dunque una serie di catene (\textit{chains}) di regole di filtraggio, almeno una delle quali viene attraversata sequenzialmente da ogni pacchetto. Una regola in una catena può causare un salto ad un'altra catena. Le regole (\textit{rules} sono composte da un campo \textit{match} ed un campo \textit{target}).
-\\Nel corso dell'attraversamento di una catena, si controlla se il pacchetto soddisfa il campo \textit{match}: se così accade, il pacchetto subirà il \textit{target} e le regole successive saranno ignorate, altrimenti verranno applicate le regole base, definibili a loro volta tramite \code{iptables}.\\
+\\Nel corso dell'attraversamento di una catena, si controlla se il pacchetto soddisfa il campo \textit{match}: se così accade, il pacchetto subirà il \textit{target} e le regole successive saranno ignorate, altrimenti verranno applicate le regole base (\textit{policy}), definibili a loro volta tramite \code{iptables}.\\
 Le tabelle di iptables sono:
 \begin{itemize}
 \item \textbf{filter}: regolamenta il firewalling vero e proprio, inteso come filtraggio; permette cioè di scartare i pacchetti (\code{DROP}) o farli passare (\code{ACCEPT}).
@@ -1455,14 +1455,16 @@ Le catene predefinite di suddetta tabella sono:
 \item \textbf{nat}: regola le attività di natting (vedi \vedi{NAT}) 
 \\Le catene predefinite di suddetta tabella sono:
 \begin{itemize}
-\item \textit{PREROUTING} vi passano i pacchetti in entrata (prima della consultazione della tabella di routing)
-\item \textit{POSTROUTING} vi passano i pacchetti in uscita (dopo la consultazione della tabella di routing)
-\item \textit{OUTPUT} altera i pacchetti generati in locale prima di uscire
+\item \code{PREROUTING}: vi passano i pacchetti su cui non sono ancora state fatte scelte di routing;
+\item \code{POSTROUTING}: vi passano i pacchetti su cui sono già state fatte scelte di routing;
+\item \code{OUTPUT}: come in filter, vi passano i pacchetti originati dal firewall stesso, diretti altrove;
 \end{itemize}
+\code{PREROUTING} e \code{POSTROUTING} sono state introdotte proprio per consentire di realizzare diversi comportamenti: ad esempio, se si vuole cambiare l’indirizzo di destinazione di un pacchetto sarà importante farlo prima che venga
+deciso da dove fare uscire il pacchetto (se così non fosse, il pacchetto uscirebbe dall’interfaccia sbagliata, mentre quando si cambia l'indirizzo del mittente di un pacchetto potrebbe essere importante farlo dopo che una decisione di routing è stata presa.
 \item \textbf{mangle}: responsabile delle modifiche alle opzioni dei pacchetti. \\ CHAINS:
 \begin{itemize}
 \item \textit{PREROUTING} esamina tutti i pacchetti che entrano nel sistema (prima di sapere se sono destinati allo stesso o se devono essere inoltrati).
-\item \textit{OUTPUT}  tutti i pacchetti generati dal sistema passano per questa catena
+\item \code{OUTPUT}  tutti i pacchetti generati dal sistema passano per questa catena
 \end{itemize}
 \end{itemize}
 Se un pacchetto soddisfa una qualche regola, gli viene applicato il \textbf{target}. I principali sono \textbf{ACCEPT} viene accettato ed instradato, \textbf{REJECT} se lo rifiuta ed avvisa il mittente con un errore o \textbf{DROP} se lo blocca e lo scarta senza notifica.
