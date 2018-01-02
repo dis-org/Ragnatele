@@ -18,7 +18,9 @@
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP #
-  + Posta elettronica #
+    + Posta elettronica #
+  + Sicurezza di rete
+    + Proxy
 
 ### Cosa va rivisto
 + Livello di Collegamento
@@ -30,7 +32,9 @@
   + Servizi di rete 
     + DHCP
     + NAT
-    + sicurezza di rete #
+    + Sicurezza di rete
+      + Oscuramento
+      + Hardening 
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
@@ -40,6 +44,7 @@
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
 | Aranna Masciolini  | harisont     | hub      | revisione | sicurezza di rete  |
+|                    |              |          | scrittura | proxy              |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
