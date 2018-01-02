@@ -30,7 +30,8 @@
   + Servizi di rete 
     + DHCP
     + NAT
-    + sicurezza di rete #
+    + Sicurezza di rete #
+      + Proxy 
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
