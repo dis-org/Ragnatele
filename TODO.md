@@ -20,7 +20,7 @@
     + SNMP #
     + Posta elettronica #
   + Sicurezza di rete
-    + Proxy
+    + Proxy #
 
 ### Cosa va rivisto
 + Livello di Collegamento
