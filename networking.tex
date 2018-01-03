@@ -1,9 +1,4 @@
 \documentclass[a4paper,11pt]{article}
-<<<<<<< HEAD
-\author{Quelli della B1}
-=======
-
->>>>>>> 891e13cf881ea5e5053b634da45dc9cda268b3aa
 \usepackage[utf8]{inputenc}
 \usepackage[italian]{babel}
 \usepackage{graphicx}
@@ -48,16 +43,9 @@
 \tableofcontents
 \newpage
 
-<<<<<<< HEAD
-\sec{Introduzione}
-Gioara 
-\sub{Il modello di riferimento ISO/OSI}
-\sub{Internet protocol suite (TCP/IP)}
-=======
 \section{Introduzione}
 La comunicazione, intesa come scambio di informazioni, può avvenire solo se l'emittente e il ricevente concordano sull'interpretazione del messaggio trasmesso. In altre parole, deve esistere una serie di regole comuni che permetta di risalire al significato del messaggio, in quanto la stessa informazione può e deve assumere forme diverse, anche a seconda del canale di comunicazione.
 In ambito di telecomunicazioni questo insieme di regole, definito formalmente, è detto \textbf{protocollo di comunicazione}. \\Se i partecipanti alla comunicazione sono molteplici, sarà necessario definire un sistema di comunicazione utilizzato da tutti, che indichi quali protocolli utilizzare in quali situazioni. \'E a questo che servono gli \textbf{standard}.
->>>>>>> 891e13cf881ea5e5053b634da45dc9cda268b3aa
 
 \sub{Gli standard}
 Si distinguono standard \textit{de iure}, cioè codificati dalle \vedi{Organizzazioni} preposte, e standard \textit{de facto}, affermatisi spontaneamente per la loro adozione massiccia.
@@ -475,19 +463,6 @@ Lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasm
 \subsub{LRC}
 \subsub{CRC}
 
-<<<<<<< HEAD
-\sub{Protocolli internet} 
-\subsub{ARP} 
-\subsub{RARP} 
-\subsub{NDP} 
-\subsub{MAC} 
- 
-\sub{Ethernet} 
-\newpage
-
-
-\sec{Livello di Rete}
-=======
 \sub{Tipi di flusso trasmissivo}
 \subsub{Simplex} Flusso monodirezionale. Le trasmissioni radiofoniche ne sono un tipico esempio. 
 \subsub{Half-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in un solo senso alla volta. Le ricetrasmittenti lavorano in questa maniera. 
@@ -506,7 +481,6 @@ In base all'implementazione, il LLC prevede 3 diversi servizi fornibili al livel
 \item \textbf{LLC2}: servizio \textit{orientato alla connessione} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC}.
 \item \textbf{LLC3}: servizio alternativo al LLC1 in quanto è \textit{non} orientato alla connessione, ma prevede una \textit{conferma di ricezione} (acknowledge - ACK) per i frame inviati e garantisce la \textit{consegna ordinata} dei dati.
 \end{itemize}
->>>>>>> 891e13cf881ea5e5053b634da45dc9cda268b3aa
 
 
 \subsection{Protocolli di secondo livello}
@@ -676,17 +650,6 @@ Insieme di dispositivi connessi da canali di comunicazione.
 Data Terminal Equipment: qualunque dispositivo che è la sorgente o la destinazione di una comunicazione di dati.
 Un esempio è il Personal Computer (PC). 
 \subsub{DCE}
-<<<<<<< HEAD
-Data Circuit-terminating Equipment o Data Communication Equipment: dispositivo intermedio tra \vedi{DTE} e il resto della rete, esegue conversioni di segnale, correzione di errori e gestisce il clock dei dispositivi connessi. Può anche essere del \vedi{DTE}. Tipicamente è un Modem-Router.
-\subsub{CPE}
-Customer Premises Equipment: ISDN
-
-\sub{Tipologie di rete}
-
-
-\sub{Topologia di una rete}
-\subsection{Qualità della rete}
-=======
 Data Circuit-terminating Equipment o Data Communication Equipment: dispositivo intermedio 
 tra uno o più \vedi{DTE} e il resto della rete; esegue conversioni di segnale, correzione di errori
 e gestisce il clock dei dispositivi connessi. Può anche essere interno al \vedi{DTE}. Tipicamente è un Modem.
@@ -836,7 +799,6 @@ Occorre considerare alcuni problemi:
 Viene utilizzato ad ogni avvio dagli host diskless (senza memoria secondaria) per determinare il proprio indirizzo IP, chiedendolo a dei particolari server RARP che contengono le informazioni in specifici file di configurazione.\\
 \'E reso obsoleto dal \vedi{DHCP}.
 \newpage
->>>>>>> 891e13cf881ea5e5053b634da45dc9cda268b3aa
 \sub{Routing}
 Il routing consiste nella scelta del cammino migliore da percorrere per trasmettere un datagram da un host all'altro, passando attraverso i nodi di una rete basata sul protocollo \vedi{IP}. Si divide in:
 \begin{itemize}
@@ -908,12 +870,7 @@ L'utilizzo di un protocollo link-state presenta diversi vantaggi:
 \end{itemize}
 Appartengono a questa categoria i protocolli \vedi{OSPF} e IS-IS.
 \sub{Protocolli di routing}
-<<<<<<< HEAD
-\subsub{ICMP} 
-\subsub{IGMP} 
-=======
 I protocolli di routing mantengono aggiornata la \vedi{Tabella di routing} di ogni dispositivo che gestiscono tramite lo scambio di appositi messaggi; questi aggiornamenti prevalgono su eventuali configurazioni statiche. Un router può essere gestito da più protocolli di routing contemporaneamente.
->>>>>>> 891e13cf881ea5e5053b634da45dc9cda268b3aa
 \subsub{RIP} 
 Routing Information Protocol: Protocollo sviluppato nel 1988 come parte di ARPANET e basato sull'algoritmo di Bellman-Ford; è definito negli RFC 1058 e 1023.
 \\Utilizza \vedi{UDP} come protocollo di trasporto sulla porta riservata 520.
@@ -1045,23 +1002,11 @@ Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC}
 \newpage
 
 \sec{Livello di trasporto}
-<<<<<<< HEAD
-
-\sub{Protocolli primario-secondario}
-\subsub{RTS-CTS}
-\subsub{XON-XOF}
-\subsub{ARQ}
-Il protocollo ARQ è di tipo \vedi{Full-Duplex}
-
-\sub{Protocolli} 
-\subsub{TCP} 
-=======
 \subsection{Terminologia}
 \subsub{Porta} 
 Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. \'E il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. Le porte $0-1023$ sono quelle raccomandate per i protocolli \vedi{TCP} e \vedi{UDP}.
 
 \subsection{Protocolli di trasporto} 
->>>>>>> 891e13cf881ea5e5053b634da45dc9cda268b3aa
 \subsub{UDP} 
 L'UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, poco affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle porte.
 
