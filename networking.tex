@@ -427,7 +427,7 @@ Nonostante esistano diversi tipi di ethernet, la struttura del frame è la stess
 \begin{itemize}
     \item \italic{Preamble} (preambolo): sette byte ognuno dei quali ha valore \code{10101010}, servono a svegliare il ricevente ed a sincronizzarlo con l'emittente, non fa quindi parte del vero frame ma avvisa che a breve ne arriverà uno; 
     \item  \italic{Start Frame Delimiter} (SFD): ulteriore byte non appartenente al frame, ha valore \code{10101011} se il messaggio in arrivo è importante, altrimenti ha lo stesso valore dei byte del preambolo. \'E protetto da codifica \vedi{Manchester};
-    \item \italic{Destination MAC Address} (indirizzo destinazione): di 6 byte, contiene l'indirizzo fisico del ricevente; se esso non corrisponde il frame viene scartato al \vedi{Livello Fisico}.
+    \item \italic{Destination MAC Address} (indirizzo destinazione): di 6 byte, contiene l'indirizzo fisico del ricevente; se esso non corrisponde il frame viene scartato al \vedi{Livello fisico}.
     \item \italic{Source MAC Address} (indirizzo sorgente): di 6 byte, contiene l'indirizzo fisico del mittente.
     \item \italic{Ether Type} (tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi{IEEE 802}.3, la lunghezza del campo dati.
     \item \italic{PayLoad} (campo dati): da 46 a 1500 byte, contiene i dati reali, i dati troppo grandi vengono divisi in più frame mentre ai dati troppo piccoli viene aggiunto un riempitivo (padding) della lunghezza necessaria.
@@ -497,7 +497,7 @@ Lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasm
 Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
 \subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l'accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
 \para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno utilizzato per l'instradamento diretto in reti locali, ovvero per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
-\subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di Rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
+\subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
 I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
 \para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
 In base all'implementazione, il LLC prevede 3 diversi servizi fornibili al livello superiore:
@@ -570,7 +570,7 @@ La connessione fra mittente e destinatario è detta \textbf{bilanciata} se sono 
 
 Il protocollo HDLC prevede che, a seconda delle necessità, le stazioni possano scambiarsi \textit{frame} di 3 tipologie:
 \begin{itemize}
-	\item \textbf{I-frame}: il tipo \italic{\textbf{I}nformation} è usato per trasportare i dati dal \vedi{Livello di Rete}. Può contenere, in aggiunta, comandi per il controllo del flusso e degli errori;
+	\item \textbf{I-frame}: il tipo \italic{\textbf{I}nformation} è usato per trasportare i dati dal \vedi{Livello di rete}. Può contenere, in aggiunta, comandi per il controllo del flusso e degli errori;
 	
 	\item \textbf{S-frame}: il tipo \italic{\textbf{S}upervisory} è usato esclusivamente per controllare il flusso e gli errori;
 	
@@ -634,14 +634,14 @@ Inoltre, il PPP prevede un secondo campo che non compare in HDLC:
 
 \boximage[PPP_frame.png][scale=0.6]{Struttura dei frame in PPP}
 
-Per le operazioni del \vedi{Livello di Collegamento} il PPP si avvale del protocollo LCP (Link Control Protocol), mentre per le negoziazioni con il \vedi{Livello di Rete} impiega protocolli del tipo NCP (Network Control Protocol).
+Per le operazioni del \vedi{Livello di collegamento} il PPP si avvale del protocollo LCP (Link Control Protocol), mentre per le negoziazioni con il \vedi{Livello di rete} impiega protocolli del tipo NCP (Network Control Protocol).
 \\Di seguito sono specificate le fasi di una connessione in PPP:
 \begin{itemize}
 	\item[1.] \textbf{Definizione della connessione}: avviene il tentativo di connessione tramite LCP (Link Control Protocol), che provvederà a gestire i pacchetti di configurazione scambiati tra gli host interessati.
 	
 	\item[2.] \textbf{Autenticazione} (opzionale): permette alle parti di autenticarsi prima di stabilire la connessione, se lo prevedono.
 	
-	\item[3.] \textbf{Configurazione protocollo di rete}: ogni protocollo viene configurato separatamente tramite il proprio NCP (Network Control Protocol). Avviene inoltre la chiusura dei protocolli del \vedi{Livello di Rete}.
+	\item[3.] \textbf{Configurazione protocollo di rete}: ogni protocollo viene configurato separatamente tramite il proprio NCP (Network Control Protocol). Avviene inoltre la chiusura dei protocolli del \vedi{Livello di rete}.
 	
 	\item[4.] \textbf{Terminazione}: la connessione viene interrotta. Può accadere a seguito del fallimento della fase 2, oppure se la connessione cade improvvisamente o se l'utente decide volontariamente di interromperla.
 \end{itemize}
