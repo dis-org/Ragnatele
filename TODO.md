@@ -12,8 +12,6 @@
     + Hub
 + Livello di Collegamento
   + Encoding (introduzione)
-  + Protocolli di secondo livello
-    + ATM #
   + Multiplazione
 + Livello delle Applicazioni
   + Servizi di rete 
@@ -44,7 +42,7 @@
 | Aranna Masciolini  | harisont     | hub      | revisione | sicurezza di rete  |
 | Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
-| Francesco Bultrini | frabulous    | ramoso   | scrittura | ATM                |
+| Francesco Bultrini | frabulous    | ramoso   |           |                    |
 | Gioara Cuccu       | Gio93k       | border   |           |                    |
 | Giorgio Mazza      | Shizen39     | metric   |           |                    |
 | Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
