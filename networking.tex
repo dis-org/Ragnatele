@@ -614,6 +614,109 @@ Per le operazioni del \vedi{Livello di collegamento} il PPP si avvale del protoc
 	\item[4.] \textbf{Terminazione}: la connessione viene interrotta. Può accadere a seguito del fallimento della fase 2, oppure se la connessione cade improvvisamente o se l'utente decide volontariamente di interromperla.
 \end{itemize}
 
+\subsubsection{ATM}
+Asynchronous Transfer Mode è un protocollo nato negli anni '90 allo scopo di unificare varie tipologie di traffico all'interno di un solo sistema integrato. Per adempiere tale compito, infatti, è in grado di trasportare contemporaneamente segnali diversi e, di conseguenza, supportare molteplici velocità e tipologie di traffico. Ciò rende ATM ottimale sia nelle connessioni LAN-LAN che in quelle LAN-WAN.
+\\Il consorzio \textit{ATM Forum} ha condotto il processo di standardizzazione del protocollo con il fine di realizzare una rete BISDN (\textit{Broadband-ISDN}), ovvero una rete a banda larga che trasporti sia voce sia dati. Questo modello prevede, tra le altre cose, la presenza di interfacce \textbf{UNI} (\textit{user-network interface}) e \textbf{NNI} (\textit{network-network interface}).
+\\Nello specifico, le UNI possono essere pubbliche o private a seconda se l'utente è connesso, rispettivamente, allo \vedi{Switch} ATM di un fornitore pubblico o a quello di una rete privata. La differenza risiede nel mezzo trasmissivo (e quindi nel protocollo di livello fisico) data la distanza che separa lo \textit{user} dal \textit{network}: nel caso di UNI pubblica il segnale può viaggiare anche per molti km, mentre nelle UNI private le distanze da coprire sono, di norma, al disotto dei 100 metri.
+\\\\A differenza delle reti LAN, dove i messaggi viaggiano in \italic{broadcast} con conseguenti problemi di sicurezza ed efficienza, nelle reti ATM i dati vengono inviati \italic{point-to-point}. Inoltre queste ultime non soffrono dei problemi relativi alla condivisione della banda; al contrario, maggiori sono le stazioni a comunicare, maggiore è la capacità della rete.
+\\Un altro vantaggio delle reti ATM è l'indipendenza da un particolare mezzo trasmissivo, un fattore che le rende facilmente adattabili a nuove tecnologie.
+
+\para{Celle ATM} L'unità di trasmissione dei dati è un particolare pacchetto detto \textbf{cella}; questa ha una lunghezza fissa di 53 byte, di cui:
+\begin{itemize}
+	\item 5 byte di \textbf{\textit{header}}, il quale contiene i seguenti campi:
+	\begin{itemize}
+		\item GFC (Generic Flow Control): presente solo nelle celle UNI, è costituito da 4 bit che avrebbero lo scopo di negoziare il controllo del flusso tra le celle di varie connessioni ATM. Tuttavia non esiste uno standard dei valori che dovrebbe assumere e per questo viene posto sempre a \code{0000};
+		% questo fa capire quanto sia utilizzato ATM...
+		\item VPI (Virtual Path Identifier): identifica il percorso virtuale che dovrà percorrere la cella per giungere a destinazione. Questo campo è più lungo nelle celle NNI data l'assenza del GFC;
+		\item VCI (Virtual Channel Identifier): utilizzato insieme al VPI, identifica il canale virtuale che dovrà percorrere la cella per giungere a destinazione;
+		\item PT (Payload Type): indica il tipo di messaggio trasportato dalla cella (dati utente o informazioni di servizio);
+		\item CLP (Cell Loss Priority): indica la priorità del messaggio e viene consultato in caso di congestione nella rete;
+		\item HEC (Header Error Control): usato per il controllo a ridondanza ciclica (\vedi{CRC}) dello header, ovvero la verifica dell'integrità;
+	\end{itemize}
+	\item 48 byte di \textbf{\textit{payload}}, ovvero il corpo di dati utili.
+\end{itemize}
+\par
+\boximage[atm_celle.png][scale=0.6]{Struttura delle celle in ATM}
+
+Il \textit{routing} viene effettuato a monte dello scambio di dati: per prima cosa viene inviato un pacchetto di \textit{handshake} che, passando per i vari switch ATM, calcola progressivamente l'instradamento andando a creare quelli che poi saranno i campi VPI e VCI nello header della cella.\\
+Il resto della trasmissione viaggerà dunque sul percorso così creato ottenendo un \vedi{Throughput} più alto e riducendo \textit{overhead}\footnote{\textit{Overhead}: nell'ambito delle reti di telecomunicazioni, si intende quella parte di banda utilizzata per spedire messaggi non contenenti dati utente.} e \vedi{Latenza}.\\\\
+
+ATM utilizza un \textbf{PRM} (Protocol Reference Model) raccomandato da CCITT il quale prevede che il protocollo operi su 3 livelli:
+\begin{itemize}
+	\item \textbf{Physical Layer}: l'equivalente del \vedi{Livello Fisico} nella gerarchia ISO/OSI;
+	% si potrebbe approfondire aggiungendo dati riportati nelle slide, ma data la loro incomprensibilità e data la carenza di materiale attendibile e concordante online (dovuto alla poca diffusione di ATM), mi sono limitato a riportare solo questo.
+	\item \textbf{ATM Layer}: paragonabile ad una parte del \vedi{Livello di Collegamento} ISO/OSI, si occupa del routing;
+	\item \textbf{AAL} (\vedi{ATM Adaptation Layer}): necessario alla connessione ed alla corretta comunicazione tra la rete ATM e reti non ATM. Qui si effettuano le operazioni di segmentazione/riassemblaggio dei dati.
+\end{itemize}
+
+L'architettura di ATM segue il principio del \italic{Core \& Edge}: nei nodi interni (\italic{core}) avvengono soltanto la commutazione e la multiplazione, ovvero operazioni sui due livelli più bassi, mentre i terminali utente (\italic{edge}) operano su tutti i livelli.
+Questa organizzazione permette di velocizzare notevolmente il trasporto dei dati nei nodi interni della rete, relegando ai nodi esterni alcune funzioni più costose in termini computazionali (ad esempio il controllo degli errori).
+\image[atm_core-and-edge.png][scale=0.6]{Visualizzazione di come viaggia l'informazione nei nodi di una rete ATM attraverso i tre livelli più bassi.}
+
+
+\para{ATM Adaptation Layer} AAL è un livello di adattamento creato per far comunicare i livelli superiori ISO/OSI con i livelli più bassi di ATM e deve per questo supportare i protocolli di trasporto non basati su ATM. Ad esempio, servizi come Gigabit Ethernet, IP e Frame Relay richiedono di essere intermediati.
+\\Le principali attività svolte da questo livello sono:
+\begin{itemize}
+	\item \textit{Segmentation and Reassembly} (SAR): i pacchetti di livello superiore vengono presi in carico da AAL il quale decide come segmentarli e riassemblarli in \vedi{Celle ATM}. Questo compito è svolto da un sottolivello di AAL denominato, appunto, \textbf{SAR};
+	\item Gestione degli errori di trasmissione e delle celle mancanti o compromesse. Questo compito è svolto dal sottolivello \textbf{CS} (Convergence Sublayer);
+	\item \textit{Timing}, ovvero sincronizzazione tra sorgente e destinazione, e \textit{flow control}, cioè il controllo nel flusso delle celle.
+\end{itemize}
+Il livello AAL deve comportarsi in modo diverso in base alle reti con cui ATM si interfaccia. Per rispondere a questa esigenza si è deciso di suddividerle in quattro \textbf{classi di servizio} - A, B, C e D - secondo 3 parametri:
+\begin{itemize}
+	\item \textit{Timing} necessario o non necessario;
+	\item \textit{Bit rate} costante o variabile (CBR o VBR);
+	\item Connessione di tipo \vedi{Connection-oriented} o \vedi{Connectionless}.
+\end{itemize} 
+\boximage[atm_classi-di-servizio.png][scale=0.65]{Classi di servizio e versioni di AAL corrispondenti.}
+Ad ognuna di queste classi è stato fatto corrispondere uno specifico tipo di ATM Adaptation Layer:
+\begin{itemize}
+	\item \textbf{AAL 1}: utilizzato per le applicazioni che richiedono emulazioni di circuito (telefonia), dove il bit rate è costante e la connessione è di tipo \textit{connection-oriented} (\textbf{Classe A}).
+	\\Su ogni cella viene effettuato l'incapsulamento SAR che prevede di riservare dal payload 1 byte in cui inserire i seguenti campi:
+	\begin{itemize}
+		\item SN (Sequence Number), costituito da:
+		\begin{itemize}
+			\item CSI (Convergence Sublayer Indicator): di 1 bit, individua i limiti dei blocchi di correzione nel Convergence Sublayer;
+			\item SC (Sequence Counter): di 3 bit, indica il numero della 	cella;
+		\end{itemize}
+		\item SNP (Sequence Number Protection), costituito da:
+		\begin{itemize}
+			\item CRC: di 3 bit, è usato per il controllo ridondanza ciclica;
+			\item 1 bit di parità;
+		\end{itemize}
+		
+		%questi li ritengo dettagli superflui ma li ho inseriti cercando di spiegarli perché presenti nelle slide del docente (ed in maniera molto confusa)
+	\end{itemize}
+	
+	\item \textbf{AAL 2}: utilizzato per quelle applicazione che richiedono una classe di servizio VBR-rt (real time VBR, cioè bit rate variabile e timing necessario) come il trasporto di audio-video compresso (\textbf{Classe B}).
+	\\Nelle celle AAL 2 il payload non ha dimensione fissa; per ogni cella, la sua lunghezza è dichiarata in un campo apposito di 6 bit detto LI (Length Indicator);
+	
+	\item \textbf{AAL 3/4}: si rivolge ad applicazioni che richiedono una classe di servizio VBR-nrt (non real time VBR, cioè bit rate variabile e timing non necessario). Dal punto di vista della connessione, può supportare sia la tipologia \textit{connection-oriented} (\textbf{Classe C}), sia quelle di tipo \textit{connectionless} (\textbf{Classe D}), sebbene per queste ultime sia ormai stato soppiantato da AAL 5.
+	\\Applicazioni di queste classi prediligono l'integrità dei dati piuttosto che la costanza nel \textit{cell delay}. I controlli di correttezza sul payload e Serial Number vanno quindi a sostituire quei campi che nei casi precedenti erano dedicati a controlli sul timing. I messaggi ricevuti vengono prima incapsulati tra appositi header e trailer, e solo dopo sono segmentati in celle.
+	\\Nelle celle di ALL 3/4 la parte di header deve fornire informazioni sul segmento, numero di sequenza e campo per il multiplexing; il trailer deve contenere l'indicatore di lunghezza ed il campo CRC. Il payload è quindi ridotto a 44 byte;
+	% non ho riportato il resto delle informazioni presenti nelle slide perché poco chiare e non ho trovato fonti concordanti online
+	
+	\item \textbf{AAL 5}: è stato introdotto, data la complessità di AAL 3/4, per:
+	\begin{itemize}
+		\item ridurre l'overhead di elaborazione del protocollo;
+		\item ridurre il sovraccarico nella trasmissione;
+		\item garantire l'adattabilità ai protocolli di trasporto esistenti.
+	\end{itemize}
+	Di contro, AAL 5 diventa più insicuro, assumendo un comportamento simile a quello del sottolivello \vedi{MAC} dell’\vedi{Ethernet}: se il pacchetto consegnato non è valido, non si corregge ma viene automaticamente scartato.
+\end{itemize}
+\boximage[atm_payload-aal.png][scale=0.3]{Celle ATM nei diversi tipi di AAL}
+\par
+
+Il modello di riferimento di ATM prevede anche 3 piani trasversali che, andando ad intersecarsi con i livelli visti in precedenza, costituiscono il cosidetto modello 3D. Questi piani sono:
+\begin{itemize}
+	\item \textbf{Control Plane}: piano responsabile della generazione e gestione delle richieste di segnalazione;
+	\item \textbf{User Plane}: piano responsabile della gestione del trasferimento dei dati utente; 
+	\item \textbf{Management Plane}: piano che non si interseca con i tre livelli ATM, ma si compone di due unità: 
+	\begin{itemize}
+		\item \textit{layer management}: gestisce alcune funzioni come il rilevamento di guasti e problemi di protocollo;
+		\item \textit{plane management}: gestisce e coordina le funzioni relative alla comunicazione tra i piani.
+	\end{itemize}
+\end{itemize}
+\image[atm_3d-model.png][scale=0.7]{ATM 3D Reference Model}
 \subsection{Dispositivi}  %2° livello -> bridge e switch (hub è al 1°, è un repeater)
 Nel secondo livello OSI troviamo dispositivi di rete plug-and-play ed \textit{"intelligenti"}, che non si limitano alla sola replicazione del segnale ma sono in grado di riconoscere, nei segnali elettrici che ricevono dal mezzo trasmissivo, i dati organizzati in \textbf{frame}; Agiscono quindi sui frame ricevuti, gestendoli ed instradandoli, il tutto in modo trasparente.
 \subsub{Bridge} Un bridge \textit{(ponte)} è un dispositivo di rete munito di porte con cui è collegato a diversi \textbf{\textit{segmenti di rete}} (generalmente due o più LAN) da cui riceve dati e li instrada selettivamente verso una porta destinataria
