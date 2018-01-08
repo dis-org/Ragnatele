@@ -15,7 +15,7 @@
   + Multiplazione
 + Livello delle Applicazioni
   + Servizi di rete 
-    + SNMP #
+    + SNMP 
     + Posta elettronica #
   + Sicurezza di rete
     + Proxy #
@@ -43,7 +43,7 @@
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
 | Aranna Masciolini  | harisont     | hub      | revisione | sicurezza di rete  |
 |                    |              |          | scrittura | proxy              |
-| Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
+| Claudio Pannacci   | Kappanneo    | backbone | revisione | HTTP               |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   |           |                    |
 | Gioara Cuccu       | Gio93k       | border   |           |                    |
