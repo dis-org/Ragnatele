@@ -15,7 +15,7 @@
   + Multiplazione
 + Livello delle Applicazioni
   + Servizi di rete 
-    + SNMP #
+    + SNMP 
     + Posta elettronica #
 
 ### Cosa va rivisto
@@ -39,8 +39,8 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Aranna Masciolini  | harisont     | hub      | revisione | sicurezza di rete  |
-| Claudio Pannacci   | Kappanneo    | backbone | scrittura | SNMP               |
+| Arianna Masciolini | harisont     | hub      | revisione | sicurezza di rete  |
+| Claudio Pannacci   | Kappanneo    | backbone | revisione | HTTP               |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   |           |                    |
 | Gioara Cuccu       | Gio93k       | border   |           |                    |

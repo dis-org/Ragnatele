@@ -77,7 +77,7 @@ Internet Engineering Task Force: organismo internazionale composto da tecnici, s
 \subsub{IRTF}
 Internet Research Task Force: organizzazione che coordina i diversi gruppi di ricerca in ambito Internet, controllata dall'\textbf{IRSG} (Internet Research Steering Group) e il cui coordinatore è nominato dallo \textbf{IAB} (Internet Activities Board).
 \newpage\subsub{W3C}
-World Wide Web Consortium: organizzazione non governativa internazionale che ha come scopo quello di sviluppare tutte le potenzialità del \vedi{World Wide Web}. La principale attività svolta dal W3C consiste nello stabilire standard tecnici  inerenti sia i linguaggi di marcatura che i protocolli di comunicazione.
+World Wide Web Consortium: fondata da CERN e MIT, è un' organizzazione non governativa internazionale che ha come scopo quello di sviluppare tutte le potenzialità del \vedi{WWW}. La principale attività svolta dal W3C consiste nello stabilire standard tecnici  inerenti sia i linguaggi di marcatura che i protocolli di comunicazione.
 \subsub{IANA}
 Internet Assigned Numbers Authority: ente storico incaricato della gestione dello spazio di indirizzamento IP e dei nomi a dominio, degli \vedi{ASN} e dei numeri di protocollo IP. Nel tempo, IANA ha delegato la gestione locale ad una serie di entità regionali:
 \begin{itemize}
@@ -107,8 +107,8 @@ I sette livelli del modello ISO/OSI si dividono inoltre in due gruppi in base ai
 \sub{Internet}
 Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente e a condividere servizi, definita formalmente nel \vedi{RFC} 1122 (originariamente in \vedi{RFC} 760).
 
-\subsub{World Wide Web}
-Inventato nel 1989 da Tim Berners-Lee, ricercatore al CERN, e comunemente noto come Web, è un modo di accedere alle informazioni tramite internet, basato sul concetto di ipertesto e, in particolare, sul protocollo \vedi{HTTP}. 
+\subsub{WWW}
+Word Wide Web: inventato nel 1989 da Tim Berners-Lee, ricercatore al CERN, e comunemente noto come Web, è un modo di accedere alle informazioni tramite internet, basato sul concetto di ipertesto e, in particolare, sul protocollo \vedi{HTTP}. 
 
 \subsub{Intranet}
 Termine utilizzato per indicare l'uso di Internet all'interno di un'azienda, basato sull'utilizzo di una \vedi{LAN}.
@@ -1121,6 +1121,32 @@ A differenza dell'\vedi{UDP}, il TCP (Transmission Control Protocol) è un proto
 \sec{Livello delle applicazioni}
 Il quinto livello del \vedi{Modello di riferimento ISO/OSI} racchiude tutte le applicazioni dedicate all'utente finale. 
 Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (ad es. Telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
+
+\subsection{Terminologia} 
+\subsub{URI} Uniform Risource Identifier: sequenza di caratteri che identifica univocamente una risorsa. Esistonon due tipi di URI:
+\begin{itemize}
+\item L'\textbf{URL} (Uniform Resource Locator) che fornisce anche i mezzi per agire sulla risorsa, descrivendo il suo meccanismo di accesso o la sua ubicazione in una rete. Il suo formato è il seguente:\\\ \\ \code{protocollo:[//[username[:password]@]host[:porta]]\\ \ [/path][?query][\#fragment]}
+\\\ \\
+Esempio: \url{https://en.wikipedia.org/wiki/URL#Syntax}
+\item L'\textbf{URN} (Uniform Resource Name) si limita ad identificare la risorsa tramite un nome riferito ad un particolare namespace.
+\end{itemize}
+\subsub{Web server}
+Software in grado di gestire le richieste di trasferimento di pagine Web di un client (browser).\\ Le possibili architetture sono due:
+\begin{itemize}
+\item \italic{prefork}: ad ogni richiesta ricevuta viene avviato un nuovo processo tramite fork del processo server;
+\item \italic{threaded}: ad ogni richiesta viene avviato un \italic{thread}.
+\end{itemize}
+\subsub{Pagina statica}
+Documento HTML che ha sempre lo stesso contenuto ad ogni visualizzazione. Quando richiesto, il web server si limita ad inviarlo al browser.
+\subsub{Pagina dinamica}
+Documento HTML generato da un'applicazione Web, realizzata tramite un linguaggio di scripting lato server (ad esempio PHP). La richiesta di una pagina dinamica innesca un processo più articolato:\ 
+\begin{enumerate}
+\item Il client (browser) invia la richiesta (\vedi{HTTP} request) al \vedi{Web server}.
+\item Il server Web determina quale \textit{application server} debba essere utilizzato per eseguire la richiesta del browser, attraverso una lista di \italic{application mapping}. Essa associa alle estensioni dei file richiesti gli  application server appositi;
+\item L'applicazione Web viene esguita dell'\italic{application server} il quale genera il documento e lo passa al web server;
+\item Il server Web invia la risposta (HTTP response) contente il documento al browser.
+\end{enumerate}
+Questo processo è detto \italic{round trip} in quanto, essendo il protocollo \vedi{HTTP} \italic{stateless}, finite le operazioni i server tornano alla situazione iniziale senza modificare alcuna informazione. Per questo i linguaggi di scripting lato server mettono a disposizione le \italic{variabili di sessione}\footnote{Diverse dai \italic{cookies} che vengono salvati localmente.} che permettono all'utente di salvare alcune informazioni sui server per un certo periodo di tempo. 
 \sub{Servizi di rete}
 %Tommaso
 \subsub{Telnet} %standard odierno
@@ -1385,17 +1411,16 @@ e permette di interrogare un nameserver per ottenere informazioni  e verificarne
 \subsub{NIS}
 Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages), è un servizio che permette di definire delle risorse di amministrazione comuni ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP} 
-HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} \footnote{diverse tipologie di informazioni integrate tra loro} distribuita nella rete ed acceduta mediante \textit{hyperlinks} \footnote{documenti relazionati tra loro in una struttura tale da consentire la navigazione mediante \textit{links} per passare da un documento all'altro})
-\paragraph{Storia} HTTP è utilizzato dal World Wide Web dal 1990, e da allora è stato aggiornato a diverse versioni:
+HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul Web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} distribuita nella rete ed acceduta mediante \textit{hyperlinks} \footnote{Collegamenti ipertestuali.}). Utilizza il protocollo TCP sulla porta 80.
+\paragraph{Storia} HTTP è utilizzato dal \vedi{WWW} dal 1990, e da allora è stato aggiornato a diverse versioni:
 \begin{itemize}
-\item \textbf{HTTP/0.9}: semplice protocollo per il trasferimento di dati grezzi sulla rete Internet, gestito dal W3C
-\item \textbf{HTTP/1.0} (RFC 1945): consente il trasferimento di messaggi di tipo MIME, %VEDI MIME
-ma aveva ancora delle limitazioni dovute alla diffusione del WWWW 
-\item \textbf{HTTP/1.1}: versione consolidata del protocollo, usato per 15 anni per lo sviluppo del Web
-\item \textbf{HTTP/2} (RFC 7540): nuovo standard, sviluppato da Google e basato sul protocollo SPDY/2.
+\item \textbf{HTTP/0.9}: semplice protocollo per il trasferimento di dati grezzi sulla rete Internet, gestito dal \vedi{W3C};
+\item \textbf{HTTP/1.0} (\vedi{RFC} 1945): pur consentendo il trasferimento di messaggi di tipo MIME, % vedi?
+non era adatto a supportre la crescita esponenziale del \vedi{WWW};
+\item \textbf{HTTP/1.1}: versione consolidata del protocollo, usato per 15 anni per lo sviluppo del Web;
+\item \textbf{HTTP/2} (\vedi{RFC} 7540): nuovo standard basato sul protocollo SPDY/2 sviluppato da Google.
 \end{itemize}
-\paragraph{Funzionamento} HTTP fornisce un insieme di \textbf{metodi di richiesta} e fornisce attraverso l'\textit{Unified Resource Location} (URL), \textit{Identifier} (URI) o \textit{Name} (URN), un modo per \textbf{identificare} la risorsa richiesta da quel metodo. \\
-L'HTTP ha un'architettura di tipo client/server e comprende due tipi di messaggi: di richiesta e di risposta.
+\paragraph{Funzionamento} L'HTTP ha un'architettura di tipo client/server \italic{stateless}\footnote{Un protocollo di comunicazione stateless non salva informazioni sulla sessione e quindi interpreta ogni messaggio indipendentemente dagli altri.} e comprende due tipi di messaggi: di richiesta e di risposta.
 \begin{itemize}
 \item \textbf{HTTP Request} inviato dal client verso un server, è composto da:
 \begin{itemize}
@@ -1412,17 +1437,35 @@ L'HTTP ha un'architettura di tipo client/server e comprende due tipi di messaggi
 \item \textbf{body}: contenuto della risposta
 \end{itemize}
 \end{itemize}
+\para{HTTPS} Adattamento dell'HTTP per comunicazioni sicure, utilizza un protocollo crittografico a doppia chiave. La comunicazione criptata avviene sulla porta 443. Esiste in due varianti che differiscono per il protocollo crittografico  utilizzato:
+\begin{itemize}
+\item SSL (Secure Sockets Layer): ogni server deve avere un certificato X.509, emesso da una \italic{certificate authority} (CA) e contenente:
+\begin{itemize}
+\item Chiave pubblica;
+\item Il \italic{distinguished name} del server (nome ed indirizzo);
+\item Numero di serie o data di pubblicazione dei certificato;
+\item La data di fine validità del certificato.
+\end{itemize}
+
+\item TLS (Transport Layer): è l'evoluzione di SSL, definita nell'\vedi{RFC} 2246 (SSL 3.1). Si articola in tre fasi:
+\begin{enumerate}
+\item Negoziazione degli algoritmi da utilizzare;
+\item Scambio delle chiavi;
+\item Autenticazione;
+\item Cifratura simmetrica.
+\end{enumerate}
+\end{itemize}
 
 \subsub{NFS}
 Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
 Lato server, la condivisione di una cartella con un host specifico è detta \italic{sharing} ed è ottenuta mediante il comando \code{export}.
 NFS si compone dei seguenti programmi:
 \begin{itemize}
-\item \code{nsfd [nserver\footnote{numero di processi da eseguire}]} demone lato server  che gestisce le richieste NSF
-\item \code{biod [nserver]} demone lato server che gestice l'I/O dei client
-\item \code{rcp.locked} demone che gestisce i \italic{lock files} che bloccano istanze multiple di processi specifici
-\item \code{rcp.statd} demone che controlla lo stato della rete
-\item \code{rcp.mountd} demone lato server che risponde alle richieste di mount
+\item \code{nsfd [nserver\footnote{Numero di processi da eseguire}]} demone lato server  che gestisce le richieste NSF;
+\item \code{biod [nserver]} demone lato server che gestice l'I/O dei client;
+\item \code{rcp.locked} demone che gestisce i \italic{lock files} che bloccano istanze multiple di processi specifici;
+\item \code{rcp.statd} demone che controlla lo stato della rete;
+\item \code{rcp.mountd} demone lato server che risponde alle richieste di mount.
 \end{itemize} 
 \subsub{SNMP}  %Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI)
 Simple Network Management Protocol: protocollo per la gestione di reti internet che permette ad uno o più \vedi{DTE} detti \italic{manager} di accedere e modificare, attraverso \vedi{UDP} sulle porte $161$ e $162$, alcune informazioni elementari dei vari dispositivi di rete, detti \italic{agents}. Le informazioni gestiste nei vari \italic{agents}, dette 
