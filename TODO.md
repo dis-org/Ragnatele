@@ -13,6 +13,7 @@
 + Livello di Collegamento
   + Encoding (introduzione)
   + Multiplazione
+  + Frame Relay
 + Livello delle Applicazioni
   + Servizi di rete 
     + SNMP 
@@ -20,9 +21,11 @@
 
 ### Cosa va rivisto
 + Livello di Collegamento
+  + Ethernet (confronto con Gervasi)
   + Manchester
   + ...
 + Livello di Rete
+  + Switched LAN
 + Livello di Trasporto
 + Livello delle Applicazioni
   + Servizi di rete 
@@ -40,7 +43,7 @@
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
 | Arianna Masciolini | harisont     | hub      | revisione | sicurezza di rete  |
-| Claudio Pannacci   | Kappanneo    | backbone | revisione | HTTP               |
+| Claudio Pannacci   | Kappanneo    | backbone |           |                    |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   |           |                    |
 | Gioara Cuccu       | Gio93k       | border   |           |                    |
