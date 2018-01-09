@@ -380,11 +380,22 @@ Utilizzato principalmente per realizzare collegamenti punto-a-punto tra due appa
 Prevede, per ogni coppia di fili, trasmissione unidirezionale e non reversibile. Pertanto, per realizzare una connessione \vedi{Full-Duplex}, si utilizzano due coppie di fili. 
 \sub{Mezzi trasmissivi}
 Le diverse reti utilizzate per l'accesso ad internet sfruttano mezzi trasmissivi differenti.
+\subsub{Cavo coassiale}
+Cavo originale delle reti \vedi{Ethernet}, costituito da un filo di rame ricoperto da un materiale dielettrico, quindi da una calza in rame e una guaina in polietilene. Sulla base del diametro, se ne distinguono due varianti:
+\begin{itemize}
+\item thick (RG-8), di diametro 0.4 cm;
+\item thin (RG-58). di diametro 0.25 cm, che usa un connettore a T, tipico delle vecchie \vedi{LAN} (si veda in particolare la sezione \vedi{Rete a dorsale}).
+\end{itemize}
+\boximage[coassiale.jpg][scale=0.4]{Sezione di un cavo coassiale.}
 \subsub{Doppino telefonico}
 Un \textit{doppino ritorto} (detto anche \textit{coppia bifilare}) è un tipo di cablaggio composto da una coppia di conduttori in rame isolati ritorti, utilizzato nella \textbf{rete di accesso}\footnote{Termine con cui si indica la parte di rete destinata al collegamento fra la sede dei singoli utenti finali fino alla prima centrale di commutazione, e più in generale al collegamento tra un utente e il suo provider.} alla \textbf{PSTN} (\textit{Public Switched Telephone Network}).
 I doppini sono utilizzati anche, in un intreccio di quattro coppie, per trasmettere dati in una rete locale, attraverso il protocollo \vedi{Ethernet}. %inserire pagina 260 delle slides, se si riesce a decrittarla
+\subsub{Cavo UTP}
+Unshielded twisted pair: evoluzione del doppino telefonico, è costituito da più doppini intrecciati. \'E soggetto a disturbi elettrici, in particolare se il segmento è molto lungo, poiché agisce come un'antenna, ma è vantaggioso in termini economici.
+\subsub{Cavo STP}
+Shielded Twisted Pair: risente dei disturbi elettrici in misura minore del cavo UTP, ma è più costoso e difficile da stendere.
 \subsub{Fibra ottica}
-Le fibre ottiche sono filamenti di materiali vetrosi o polimerici, realizzati in modo da poter condurre al loro interno la luce (propagazione guidata). Disponibili sotto forma di cavi, presentano numerosi vantaggi: sono flessibili, immuni ai disturbi elettrici ed alle condizioni atmosferiche più estreme e poco sensibili alle variazioni di temperatura.
+Le fibre ottiche sono filamenti di materiali vetrosi o polimerici, realizzati in modo da poter condurre al loro interno la luce (propagazione guidata). Ne esistono due tipologie, le \textit{monomodali}, in cui la sorgente è un laser, e le \textit{multimodali}, in cui la sorgente è un LED. Disponibili sotto forma di cavi, presentano numerosi vantaggi: sono flessibili, immuni ai disturbi elettrici ed alle condizioni atmosferiche più estreme e poco sensibili alle variazioni di temperatura.
 Le architetture di rete che utilizzano la fibra ottica come mezzo trasmissivo sono indicate genericamente con l'acronimo \textbf{FTTx} (\textit{Fiber To The x}). In particolare, la sigla FTTH (\textit{Fiber To The Home}) indica un tipo di rete in cui il collegamento in fibra ottica raggiunge la singola unità abitativa. È la soluzione più costosa, ma garantisce la massima velocità di trasmissione. 
 Elementi principali di una rete FTTx sono:
 \begin{itemize}
@@ -471,9 +482,9 @@ I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
 \para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
 In base all'implementazione, il LLC prevede 3 diversi servizi fornibili al livello superiore:
 \begin{itemize}
-\item \textbf{LLC1}: servizio \textit{non} orientato alla connessione, non è prevista alcuna forma di \textit{conferma}, di \textit{correzione errori} ne di \textit{controllo del flusso}.
-\item \textbf{LLC2}: servizio \textit{orientato alla connessione} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC}.
-\item \textbf{LLC3}: servizio alternativo al LLC1 in quanto è \textit{non} orientato alla connessione, ma prevede una \textit{conferma di ricezione} (acknowledge - ACK) per i frame inviati e garantisce la \textit{consegna ordinata} dei dati.
+\item \textbf{LLC1}: servizio \vedi{Connectionless}, non è prevista alcuna forma di \textit{conferma}, di \textit{correzione errori} ne di \textit{controllo del flusso}.
+\item \textbf{LLC2}: servizio \vedi{Connection-oriented} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC}.
+\item \textbf{LLC3}: servizio alternativo al LLC1 in quanto è \vedi{Connectionless}, ma prevede una \textit{conferma di ricezione} (acknowledge - ACK) per i frame inviati e garantisce la \textit{consegna ordinata} dei dati.
 \end{itemize}
 
 
@@ -1479,19 +1490,6 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse ch
 \end{itemize}
 \para{MIB} Da non confondere con il film Man in Black.
 \para{SMI} Structure of Management Information.
-\subsub{NAT}
-Network Address Translation: servizio svolto da un router che permette di modificare gli indirizzi IP contenuti negli header dei pacchetti che transitano all'interno di esso.\\
- In particolare, ogni messaggio \vedi{TCP}/\vedi{IP} è caratterizzato da un \textbf{indirizzo sorgente} e un \textbf{indirizzo destinazione}, ognuno dei quali è composto da due parti:
- \begin{itemize}
- 	\item L'\textit{indirizzo IP} che identifica il nodo di rete
- 	\item Il \textit{port number} che identifica, all’interno del particolare nodo di rete, quale programma riceve effettivamente il messaggio.
- \end{itemize}
-Le operazioni del router su cui gira NAT dipendono dal tipo di flusso dei pacchetti:
-\begin{itemize}
-\item \textbf{dalla LAN verso l'esterno}: il NAT modifica \textit{l'indirizzo sorgente} (Source-NAT): traduce gli indirizzi della rete privata (globalmente non univoci) in un indirizzo IP pubblico, \textit{dopo} aver effettuato il routing;
-\item \textbf{dall'esterno verso la LAN}: il NAT modifica  \textit{l'indirizzo destinazione} (Destination-NAT): traduce l'indirizzo pubblico in uno privato appartenente alla rete interna (redirecting), \textit{prima} del routing stesso.
-\end{itemize}
-I vantaggi del Source-NAT sono la possibilità di avere indirizzi privati già utilizzati da altre LAN senza entrare in eventuali conflitti e il nascondere la rete privata dall'esterno (\textbf{IP Masquerading)} grazie all'indirizzo pubblico.
  
  \subsub {Posta Elettronica}
 La Posta Elettronica \'e composta da due programm:i il Mail User Agent ed il Programma di Trasporto. Il primo \'e un interfaccia verso l'applicazione utilizzata \'e composto da:
@@ -1573,6 +1571,13 @@ deny\_time = 20 \#può anche valere FOREVER (fino al riavvio di xinetd) o NEVER 
 disable = no
 }
 \end{itemize}
+\sub{NAT}
+Network Address Translation: servizio svolto da un router posto tra due reti differenti, normalmente una privata e una pubblica, che consiste nel modificare gli indirizzi IP contenuti negli header dei pacchetti che transitano al suo interno.\\
+ In particolare, ogni messaggio \vedi{TCP}/\vedi{IP} è caratterizzato da un \textbf{indirizzo sorgente} e un \textbf{indirizzo destinazione}, ognuno dei quali è composto da due parti:
+ \begin{itemize}
+ 	\item L'\vedi{Indirizzo IP} che identifica il nodo di rete;
+ 	\item Il port number che identifica, all’interno del particolare nodo di rete, quale programma riceve effettivamente il messaggio.
+ \end{itemize}
 
 \sub{Firewall} Sistema hardware e/o software che costituisce un intermediario tra la rete locale (o singolo host) ed una o più reti esterne (tipicamente internet), filtrando il traffico. Tipicamente, un firewall è un \vedi{DTE} con più schede di rete che costituisce l'unico punto di collegamento tra le reti coinvolte.\\
 Nella rete interna ci saranno i servizi di base (come \vedi{NFS}, \vedi{NIS}, LDAP etc.) rivolti agli utenti della sottorete interna; nella rete esterna i servizi di networking (ad esempio \vedi{DNS}, SMPT, \vedi{FTP} etc.), rivolti sia ad utenti interni che esterni e dunque esposti a rischi.\\
@@ -1604,7 +1609,9 @@ Le catene predefinite di suddetta tabella sono:
 \end{itemize}
 \code{PREROUTING} e \code{POSTROUTING} sono state introdotte per consentire di realizzare particolari comportamenti: ad esempio, se si vuole cambiare l’indirizzo di destinazione di un pacchetto sarà importante farlo prima che venga deciso da dove fare uscire il pacchetto (se così non fosse, il pacchetto uscirebbe dall’interfaccia sbagliata, mentre quando si cambia l'indirizzo del mittente di un pacchetto potrebbe essere importante farlo dopo che una decisione di routing è stata presa. I possibili target sono:
 \begin{itemize}
-\item \code{SNAT}, che consente di cambiare l’indirizzo ip sorgente di un pacchetto (\code{POSTROUTING}),
+\item \code{SNAT}, che consente di cambiare l’indirizzo ip sorgente di un pacchetto (\code{POSTROUTING}).
+Questa azione viene solitamente intrapresa per avere la possibilità di avere indirizzi privati già utilizzati da altre LAN senza creare conflitti o per nascondere la rete privata dall'esterno sotto un indirizzo pubblico (\vedi{IP 
+Masquerading)}.
 \item \code{DNAT}, che consente di cambiare l’indirizzo ip destinazione di un pacchetto (\code{PREROUTING}),
 \item \code{MASQUERADE}: tipo particolare di \code{SNAT}, che fa in modo che i pacchettini abbiano come mittente l’indirizzo IP della interfaccia di rete dalla quale usciranno (\code{POSTROUTING}),
 \item \code{REDIRECT}, versione semplificata del \code{DNAT} che consente di cambiare la porta di destinazione di un pacchetto (\code{PREROUTING});
@@ -1627,5 +1634,5 @@ Un firewall può essere configurato in diverse modalità:
 \item \textbf{Screened sub-net}: viene creata una \textit{rete intermedia} (\textbf{DMZ} - De-Militarized Zone) usando un firewall router esterno ed uno interno; i bastion host risiedono nella DMZ rimanendo isolati dalla rete interna, non rappresentando più un punto critico, come anche le workstation che forniscono i servizi più vulnerabili. Il firewall router esterno si limita ad un filtraggio di base in modo da garantire ampia fruibilità dei servizi, mentre quello interno opera un maggior controllo.
 \end{itemize}
 \subsub{Proxy}
-Con il termine \textit{proxy} si indica un server intermedio tra un host e un web server il quale funge da intermediario fra i due, disaccoppiando l'accesso ad internet dal browser. Non occorre forse ricordare che il termine \textit{server} non indica propriamente una macchina, ma un software che vi gira: un proxy è dunque un prodotto software, di cui è un noto esempio SQUID, distribuito sotto la GNU GPL\footnote{General Public License}. Più specificamente, un proxy mantiene una cache di pagine visitate di recente e la mette a disposizione dei vari client il cui browser è configurato per utilizzarla, in modo tale da limitare il consumo di banda (anche in maniera consistente, specialmente nei contesti, per esempio aziendali, in cui i diversi utenti, cui il proxy è totalmente trasparente, si servono spesso tutti quanti delle stesse pagine) e, soprattutto, poter filtrare le pagine accessibili in base al loro contenuto. I proxy sono dunque largamente impiegati come \vedi{Firewall} al \vedi{Livello delle applicazioni}, oltre a poter essere utilizzati in catena per garantire l'anonimato in internet (si pensi in particolare al progetto TOR).
+Con il termine \textit{proxy} si indica un server collocato tra un host e un web server il quale funge da intermediario fra i due, disaccoppiando l'accesso ad internet dal browser. Non occorre forse ricordare che il termine \textit{server} non indica propriamente una macchina, ma un software che vi gira: un proxy è dunque un prodotto software, di cui è un noto esempio SQUID, distribuito sotto la GNU GPL\footnote{General Public License}. Più specificamente, un proxy mantiene una cache di pagine visitate di recente e la mette a disposizione dei vari client il cui browser è configurato per utilizzarla, in modo tale da limitare il consumo di banda (anche in maniera consistente, specialmente nei contesti, per esempio aziendali, in cui i diversi utenti, cui il proxy è totalmente trasparente, si servono spesso tutti quanti delle stesse pagine) e, soprattutto, poter filtrare le pagine accessibili in base al loro contenuto. I proxy sono dunque largamente impiegati come \vedi{Firewall} al \vedi{Livello delle applicazioni}, oltre a poter essere utilizzati in catena per garantire l'anonimato in internet (si pensi in particolare al progetto TOR).
 \end{document}
