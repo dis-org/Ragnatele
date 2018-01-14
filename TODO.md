@@ -5,6 +5,7 @@
 + Quando hai finito rimuovi l'argomento dalla scaletta e dalla tabella.
 
 ### Cosa c'è da fare
++ Premessa
 + Introduzione
     + Tipi di connessione (point-to-point VS multipunto) (?)
 + Livello Fisico
@@ -12,6 +13,9 @@
     + Hub
   + Interfacce
     + RS422
+  + Protocolli
+    + PHD
+    + SHD
 + Livello di Collegamento
   + Encoding (introduzione)
   + Multiplazione
