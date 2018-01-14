@@ -10,6 +10,8 @@
 + Livello Fisico
   + Dispositivi
     + Hub
+  + Interfacce
+    + RS422
 + Livello di Collegamento
   + Encoding (introduzione)
   + Multiplazione
