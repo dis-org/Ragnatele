@@ -11,6 +11,7 @@
 + Livello Fisico
   + Dispositivi
     + Hub
+    + Repeater
   + Interfacce
     + RS422
   + Protocolli
