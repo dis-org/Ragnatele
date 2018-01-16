@@ -21,10 +21,10 @@
   + Multiplazione
   + Frame Relay
 + Livello delle Applicazioni
+  + inetd (Internet daemon)
   + Servizi di rete 
     + SNMP 
     + Posta elettronica #
-
 ### Cosa va rivisto
 + Livello di Collegamento
   + Ethernet (confronto con Gervasi)
