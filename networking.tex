@@ -45,7 +45,7 @@
 
 \section{Introduzione}
 La comunicazione, intesa come scambio di informazioni, può avvenire solo se l'emittente e il ricevente concordano sull'interpretazione del messaggio trasmesso. In altre parole, deve esistere una serie di regole comuni che permetta di risalire al significato del messaggio, in quanto la stessa informazione può e deve assumere forme diverse, anche a seconda del canale di comunicazione.
-In ambito di telecomunicazioni questo insieme di regole, definito formalmente, è detto \textbf{protocollo di comunicazione}. \\Se i partecipanti alla comunicazione sono molteplici, sarà necessario definire un sistema di comunicazione utilizzato da tutti, che indichi quali protocolli utilizzare in quali situazioni. \'E a questo che servono gli \textbf{standard}.
+Nell'ambito delle telecomunicazioni, questo insieme di regole definito formalmente è detto \textbf{protocollo di comunicazione}. \\Se i partecipanti sono molteplici, sarà necessario definire un sistema utilizzato da tutti, che indichi quali protocolli utilizzare in quali situazioni. \'E a questo che servono gli \textbf{standard}.
 
 \sub{Gli standard}
 Si distinguono standard \textit{de iure}, cioè codificati dalle \vedi{Organizzazioni} preposte, e standard \textit{de facto}, affermatisi spontaneamente per la loro adozione massiccia.
@@ -64,7 +64,7 @@ Una lista completa dei gruppi di lavoro e dei loro standard è reperibile sul si
 \subsub{RFC}
 Request For Comments: tipologia di documento pubblicato dalla \vedi{IETF}, riportante informazioni o specifiche riguardanti innovazioni nell'ambito di \vedi{Internet}. Fonte ufficale: \url{www.rfc-editor.org}. 
 \subsub{ASN.1} 
-Abstract Syntax Notation One (da non confondere con l'\vedi{ASN}). 
+Abstract Syntax Notation One (da non confondere con l'\vedi{ASN}): notazione internazionalmente standardizzata indipendente dall'implementazione, dalla piattaforma e dal linguaggio, volta a specificare strutture dati ad alto livello di astrazione.
 \sub{Organizzazioni}
 \subsub{IEEE}
 Institute of Electrical and Electronic Engineers, molto attivo nello sviluppo di standard di comunicazione dati. Al suo interno, riveste un ruolo di particolare importanza nel campo delle telecomunicazioni la \textbf{ComSoc} (Communications Society), e più in particolare il comitato \vedi{IEEE 802} \textit{LAN/MAN Standards Committee} (LMSC), commissione preposta a sviluppare standard per le reti locali e metropolitane. 
@@ -79,7 +79,7 @@ Internet Research Task Force: organizzazione che coordina i diversi gruppi di ri
 \newpage\subsub{W3C}
 World Wide Web Consortium: fondata da CERN e MIT, è un' organizzazione non governativa internazionale che ha come scopo quello di sviluppare tutte le potenzialità del \vedi{WWW}. La principale attività svolta dal W3C consiste nello stabilire standard tecnici  inerenti sia i linguaggi di marcatura che i protocolli di comunicazione.
 \subsub{IANA}
-Internet Assigned Numbers Authority: ente storico incaricato della gestione dello spazio di indirizzamento IP e dei nomi a dominio, degli \vedi{ASN} e dei numeri di protocollo IP. Nel tempo, IANA ha delegato la gestione locale ad una serie di entità regionali:
+Internet Assigned Numbers Authority: ente storico incaricato della gestione dello spazio di indirizzamento IP e dei nomi di dominio, degli \vedi{ASN} e dei numeri di protocollo IP. Nel tempo, IANA ha delegato la gestione locale ad una serie di entità regionali:
 \begin{itemize}
 \item \textbf{ARIN} per le Americhe;
 \item \textbf{RIPE NCC} per l'Europa;
@@ -101,7 +101,6 @@ La comunicazione tra due computer può apparire banale agli utenti, ma in realt�
 	\item I compiti e le richieste che devono essere compiuti e soddisfatti all’interno di un livello sono definiti chiaramente, cosicché per ogni livello possono essere sviluppati diversi standard, indipendenti gli uni dagli altri;
 	\item La chiara divisione tra i livelli fa sì che le modifiche ad uno standard non abbiano alcun effetto sui processi che si svolgono su un altro livello. Introdurre nuovi standard risulta così più semplice.
 \end{itemize}
-I sette livelli del modello ISO/OSI si dividono inoltre in due gruppi in base ai compiti che svolgono: orientati all’applicazione e orientati al trasporto.
 \image[osi-model.png][scale=0.2]{Modello di riferimento ISO/OSI}
 
 \sub{Internet}
@@ -121,7 +120,7 @@ Detto anche \italic{Stack TCP/IP}, è la famiglia di protocolli alla base del fu
 I protocolli sono divisi in quattro livelli, ripresi in parte dal \vedi{Modello di riferimento ISO/OSI}, questa suddivisione rappresenta lo standard \italic{de facto} per l'architettura di rete.
 \image[tcpipprotocols.png][scale=0.75]{Famiglia dei protocolli TCP/IP}
 \sub{Protocolli elementari}
-In questa sezione saranno introdotti alcuni semplici protocolli, suddivisi, a seconda della relazione tra i DTE coinvbolti, in:
+In questa sezione saranno introdotti alcuni semplici protocolli, suddivisi, a seconda della relazione tra i DTE coinvolti, in:
 \begin{itemize}
 \item protocolli in ambito \textbf{primario-secondario}: \vedi{RTS/CTS}, \vedi{XON-XOFF}, \vedi{ARQ};
 \item protocolli \textbf{peer-to-peer};
@@ -132,7 +131,7 @@ Il protocollo RTS/CTS (\textit{Request To Send/Clear To Send}, basato sull'inter
 \subsub{XON-XOFF}
 Nel caso del protocollo XON-XOFF, la stazione primaria invia dati ad un terminale (stazione secondaria), che li memorizza. Nel momento in cui il terminale si satura, esso invia il carattere ASCII (vedi \vedi{Codice}) XOFF, cui segue l'interruzione delle trasmissioni. Non appena è nuovamente in grado di ricevere, lo segnala tramite il carattere XON. 
 \subsub{ARQ}
-Il protocollo ARQ (\textit{Automatic Repeat reQuest} o \textit{Automatic Repeat Query}) è di tipo \vedi{Full-Duplex} e sfrutta il concetto di \textit{finestra scorrevole} per trasmettere in modo più efficiente: il messaggio è suddiviso in sequenze di frame, inviati a gruppi. ALla ricezione di un certo numero di frame, il mittente riceve un riscontro da parte del destinatario, il quale indica quali frame sia necessario ritrasmettere tramite una sequenza di \code{0} ed \code{1}. Per quel che riguarda la ritrasmissione, possono essere adottate due metodologie differenti:
+Il protocollo ARQ (\textit{Automatic Repeat reQuest} o \textit{Automatic Repeat Query}) è di tipo \vedi{Full-Duplex} e sfrutta il concetto di \textit{finestra scorrevole} per trasmettere in modo più efficiente: il messaggio è suddiviso in sequenze di frame, inviati a gruppi. Alla ricezione di un certo numero di frame, il mittente riceve un riscontro da parte del destinatario, il quale indica quali frame sia necessario ritrasmettere tramite una sequenza di \code{0} ed \code{1}. Per quel che riguarda la ritrasmissione, possono essere adottate due metodologie differenti:
 \begin{itemize}
 \item \textit{Go-back-n}: si ricomincia la trasmissione a partire dall'n-esimo frame, il primo danneggiato;
 \item approccio selettivo: vengono ritrasmessi i soli frame danneggiati.
@@ -178,21 +177,12 @@ Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa afferm
 
 \boximage[fourier.png][scale=0.6]{Esempio di funzione composta da tre sinusoidi semplici.}
 
-\subsub{Ampiezza di banda}
-L'ampiezza di banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
+\subsub{Banda}
+La banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
+\subsub{Multiplazione}
 
 \subsection{Qualità delle trasmissioni} \label{qualita}
-Vi sono numerosi strumenti software per valutare la qualità di una rete in base a prestazioni e affidabilità, quali:
-\begin{itemize}
-\item il comando Unix \code{ping}, che indica se un host remoto possa essere raggiunto inviando \textit{echo messages} del protocollo \vedi{ICMP} e riporta le statistiche relative alla trasmissione, in particolare:
-\begin{itemize}
-\item \textit{packet loss}: percentuale di pacchetti persi, se la connessione è buona dovrebbe sempre essere pari a 0;
-\item RTT (\textit{round trip time}): statistiche sul tempo di trasmissione;
-\end{itemize}
-\boximage[ping.png][scale=0.35]{Esempio di output del comando \code{ping}.}
-\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione;
-\item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
-\end{itemize}
+I criteri per valutare la bontà della rete sono molteplici, legati alle prestazioni e ad affidabilità e sicurezza.
 \subsub{Criteri di valutazione in base alle prestazioni}
 \para{Throughput}Quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete.
 \para{Latenza}Detta anche ritardo, è il tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
@@ -205,7 +195,34 @@ Vi sono numerosi strumenti software per valutare la qualità di una rete in base
 \subsubsection{Criteri di valutazione in base all'affidabilità}
 \para{Jitter}Variabilità del ritardo con cui i pacchetti vengono consegnati in ricezione.
 \para{Packet loss}Percentuale dei pacchetti non giunti a destinazione.
+\subsubsection{Velocità di trasferimento}
+Un parametro interessante in ambito di comunicazione dati è la velocità di trasferimento o \textit{bitrate}, espressa in $bit/sec$. Preliminarmente, occorre intendersi sul tipo di canale interessato, distinguendo:
+\begin{itemize}
+\item canali \textit{perfetti}, cioè senza alcun tipo di distorsione;
+\item canali \textit{ideali}, con solo un ritardo costante nella propagazione;
+\item canali \textit{reali}, con alterazioni in funzione della frequenza dei segnali che li attraversano.
+\end{itemize}
+La massima velocità di trasferimento, detta anche \textit{max data rate}, può essere calcolata sia in funzione del numero di livelli, sia in funzione del \vedi{Rumore}.
+\subsub{Condizione di Nyquist}
+Stabilisce che la massima velocità di trasferimento su un canale di banda $B$ con $m$ livelli è
+\[2B\log_{2}m\]
 
+\subsub{Teorema di Shannon-Hartley}
+Afferma che la massima velocità alla quale è possibile trasmettere senza errore è
+\[B\log_{2}(1+\textbf{SNR})\]
+dove $B$ è l'ampiezza di \vedi{Banda} e \textbf{SNR} è il rapporto segnale-\vedi{Rumore}.
+\subsubsection{Strumenti software}
+I criteri sopra descritti possono essere valutati con numerosi strumenti software, tra cui:
+\begin{itemize}
+\item il comando Unix-Linux \code{ping}, che indica se un host remoto possa essere raggiunto inviando \textit{echo messages} del protocollo \vedi{ICMP} e riporta le statistiche relative alla trasmissione, in particolare:
+\begin{itemize}
+\item \textit{packet loss}: percentuale di pacchetti persi, se la connessione è buona dovrebbe sempre essere pari a 0;
+\item RTT (\textit{round trip time}): statistiche sul tempo di trasmissione;
+\end{itemize}
+\boximage[ping.png][scale=0.35]{Esempio di output del comando \code{ping}.}
+\item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione;
+\item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
+\end{itemize}
 \sub{Filtri}
 Un filtro è un sistema che tratta le varie componenti del segnale in modo diverso a seconda della loro frequenza.
 \\È opportuna innanzitutto una distinzione tra filtri \textit{passivi} ed \textit{attivi}: i primi sono costituiti solamente da resistenze e condensatori, mentre i secondi includono altre componenti, come i transistor e gli amplificatori. Inoltre, a seconda del comportamento, si distinguono quattro tipi di filtri:
@@ -216,9 +233,17 @@ Un filtro è un sistema che tratta le varie componenti del segnale in modo diver
 \item \textbf{filtro elimina banda}: complemento del filtro passa banda, blocca le frequenze comprese tra le due frequenze di taglio.
 \end{itemize}
 
+\sub{Alterazioni del segnale}
+L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento del suddetto. %Claudio perdonami, non credo che nessuno vorrà mai fare riferimenti a queste parole
+\subsub{Attenuazione} Perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}} = 20\log_{10}\frac{V_{i}}{V_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale, mentre $V_{i}$ e $V_{f}$ sono rispettivamente il potenziale elettrico iniziale e finale; vi si pone rimedio tramite dispositivi come gli amplificatori;
+\subsub{Distorsione} Cambiamento di forma del segnale, si verifica quando esso è composto da varie frequenze e dipende dal ritardo all'arrivo delle singole componenti;
+\subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
+\subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interferenza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) avviene quando, in seguito alla traduzione, i simboli si sovrappongono sull'asse del tempo; chiaramente questo è legato ai limiti della banda.
+\boximage[isi.png][scale=0.5]{Interferenza intersimbolica}
+
 \sub{Modulazione}
 Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}, tipicamente analogico.
-\subsub{Ad onda continua}
+\subsub{Modulazione ad onda continua}
 Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie.
 \para{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante;
 \para{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rarefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
@@ -231,7 +256,7 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \para{PAM} (Pulse Amplitude Modulation), analoga alla AM;
 \para{PWM} (Pulse Width Modulation), dove la durata dell'impulso cambia in base all'ampiezza della modulante;
 \para{PPM} (Pulse Position Modulation), analoga alla PM;
-\para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
+\para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing) (vedi \vedi{Multiplazione}), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
 \\La PCM costa di tre fasi distinte:
 \begin{enumerate}
 \item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
@@ -244,12 +269,12 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
 
 \subsub{Modulazione digitale} 
-Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta, facendo corrispondere ad ogni sequenza di bit in input un'univoca forma d'onda analogica limitata nel tempo in uscita, detta \textit{simbolo}. \'E dunque più corretto parlare di \textit{codifica}, per quanto il termine più largamente impiegato sia quello di \textbf{modulazione per modem in banda base}. Esistono diverse varianti di questo tipo di modulazione: 
+Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta facendo corrispondere ad ogni sequenza di bit in input un forma d'onda analogica univoca e limitata nel tempo in uscita, detta \textit{simbolo}. \'E più corretto dunque parlare di \textit{codifica}, della quale esistono diverse varianti: 
 \begin{itemize} 
 \item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
-\item \textbf{FSK} (Frequency-Shift Keying): la frequenza portante istantanea viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
+\item \textbf{FSK} (Frequency-Shift Keying): la frequenza della portante viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
 \begin{itemize} 
-\item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{interferenza intersimbolica}); 
+\item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{\vedi{Interferenza} intersimbolica}); 
 \item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso; 
 \item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di passaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione.
 \end{itemize} 
@@ -268,36 +293,13 @@ La FSK è stata utilizzata nei primi modem V.21 e V.23 e la si impiega ancora og
 \boximage[trellis.png][scale=0.3]{Diagramma a traliccio}
 \end{itemize}
 \para{Diagramma a costellazione}
-Rappresentazione grafica teorica di un segnale modulato secondo uno degli schemi di modulazione digitale. Il segnale viene mostrato su un piano bidimensionale in cui I e Q sono gli assi cartesiani e i punti in cui un vettore può trovarsi vengono rappresentati con dei punti. Se c’è rumore, attorno al punto ideale si creano delle aree utili per capire di che tipo sia il rumore. 
+Rappresentazione grafica teorica di un segnale modulato secondo uno degli schemi di modulazione digitale. Il segnale viene mostrato su un piano bidimensionale in cui I e Q sono gli assi cartesiani e i punti in cui un vettore può trovarsi vengono rappresentati con dei punti. Se c’è del rumore, attorno al punto ideale si creano delle aree, utili per la comprensione delle cause del rumore stesso.
 \boximage[constellation.png][scale=0.3]{Diagramma a costellazione}
 \para{Vettore errore}
 Il vettore errore rappresenta la differenza tra il punto teorico in cui si sarebbe dovuto trovare il segnale nel \vedi{Diagramma a costellazione} e la sua posizione reale. Ciò che interessa maggiormente del vettore errore è il suo modulo, utile a valutare la qualità della modulazione, detto anche \textbf{EVM} (Error Vector Magnitude). Esso è espresso in percentuale o in $dB$, come rapporto tra il valore quadratico medio della potenza del vettore errore e il  \href{<https://it.wikipedia.org/wiki/Valore_efficace>}{valore quadratico medio}\footnote{Si noti che il concetto di valore quadratico medio non coincide con quello di scarto quadratico medio} della potenza del segnale di riferimento. In questo caso, l'EVM può avere -ed è auspicabile che abbia- valore negativo. %da riformulare
 Per la misurazione dell'EVM esistono strumenti hardware e software, tutti quanti basati sulla demodulazione del segnale ed il confronto con quello ideale.
-\sub{Alterazioni del segnale}
-L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento del suddetto. %Claudio perdonami, non credo che nessuno vorrà mai fare riferimenti a queste parole
-\subsub{Attenuazione} Perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}} = 20\log_{10}\frac{V_{i}}{V_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale, mentre $V_{i}$ e $V_{f}$ sono rispettivamente il potenziale elettrico iniziale e finale; vi si pone rimedio tramite dispositivi come gli amplificatori;
-\subsub{Distorsione} Cambiamento di forma del segnale, si verifica quando esso è composto da varie frequenze e dipende dal ritardo all'arrivo delle singole componenti;
-\subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
-\subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interferenza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) avviene quando, in seguito alla traduzione, i simboli si sovrappongono sull'asse del tempo; chiaramente questo è legato ai limiti della banda.
-\boximage[isi.png][scale=0.5]{Interferenza intersimbolica}
 
-\subsection{Velocità di trasferimento}
-Un parametro interessante in ambito di comunicazione dati è la velocità di trasferimento o \textit{bitrate}, espressa in $bit/sec$. Preliminarmente, occorre intendersi sul tipo di canale interessato, distinguendo:
-\begin{itemize}
-\item canali \textit{perfetti}, cioè senza alcun tipo di distorsione;
-\item canali \textit{ideali}, con solo un ritardo costante nella propagazione;
-\item canali \textit{reali}, con alterazioni in funzione della frequenza dei segnali che li attraversano.
-\end{itemize}
-La massima velocità di trasferimento, detta anche \textit{max data rate}, può essere calcolata sia in funzione del numero di livelli, sia in funzione del \vedi{Rumore}.
-\subsub{Condizione di Nyquist}
-Stabilisce che la massima velocità di trasferimento su un canale di banda $B$ con $m$ livelli è
-\[2B\log_{2}m\]
-
-\subsub{Teorema di Shannon-Hartley}
-Afferma che la massima velocità alla quale è possibile trasmettere senza errore è
-\[B\log_{2}(1+\textbf{SNR})\]
-dove $B$ è l'\vedi{Ampiezza di banda} e \textbf{SNR} è il rapporto segnale-\vedi{Rumore}.
-\subsection{Velocità di modulazione}
+\paragraph{Velocità di modulazione}
 La velocità di modulazione, espressa in $baud=\frac{simboli}{sec}$, indica il numero di simboli trasmessi nell'unità di tempo\footnote{Non si confonda il baud con i $bps=bit/sec$: un simbolo può essere composto da più bit.}. Più in particolare, in un sistema di comunicazione digitale, si parla di \textit{baud rate}.
 Velocità di trasferimento e di modulazione sono in relazione 
 \[v_{m}=\frac{v_{t}}{\log_{2}m}\]
@@ -654,9 +656,9 @@ Il resto della trasmissione viaggerà dunque sul percorso così creato ottenendo
 
 ATM utilizza un \textbf{PRM} (Protocol Reference Model) raccomandato da CCITT il quale prevede che il protocollo operi su 3 livelli:
 \begin{itemize}
-	\item \textbf{Physical Layer}: l'equivalente del \vedi{Livello Fisico} nella gerarchia ISO/OSI;
+	\item \textbf{Physical Layer}: l'equivalente del \vedi{Livello fisico} nella gerarchia ISO/OSI;
 	% si potrebbe approfondire aggiungendo dati riportati nelle slide, ma data la loro incomprensibilità e data la carenza di materiale attendibile e concordante online (dovuto alla poca diffusione di ATM), mi sono limitato a riportare solo questo.
-	\item \textbf{ATM Layer}: paragonabile ad una parte del \vedi{Livello di Collegamento} ISO/OSI, si occupa del routing;
+	\item \textbf{ATM Layer}: paragonabile ad una parte del \vedi{Livello di collegamento} ISO/OSI, si occupa del routing;
 	\item \textbf{AAL} (\vedi{ATM Adaptation Layer}): necessario alla connessione ed alla corretta comunicazione tra la rete ATM e reti non ATM. Qui si effettuano le operazioni di segmentazione/riassemblaggio dei dati.
 \end{itemize}
 
@@ -949,7 +951,7 @@ Il concetto di distanza tra due nodi di una rete, a seconda del contesto può es
 \item \textit{reliability} (affidabilità): poiché le condizioni della rete sono variabili, viene solitamente misurata ad intervalli regolari. Talvolta è tuttavia impostata ad un valore costante;
 \item \textit{load}: traffico, anch'esso misurato ad intervalli regolari;
 \item \textit{delay}: tempo necessario al router per trasmettere un datagram, misurato in $\mu s$;
-\item \textit{bandwidth} (\vedi{Ampiezza di banda});
+\item \textit{bandwidth} (ampiezza di \vedi{Banda});
 \item \textit{communication cost}: numero intero che indica arbitrariamente quanto un percorso sia conveniente. Valori più bassi indicano un percorso migliore. 
 \end{itemize}
 
@@ -1610,8 +1612,8 @@ Le catene predefinite di suddetta tabella sono:
 \code{PREROUTING} e \code{POSTROUTING} sono state introdotte per consentire di realizzare particolari comportamenti: ad esempio, se si vuole cambiare l’indirizzo di destinazione di un pacchetto sarà importante farlo prima che venga deciso da dove fare uscire il pacchetto (se così non fosse, il pacchetto uscirebbe dall’interfaccia sbagliata, mentre quando si cambia l'indirizzo del mittente di un pacchetto potrebbe essere importante farlo dopo che una decisione di routing è stata presa. I possibili target sono:
 \begin{itemize}
 \item \code{SNAT}, che consente di cambiare l’indirizzo ip sorgente di un pacchetto (\code{POSTROUTING}).
-Questa azione viene solitamente intrapresa per avere la possibilità di avere indirizzi privati già utilizzati da altre LAN senza creare conflitti o per nascondere la rete privata dall'esterno sotto un indirizzo pubblico (\vedi{IP 
-Masquerading)}.
+Questa azione viene solitamente intrapresa per avere la possibilità di avere indirizzi privati già utilizzati da altre LAN senza creare conflitti o per nascondere la rete privata dall'esterno sotto un indirizzo pubblico (IP 
+Masquerading).
 \item \code{DNAT}, che consente di cambiare l’indirizzo ip destinazione di un pacchetto (\code{PREROUTING}),
 \item \code{MASQUERADE}: tipo particolare di \code{SNAT}, che fa in modo che i pacchettini abbiano come mittente l’indirizzo IP della interfaccia di rete dalla quale usciranno (\code{POSTROUTING}),
 \item \code{REDIRECT}, versione semplificata del \code{DNAT} che consente di cambiare la porta di destinazione di un pacchetto (\code{PREROUTING});
