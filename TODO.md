@@ -49,7 +49,7 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Arianna Masciolini | harisont     | hub      | revisione | sicurezza di rete  |
+| Arianna Masciolini | harisont     | hub      | revisione | Introduzione       |
 | Claudio Pannacci   | Kappanneo    | backbone |           |                    |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   |           |                    |
