@@ -9,17 +9,15 @@
 + Introduzione
     + Tipi di connessione (point-to-point VS multipunto) (?)
 + Livello Fisico
-  + Dispositivi
-    + Hub
-    + Repeater
-  + Interfacce
-    + RS422
-  + Protocolli
-    + PHD
-    + SHD
+  + Multiplazione #
+  + Dispositivi #
+    + Hub #
+    + Repeater #
+  + Protocolli #
+    + PHD #
+    + SHD #
 + Livello di Collegamento
   + Encoding (introduzione)
-  + Multiplazione
   + Frame Relay
 + Livello delle Applicazioni
   + inetd (Internet daemon)
@@ -49,7 +47,7 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Arianna Masciolini | harisont     | hub      | revisione | Introduzione       |
+| Arianna Masciolini | harisont     | hub      | scrittura | Arg. mancanti lv. 1|
 | Claudio Pannacci   | Kappanneo    | backbone |           |                    |
 | Filippo Mariani    | FilMar       | stub     |           |                    |
 | Francesco Bultrini | frabulous    | ramoso   |           |                    |
