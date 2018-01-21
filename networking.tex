@@ -795,15 +795,6 @@ Nodo provvisto di procedure specifiche volte ad effettuare le scelte di \vedi{Ro
 \end{itemize}
 \subsub{Gateway} 
 \vedi{Router} che connette due reti o sottoreti di tipo diverso.
-\sub{Tipologie di comunicazione}
-\subsub{Connection-oriented} 
-Un servizio connection-oriented, di cui è un esempio la rete telefonica, richiede che venga creato un canale di comunicazione -sia esso logico o fisico- prima dell'invio dei dati. Questo metodo è considerato "affidabile", poiché è garantito che i dati arriveranno nell'ordine in cui sono stati inviati. In termini più tecnici, le principali caratteristiche di un servizio connection-oriented sono:
-\begin{itemize}
-\item \textbf{orientamento dello stream}: l'ordine di invio dei byte viene mantenuto;
-\item \textbf{connessione di circuito virtuale}: la trasmissione ha luogo solo quando emittente e destinatario hanno verificato la sussistenza delle condizioni necessarie.
-\end{itemize}
-\subsub{Connectionless}
-In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul destinatario ed è instradato secondo queste ultime, indipendentemente dagli altri. L'ordine di arrivo dei pacchetti è arbitrario.
 
 \newpage
 \sub{Tipologie di rete cablata}
@@ -845,34 +836,41 @@ L'header del datagram IPv4 contiene i seguenti campi:
 \item \textbf{TOS} (Type Of Service) o Differentiated services: indicazioni sulla corretta gestione del datagram, volte a trattare in modo differente i diversi servizi, quasi del tutto inutilizzate;
 \item \textbf{Total lenght}: lunghezza totale del datagram;
 \item campi che controllano la frammentazione e il riassemblaggio dei datagram:
+\boximage[ip-header.png][scale=0.40]{Formato header IPv4}
 \begin{itemize}
 \item \textbf{Identification}: indicazione del pacchetto cui appartiene il datagram,
 \item \textbf{IP flags},
 \item \textbf{Offset del frammento}.
 \end{itemize}
-\item \textbf{TTL} (Time To Leave): duarata per cui il datagram permane in transito, espressa in secondi;
+\item \textbf{TTL} (Time To Leave): durata per cui il datagram permane in transito, espressa in secondi. Evita che pacchetti inutili rimangano in rete a tempo indeterminato;
 \item \textbf{Protocol}: indicazione di quale protocollo di più alto livello ha generato il blocco dei dati;
 \item \textbf{Header checksum}: sequenza di bit che utilizzata per verificare l'integrità dei dati contenuti nell'header;
 \item \textbf{Source address}: \vedi{Indirizzo IP} di provenienza;
 \item \textbf{Destination address}: \vedi{Indirizzo IP} di destinazione;
 \item \textbf{Opzioni} (campo opzionale, utilizzato per test e debugging).
 \end{itemize} 
-\boximage[ip-header.png][scale=0.45]{Formato header IPv4}
 
 \subsub{Indirizzo IP} Ogni dispositivo connesso ad una rete IP è identificato da un indirizzo IP, univoco in quella rete. Più propriamente l'indirizzo IP viene associato alle interfacce del dispositivo. Un dispositivo con più schede di rete -per esempio un router- può connettersi direttamente a più reti e per ognuna avrà un indirizzo IP.
 
 \paragraph{Indirizzo IPv4}
 Composto da 4 byte, è in forma $x.y.z.q$ e suddiviso in due parti, \textit{rete} ed \textit{host}. Gli indirizzi IP si suddividono in classi a seconda del numero di byte dedicato alla rete:
 \boximage[ipaddress.png][scale=0.8]{Suddivisione in classi degli indirizzi IPv4}
+\begin{itemize}
+\item classe A: la parte rete ha valore $<128$;
+\item classe B: la parte rete ha valori compresi tra $128$ e $191$;
+\item classe C: la parte rete ha valori compresi tra $191$ e $223$;
+\item classe D: la parte rete ha valori compresi tra $224$ e $239$ e viene utilizzata per l'\vedi{IP multicasting};
+\item classe E: la parte rete ha valore $>239$. Gli indirizzi di questa classe sono riservati.
+\end{itemize}
 
-\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ \ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$.
+\para{Netmask} Quando si fa riferimento ad una rete è necessario associare all'indirizzo IP una maschera di rete. La maschera indica il numero esatto di bit riservati alla rete. Quando la netmask differisce da quella predefinita per la classe dell'indirizzo, si stanno creando sottoreti (\italic{subnetting}) o, viceversa, si sta incrementando il numero di possibili host a scapito del numero di possibili reti (\italic{supernetting}). Oltre che, appunto, come numero decimale, si suole rappresentare la netmask come un indirizzo IP in cui tutti e soli i bit riservati alla rete hanno valore 1. \\\\Esempio:\\ $110.127.234.18$ \ è un indirizzo di classe A, la sua rete di default si può indicare come $110.0.0.0/8$ e la sua netmask espressa come indirizzo è $255.0.0.0$. Se la netmask fosse invece $110.0.0.0/10$ si starebbe facendo subnetting.
 
 \ \\Nell'ambito degli indirizzi IPv4 sussistono alcune convenzioni:
 \begin{itemize}
-\item se la parte host di un indirizzo è 0, si sta indicando non un host in particolare, bensì la rete stessa
-\item se la parte host di un indirizzo ha valore 1 su tutti i bit, si sta specificando un \textit{indirizzo broadcast}, utilizzato per inviare pacchetti a tutti gli host della rete
-\item l'indirizzo $0.0.0.0$ indica la \textit{default route}, indicante il gateway di default al fine di instradare pacchetti la cui destinazione non è nella tabella di routing. Si tratta di una scelta poco felice, poiché costituisce uno spreco di spazio d'indirizzamento di classe A
-\item l'indirizzo $127.0.0.1$ è il cosiddetto \textit{loopback address} (\code{localhost}), associato all'\vedi{Interfaccia di rete} virtuale di loopback
+\item se la parte host di un indirizzo è 0, si sta indicando non un host in particolare, bensì la rete stessa;
+\item se la parte host di un indirizzo ha valore 1 su tutti i bit, si sta specificando un \textit{indirizzo broadcast}, utilizzato per inviare pacchetti a tutti gli host della rete;
+\item l'indirizzo $0.0.0.0$ specifica la \textit{default route}, indicante il gateway di default al fine di instradare pacchetti la cui destinazione non è nella tabella di routing. Si tratta di una scelta poco felice, poiché costituisce uno spreco di spazio d'indirizzamento di classe A;
+\item l'indirizzo $127.0.0.1$ è il cosiddetto \textit{loopback address} (\code{localhost}), associato all'\vedi{Interfaccia di rete} virtuale di loopback;
 \item gli indirizzi di rete $10.0.0.0/8$, $172.16.0.0/12$, $192.168.0.0/16$ e\\ $169.254.0.0/16$ sono riservati, ossia identificano reti private gestite dai server \vedi{NAT}.
 \end{itemize}
 
@@ -890,7 +888,7 @@ Quando un'interfaccia virtuale di rete viene configurata ad essa viene assegnato
 Più di recente, \code{ifconfig}, \code{route} (vedi \vedi{Routing}) ed \code{arp} sono stati rimpiazzati dal comando \code{ip}, preinstallato su gran parte delle distribuzioni arch-based. Per i dettagli su tale comando, si visiti \href{<https://www.tecmint.com/ifconfig-vs-ip-command-comparing-network-configuration/>}{questa pagina}.
 \sub{IP multicasting} 
 Si parla di IP multicasting quando un datagram è trasmesso ad un gruppo di host identificato da un unico \vedi{Indirizzo IP}. Gli appartenenti al gruppo possono cambiare dinamicamente -un gruppo può essere dunque permanente o transitorio- e si può definire una chiave di accesso che renda selettivo l'ingresso. La gestione delle informazioni relative alla composizione dei gruppi e l'invio in internet dei datagram sono responsabilità dei \textit{multicast agents}, che girano sui router o su host particolari.
-\subsub{IGMP} 
+\para{IGMP} 
 Le funzioni di \vedi{IP multicasting} sono supportate dal protocollo IGMP (Internet Group Management Protocol), definito negli \vedi{RFC} 1112, 1122, 1812, 2236, 2715, 2933 e 3228.
 
 \subsection{Protocolli di address resolution} 
@@ -915,7 +913,7 @@ Il routing consiste nella scelta del cammino migliore da percorrere per trasmett
 \item \textbf{Routing Minimale}: la tabella di routing viene definita al momento della configurazione dell'\vedi{Interfaccia di rete};
 \item \textbf{Routing Statico}: utilizzato quasi solamente per gli host, prevede la definizione manuale delle varie \italic{route}. In Unix-Linux le route possono essere aggiunte usando il comando \\\\
 \code{\$ route add -net <indirizzo di rete> netmask <netmask\\ x.y.z.q> gw <indirizzo gateway> }\\\\
-I comandi possono essere salvati in un file di configurazione eseguito all'avvio della macchina (In Unix-Linux \code{/etc/init.d/rc.local}); 
+Per rendere permanenti le modifiche, i comandi \code{route} devono essere salvati in un file di configurazione eseguito all'avvio della macchina (in sistemi Unix-Linux, il path di tale file è \code{/etc/init.d/rc.local}); 
 \item \textbf{Routing Dinamico}: utilizzato nei router, sfrutta i diversi \vedi{Protocolli di routing}.
 \end{itemize}
 \ \\
@@ -941,11 +939,12 @@ Il significato delle \italic{flag} è il seguente:
 \begin{itemize}
 \item U (Up) indica che l'\vedi{Interfaccia di rete} è attiva;
 \item G indica un'uscita verso un'altra rete tramite \vedi{Gateway};
-\item H indica che la destinazione è l'indirizzo completo di un host.
+\item H indica che la destinazione è l'indirizzo completo di un host;
+\item D indica una route aggiunta da un \vedi{ICMP} redirect.
 \end{itemize} 
 
 \subsub{Metric}
-Il concetto di distanza tra due nodi di una rete, a seconda del contesto può essere dato da:
+Il concetto di distanza tra due nodi di una rete, a seconda del contesto e del protocollo, può essere dato da:
 \begin{itemize}
 \item \textit{path length} (o \textit{hop-count}): numero di nodi da attraversare;
 \item \textit{reliability} (affidabilità): poiché le condizioni della rete sono variabili, viene solitamente misurata ad intervalli regolari. Talvolta è tuttavia impostata ad un valore costante;
@@ -965,7 +964,7 @@ Exterior Gateway Protocol: famiglia di protocolli per il routing tra più divers
 Classless Inter-Domain Routing: include \vedi{OSPF}, \vedi{BGP} e IS-IS.
 
 \subsub{Distance-vector}
-Un algoritmo del tipo distance-vector prevede che ogni router mantenga la propria \vedi{Tabella di routing} aggiornata effettuando scambi regolari con gli altri router raggiungibili. Questi aggiornamenti sono in forma di coppie del tipo (rete di destinazione, distanza).
+Un algoritmo del tipo distance-vector prevede che ogni router mantenga la propria \vedi{Tabella di routing} aggiornata effettuando scambi regolari con tutti gli altri router raggiungibili. Questi aggiornamenti sono in forma di coppie del tipo (rete di destinazione, distanza).
 \\La distanza può essere misurata in \italic{hops} o in base al tempo di propagazione (vedi \vedi{Criteri di valutazione in base alle prestazioni}).
 \\Il \vedi{RIP} è basato su un algoritmo di questo tipo.
 
@@ -1105,7 +1104,7 @@ Una tipologia particolare di \textit{inter-domain routing} è il \textit{pass-th
 \paragraph{iBGP} \label{iBGP}
 Come accennato, iBGP sta per "internal BGP" ed è coinvolto nell'\textit{intra-domain routing}. La sua funzione è quella di stabilire quale sia il router ottimale come punto di connessione con gli \vedi{AS} esterni.
 \sub{ICMP} %da spostare prima? Boh. Bah.
-Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per riportare eventuali malfunzionamenti nel routing e per verificare lo stato della rete. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono illustrati in figura.\\
+Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC} 792, 1256, 1788, 2463 e 2521, è progettato per verificare lo stato della rete e riportare eventuali malfunzionamenti nel routing. Esso comporta che i router inviino messaggi ICMP ai mittenti dei datagram che presentano problemi. I possibili tipi di messaggio sono illustrati in figura.\\
 \boximage[icmp_msg.jpg][scale=0.4]{Tipi di messaggi ICMP} 
 \ \\In particolare, il messaggio \textbf{redirection} indica la necessità di reinstradare i pacchetti in modo migliore, segnala cioè che un router è stato attraversato inutilmente, ossia ha dovuto ritrasmettere il messaggio sulla rete di provenienza dello stesso. Alla ricezione di un messaggio di questo tipo, l'host ricevente associa a quella destinazione un router diverso da quello di default. I messaggi \textbf{address mask request/reply} consentono invece ad un'interfaccia di scoprire la netmask utilizzata in una rete. %necessita revisione 
 \\I comandi \code{ping} e \code{traceroute} (vedi \vedi{qualita}) sfruttano il protocollo ICMP.
@@ -1114,20 +1113,28 @@ Il protocollo ICMP (Internet Control Message Protocol) definito negli \vedi{RFC}
 \sec{Livello di trasporto}
 \subsection{Terminologia}
 \subsub{Porta} 
-Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che viene indirizzato dagli host internet per implementare i diversi \vedi{Servizi di rete}. Consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati al processo che li attende. \'E il sistema operativo dell'host che si fa carico di formire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo della destinazione (IP e portnumber, assieme, sono detti \textit{socket}) al suo interno. Le porte $0-1023$ sono quelle raccomandate per i protocolli \vedi{TCP} e \vedi{UDP}.
+Identificata da un numero intero detto \textit{portnumber}, rappresenta un punto di destinazione astratto che consente ad un host di effettuare più connessioni contemporanee verso altri, facendo in modo che i dati contenuti nei pacchetti in arrivo vengano indirizzati specificamente al processo applicativo che li attende. \'E il sistema operativo dell'host che si fa carico di fornire i meccanismi di interfaccia che i processi utilizzeranno per specificare una porta o per accedervi. L'accesso ad una porta dall'esterno richiede la conoscenza dell'IP dell'host e del portnumber del protocollo utilizzato dal processo destinatario (IP e portnumber, assieme, sono detti \textit{socket}). Le porte $0-1023$ sono quelle raccomandate per i protocolli \vedi{TCP} e \vedi{UDP}.
+\subsub{Connectionless}
+In un servizio connectionless, ogni pacchetto contiene tutte le informazioni sul destinatario ed è instradato secondo queste ultime, indipendentemente dagli altri. L'ordine di arrivo dei pacchetti è arbitrario.
+\subsub{Connection-oriented} 
+Un servizio connection-oriented, di cui è un esempio la rete telefonica, richiede che venga creato un canale di comunicazione -sia esso logico o fisico- prima dell'invio dei dati. Questo metodo è considerato "affidabile", poiché è garantito che i dati arriveranno nell'ordine in cui sono stati inviati. In termini più tecnici, le principali caratteristiche di un servizio connection-oriented sono:
+\begin{itemize}
+\item \textbf{orientamento dello stream}: l'ordine di invio dei byte viene mantenuto;
+\item \textbf{connessione di circuito virtuale}: la trasmissione ha luogo solo quando emittente e destinatario hanno verificato la sussistenza delle condizioni necessarie.
+\end{itemize}
 
-\subsection{Protocolli di trasporto} 
+\sub{Protocolli di trasporto} 
 \subsub{UDP} 
-L'UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, poco affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle porte.
+L'UDP (User Datagram Protocol) è un protocollo di tipo \vedi{Connectionless}. Pur essendo, di conseguenza, poco affidabile, esso è vantaggioso per applicazioni \textit{time-sensitive} perché molto veloce, ed è spesso impiegato, ad esempio, per la trasmissione di informazioni audio-video in tempo reale, come nel caso delle trasmissioni VOIP (Voice Over IP). L'UDP fornisce soltanto i servizi basilari del livello di trasporto, ovvero la verifica dell'integrità dei dati mediante una checksum, inserita nell'header del pacchetto e la multiplazione delle connessioni, ottenuta attraverso il meccanismo di assegnazione delle porte. Un programma applicativo che utilizzi l'UDP si assume dunque la responsabilità di fornire soluzioni per quel che riguarda l'affidabilità.
 
 \subsub{TCP}
-A differenza dell'\vedi{UDP}, il TCP (Transmission Control Protocol) è un protocollo \vedi{Connection-oriented}. La prima definizione del TCP si trova nell'\vedi{RFC} 793, ma le molteplici modifiche che essa ha subito, formalizzate in altrettanti \vedi{RFC}, hanno portato alla necessità di pubblicare un ennesimo \vedi{RFC}, il 4614: una sorta di guida ai documenti sul TCP. Affidabile e di applicabilità generale, è progettato per adattarsi dinamicamente alle peculiarità delle diverse reti che compongono \vedi{Internet}, contribuendo ad isolare le applicazioni dai dettagli di networking. Più specificamente, oltre a quelle di qualsiasi protocollo \vedi{Connection-oriented}, le principali caratteristiche del TCP sono:%
+A differenza dell'\vedi{UDP}, il TCP (Transmission Control Protocol) è un protocollo \vedi{Connection-oriented}. La prima definizione del TCP si trova nell'\vedi{RFC} 793, ma le molteplici modifiche che essa ha subito, formalizzate in altrettanti \vedi{RFC}, hanno portato alla necessità di pubblicare un ennesimo \vedi{RFC}, il 4614: una sorta di guida ai documenti sul TCP. Affidabile e di applicabilità generale, è progettato per adattarsi dinamicamente alle peculiarità delle diverse reti che compongono \vedi{Internet}, contribuendo ad isolare le applicazioni dai dettagli di networking. Più specificamente, oltre a quelle di qualsiasi protocollo \vedi{Connection-oriented}, le principali caratteristiche del TCP sono:
 \begin{itemize}
 \item \textbf{trasferimento bufferizzato}: il trasferimento viene ottimizzato creando pacchetti di dimensione il più possibile simile;
 \item  \textbf{stream non strutturato}: la comprensione della forma dei dati trasmessi sta all'applicazione che utilizza il protocollo in oggetto;
 \item \textbf{connessione \vedi{Full-Duplex}};
-\item affidabilità garantita mediante \textbf{riscontro positivo con ritrasmissione} (\textit{acknowledgement}): alla ricezione di un pacchetto, il destinatario risponde con un "ACK", ossia una conferma di ricezione. Il mittente dovrà poi ritrasmettere i pacchetti persi o, eventualmente, chiudere la connessione.
-
+\item affidabilità garantita mediante \textbf{riscontro positivo con ritrasmissione} (\textit{acknowledgement}): alla ricezione di un pacchetto, il destinatario risponde con un "ACK", ossia una conferma di ricezione. Il mittente dovrà poi ritrasmettere i pacchetti persi o, eventualmente, chiudere la connessione;
+\item trasmissione ottimizzata tramite la tecnica della \textit{finestra scorrevole} (vedi \vedi{ARQ}).
 \end{itemize}
 \newpage
 
@@ -1136,7 +1143,7 @@ Il quinto livello del \vedi{Modello di riferimento ISO/OSI} racchiude tutte le a
 Qui \'e dove la differenza fra protocollo e servizio si fa sempre pi\'u labile: molto spesso, la stessa parola (ad es. Telnet) indica sia il protocollo, che la sua implementazione la quale, la maggior parte delle volte, \'e un comando Linux. 
 
 \subsection{Terminologia} 
-\subsub{URI} Uniform Risource Identifier: sequenza di caratteri che identifica univocamente una risorsa. Esistonon due tipi di URI:
+\subsub{URI} Uniform Risource Identifier: sequenza di caratteri che identifica univocamente una risorsa. Esistono due tipi di URI:
 \begin{itemize}
 \item L'\textbf{URL} (Uniform Resource Locator) che fornisce anche i mezzi per agire sulla risorsa, descrivendo il suo meccanismo di accesso o la sua ubicazione in una rete. Il suo formato è il seguente:\\\ \\ \code{protocollo:[//[username[:password]@]host[:porta]]\\ \ [/path][?query][\#fragment]}
 \\\ \\
@@ -1573,13 +1580,6 @@ deny\_time = 20 \#può anche valere FOREVER (fino al riavvio di xinetd) o NEVER 
 disable = no
 }
 \end{itemize}
-\sub{NAT}
-Network Address Translation: servizio svolto da un router posto tra due reti differenti, normalmente una privata e una pubblica, che consiste nel modificare gli indirizzi IP contenuti negli header dei pacchetti che transitano al suo interno.\\
- In particolare, ogni messaggio \vedi{TCP}/\vedi{IP} è caratterizzato da un \textbf{indirizzo sorgente} e un \textbf{indirizzo destinazione}, ognuno dei quali è composto da due parti:
- \begin{itemize}
- 	\item L'\vedi{Indirizzo IP} che identifica il nodo di rete;
- 	\item Il port number che identifica, all’interno del particolare nodo di rete, quale programma riceve effettivamente il messaggio.
- \end{itemize}
 
 \sub{Firewall} Sistema hardware e/o software che costituisce un intermediario tra la rete locale (o singolo host) ed una o più reti esterne (tipicamente internet), filtrando il traffico. Tipicamente, un firewall è un \vedi{DTE} con più schede di rete che costituisce l'unico punto di collegamento tra le reti coinvolte.\\
 Nella rete interna ci saranno i servizi di base (come \vedi{NFS}, \vedi{NIS}, LDAP etc.) rivolti agli utenti della sottorete interna; nella rete esterna i servizi di networking (ad esempio \vedi{DNS}, SMPT, \vedi{FTP} etc.), rivolti sia ad utenti interni che esterni e dunque esposti a rischi.\\
@@ -1603,7 +1603,7 @@ Le catene predefinite di suddetta tabella sono:
 \item \code{OUTPUT}: vi passano i pacchetti originati dal firewall stesso, diretti altrove,
 \item \code{FORWARD}: vi passano i pacchetti che transitano nel firewall pur provenendo da altri host, diretti altrove;
 \end{itemize}
-\item \textbf{nat}: regola le attività di natting (vedi \vedi{NAT}). Le catene predefinite di suddetta tabella sono:
+\item \textbf{nat}: regola le attività di natting, ossia di modifica degli indirizzi IP volta nell'ambito dell'\vedi{Oscuramento}. Le catene predefinite di suddetta tabella sono: \label{NAT}
 \begin{itemize}
 \item \code{PREROUTING}: vi passano i pacchetti su cui non sono ancora state fatte scelte di routing,
 \item \code{POSTROUTING}: vi passano i pacchetti su cui sono già state fatte scelte di routing,
