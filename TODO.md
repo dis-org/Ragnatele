@@ -48,8 +48,9 @@
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
 | Arianna Masciolini | harisont     | hub      | scrittura | Arg. mancanti lv. 1|
+|                    |              |          | revisione | IP                 |
 | Claudio Pannacci   | Kappanneo    | backbone |           |                    |
-| Filippo Mariani    | FilMar       | stub     |           |                    |
+| Filippo Mariani    | FilMar       | stub     | revisione | IP                 |
 | Francesco Bultrini | frabulous    | ramoso   |           |                    |
 | Gioara Cuccu       | Gio93k       | border   |           |                    |
 | Giorgio Mazza      | Shizen39     | metric   |           |                    |
