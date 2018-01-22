@@ -318,7 +318,7 @@ Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzional
 Ognuno dei modem suddetti può essere inoltre \textbf{interno} o \textbf{esterno} al \vedi{DTE}. Tra i modem \textbf{esterni}, in base al tipo di collegamento al DTE, si distinguono:
 \begin{itemize}
 \item \textbf{Modem seriali}, collegati con cavo seriale tramite interfaccia \vedi{RS-232} o \vedi{USB};
-\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfaccie parallele}).
+\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfacce parallele}).
 \end{itemize}
 Tra i modem \textbf{interni} si distinguono invece:
 \begin{itemize}
@@ -341,17 +341,18 @@ Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \
 \item PCM upstream, che permette di effettuare trasmissioni digitali a più alta velocità (fino a $48 kbit/s$) sulle linee telefoniche analogiche.
 \end{itemize}
 \end{itemize}
-\sub{Protocolli di primo livello}
-\subsub{DSL}
-Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su \vedi{Doppino telefonico}, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa, l'\textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
-Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza vengono tripartite, consentendo di utilizzare  allo stesso tempo un'unica linea telefonica sia per il servizio ADSL che per le chiamate telefoniche. L'ADSL è generalmente installata solo per brevi distanze dalla centrale telefonica (l'ultimo miglio), o comunque meno di 4 km.
-\boximage[adsl_band.jpg][scale=0.4]{Tripartizione della banda tramite splitter}
-Le velocità teoriche ottenibili sono dell'ordine degli 8Mbit/s per quel che riguarda il downstream e 800kbit/s per quanto riguarda l'upstream, ma lo stato delle linee e della bassa qualità del doppino le porta a circa 1,5Mbit/s in download e 256kbit/s in upload.
-Nonostante il fatto che le linee guida siano dettate dallo standard ANSI T1.423 Issue 1, categorie 1 e 2, questa tecnologia non é ancora totalmente standardizzata: ogni produttore di modem per ADSL propone la propria variante.
+
+\subsection{Altri dispositivi}
+\subsub{Ripetitore}
+Dispositivo di rete che si limita a ripetere i pacchetti che gli arrivano.
+Si utilizza quando esiste una limitazione fisica alla lunghezza della \vedi{LAN}: le reti collegate possono in tal caso essere viste, da un punto di vista logico, come una rete unica.
+\subsub{Hub} 
+Uno hub è un dispositivo di rete che funge da nodo di smistamento dati di una una \vedi{Rete a dorsale} o in una \vedi{Rete a stella}. Poiché non è in grado di reinviare i pacchetti se non in broadcast, è attualmente impiegato in misura molto minore rispetto allo \vedi{Switch}.
+
 \sub{Interfacce hardware} 
 Dal punto di vista fisico, un'interfaccia o porta è caratterizzata da un canale di trasmissione, identificato da un mezzo trasmissivo (ad esempio un cavo), due connettori e due porte o \textit{slot} poste agli estremi della trasmissione; dal punto di vista logico, da una modalità di trasmissione (seriale o parallela). 
-\subsub{Interfaccie parallele}
-Le interfaccie parallele trasmettono segnali da più pin in contemporanea.
+\subsub{Interfacce parallele}
+Le interfacce parallele trasmettono segnali da più pin in contemporanea.
 \para{Interfaccia Centronics}
 Ormai obsoleta, sostituita in gran parte dei casi dall'interfaccia \vedi{USB}, originariamente monodirezionale, è stata impiegata soprattutto per collegare i \vedi{DTE} alle stampanti, ma più di recente ne è stato sviluppato uno standard bidirezionale che permette anche il collegamento di dispositivi di input.
 Tale interfaccia consente di trasferire 8 bit in parallelo nello standard \textbf{TTL}\footnote{Transistor-Transistor Logic: prima tecnologia di circuiti integrati diffusa su scala globale}.
@@ -365,12 +366,12 @@ Sul DTE si trovavano tipicamente da una a tre porte parallele, dette \textbf{LPT
 \end{itemize}
 
 \subsub{Interfacce seriali}
-le interfaccie seriali trasmettono da un solo pin alla volta.
+le interfacce seriali trasmettono da un solo pin alla volta.
 \para{RS-232}
 L'RS-232 è uno standard che permette la realizzazione di una trasmissione seriale tra un \vedi{DTE} e un \vedi{DCE}, in modalità sia sincrona che asincrona. Dal momento che il numero di linee effettivamente utilizzate varia sensibilmente a seconda del tipo di collegamento e dei modem eventualmente impiegati, per questa interfaccia esistono due diversi tipi di connettore: quello a 25 pin e quello ridotto, a 9 pin, sufficiente per molte applicazioni.
 \boximage[rs232.jpg][scale=0.5]{Uso di ogni linea nei due tipi di connettore RS-232}
 \para{USB}
-Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l'USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare \italic{collegamenti a caldo}, senza necessità di spegnere le macchine, le quali  riconoscono automaticamente le periferiche (interfaccie \textit{plug-and-play}).
+Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l'USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare \italic{collegamenti a caldo}, senza necessità di spegnere le macchine, le quali  riconoscono automaticamente le periferiche (interfacce \textit{plug-and-play}).
 I connettori USB sono molteplici (tipi A, B e C con rispettive varianti miniaturizzate), ma tutti con quattro poli ed uguali funzionalità.
 Un'estensione dell'USB, chiamata USB-OTG (On-The-Go), consente a una singola porta di fungere sia da dispositivo sia da controllore, semplificando le connessioni USB dei piccoli dispositivi.
 Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferiche collegate ad albero, attraverso  \vedi{Hub}. Supporta fino a un massimo di 127 periferiche per gestore, ma nel computo vanno inclusi anche gli hub e il gestore stesso. Attualmente, la massima velocità di trasmissione reale raggiunta è 7,2 Gbps (versione USB 3.1).
@@ -407,9 +408,14 @@ Elementi principali di una rete FTTx sono:
 \paragraph{Reti AON} Le reti AON (Active Optical Network) sono strutture P2P (point-to-point), nel senso che ogni utente ha il proprio tratto di fibra, che giunge direttamente al proprio ONT. Nelle AON si utilizzano componenti attivi, come amplificatori, ripetitori, router o switch. La loro topologia è solitamente a stella (vedi \vedi{Rete a stella}). Garantisce, a costi elevati, la massima velocità di trasmissione.
 \paragraph{Reti PON} Le reti PON (Passive Optical Network)
 utilizzano solo componenti passivi e sono caratterizzate da una topologia ad albero (vedi \vedi{Rete ad albero}). In esse, tratti di fibra vengono condivisi tra più utenti, e solo alla fine uno splitter ottico suddivide il segnale in più segnali uguali ma di potenza minore in modo da distribuirlo.
+\sub{Protocolli di primo livello}
+\subsub{DSL}
+Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su \vedi{Doppino telefonico}, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa, l'\textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
+Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza vengono tripartite, consentendo di utilizzare  allo stesso tempo un'unica linea telefonica sia per il servizio ADSL che per le chiamate telefoniche. L'ADSL è generalmente installata solo per brevi distanze dalla centrale telefonica (l'ultimo miglio), o comunque meno di 4 km.
+\boximage[adsl_band.jpg][scale=0.4]{Tripartizione della banda tramite splitter}
+Le velocità teoriche ottenibili sono dell'ordine degli 8Mbit/s per quel che riguarda il downstream e 800kbit/s per quanto riguarda l'upstream, ma lo stato delle linee e della bassa qualità del doppino le porta a circa 1,5Mbit/s in download e 256kbit/s in upload.
+Nonostante il fatto che le linee guida siano dettate dallo standard ANSI T1.423 Issue 1, categorie 1 e 2, questa tecnologia non é ancora totalmente standardizzata: ogni produttore di modem per ADSL propone la propria variante.
 
-\subsection{Dispositivi}
-\subsub {Hub}
 
 \newpage\sec{Livello di collegamento}
 In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
