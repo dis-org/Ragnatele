@@ -179,7 +179,6 @@ Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa afferm
 
 \subsub{Banda}
 La banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
-\subsub{Multiplazione}
 
 \subsection{Qualità delle trasmissioni} \label{qualita}
 I criteri per valutare la bontà della rete sono molteplici, legati alle prestazioni e ad affidabilità e sicurezza.
@@ -253,8 +252,8 @@ Wavelength Division Multiplexing: utilizzata per i segnali ottici (vedi \vedi{Fi
 Time Division Multiplexing: nella TDM, i dispositivi ottengono a turno, per un brevissimo lasso di tempo, l'uso esclusivo del canale di comunicazioni e delle risorse ad esso dedicate, ad esempio la banda.
 La TDM si suddivide in:
 \begin{itemize}
-\item sincrona: gli intervalli di tempo sono indipendenti dalla presenza di dati da spedire;
-\item statistica: gli intervalli vengono allocati solo quando ci sono dati da inviare. La velocità complessiva è solitamente minore della somma delle velocità dei canali.
+\item \textbf{sincrona}: gli intervalli di tempo sono indipendenti dalla presenza di dati da spedire;
+\item \textbf{statistica}: gli intervalli vengono allocati solo quando ci sono dati da inviare. La velocità complessiva è solitamente minore della somma delle velocità dei canali.
 \end{itemize}
 \sub{Modulazione}
 Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}, tipicamente analogico.
@@ -1050,7 +1049,7 @@ In RIP v1 non sono supportate subnet variabili.
 \newpage\subsub{OSPF} 
 Open Shortest Path First: Protocollo Open Source sviluppato nel 1988 dall’\vedi{IGP} working group di \vedi{IETF} e divenuto standard nel 1990 (\vedi{RFC} 1247), è basato sull’algoritmo di Dijkstra per lo shortest path.\\
 Supporta subnet variabili, routing in base al tipo di servizio ed autenticazione ed esegue il bilanciamento del carico.\\
-L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{aree}: ogni router conserva il \italic{topological database} della sua area, dove salva la lista dei router adiacenti, indicando quelli designati a svolgere il ruolo di hub, ossia di "rappresentanti dell'area", cioè DS (\italic{Designated Routers}) e BDR (\italic{Backup Designated Routers}).\\ Le varie aree sono collegate tra loro dalla cosiddetta \italic{backbone area} o area 0, i cui nodi non sempre sono collegati fisicamente: nel caso in cui non lo siano, vengono definiti collegamenti virtuali (\italic{virtual-link}) tra router di backbone e router di altre aree, che funzionano come link diretti (\textbf{la topologia logica può essere diversa da quella fisica}).\\ La divisione in aree porta a due tipi diversi di routing (\italic{intra-area} ed \italic{inter-area}) e a quattro diversi tipi di router:
+L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{aree}: ogni router conserva il \italic{topological database} della sua area, dove salva la lista dei router adiacenti, indicando quelli designati a svolgere il ruolo di "rappresentanti dell'area", cioè DS (\italic{Designated Routers}) e BDR (\italic{Backup Designated Routers}).\\ Le varie aree sono collegate tra loro dalla cosiddetta \italic{backbone area} o area 0, i cui nodi non sempre sono collegati fisicamente: nel caso in cui non lo siano, vengono definiti collegamenti virtuali (\italic{virtual-link}) tra router di backbone e router di altre aree, che funzionano come collegamenti fisici diretti (\textbf{la topologia logica può essere diversa da quella fisica}).\\ La divisione in aree porta a due tipi diversi di routing (\italic{intra-area} ed \italic{inter-area}) e a quattro diversi tipi di router:
 \begin{itemize}
 \item \textbf{IR (Internal Router)}: router interno ad un'area;
 \item \textbf{ABR (Area Border Router)}: a confine tra più aree, mantengono il \italic{topological database} di ogni area che collegano;
@@ -1058,7 +1057,6 @@ L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{ar
 \item \textbf{ASBR (AS Boundary Router)}: router di confine tra \vedi{AS}.
 \end{itemize}
 
-\paragraph{I pacchetti OSPF}
 L'OSPF utilizza pacchetti di tipo LSA (\vedi{Link-State} Advertisement), in particolare presenta cinque tipi di pacchetto:
 \begin{itemize}
 \item Tipo 1: \vedi{Hello},
@@ -1073,7 +1071,7 @@ L'OSPF utilizza pacchetti di tipo LSA (\vedi{Link-State} Advertisement), in part
 Primo pacchetto ad essere inviato quando si abilita l'OSPF su un'interfaccia, esso è il mezzo attraverso il quale i router vengono a conoscenza l'uno dell'altro e viene reinviato periodicamente.
 \boximage[opsf-hello-packet.jpg][scale=0.7]{Struttura di un pacchetto Hello}
 \begin{itemize}
-\item \textbf{Network mask} (vedi \vedi{Netmask}): necessaria perché solo i router che concordano sulla suddivisione della rete si connettono tra loro;
+\item \textbf{\vedi{Netmask}}: necessaria perché solo i router che concordano sulla suddivisione della rete si connettono tra loro;
 \item \textbf{Hello Interval}: stabilisce l'intervallo in secondi tra due pacchetti \italic{Hello}; due router con differente hello interval non stabiliranno una connessione;
 \item \textbf{Options}: indica le funzionalità del mittente per verificare, prima della connessione, che siano compatibili con quelle del destinatario;
 \item \textbf{Router Priority}: indica la priorità del router;
