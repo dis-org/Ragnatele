@@ -11,11 +11,15 @@
 + Livello di Collegamento
   + Encoding (introduzione)
   + Frame Relay
++ Livello di rete
+  + EGP (?)
+  + BGP - struttura dei diversi tipi di messaggi (?) 
 + Livello delle Applicazioni
   + inetd (Internet daemon)
   + Servizi di rete 
     + SNMP 
     + Posta elettronica #
+
 ### Cosa va rivisto
 + Livello di Collegamento
   + Ethernet (confronto con Gervasi)
@@ -38,8 +42,7 @@
 
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
 |:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Arianna Masciolini | harisont     | hub      | scrittura | Arg. mancanti lv. 1|
-|                    |              |          | revisione | cfr. slides AR     |
+| Arianna Masciolini | harisont     | hub      | revisione | cfr. slides AR     |
 | Claudio Pannacci   | Kappanneo    | backbone |           |                    |
 | Filippo Mariani    | FilMar       | stub     | revisione | cfr. slides AR     |
 | Francesco Bultrini | frabulous    | ramoso   |           |                    |
