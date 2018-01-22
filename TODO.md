@@ -10,12 +10,10 @@
     + Tipi di connessione (point-to-point VS multipunto) (?)
 + Livello Fisico
   + Multiplazione #
-  + Dispositivi #
-    + Hub #
-    + Repeater #
   + Protocolli #
     + PHD #
     + SHD #
+    + Sonet #
 + Livello di Collegamento
   + Encoding (introduzione)
   + Frame Relay
