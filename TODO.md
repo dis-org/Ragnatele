@@ -8,12 +8,6 @@
 + Premessa
 + Introduzione
     + Tipi di connessione (point-to-point VS multipunto) (?)
-+ Livello Fisico
-  + Multiplazione #
-  + Protocolli #
-    + PHD #
-    + SHD #
-    + Sonet #
 + Livello di Collegamento
   + Encoding (introduzione)
   + Frame Relay

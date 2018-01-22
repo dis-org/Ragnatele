@@ -240,7 +240,22 @@ L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento
 \subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
 \subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interferenza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) avviene quando, in seguito alla traduzione, i simboli si sovrappongono sull'asse del tempo; chiaramente questo è legato ai limiti della banda.
 \boximage[isi.png][scale=0.5]{Interferenza intersimbolica}
-
+\sub{Multiplazione}
+La multiplazione è una tecnica che prevede l'impiego di un unico canale per più comunicazioni differenti contemporanee.
+\subsub{FDM}
+Frequency Division Multiplexing: tuttora impiegata nelle comunicazioni telefoniche, prevede che in fase di trasmissione le comunicazioni subiscano un shift di frequenza e che la frequenza originaria sia ripristinata all'arrivo alla destinazione. Il numero di canali multiplabili dipenderà, in
+linea di principio, solo dalla capacità del mezzo trasmissivo.
+\subsub{WDM}
+Wavelength Division Multiplexing: utilizzata per i segnali ottici (vedi \vedi{Fibra ottica}), consiste nel modulare la lunghezza d'onda del raggio luminoso, così da inviare diversi raggi contemporaneamente.
+\para{DWDM} Dense WDM: capace di modulare 16 lunghezze d'onda alla distanza di 0.8 nm.
+\para{CWDM} Coarse WDM (WDM grossolana): utilizza maggiori spaziature tra i canali, con risparmio a livello economico. Impiegata per la realizzazione di \vedi{MAN} a basso costo.
+\subsub{TDM}
+Time Division Multiplexing: nella TDM, i dispositivi ottengono a turno, per un brevissimo lasso di tempo, l'uso esclusivo del canale di comunicazioni e delle risorse ad esso dedicate, ad esempio la banda.
+La TDM si suddivide in:
+\begin{itemize}
+\item sincrona: gli intervalli di tempo sono indipendenti dalla presenza di dati da spedire;
+\item statistica: gli intervalli vengono allocati solo quando ci sono dati da inviare. La velocità complessiva è solitamente minore della somma delle velocità dei canali.
+\end{itemize}
 \sub{Modulazione}
 Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}, tipicamente analogico.
 \subsub{Modulazione ad onda continua}
@@ -256,7 +271,7 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \para{PAM} (Pulse Amplitude Modulation), analoga alla AM;
 \para{PWM} (Pulse Width Modulation), dove la durata dell'impulso cambia in base all'ampiezza della modulante;
 \para{PPM} (Pulse Position Modulation), analoga alla PM;
-\para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing) (vedi \vedi{Multiplazione}), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
+\para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \vedi{FDM}, poi  abbandonata per la più moderna \vedi{TDM}, inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
 \\La PCM costa di tre fasi distinte:
 \begin{enumerate}
 \item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
@@ -409,6 +424,19 @@ Elementi principali di una rete FTTx sono:
 \paragraph{Reti PON} Le reti PON (Passive Optical Network)
 utilizzano solo componenti passivi e sono caratterizzate da una topologia ad albero (vedi \vedi{Rete ad albero}). In esse, tratti di fibra vengono condivisi tra più utenti, e solo alla fine uno splitter ottico suddivide il segnale in più segnali uguali ma di potenza minore in modo da distribuirlo.
 \sub{Protocolli di primo livello}
+\subsub{PDH}
+Plesiochronous Digital Hierarchy: tecnologia utilizzata nelle reti di telecomunicazione per trasportare grandi quantità di dati su apparecchiature di trasporto digitali. Rappresenta il primo metodo di \vedi{Multiplazione} per trasmettere
+molti (per l'esattezza 30) canali contemporaneamente.
+Tramite un multiplexer \vedi{TDM} si uniscono i diversi canali. Poiché questi possono funzionare a bitrate differenti, il multiplexer si trova a dover inserire bit aggiuntivi (i cosiddetti \textit{dummy bits}) per compensare la differenza e rendere sincrono il flusso in entrata al demultiplexer ricevente, che li riconosce e li elimina.
+Il PDH è incapace di monitorare le prestazioni della rete e garantire buone performance per trasferimento contemporaneo di audio, video e dati. Problemi di temporizzazione (il termine \textit{plesiochronous} significa letteralmente "quasi sincronizzato") portano a preferirgli l'\vedi{SDH}.
+\subsub{SDH}
+Synchronous Digital Hierarchy: protocollo usato per la trasmissione di fonia e dati su fibra e rete elettrica, anch'esso ha il compito di aggregare flussi di dati con bitrate diversi e spedirli tutti insieme a grandi distanze.
+A differenza del \vedi{PDH}, prevede che tutti gli elementi
+della rete siano sincronizzati da uno stesso clock. Inoltre permette di trasferire informazioni essenziali per la corretta gestione della rete, permettendo di raggiungere elevatissimi livelli di qualità del servizio. 
+Non presenta limiti di distanza e oggi può offrire una velocità di 140Gb/s. L'unico vincolo è dovuto alla multiplazione \vedi{TDM}, che quindi fornisce ad ogni utente una capacità costante nel tempo.
+Diffuso in tutto il mondo tranne che in Nord America.
+\para{SONET}
+Alternativa al \vedi{SDH} in Nord America.
 \subsub{DSL}
 Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su \vedi{Doppino telefonico}, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa, l'\textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
 Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza vengono tripartite, consentendo di utilizzare  allo stesso tempo un'unica linea telefonica sia per il servizio ADSL che per le chiamate telefoniche. L'ADSL è generalmente installata solo per brevi distanze dalla centrale telefonica (l'ultimo miglio), o comunque meno di 4 km.
