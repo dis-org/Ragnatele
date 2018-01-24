@@ -1532,25 +1532,39 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse ch
 \para{MIB} Da non confondere con il film Man in Black.
 \para{SMI} Structure of Management Information.
  
- \subsub {Posta Elettronica}
-La Posta Elettronica \'e composta da due programm:i il Mail User Agent ed il Programma di Trasporto. Il primo \'e un interfaccia verso l'applicazione utilizzata \'e composto da:
+ \sub {Posta Elettronica}
+La Posta Elettronica \'e composta da due programm:i il Mail User Agent ed il Programma di Trasporto(SendMail). Il primo \'e un interfaccia verso l'applicazione utilizzata \'e composto da:
  \begin{itemize}
  	\item Composizione 
  	\item Visualizzazione
  	\item Eliminazione
  \end{itemize}
- Per Composizione si intende la composizione del messaggio stesso ma anche all'automatizzazione  di scrittura e gestione delle mail.\newline
+ Per Composizione si intende il processo di composizione del messaggio stesso.\newline
  Per Visualizzazione ci si riferisce ai processi di visualizzazione del messaggio stesso, di archiviazione e di interazione con il sistema.\newline
  Per Eliminazione si intende il processo di gestione dello spazio eliminando mail irrilevanti\newline
- Il Programma di Trasporto (Sendmail) si interessa di:
+ Il Programma di Trasporto (SendMail) si interessa di:
  \begin{itemize}
 	\item Trasferimento
 	\item Notifica all'utente
  \end{itemize}
  Per trasferimento si intende il meccanismo con il quale il messaggio viene trasmesso: quando il Mail User Agent spedisce il messaggio viene attivata una sessione con il server di destinazione, le mail vengono trasferite secondo il protocollo SMTP(Simple Mail Transfer Protocol).\newline 
  Per Notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
- I protocolli principali utilizzati per interagire con il protocollo di trasporto sono POP3 (Post Office Protocol) e IMAP (Internet Message Access Protocol). %spiega i due protocolli 
+ I protocolli principali utilizzati per interagire con il protocollo di trasporto sono IMAP (Internet Message Access Protocol), SMTP (Simple Mail Transfer Protocol) e POP3 (Post Office Protocol). %spiega i tre protocolli 
+\subusub{MIME}
+ Per poter far fronte ai diversi caratteri da dover rappresentare con le email  \'e stato introdotto lo standard di decodifica MIME (Multipurpouse Internet Mail Estensions).\n
+ Lo standard MIME aggiunge nuovi headers rispetto al RFC822 senza influire sul normale funzionamento del Programma di Trasporto tra i quali il Content-Type che descrive il tipo di contenuto (Ad es: Content-Type: mpeg).
 
+\subsub{SMTP}
+Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente e affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE(Interprocess Communication Environment). Quando avviene una richiesta di posta dell'utente ciene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (sender) che invia i comandi e quello ricevente (receiver) che invia le risposte.
+Una volta stabilito il canale trasmissivo con il comando HELO, l'SMTP-sender invia il comando MAIL (che contiene il mittente) e il receiver risponde con OK.\n
+Il sender invia poi il comando RCPT (che contiene il destinatario) identificando il recipient della mail. Se il receiver non pu\'o rispondere invia un codice di reject del recipient. Ogni qualvolta che il receiver interpreta correttamente un messaggio risponde con OK. Tutto il dialogo \'e bloccante ovvero funziona un passo alla volta. 
+I comandi MAIL, SEND, SOML o SAML iniziano una transizione di mail. Vanno seguiti da uno o pi\'u comandi RCPT e dal comando DATA. L'ultimo comando \'e QUIT 
+%mancano esempi
+\subsub{POP3}
+Il Post Office Protocol permette l'accesso da remoto ad un server di posta elettronica in ascolto sulla porta 110.
+\'e un'applicazione client-server che consente al client di ricevere e cancellare messaggi sul server SMTP. La connessione al server \'e stabilita tramite il protocollo TCP/IP. Client e Server si scambiano comandi  e risposte: i primi segueno la seguente sintassi \code{keyword argomento} e le risposte: \code{state keyword info}
+\subsub{IMAP}
+Dalle dispense l'unica cosa che si evince \'e che imap \'e meglio di pop3 e che utilizza dei flag per i messaggi che ne indicano lo stato e suppongo sia l'unica cosa che gli interessi. Il resto \'e un ammasso di informazioni incomprensibili e disegni senza contesto.
 \newpage
 \sec{Sicurezza di rete}
 La sicurezza di rete è una branca della sicurezza informatica che si occupa dei rischi correlati all'interconnessione di host.
