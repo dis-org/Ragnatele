@@ -18,7 +18,6 @@
   + inetd (Internet daemon)
   + Servizi di rete 
     + SNMP 
-    + Posta elettronica #
 
 ### Cosa va rivisto
 + Livello di Collegamento
