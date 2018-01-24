@@ -12,8 +12,6 @@
   + Encoding (introduzione)
   + Frame Relay
 + Livello di rete
-  + EGP (?)
-  + BGP - struttura dei diversi tipi di messaggi (?) 
 + Livello delle Applicazioni
   + inetd (Internet daemon)
   + Servizi di rete 
@@ -33,6 +31,16 @@
     + Sicurezza di rete
       + Oscuramento
       + Hardening 
+      
+### Argomenti lasciati alla buona volontà dei posteri
++ Introduzione
+    + Storia di internet
++ Livello di rete
+    + EGP (il protocollo!!)
+    + BGP - struttura dei diversi tipi di messaggi
+    + Routing internet delle origini 
++ Livello delle Applicazioni
+    + Algoritmi crittografici usati in OpenSSH
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
