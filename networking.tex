@@ -1525,7 +1525,7 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse ch
 \\Esistono più versioni del protocollo:
 \begin{itemize}
 \item SNMPv1 definito nell \vedi{RFC} 1157;
-\item SNMPv2p definito negli RFC 1441, 445, 1446, 1448, 1449;
+\item SNMPv2 definito negli RFC 1441, 445, 1446, 1448, 1449;
 \item SNMPv2 definito negli RFC che vanno dal 1901 fino al 1910;
 \item SNMPv3 defintio negli RFC 2026 e 2200, che rimedia alle carenze in merito a sicurezza e privacy delle versioni precedenti, tramite un sistema di autenticazione e strumenti di controllo degli accessi.
 \end{itemize}
@@ -1533,30 +1533,30 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse ch
 \para{SMI} Structure of Management Information.
  
  \sub {Posta Elettronica}
-La Posta Elettronica \'e composta da due programm:i il Mail User Agent ed il Programma di Trasporto(SendMail). Il primo \'e un interfaccia verso l'applicazione utilizzata \'e composto da:
+La Posta Elettronica \'e composta da due programm: il Mail User Agent ed il programma di trasporto (ad esempio \textit{SendMail}). Il primo \'e un' interfaccia verso l'applicazione utilizzata ed offre funzionalità di:
  \begin{itemize}
- 	\item Composizione 
- 	\item Visualizzazione
- 	\item Eliminazione
+ 	\item composizione 
+ 	\item visualizzazione
+ 	\item eliminazione
  \end{itemize}
- Per Composizione si intende il processo di composizione del messaggio stesso.\newline
- Per Visualizzazione ci si riferisce ai processi di visualizzazione del messaggio stesso, di archiviazione e di interazione con il sistema.\newline
- Per Eliminazione si intende il processo di gestione dello spazio eliminando mail irrilevanti\newline
- Il Programma di Trasporto (SendMail) si interessa di:
+ Per composizione si intende il processo di composizione del messaggio stesso.\newline
+ Per visualizzazione ci si riferisce ai processi di visualizzazione del messaggio stesso, di archiviazione e di interazione con il sistema.\newline
+ Per eliminazione si intende il processo di gestione dello spazio eliminando mail irrilevanti\newline
+ Il programma di trasporto si interessa di:
  \begin{itemize}
-	\item Trasferimento
-	\item Notifica all'utente
+	\item trasferimento
+	\item notifica all'utente
  \end{itemize}
  Per trasferimento si intende il meccanismo con il quale il messaggio viene trasmesso: quando il Mail User Agent spedisce il messaggio viene attivata una sessione con il server di destinazione, le mail vengono trasferite secondo il protocollo SMTP(Simple Mail Transfer Protocol).\newline 
- Per Notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
+ Con notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
  I protocolli principali utilizzati per interagire con il protocollo di trasporto sono IMAP (Internet Message Access Protocol), SMTP (Simple Mail Transfer Protocol) e POP3 (Post Office Protocol). %spiega i tre protocolli 
-\subusub{MIME}
- Per poter far fronte ai diversi caratteri da dover rappresentare con le email  \'e stato introdotto lo standard di decodifica MIME (Multipurpouse Internet Mail Estensions).\n
+\subsub{MIME}
+ Per poter far fronte ai diversi caratteri da dover rappresentare con le email  \'e stato introdotto lo standard di decodifica MIME (Multipurpouse Internet Mail Estensions).\\
  Lo standard MIME aggiunge nuovi headers rispetto al RFC822 senza influire sul normale funzionamento del Programma di Trasporto tra i quali il Content-Type che descrive il tipo di contenuto (Ad es: Content-Type: mpeg).
 
 \subsub{SMTP}
 Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente e affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE(Interprocess Communication Environment). Quando avviene una richiesta di posta dell'utente ciene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (sender) che invia i comandi e quello ricevente (receiver) che invia le risposte.
-Una volta stabilito il canale trasmissivo con il comando HELO, l'SMTP-sender invia il comando MAIL (che contiene il mittente) e il receiver risponde con OK.\n
+Una volta stabilito il canale trasmissivo con il comando HELO, l'SMTP-sender invia il comando MAIL (che contiene il mittente) e il receiver risponde con OK.\\
 Il sender invia poi il comando RCPT (che contiene il destinatario) identificando il recipient della mail. Se il receiver non pu\'o rispondere invia un codice di reject del recipient. Ogni qualvolta che il receiver interpreta correttamente un messaggio risponde con OK. Tutto il dialogo \'e bloccante ovvero funziona un passo alla volta. 
 I comandi MAIL, SEND, SOML o SAML iniziano una transizione di mail. Vanno seguiti da uno o pi\'u comandi RCPT e dal comando DATA. L'ultimo comando \'e QUIT 
 %mancano esempi
