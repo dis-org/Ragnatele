@@ -39,12 +39,12 @@
 + Se si stanno effettuando più modifiche in parallelo inserire altre righe sotto la propria solo con azione e argomento.
 + Se non si è parte dell'organizzazione si scriva FORK nel campo "Branch".
 
-| Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento          |
-|:-------------------|:------------:|:--------:|:---------:|:------------------:|
-| Arianna Masciolini | harisont     | hub      | revisione | cfr. slides AR     |
-| Claudio Pannacci   | Kappanneo    | backbone |           |                    |
-| Filippo Mariani    | FilMar       | stub     | revisione | cfr. slides AR     |
-| Francesco Bultrini | frabulous    | ramoso   |           |                    |
-| Gioara Cuccu       | Gio93k       | border   |           |                    |
-| Giorgio Mazza      | Shizen39     | metric   |           |                    |
-| Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica  |
+| Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento            |
+|:-------------------|:------------:|:--------:|:---------:|:--------------------:|
+| Arianna Masciolini | harisont     | hub      | revisione | cfr. slides AR       |
+| Claudio Pannacci   | Kappanneo    | backbone |           |                      |
+| Filippo Mariani    | FilMar       | stub     | scrittura | ampliamento ethernet |
+| Francesco Bultrini | frabulous    | ramoso   |           |                      |
+| Gioara Cuccu       | Gio93k       | border   |           |                      |
+| Giorgio Mazza      | Shizen39     | metric   |           |                      |
+| Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica    |
