@@ -1119,7 +1119,7 @@ Usati per confermare la ricezione degli LSA via Link State Update; ne contengono
 \boximage[ospf-link-state-akn.jpg][scale=0.7]{Struttura di un pacchetto Link State Acknowledgment}
 \newpage
 \subsub{BGP}
-Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell'\vedi{RFC} 1771\footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrata più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le policy adottate dal rispettivo \vedi{ISP}. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
+Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell'\vedi{RFC} 1771\footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrata più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le differenze tra le policy adottate dai diversi \vedi{ISP} che gestiscono tali domini. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
 \\Perché due router possano comunicare, devono essere innanzitutto definiti come \textit{BGP neighbors}, detti anche \textit{peers} tramite una configurazione manuale che ha per risultato la creazione di una sessione \vedi{TCP} sulla \vedi{Porta} 179.
 A questo punto, i peer si invieranno l'un l'altro la \vedi{Tabella di routing} in formato \vedi{CIDR} ed una serie di messaggi:
 \boximage[header_bgp.png][scale=0.6]{Header di un messaggio BGP. Il campo \textbf{Marker} contiene un valore riconosciuto da entrambi i peer, importante per sincronizzazione ed autenticazione}
@@ -1202,7 +1202,7 @@ Questo processo è detto \italic{round trip} in quanto, essendo il protocollo \v
 \sub{Servizi di rete}
 %Tommaso
 \subsub{Telnet} %standard odierno
-Telnet, definto negli \vedi{RFC} 854 e 855, nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}, basato su TCP. Telnet consente di accedere da remoto ad una macchina, emulandone il terminale tramite un \textbf{NVT} (Network Virtual Terminal), che fornisce un'interfaccia standard. Il client ascolta sulla porta predefinita e l'utente stabilisce una connessione utilizzando \vedi{IP}, nome utente e password di un utente del server. Inizialmente, vi é una negoziazione dei parametri, dalla quale dipendono le funzionalità attivate per la sessione. le funzioni di controllo standard sono illustrate in figura. 
+Telnet, definto negli \vedi{RFC} 854 e 855, nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Nei sistemi Windows è implementato da un programma autonomo, di cui è un esempio Putty. Basato su TCP, Telnet consente di accedere da remoto ad una macchina, emulandone il terminale tramite un \textbf{NVT} (Network Virtual Terminal), che fornisce un'interfaccia standard. Il client ascolta sulla porta predefinita (23) e l'utente stabilisce una connessione utilizzando \vedi{IP}, nome utente e password di un utente del server. Inizialmente vi é una negoziazione dei parametri, dalla quale dipendono le funzionalità attivate per la sessione. Le funzioni di controllo standard sono illustrate in figura. 
 \boximage[nvt.jpg][scale=0.5]{Funzioni di controllo standard}
 
 \ \\L'unico grande problema di Telnet riguarda la sicurezza. Si tratta infatti di un protocollo non criptato: la password, il nome utente e tutte le altre informazioni sono inviate in chiaro. A questa problematica pone rimedio \vedi{SSH}.
@@ -1216,13 +1216,52 @@ Progettati per i sistemi BSD Unix e anch'essi basati sul \vedi{TCP}, i comandi r
 Anche in questi casi non vi è alcuna forma di crittografia ed \vedi{SSH} sopperisce a questa mancanza.
 
 \subsub{FTP}
-Anche il File Transfer Protocol è basato sul \vedi{TCP}. Ogni trasferimento coinvolge due processi, che si traducono in due connessioni distinte:
+Definito nell'\vedi{RFC} 959, il File Transfer Protocol, impiegato per il trasferimento di file in rete, è basato sul \vedi{TCP}. Ogni trasferimento coinvolge due processi, che si traducono in due connessioni distinte:
 \begin{itemize}
-\item \textbf{PI} (Protocol Interpreter), volto alla trasmissione dei comandi; 
-\item \textbf{DTP} (Data Transfer Protocol), che consiste nel vero e proprio trasferimento. In questa fase client e server si scambiano i ruoli. Ad oggi, gran parte delle richiese FTP non avviene da linea di comando, ma da browser, ad esempio specificando un url.
+\item \textbf{PI} (Protocol Interpreter), volto alla trasmissione dei comandi, che usa la porta 21; 
+\item \textbf{DTP} (Data Transfer Protocol), che consiste nel vero e proprio trasferimento ed utilizza la porta 21. In questa fase client e server si scambiano i ruoli. Ad oggi, gran parte delle richiese FTP non avviene da linea di comando, ma da browser, ad esempio specificando un url.
+\end{itemize}
+I comandi FTP si suddividono in quattro categorie:
+\begin{itemize}
+\item controllo dell'accesso:
+	\begin{itemize}
+	\item \code{OPEN \italic{nomehost}},
+	\item \code{USER \italic{nomeutente}},
+	\item \code{PASS \italic{password}},
+	\item \code{QUIT};
+	\end{itemize}
+\item configurazione dei parametri per il trasferimento:
+	\begin{itemize}
+	\item \code{PORT \italic{socket in forma \vedi{IP}:\vedi{Porta}}},
+	\item \code{PASV};
+	\end{itemize}
+\item trasferimento dei file:	
+	\begin{itemize}
+		\item \code{TYPE} (ASCII o binario),
+		\item \code{RECV} o \code{GET \italic{fileremoto filelocale}},
+		\item \code{SEND} o \code{PUT \italic{filelocale fileremoto}};
+	\end{itemize}
+\item gestione di directory e file, usati dal client, con effetto sul server:
+	\begin{itemize}
+		\item \code{DELETE \italic{fileremoto}},
+		\item \code{CD},
+		\item \code{MKDIR},
+		\item \code{RMDIR},
+		\item \code{LS} o \code{DIR};
+	\end{itemize}
 \end{itemize}
 Nell'ambito dell'FTP, si parla di \textit{sessione anonima} quando si utilizza il protocollo in sola lettura; in tal caso si usa \code{anonymous} come account.\\
-Un alternativa più leggera all'FTP standard, pensata per l'ambito \vedi{LAN}, è il TFTP (Trivial FTP) utilizzata dalle macchine diskless per ottenere l'immagine del sistema operativo. Essa sfrutta l'\vedi{UDP} al posto del \vedi{TCP}. Anche l'FTP è carente dal punto di vista della sicurezza e le sue funzionalità sono state reimplementate in Open \vedi{SSH}.
+Un alternativa più leggera all'FTP standard, pensata per l'ambito \vedi{LAN}, è il TFTP (Trivial FTP) utilizzata dalle macchine diskless per ottenere l'immagine del sistema operativo. Essa sfrutta l'\vedi{UDP} al posto del \vedi{TCP}. Anche l'FTP è carente dal punto di vista della sicurezza, ragion per cui l'\vedi{RFC} 2228 introduce nuovi comandi ad essa correlati:
+\begin{itemize}
+\item \code{AUTH}: definizione del meccanismo di autenticazione da utilizzare;
+\item \code{PROT \italic{lv}}: dichiarazione del livello di protezione da utilizzare, da configuare tramite ulteriori comandi appositi, a scelta tra:
+	\begin{itemize}
+		\item \code{clear} (trasmissione in chiaro),
+		\item \code{safety} (richiesta verifica integrità dati, comando \code{MIC}),
+		\item \code{confidential} (trasmissione cifrata, comando \code{CONF}),
+		\item \code{private} (trasmissione cifrata e con richiesta verifica integrità dati, comando \code{ENC}).
+	\end{itemize}
+\end{itemize}
 \subsub{SSH}
 Come si è anticipato, \vedi{Telnet}, i \vedi{Comandi r} ed  \vedi{FTP} sono stati rimpiazzati da SSH (Secure SHell), che permette di instradare connessioni TCP in un canale cifrato, accorpandone tutte le funzionalità. Inoltre, con la specifica \code{-x}, SSH permette di trasmettere anche il desktop, funzionalità in precedenza fornita da un programmi appositi. Il vantaggio di SSH è appunto l'impiego di crittografia asimmetrica. 
 Le chiavi pubbliche (\textit{authorized keys}) vengono salvate in un file ASCII del server, mentre il client memorizza i \textit{known hosts}. La chiave privata del client viene controllata alla sua prima connessione con il server.\\ 
@@ -1234,7 +1273,7 @@ L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url
 \item \code{sftp}, che sostituisce \vedi{FTP};
 \item \code{ssh-add}, \code{ssh-agent} ed \code{ssh-keygen}, una serie di programmi per la generazione e la gestione delle chiavi;
 \item i demoni \code{sshd} ed \code{sftp-server}.
-\boximage[ssh_example.png][scale=0.5]{Connessione SSH ad un instanza Linux Amazon, notare la sintassi ssh -i ChiavePrivata NomeUtente@IndirizzoIp}
+\boximage[ssh_example.png][scale=0.5]{Connessione SSH ad un' instanza Linux Amazon, notare la sintassi \code{ssh -i ChiavePrivata NomeUtente@IndirizzoIp}}
 
 \end{itemize}
 \subsub{DHCP} %può contenere tracce di Tasso
@@ -1551,12 +1590,12 @@ La Posta Elettronica \'e composta da due programm: il Mail User Agent ed il prog
  Con notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
  I protocolli principali utilizzati per interagire con il protocollo di trasporto sono IMAP (Internet Message Access Protocol), SMTP (Simple Mail Transfer Protocol) e POP3 (Post Office Protocol). %spiega i tre protocolli 
 \subsub{MIME}
- Per poter far fronte ai diversi caratteri da dover rappresentare con le email  \'e stato introdotto lo standard di decodifica MIME (Multipurpouse Internet Mail Estensions).\\
+ Per poter far fronte ai diversi caratteri da dover rappresentare con le email  \'e stato introdotto lo standard di decodifica MIME (Multipurpouse Internet Mail Extensions).\\
  Lo standard MIME aggiunge nuovi headers rispetto al RFC822 senza influire sul normale funzionamento del Programma di Trasporto tra i quali il Content-Type che descrive il tipo di contenuto (Ad es: Content-Type: mpeg).
 
 \subsub{SMTP}
-Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente e affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE(Interprocess Communication Environment). Quando avviene una richiesta di posta dell'utente ciene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (sender) che invia i comandi e quello ricevente (receiver) che invia le risposte.
-Una volta stabilito il canale trasmissivo con il comando HELO, l'SMTP-sender invia il comando MAIL (che contiene il mittente) e il receiver risponde con OK.\\
+Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente e affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE (Inter Process Communication Environment). Quando avviene una richiesta di posta dell'utente viene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (sender) che invia i comandi e quello ricevente (receiver) che invia le risposte.
+Una volta stabilito il canale trasmissivo con il comando HELLO, l'SMTP-sender invia il comando MAIL (che contiene il mittente) e il receiver risponde con OK.\\
 Il sender invia poi il comando RCPT (che contiene il destinatario) identificando il recipient della mail. Se il receiver non pu\'o rispondere invia un codice di reject del recipient. Ogni qualvolta che il receiver interpreta correttamente un messaggio risponde con OK. Tutto il dialogo \'e bloccante ovvero funziona un passo alla volta. 
 I comandi MAIL, SEND, SOML o SAML iniziano una transizione di mail. Vanno seguiti da uno o pi\'u comandi RCPT e dal comando DATA. L'ultimo comando \'e QUIT 
 %mancano esempi
