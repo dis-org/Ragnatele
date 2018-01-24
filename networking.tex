@@ -179,6 +179,7 @@ Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa afferm
 
 \subsub{Banda}
 La banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
+\subsub{Multiplazione}
 
 \subsection{Qualità delle trasmissioni} \label{qualita}
 I criteri per valutare la bontà della rete sono molteplici, legati alle prestazioni e ad affidabilità e sicurezza.
@@ -239,22 +240,7 @@ L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento
 \subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
 \subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interferenza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) avviene quando, in seguito alla traduzione, i simboli si sovrappongono sull'asse del tempo; chiaramente questo è legato ai limiti della banda.
 \boximage[isi.png][scale=0.5]{Interferenza intersimbolica}
-\sub{Multiplazione}
-La multiplazione è una tecnica che prevede l'impiego di un unico canale per più comunicazioni differenti contemporanee.
-\subsub{FDM}
-Frequency Division Multiplexing: tuttora impiegata nelle comunicazioni telefoniche, prevede che in fase di trasmissione le comunicazioni subiscano un shift di frequenza e che la frequenza originaria sia ripristinata all'arrivo alla destinazione. Il numero di canali multiplabili dipenderà, in
-linea di principio, solo dalla capacità del mezzo trasmissivo.
-\subsub{WDM}
-Wavelength Division Multiplexing: utilizzata per i segnali ottici (vedi \vedi{Fibra ottica}), consiste nel modulare la lunghezza d'onda del raggio luminoso, così da inviare diversi raggi contemporaneamente.
-\para{DWDM} Dense WDM: capace di modulare 16 lunghezze d'onda alla distanza di 0.8 nm.
-\para{CWDM} Coarse WDM (WDM grossolana): utilizza maggiori spaziature tra i canali, con risparmio a livello economico. Impiegata per la realizzazione di \vedi{MAN} a basso costo.
-\subsub{TDM}
-Time Division Multiplexing: nella TDM, i dispositivi ottengono a turno, per un brevissimo lasso di tempo, l'uso esclusivo del canale di comunicazioni e delle risorse ad esso dedicate, ad esempio la banda.
-La TDM si suddivide in:
-\begin{itemize}
-\item \textbf{sincrona}: gli intervalli di tempo sono indipendenti dalla presenza di dati da spedire;
-\item \textbf{statistica}: gli intervalli vengono allocati solo quando ci sono dati da inviare. La velocità complessiva è solitamente minore della somma delle velocità dei canali.
-\end{itemize}
+
 \sub{Modulazione}
 Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}, tipicamente analogico.
 \subsub{Modulazione ad onda continua}
@@ -270,7 +256,7 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \para{PAM} (Pulse Amplitude Modulation), analoga alla AM;
 \para{PWM} (Pulse Width Modulation), dove la durata dell'impulso cambia in base all'ampiezza della modulante;
 \para{PPM} (Pulse Position Modulation), analoga alla PM;
-\para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \vedi{FDM}, poi  abbandonata per la più moderna \vedi{TDM}, inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
+\para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \textbf{FDM} (Frequency Division Multiplexing), poi  abbandonata per la più moderna \textbf{TDM} (Time Division Multiplexing) (vedi \vedi{Multiplazione}), inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
 \\La PCM costa di tre fasi distinte:
 \begin{enumerate}
 \item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
@@ -332,7 +318,7 @@ Un modem (contrazione di modulatore/demodulatore) è un \vedi{DCE} con funzional
 Ognuno dei modem suddetti può essere inoltre \textbf{interno} o \textbf{esterno} al \vedi{DTE}. Tra i modem \textbf{esterni}, in base al tipo di collegamento al DTE, si distinguono:
 \begin{itemize}
 \item \textbf{Modem seriali}, collegati con cavo seriale tramite interfaccia \vedi{RS-232} o \vedi{USB};
-\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfacce parallele}).
+\item \textbf{Modem paralleli}, collegati con cavo parallelo alle porte LPT1 o LP2 (vedi \vedi{Interfaccie parallele}).
 \end{itemize}
 Tra i modem \textbf{interni} si distinguono invece:
 \begin{itemize}
@@ -355,18 +341,17 @@ Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \
 \item PCM upstream, che permette di effettuare trasmissioni digitali a più alta velocità (fino a $48 kbit/s$) sulle linee telefoniche analogiche.
 \end{itemize}
 \end{itemize}
-
-\subsection{Altri dispositivi}
-\subsub{Ripetitore}
-Dispositivo di rete che si limita a ripetere i pacchetti che gli arrivano.
-Si utilizza quando esiste una limitazione fisica alla lunghezza della \vedi{LAN}: le reti collegate possono in tal caso essere viste, da un punto di vista logico, come una rete unica.
-\subsub{Hub} 
-Uno hub è un dispositivo di rete che funge da nodo di smistamento dati di una una \vedi{Rete a dorsale} o in una \vedi{Rete a stella}. Poiché non è in grado di reinviare i pacchetti se non in broadcast, è attualmente impiegato in misura molto minore rispetto allo \vedi{Switch}.
-
+\sub{Protocolli di primo livello}
+\subsub{DSL}
+Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su \vedi{Doppino telefonico}, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa, l'\textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
+Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza vengono tripartite, consentendo di utilizzare  allo stesso tempo un'unica linea telefonica sia per il servizio ADSL che per le chiamate telefoniche. L'ADSL è generalmente installata solo per brevi distanze dalla centrale telefonica (l'ultimo miglio), o comunque meno di 4 km.
+\boximage[adsl_band.jpg][scale=0.4]{Tripartizione della banda tramite splitter}
+Le velocità teoriche ottenibili sono dell'ordine degli 8Mbit/s per quel che riguarda il downstream e 800kbit/s per quanto riguarda l'upstream, ma lo stato delle linee e della bassa qualità del doppino le porta a circa 1,5Mbit/s in download e 256kbit/s in upload.
+Nonostante il fatto che le linee guida siano dettate dallo standard ANSI T1.423 Issue 1, categorie 1 e 2, questa tecnologia non é ancora totalmente standardizzata: ogni produttore di modem per ADSL propone la propria variante.
 \sub{Interfacce hardware} 
 Dal punto di vista fisico, un'interfaccia o porta è caratterizzata da un canale di trasmissione, identificato da un mezzo trasmissivo (ad esempio un cavo), due connettori e due porte o \textit{slot} poste agli estremi della trasmissione; dal punto di vista logico, da una modalità di trasmissione (seriale o parallela). 
-\subsub{Interfacce parallele}
-Le interfacce parallele trasmettono segnali da più pin in contemporanea.
+\subsub{Interfaccie parallele}
+Le interfaccie parallele trasmettono segnali da più pin in contemporanea.
 \para{Interfaccia Centronics}
 Ormai obsoleta, sostituita in gran parte dei casi dall'interfaccia \vedi{USB}, originariamente monodirezionale, è stata impiegata soprattutto per collegare i \vedi{DTE} alle stampanti, ma più di recente ne è stato sviluppato uno standard bidirezionale che permette anche il collegamento di dispositivi di input.
 Tale interfaccia consente di trasferire 8 bit in parallelo nello standard \textbf{TTL}\footnote{Transistor-Transistor Logic: prima tecnologia di circuiti integrati diffusa su scala globale}.
@@ -380,12 +365,12 @@ Sul DTE si trovavano tipicamente da una a tre porte parallele, dette \textbf{LPT
 \end{itemize}
 
 \subsub{Interfacce seriali}
-le interfacce seriali trasmettono da un solo pin alla volta.
+le interfaccie seriali trasmettono da un solo pin alla volta.
 \para{RS-232}
 L'RS-232 è uno standard che permette la realizzazione di una trasmissione seriale tra un \vedi{DTE} e un \vedi{DCE}, in modalità sia sincrona che asincrona. Dal momento che il numero di linee effettivamente utilizzate varia sensibilmente a seconda del tipo di collegamento e dei modem eventualmente impiegati, per questa interfaccia esistono due diversi tipi di connettore: quello a 25 pin e quello ridotto, a 9 pin, sufficiente per molte applicazioni.
 \boximage[rs232.jpg][scale=0.5]{Uso di ogni linea nei due tipi di connettore RS-232}
 \para{USB}
-Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l'USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare \italic{collegamenti a caldo}, senza necessità di spegnere le macchine, le quali  riconoscono automaticamente le periferiche (interfacce \textit{plug-and-play}).
+Ideata nel 1995 da un consorzio di costruttori tra cui Intel, Compaq, Digital e Microsoft, l'USB (\textit{Universal Serial Bus}) ha soppiantato le interfacce precedentemente descritte. Essa risulta infatti vantaggiosa, oltre che in termini di velocità e versatilità, poiché può fornire direttamente l'alimentazione alle periferiche e consente di creare \italic{collegamenti a caldo}, senza necessità di spegnere le macchine, le quali  riconoscono automaticamente le periferiche (interfaccie \textit{plug-and-play}).
 I connettori USB sono molteplici (tipi A, B e C con rispettive varianti miniaturizzate), ma tutti con quattro poli ed uguali funzionalità.
 Un'estensione dell'USB, chiamata USB-OTG (On-The-Go), consente a una singola porta di fungere sia da dispositivo sia da controllore, semplificando le connessioni USB dei piccoli dispositivi.
 Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferiche collegate ad albero, attraverso  \vedi{Hub}. Supporta fino a un massimo di 127 periferiche per gestore, ma nel computo vanno inclusi anche gli hub e il gestore stesso. Attualmente, la massima velocità di trasmissione reale raggiunta è 7,2 Gbps (versione USB 3.1).
@@ -422,27 +407,9 @@ Elementi principali di una rete FTTx sono:
 \paragraph{Reti AON} Le reti AON (Active Optical Network) sono strutture P2P (point-to-point), nel senso che ogni utente ha il proprio tratto di fibra, che giunge direttamente al proprio ONT. Nelle AON si utilizzano componenti attivi, come amplificatori, ripetitori, router o switch. La loro topologia è solitamente a stella (vedi \vedi{Rete a stella}). Garantisce, a costi elevati, la massima velocità di trasmissione.
 \paragraph{Reti PON} Le reti PON (Passive Optical Network)
 utilizzano solo componenti passivi e sono caratterizzate da una topologia ad albero (vedi \vedi{Rete ad albero}). In esse, tratti di fibra vengono condivisi tra più utenti, e solo alla fine uno splitter ottico suddivide il segnale in più segnali uguali ma di potenza minore in modo da distribuirlo.
-\sub{Protocolli di primo livello}
-\subsub{PDH}
-Plesiochronous Digital Hierarchy: tecnologia utilizzata nelle reti di telecomunicazione per trasportare grandi quantità di dati su apparecchiature di trasporto digitali. Rappresenta il primo metodo di \vedi{Multiplazione} per trasmettere
-molti (per l'esattezza 30) canali contemporaneamente.
-Tramite un multiplexer \vedi{TDM} si uniscono i diversi canali. Poiché questi possono funzionare a bitrate differenti, il multiplexer si trova a dover inserire bit aggiuntivi (i cosiddetti \textit{dummy bits}) per compensare la differenza e rendere sincrono il flusso in entrata al demultiplexer ricevente, che li riconosce e li elimina.
-Il PDH è incapace di monitorare le prestazioni della rete e garantire buone performance per trasferimento contemporaneo di audio, video e dati. Problemi di temporizzazione (il termine \textit{plesiochronous} significa letteralmente "quasi sincronizzato") portano a preferirgli l'\vedi{SDH}.
-\subsub{SDH}
-Synchronous Digital Hierarchy: protocollo usato per la trasmissione di fonia e dati su fibra e rete elettrica, anch'esso ha il compito di aggregare flussi di dati con bitrate diversi e spedirli tutti insieme a grandi distanze.
-A differenza del \vedi{PDH}, prevede che tutti gli elementi
-della rete siano sincronizzati da uno stesso clock. Inoltre permette di trasferire informazioni essenziali per la corretta gestione della rete, permettendo di raggiungere elevatissimi livelli di qualità del servizio. 
-Non presenta limiti di distanza e oggi può offrire una velocità di 140Gb/s. L'unico vincolo è dovuto alla multiplazione \vedi{TDM}, che quindi fornisce ad ogni utente una capacità costante nel tempo.
-Diffuso in tutto il mondo tranne che in Nord America.
-\para{SONET}
-Alternativa al \vedi{SDH} in Nord America.
-\subsub{DSL}
-Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su \vedi{Doppino telefonico}, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa, l'\textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
-Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza vengono tripartite, consentendo di utilizzare  allo stesso tempo un'unica linea telefonica sia per il servizio ADSL che per le chiamate telefoniche. L'ADSL è generalmente installata solo per brevi distanze dalla centrale telefonica (l'ultimo miglio), o comunque meno di 4 km.
-\boximage[adsl_band.jpg][scale=0.4]{Tripartizione della banda tramite splitter}
-Le velocità teoriche ottenibili sono dell'ordine degli 8Mbit/s per quel che riguarda il downstream e 800kbit/s per quanto riguarda l'upstream, ma lo stato delle linee e della bassa qualità del doppino le porta a circa 1,5Mbit/s in download e 256kbit/s in upload.
-Nonostante il fatto che le linee guida siano dettate dallo standard ANSI T1.423 Issue 1, categorie 1 e 2, questa tecnologia non é ancora totalmente standardizzata: ogni produttore di modem per ADSL propone la propria variante.
 
+\subsection{Dispositivi}
+\subsub {Hub}
 
 \newpage\sec{Livello di collegamento}
 In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello di riferimento ISO/OSI} si occupa di:
@@ -1049,7 +1016,7 @@ In RIP v1 non sono supportate subnet variabili.
 \newpage\subsub{OSPF} 
 Open Shortest Path First: Protocollo Open Source sviluppato nel 1988 dall’\vedi{IGP} working group di \vedi{IETF} e divenuto standard nel 1990 (\vedi{RFC} 1247), è basato sull’algoritmo di Dijkstra per lo shortest path.\\
 Supporta subnet variabili, routing in base al tipo di servizio ed autenticazione ed esegue il bilanciamento del carico.\\
-L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{aree}: ogni router conserva il \italic{topological database} della sua area, dove salva la lista dei router adiacenti, indicando quelli designati a svolgere il ruolo di "rappresentanti dell'area", cioè DS (\italic{Designated Routers}) e BDR (\italic{Backup Designated Routers}).\\ Le varie aree sono collegate tra loro dalla cosiddetta \italic{backbone area} o area 0, i cui nodi non sempre sono collegati fisicamente: nel caso in cui non lo siano, vengono definiti collegamenti virtuali (\italic{virtual-link}) tra router di backbone e router di altre aree, che funzionano come collegamenti fisici diretti (\textbf{la topologia logica può essere diversa da quella fisica}).\\ La divisione in aree porta a due tipi diversi di routing (\italic{intra-area} ed \italic{inter-area}) e a quattro diversi tipi di router:
+L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{aree}: ogni router conserva il \italic{topological database} della sua area, dove salva la lista dei router adiacenti, indicando quelli designati a svolgere il ruolo di hub, ossia di "rappresentanti dell'area", cioè DS (\italic{Designated Routers}) e BDR (\italic{Backup Designated Routers}).\\ Le varie aree sono collegate tra loro dalla cosiddetta \italic{backbone area} o area 0, i cui nodi non sempre sono collegati fisicamente: nel caso in cui non lo siano, vengono definiti collegamenti virtuali (\italic{virtual-link}) tra router di backbone e router di altre aree, che funzionano come link diretti (\textbf{la topologia logica può essere diversa da quella fisica}).\\ La divisione in aree porta a due tipi diversi di routing (\italic{intra-area} ed \italic{inter-area}) e a quattro diversi tipi di router:
 \begin{itemize}
 \item \textbf{IR (Internal Router)}: router interno ad un'area;
 \item \textbf{ABR (Area Border Router)}: a confine tra più aree, mantengono il \italic{topological database} di ogni area che collegano;
@@ -1057,6 +1024,7 @@ L'OSPF supporta sistemi gerarchici, ovvero la divisione della rete in \textbf{ar
 \item \textbf{ASBR (AS Boundary Router)}: router di confine tra \vedi{AS}.
 \end{itemize}
 
+\paragraph{I pacchetti OSPF}
 L'OSPF utilizza pacchetti di tipo LSA (\vedi{Link-State} Advertisement), in particolare presenta cinque tipi di pacchetto:
 \begin{itemize}
 \item Tipo 1: \vedi{Hello},
@@ -1071,7 +1039,7 @@ L'OSPF utilizza pacchetti di tipo LSA (\vedi{Link-State} Advertisement), in part
 Primo pacchetto ad essere inviato quando si abilita l'OSPF su un'interfaccia, esso è il mezzo attraverso il quale i router vengono a conoscenza l'uno dell'altro e viene reinviato periodicamente.
 \boximage[opsf-hello-packet.jpg][scale=0.7]{Struttura di un pacchetto Hello}
 \begin{itemize}
-\item \textbf{\vedi{Netmask}}: necessaria perché solo i router che concordano sulla suddivisione della rete si connettono tra loro;
+\item \textbf{Network mask} (vedi \vedi{Netmask}): necessaria perché solo i router che concordano sulla suddivisione della rete si connettono tra loro;
 \item \textbf{Hello Interval}: stabilisce l'intervallo in secondi tra due pacchetti \italic{Hello}; due router con differente hello interval non stabiliranno una connessione;
 \item \textbf{Options}: indica le funzionalità del mittente per verificare, prima della connessione, che siano compatibili con quelle del destinatario;
 \item \textbf{Router Priority}: indica la priorità del router;
@@ -1119,7 +1087,7 @@ Usati per confermare la ricezione degli LSA via Link State Update; ne contengono
 \boximage[ospf-link-state-akn.jpg][scale=0.7]{Struttura di un pacchetto Link State Acknowledgment}
 \newpage
 \subsub{BGP}
-Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell'\vedi{RFC} 1771\footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrata più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le differenze tra le policy adottate dai diversi \vedi{ISP} che gestiscono tali domini. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
+Il protocollo BGP (Border Gateway Protocol), descritto nella sua versione corrente nell'\vedi{RFC} 1771\footnote{Le precedenti versioni del BGP sono descritte negli RFC 1105, 1163, 1267 e 1654.}, è un protocollo \vedi{EGP}, ma ne esiste anche una versione \textit{intradomain}, l'\vedi{iBGP}, che verrà illustrata più avanti. Esso mette dunque in comunicazione particolari router appartenenti ad \vedi{AS} differenti, detti -come suggerito dal nome del protocollo- \textit{gateway di confine}. Un protocollo apposito è necessario perché, a differenza di quanto avviene all'interno di un singolo AS, un protocollo che metta in comunicazione più domini di routing deve tenere in conto le policy adottate dal rispettivo \vedi{ISP}. La principale funzione del BGP è lo scambio di informazioni sulla raggiungibilità delle reti, volta al mantenimento di una visione unitaria della topologia della rete da parte dei diversi router. 
 \\Perché due router possano comunicare, devono essere innanzitutto definiti come \textit{BGP neighbors}, detti anche \textit{peers} tramite una configurazione manuale che ha per risultato la creazione di una sessione \vedi{TCP} sulla \vedi{Porta} 179.
 A questo punto, i peer si invieranno l'un l'altro la \vedi{Tabella di routing} in formato \vedi{CIDR} ed una serie di messaggi:
 \boximage[header_bgp.png][scale=0.6]{Header di un messaggio BGP. Il campo \textbf{Marker} contiene un valore riconosciuto da entrambi i peer, importante per sincronizzazione ed autenticazione}
@@ -1202,7 +1170,7 @@ Questo processo è detto \italic{round trip} in quanto, essendo il protocollo \v
 \sub{Servizi di rete}
 %Tommaso
 \subsub{Telnet} %standard odierno
-Telnet, definto negli \vedi{RFC} 854 e 855, nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}. Nei sistemi Windows è implementato da un programma autonomo, di cui è un esempio Putty. Basato su TCP, Telnet consente di accedere da remoto ad una macchina, emulandone il terminale tramite un \textbf{NVT} (Network Virtual Terminal), che fornisce un'interfaccia standard. Il client ascolta sulla porta predefinita (23) e l'utente stabilisce una connessione utilizzando \vedi{IP}, nome utente e password di un utente del server. Inizialmente vi é una negoziazione dei parametri, dalla quale dipendono le funzionalità attivate per la sessione. Le funzioni di controllo standard sono illustrate in figura. 
+Telnet, definto negli \vedi{RFC} 854 e 855, nasce come protocollo di rete per sistemi Unix in grado di gestire una comunicazione standardizzata fra due \vedi{DTE}, basato su TCP. Telnet consente di accedere da remoto ad una macchina, emulandone il terminale tramite un \textbf{NVT} (Network Virtual Terminal), che fornisce un'interfaccia standard. Il client ascolta sulla porta predefinita e l'utente stabilisce una connessione utilizzando \vedi{IP}, nome utente e password di un utente del server. Inizialmente, vi é una negoziazione dei parametri, dalla quale dipendono le funzionalità attivate per la sessione. le funzioni di controllo standard sono illustrate in figura. 
 \boximage[nvt.jpg][scale=0.5]{Funzioni di controllo standard}
 
 \ \\L'unico grande problema di Telnet riguarda la sicurezza. Si tratta infatti di un protocollo non criptato: la password, il nome utente e tutte le altre informazioni sono inviate in chiaro. A questa problematica pone rimedio \vedi{SSH}.
@@ -1216,52 +1184,13 @@ Progettati per i sistemi BSD Unix e anch'essi basati sul \vedi{TCP}, i comandi r
 Anche in questi casi non vi è alcuna forma di crittografia ed \vedi{SSH} sopperisce a questa mancanza.
 
 \subsub{FTP}
-Definito nell'\vedi{RFC} 959, il File Transfer Protocol, impiegato per il trasferimento di file in rete, è basato sul \vedi{TCP}. Ogni trasferimento coinvolge due processi, che si traducono in due connessioni distinte:
+Anche il File Transfer Protocol è basato sul \vedi{TCP}. Ogni trasferimento coinvolge due processi, che si traducono in due connessioni distinte:
 \begin{itemize}
-\item \textbf{PI} (Protocol Interpreter), volto alla trasmissione dei comandi, che usa la porta 21; 
-\item \textbf{DTP} (Data Transfer Protocol), che consiste nel vero e proprio trasferimento ed utilizza la porta 21. In questa fase client e server si scambiano i ruoli. Ad oggi, gran parte delle richiese FTP non avviene da linea di comando, ma da browser, ad esempio specificando un url.
-\end{itemize}
-I comandi FTP si suddividono in quattro categorie:
-\begin{itemize}
-\item controllo dell'accesso:
-	\begin{itemize}
-	\item \code{OPEN \italic{nomehost}},
-	\item \code{USER \italic{nomeutente}},
-	\item \code{PASS \italic{password}},
-	\item \code{QUIT};
-	\end{itemize}
-\item configurazione dei parametri per il trasferimento:
-	\begin{itemize}
-	\item \code{PORT \italic{socket in forma \vedi{IP}:\vedi{Porta}}},
-	\item \code{PASV};
-	\end{itemize}
-\item trasferimento dei file:	
-	\begin{itemize}
-		\item \code{TYPE} (ASCII o binario),
-		\item \code{RECV} o \code{GET \italic{fileremoto filelocale}},
-		\item \code{SEND} o \code{PUT \italic{filelocale fileremoto}};
-	\end{itemize}
-\item gestione di directory e file, usati dal client, con effetto sul server:
-	\begin{itemize}
-		\item \code{DELETE \italic{fileremoto}},
-		\item \code{CD},
-		\item \code{MKDIR},
-		\item \code{RMDIR},
-		\item \code{LS} o \code{DIR};
-	\end{itemize}
+\item \textbf{PI} (Protocol Interpreter), volto alla trasmissione dei comandi; 
+\item \textbf{DTP} (Data Transfer Protocol), che consiste nel vero e proprio trasferimento. In questa fase client e server si scambiano i ruoli. Ad oggi, gran parte delle richiese FTP non avviene da linea di comando, ma da browser, ad esempio specificando un url.
 \end{itemize}
 Nell'ambito dell'FTP, si parla di \textit{sessione anonima} quando si utilizza il protocollo in sola lettura; in tal caso si usa \code{anonymous} come account.\\
-Un alternativa più leggera all'FTP standard, pensata per l'ambito \vedi{LAN}, è il TFTP (Trivial FTP) utilizzata dalle macchine diskless per ottenere l'immagine del sistema operativo. Essa sfrutta l'\vedi{UDP} al posto del \vedi{TCP}. Anche l'FTP è carente dal punto di vista della sicurezza, ragion per cui l'\vedi{RFC} 2228 introduce nuovi comandi ad essa correlati:
-\begin{itemize}
-\item \code{AUTH}: definizione del meccanismo di autenticazione da utilizzare;
-\item \code{PROT \italic{lv}}: dichiarazione del livello di protezione da utilizzare, da configuare tramite ulteriori comandi appositi, a scelta tra:
-	\begin{itemize}
-		\item \code{clear} (trasmissione in chiaro),
-		\item \code{safety} (richiesta verifica integrità dati, comando \code{MIC}),
-		\item \code{confidential} (trasmissione cifrata, comando \code{CONF}),
-		\item \code{private} (trasmissione cifrata e con richiesta verifica integrità dati, comando \code{ENC}).
-	\end{itemize}
-\end{itemize}
+Un alternativa più leggera all'FTP standard, pensata per l'ambito \vedi{LAN}, è il TFTP (Trivial FTP) utilizzata dalle macchine diskless per ottenere l'immagine del sistema operativo. Essa sfrutta l'\vedi{UDP} al posto del \vedi{TCP}. Anche l'FTP è carente dal punto di vista della sicurezza e le sue funzionalità sono state reimplementate in Open \vedi{SSH}.
 \subsub{SSH}
 Come si è anticipato, \vedi{Telnet}, i \vedi{Comandi r} ed  \vedi{FTP} sono stati rimpiazzati da SSH (Secure SHell), che permette di instradare connessioni TCP in un canale cifrato, accorpandone tutte le funzionalità. Inoltre, con la specifica \code{-x}, SSH permette di trasmettere anche il desktop, funzionalità in precedenza fornita da un programmi appositi. Il vantaggio di SSH è appunto l'impiego di crittografia asimmetrica. 
 Le chiavi pubbliche (\textit{authorized keys}) vengono salvate in un file ASCII del server, mentre il client memorizza i \textit{known hosts}. La chiave privata del client viene controllata alla sua prima connessione con il server.\\ 
@@ -1273,7 +1202,7 @@ L'implementazione FLOSS del protocollo, Open SSH (si veda il sito ufficiale \url
 \item \code{sftp}, che sostituisce \vedi{FTP};
 \item \code{ssh-add}, \code{ssh-agent} ed \code{ssh-keygen}, una serie di programmi per la generazione e la gestione delle chiavi;
 \item i demoni \code{sshd} ed \code{sftp-server}.
-\boximage[ssh_example.png][scale=0.5]{Connessione SSH ad un' instanza Linux Amazon, notare la sintassi \code{ssh -i ChiavePrivata NomeUtente@IndirizzoIp}}
+\boximage[ssh_example.png][scale=0.5]{Connessione SSH ad un instanza Linux Amazon, notare la sintassi ssh -i ChiavePrivata NomeUtente@IndirizzoIp}
 
 \end{itemize}
 \subsub{DHCP} %può contenere tracce di Tasso
@@ -1564,7 +1493,7 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse ch
 \\Esistono più versioni del protocollo:
 \begin{itemize}
 \item SNMPv1 definito nell \vedi{RFC} 1157;
-\item SNMPv2 definito negli RFC 1441, 445, 1446, 1448, 1449;
+\item SNMPv2p definito negli RFC 1441, 445, 1446, 1448, 1449;
 \item SNMPv2 definito negli RFC che vanno dal 1901 fino al 1910;
 \item SNMPv3 defintio negli RFC 2026 e 2200, che rimedia alle carenze in merito a sicurezza e privacy delle versioni precedenti, tramite un sistema di autenticazione e strumenti di controllo degli accessi.
 \end{itemize}
@@ -1572,30 +1501,30 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse ch
 \para{SMI} Structure of Management Information.
  
  \sub {Posta Elettronica}
-La Posta Elettronica \'e composta da due programm: il Mail User Agent ed il programma di trasporto (ad esempio \textit{SendMail}). Il primo \'e un' interfaccia verso l'applicazione utilizzata ed offre funzionalità di:
+La Posta Elettronica \'e composta da due programm:i il Mail User Agent ed il Programma di Trasporto(SendMail). Il primo \'e un interfaccia verso l'applicazione utilizzata \'e composto da:
  \begin{itemize}
- 	\item composizione 
- 	\item visualizzazione
- 	\item eliminazione
+ 	\item Composizione 
+ 	\item Visualizzazione
+ 	\item Eliminazione
  \end{itemize}
- Per composizione si intende il processo di composizione del messaggio stesso.\newline
- Per visualizzazione ci si riferisce ai processi di visualizzazione del messaggio stesso, di archiviazione e di interazione con il sistema.\newline
- Per eliminazione si intende il processo di gestione dello spazio eliminando mail irrilevanti\newline
- Il programma di trasporto si interessa di:
+ Per Composizione si intende il processo di composizione del messaggio stesso.\newline
+ Per Visualizzazione ci si riferisce ai processi di visualizzazione del messaggio stesso, di archiviazione e di interazione con il sistema.\newline
+ Per Eliminazione si intende il processo di gestione dello spazio eliminando mail irrilevanti\newline
+ Il Programma di Trasporto (SendMail) si interessa di:
  \begin{itemize}
-	\item trasferimento
-	\item notifica all'utente
+	\item Trasferimento
+	\item Notifica all'utente
  \end{itemize}
  Per trasferimento si intende il meccanismo con il quale il messaggio viene trasmesso: quando il Mail User Agent spedisce il messaggio viene attivata una sessione con il server di destinazione, le mail vengono trasferite secondo il protocollo SMTP(Simple Mail Transfer Protocol).\newline 
- Con notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
+ Per Notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
  I protocolli principali utilizzati per interagire con il protocollo di trasporto sono IMAP (Internet Message Access Protocol), SMTP (Simple Mail Transfer Protocol) e POP3 (Post Office Protocol). %spiega i tre protocolli 
 \subsub{MIME}
- Per poter far fronte ai diversi caratteri da dover rappresentare con le email  \'e stato introdotto lo standard di decodifica MIME (Multipurpouse Internet Mail Extensions).\\
+ Per poter far fronte ai diversi caratteri da dover rappresentare con le email  \'e stato introdotto lo standard di decodifica MIME (Multipurpouse Internet Mail Estensions).\\
  Lo standard MIME aggiunge nuovi headers rispetto al RFC822 senza influire sul normale funzionamento del Programma di Trasporto tra i quali il Content-Type che descrive il tipo di contenuto (Ad es: Content-Type: mpeg).
 
 \subsub{SMTP}
-Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente e affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE (Inter Process Communication Environment). Quando avviene una richiesta di posta dell'utente viene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (sender) che invia i comandi e quello ricevente (receiver) che invia le risposte.
-Una volta stabilito il canale trasmissivo con il comando HELLO, l'SMTP-sender invia il comando MAIL (che contiene il mittente) e il receiver risponde con OK.\\
+Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente e affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE(Interprocess Communication Environment). Quando avviene una richiesta di posta dell'utente ciene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (sender) che invia i comandi e quello ricevente (receiver) che invia le risposte.
+Una volta stabilito il canale trasmissivo con il comando HELO, l'SMTP-sender invia il comando MAIL (che contiene il mittente) e il receiver risponde con OK.\\
 Il sender invia poi il comando RCPT (che contiene il destinatario) identificando il recipient della mail. Se il receiver non pu\'o rispondere invia un codice di reject del recipient. Ogni qualvolta che il receiver interpreta correttamente un messaggio risponde con OK. Tutto il dialogo \'e bloccante ovvero funziona un passo alla volta. 
 I comandi MAIL, SEND, SOML o SAML iniziano una transizione di mail. Vanno seguiti da uno o pi\'u comandi RCPT e dal comando DATA. L'ultimo comando \'e QUIT 
 %mancano esempi
