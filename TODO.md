@@ -18,19 +18,9 @@
     + SNMP 
 
 ### Cosa va rivisto
-+ Livello di Collegamento
-  + Ethernet (confronto con Gervasi)
-  + Manchester
-  + ...
-+ Livello di Rete
-  + Switched LAN
-+ Livello di Trasporto
-+ Livello delle Applicazioni
-  + Servizi di rete 
-    + DHCP
-    + Sicurezza di rete
-      + Oscuramento
-      + Hardening 
++ Livello di rete
+  + DNS
++ Sicurezza di rete
       
 ### Argomenti lasciati alla buona volontà dei posteri
 + Introduzione
