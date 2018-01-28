@@ -22,14 +22,15 @@
   + DNS
 + Sicurezza di rete
       
-### Argomenti lasciati alla buona volontà dei posteri
+### Argomenti lasciati alla buona volontà dei posteri 
 + Livello di rete
-    + EGP (il protocollo!!)
-    + BGP - struttura dei diversi tipi di messaggi
+    + EGP (il protocollo, non la famiglia!)
+    + BGP - struttura dei diversi tipi di messaggi 
     + Routing internet delle origini 
 + Livello delle Applicazioni
-    + Algoritmi crittografici (non sono molto attinenti alle reti)
+    + Algoritmi crittografici (non sono molto attinenti all'architettura reti)
     + Usenet news (non le usa più nessuno)
+    + HTTP 1 (non si usa, siamo al 2)
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
