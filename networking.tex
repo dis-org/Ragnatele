@@ -1576,12 +1576,12 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un database c
 \para{SMI} Structure of Management Information.
  
  \sub {Posta elettronica}
-La posta elettronica \'e un servizio che coinvolge due programmi: il \textbf{Mail User Agent} ed il \textbf{programma di trasporto} (ad esempio \textit{SendMail}). 
-\subsub{MUA} Il Mail User Agent costituisce un'interfaccia utente verso l'applicazione utilizzata ed offre funzionalità di composizione, visualizzazione, archiviazione ed eliminazione (automatica, tramite filtri, o manuale) dei messaggi.
-I principali protocolli che consentono l'interazione tra MUA e protocollo di trasporto sono \textbf{IMAP} (Internet Message Access Protocol) e \textbf{POP3} (Post Office Protocol 3) o Popper. 
+La posta elettronica \'e un servizio che coinvolge due programmi: il \textbf{Mail User Agent} ed il \textbf{programma di trasporto}, di cui è un esempio \textit{SendMail}. 
+\subsub{MUA} Il Mail User Agent costituisce un'interfaccia utente che offre funzionalità di composizione, visualizzazione, archiviazione ed eliminazione (automatica, tramite filtri, o manuale) dei messaggi.
+I principali protocolli che consentono l'interazione tra MUA e protocollo di trasporto sono \vedi{POP3} e \vedi{IMAP}. 
 \para{POP3}
-Il Post Office Protocol permette l'accesso da remoto ad un server di posta elettronica in ascolto sulla porta 110.
-Si tratta di un'applicazione client-server in cui la connessione al server \'e stabilita tramite il protocollo TCP/IP. Client e server si scambiano comandi (sintassi: \code{keyword argomento}) e risposte (sintassi: \code{state keyword info}), in un dialogo articolato in quattro fasi:
+Il Post Office Protocol, noto anche come \textit{Popper}, permette l'accesso da remoto ad un server di posta elettronica in ascolto sulla porta 110.
+Si tratta di un'applicazione client-server in cui la connessione \'e stabilita tramite il protocollo TCP/IP. Client e server si scambiano comandi (sintassi: \code{keyword \textit{argomento}}) e risposte (sintassi: \code{state keyword info}), in un dialogo articolato in quattro fasi:
 \begin{enumerate}
 \item apertura di una connessione TCP/IP e invio di un messaggio di benvenuto al client da parte del server;
 \item \textbf{authorization}: il client effettua il login in chiaro, tramite i comandi \code{USER} e \code{PASS};
@@ -1598,23 +1598,23 @@ Si tratta di un'applicazione client-server in cui la connessione al server \'e s
 \item \textbf{update}: rilascio delle risorse acquisite e chiusura della sessione, tramite il comando \code{QUIT}.
 \end{enumerate}
 \para{IMAP}
-L'Interactive Mail Access Protocol, definito negli \vedi{RFC} 1064 e 2060 e attualmente alla sua quarta versione, è un metodo per l'accesso dinamico alle mailbox più moderno ed efficiente di \vedi{POP3}, specialmente nei casi, oramai all'ordine del giorno, in cui l'utente ha necessità di accedere alla propria casella di posta da più di un client simultaneamente. Esso è inoltre dotato di potenti strumenti di ricerca delle informazioni e di gestione delle informazioni multimediali (vedi \vedi{MIME}). 
+L'Interactive Mail Access Protocol, definito negli \vedi{RFC} 1064 e 2060 e attualmente alla sua quarta versione, è un metodo per l'accesso dinamico alle mailbox più moderno ed efficiente di \vedi{POP3}, specialmente nei casi, oramai all'ordine del giorno, in cui l'utente ha necessità di accedere alla propria casella di posta da più di un client simultaneamente. Esso è inoltre dotato di potenti strumenti di ricerca delle informazioni e di gestione dei contenuti multimediali (vedi \vedi{MIME}). 
 IMAP, che utilizza la porta 143, associa ai messaggi delle flag di sistema, che ne definiscono lo stato, ad esempio \code{\textbackslash Seen}, \code{\textbackslash Answered}, \code{\textbackslash Flagged}, \code{\textbackslash Deleted}, \code{\textbackslash Draft} e \code{\textbackslash Recent Message}.\\
-\subsub{Programma di trasporto} Il programma di trasporto si occupa del trasferimento dei messaggi e del servizio di notifica all'utente, ossia la gestione della ricevuta di ritorno, utile per rilevare i casi in cui l'utente finale non riceve la mail.\newline
-Per \textit{trasferimento} si intende il meccanismo con il quale il messaggio viene effettivamente trasmesso: nel momento in cui il MUA procede all'invio di un messaggio viene attivata una sessione con il server di destinazione e il programma di trsporto trasferisce l'e-mail tramite il protocollo \textbf{SMTP} (Simple Mail Transfer Protocol). 
+\subsub{Programma di trasporto} Il programma di trasporto si occupa del trasferimento dei messaggi e del servizio di notifica all'utente, ossia della gestione della ricevuta di ritorno, utile per rilevare i casi in cui l'utente finale non riceve la mail.\newline
+Per trasferimento s'intende il meccanismo con il quale il messaggio viene effettivamente trasmesso: nel momento in cui il MUA procede all'invio di un messaggio, viene attivata una sessione con il server di destinazione e il programma di trsporto trasferisce l'e-mail tramite il protocollo \textbf{SMTP} (Simple Mail Transfer Protocol). 
 
-\para{SMTP} Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente ed affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE (Inter Process Communication Environment). Ad ogni richiesta da parte dell'utente, tramite il comando \code{HELO} viene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (\textit{sender}), che invia i comandi, e quello ricevente (\textit{receiver}), che invia le risposte.
+\para{SMTP} Il Simple Mail Transfer Protocol  \'e adibito al trasporto di messaggi, efficiente ed affidabile, in ambienti eterogenei. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE (Inter Process Communication Environment). Ad ogni richiesta da parte dell'utente, tramite il comando \code{HELO} viene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (\textit{sender}), che invia i comandi, e quello ricevente (\textit{receiver}), che invia le risposte.
 Una volta creato il canale, l'SMTP-sender invia il comando \code{MAIL}\footnote{Comandi alternativi a \code{MAIL} sono \code{SEND}, \code{SOML} e \code{SAML}}, che contiene i dati riguardanti il mittente, e il receiver risponde con \code{OK}.\\
 Il sender invia poi il comando \code{RCPT}, contenente i dati del destinatario, seguito da \code{DATA}. Se il receiver non pu\'o rispondere, invia un codice di reject. Ogniqualvolta il receiver interpreta correttamente un messaggio risponde con \code{OK}. Altri comandi utilizzati durande la sessione sono \code{NOOP}, \code{HELP}, \code{EXPN} e \code{VRFY}. La sessione termina sempre con \code{QUIT}. Tale dialogo \'e bloccante. 
 %mancano esempi
 \para{Configurazione di Sendmail}
-La configurazione manuale di Sendmail (file \code{sendmail.cf}) è diventata nel tempo talmente complessa da essere sconsigliata. Essa viene semplificata tramite uno pseudolinguaggio, \textbf{M4}.
+La configurazione manuale di Sendmail (file \code{sendmail.cf}) è diventata nel tempo talmente complessa da essere sconsigliata. Essa viene semplificata tramite uno pseudolinguaggio compilato, \textbf{M4}.
 \para{MIME}
 Per poter far fronte alle nuove esigenze di codifica di caratteri speciali e contenuti multimediali, gli \vedi{RFC} 1341 e 1521 hanno introdotto lo standard di codifica MIME (Multipurpouse Internet Mail Extensions). Esso aggiunge nuovi header rispetto al RFC 822 senza influire sul normale funzionamento del programma di trasporto, tra i quali il content-type, che descrive il tipo di contenuto. 
 \para{Mail relay} Quando un dominio di posta è particolarmente importante, occorre definire un gestore di posta secondario, che in caso di malfunzionamenti sia in grado di salvare temporaneamente i messaggi in transito, facendo le veci del server di destinazione, in modo che eventuali anomalie non abbiano conseguenze sul mittente.
 Tale funzione, tuttavia, è stata a lungo sfruttata dagli spammer, che si fingevano server secondari. Attualmente si suole dunque indicare espressamente gli host dai quali si accetta relaying in un'apposita tabella.
 \para{Posta elettronica privata}
-La crittografia ed i certificati digitali permettono di garantire la segretezza della corrispondenza. Esiste la possibilità, difatti, di configurare il proprio \vedi{MUA} per l'uso, ad esempio, di GPG (GNU Privacy Guard, equivalente libero di PGP) tramite il plugin Enigmail. La PEC (Posta Elettronica Certificata) è la modalita di attuazione italiana del concetto di posta elettronica privata.
+La crittografia ed i certificati digitali permettono di garantire la segretezza della corrispondenza. Esiste la possibilità, difatti, di configurare il proprio \vedi{MUA} per l'uso, ad esempio, di GPG (GNU Privacy Guard, equivalente libero di PGP) tramite il plugin Enigmail. La PEC (Posta Elettronica Certificata) è la modalita di attuazione italiana, istituzionalizzata, del concetto di posta elettronica privata.
 \newpage
 \sec{Sicurezza di rete}
 La sicurezza di rete è una branca della sicurezza informatica che si occupa dei rischi correlati all'interconnessione di host.
