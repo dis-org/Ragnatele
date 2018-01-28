@@ -23,14 +23,13 @@
 + Sicurezza di rete
       
 ### Argomenti lasciati alla buona volontà dei posteri
-+ Introduzione
-    + Storia di internet
 + Livello di rete
     + EGP (il protocollo!!)
     + BGP - struttura dei diversi tipi di messaggi
     + Routing internet delle origini 
 + Livello delle Applicazioni
-    + Algoritmi crittografici usati in OpenSSH
+    + Algoritmi crittografici (non sono molto attinenti alle reti)
+    + Usenet news (non le usa più nessuno)
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
