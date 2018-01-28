@@ -775,12 +775,10 @@ Nel secondo livello OSI troviamo dispositivi di rete plug-and-play ed \textit{"i
 \end{itemize}
 %img [Ciascun segmento di rete, collegato ad una porta di un bridge, costituisce un \textbf{dominio di collisione} \footnote{insieme di nodi che concorrono per accedere allo stesso mezzo trasmissivo per successivamente trasmettere} separato]
 
-\subsub{Switch} Uno switch \textit{(commutatore)} è un dispositivo molto simile al bridge, ma a differenza di quest'ultimo è collegato direttamente agli \textbf{\textit{host}} ed ha un numero di porte nettamente superiore.
-\paragraph{Funzionamento} la funzione di instradamento è implementata mantenendo in un \textbf{buffer locale} tutti gli \textit{indirizzi MAC} degli host connessi alla rete, suddivisi per \textit{porta dello switch}.\\
-L'instradamento è analogo al bridge, ma nel caso in cui lo switch invia il pacchetto a tutte le porte (Flooding), il nodo destinatario -ricevuto il pacchetto- risponderà facendo sapere allo switch la sua porta ed il suo MAC address.\\
-Infine usando lo switch, non sono possibili collisioni ed è possibile usare la modalità \textbf{full duplex} (trasmissione contemporanea)
-%img [lo switch riduce la rete in un insieme di \textbf{domini di collisione} di dimensioni minime (al limite costituiti ognuno da un singolo host)]
-%implementazione LAN con switch???
+\subsub{Switch} Uno switch \textit{(commutatore)} è un dispositivo molto simile al bridge, ma a differenza di quest'ultimo è collegato direttamente agli host ed ha un numero di porte nettamente superiore.
+\paragraph{Funzionamento} La funzione di instradamento è implementata mantenendo in un buffer locale tutti gli indirizzi \vedi{MAC} degli host connessi alla rete, suddivisi per \textit{porta dello switch}.\\
+L'instradamento è analogo a quello del bridge, ma nel caso in cui lo switch invii il pacchetto a tutte le porte (flooding), il nodo destinatario, ricevuto il pacchetto, risponderà facendo sapere allo switch la sua porta ed il suo MAC address.\\
+Infine, usando lo switch, non sono possibili collisioni ed è possibile usare la modalità \vedi{Full-Duplex}.
 
 \newpage\sec{Livello di rete}
 
@@ -1320,24 +1318,24 @@ chiamato \code{dhcpd.conf}.
 \newpage\subsub{DNS}
 Il DNS (\textit{Domain Name System}) è un servizio utilizzato per associare i nomi degli host, più semplici da ricordare per l'utente, ai relativi indirizzi  \vedi{IP}. In tal modo è inoltre possibile attribuire più nomi allo stesso indirizzo IP (o viceversa) per rappresentare servizi diversi forniti da uno stesso host (o più host che forniscono lo stesso servizio).
 \paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ nel 1983, quando questo modello diventò insostenibile, assieme a Paul Mockapetris e Craig Partridge ideò il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
-\paragraph{Spazio dei nomi gerarchico} basato su un insieme di database distribuiti, garantisce l'aggiornamento di tutta la rete. L'insieme dei nomi viene suddiviso in zone dette domini che possono coprire più host ed essere suddivise in sotto-domini e così via, formando una struttura ad albero in cui i nodi rappresentano i nomi:
+\paragraph{Spazio dei nomi gerarchico} Basato su un insieme di database distribuiti, garantisce l'aggiornamento di tutta la rete. L'insieme dei nomi viene suddiviso in zone dette domini che possono coprire più host ed essere suddivise in sotto-domini e così via, formando una struttura ad albero in cui i nodi rappresentano i nomi:
 \begin{itemize}
 \item I domini di primo livello o \textbf{TLD} (\textit{Top Level Domain}) sono i figli del nodo radice ".", suddivisi in: 
 \begin{itemize}
-\item \textbf{gTLD} (\textit{generic TLD}), ad esempio .com, .edu...
-\item \textbf{ccTLD} (\textit{country-code TLD}) ad esempio .it, .fr, .uk...),
+\item \textbf{gTLD} (\textit{generic TLD}), ad esempio .com, .edu\footnote{gTLD riservati: \code{.example}, \code{.invalid}, \code{.localhost}, \code{.test}}...
+\item \textbf{ccTLD} (\textit{country-code TLD}) ad esempio .it, .fr, .uk...,
 \item \textbf{infrastrutturali}: .arpa, usato per la risoluzione inversa dei nomi. 
 \end{itemize}
-Essi sono assegnati da \vedi{ICANN} alle organizzioni o alle autorità responsabili locali (per l'Italia l'IIT CNR). La lista completa dei è disponibile all'indirizzo \url{www.iana.org/domains/root/db}.
-\item I domini di secondo livello, in genere, appartengono alle organizzazioni che li hanno registrati e comprendono il loro e il dominio precedente separati da un punto (es. unipg.it).
+Essi sono assegnati da \vedi{ICANN} alle organizzioni o alle autorità responsabili locali (per l'Italia l'IIT CNR). La lista completa è disponibile all'indirizzo \url{www.iana.org/domains/root/db}.
+\item I domini di secondo livello, in genere, appartengono alle organizzazioni che li hanno registrati e comprendono il loro nome e il dominio di primo livello separati da un punto (es. unipg.it).
 \item I successivi \textit{sotto-domini} vengono creati per rendere la gestione del DNS modulare e seguono la stessa logica dei domini di secondo livello.
 \item Infine le foglie corrispondono agli host. 
 \image[dns.png][scale=0.35]{Spazio gerarchico dei nomi}
 \end{itemize}
 Quindi, al contrario degli indirizzi IP, in un nome DNS la parte più importante è la prima partendo da destra (appunto, il TLD).
-Ad ogni dominio è associato un resource record (RR), file ASCII che contengono records del database DNS.  %\vedi resource record
-\paragraph{Server DNS} per rendere disponibile lo spazio dei nomi e rispondere alle richieste del resolver risolvendo i nomi (name server)
-\paragraph{Client DNS} una libreria di funzioni per generare e inviare le richieste sui nomi, interrogando i server DNS (resolver)
+Ad ogni dominio è associato un Resource Record (RR), file ASCII che contiene record del database DNS.  %\vedi resource record
+\paragraph{Name server} Server DNS che risponde alle richieste del resolver, effettuando le conversioni nomi/indirizzi.
+\paragraph{Resolver} Libreria di funzioni presente nei client per generare e inviare le query relative ai nameserver.
 
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
@@ -1356,7 +1354,7 @@ BIND può essere configurato come
 \item \italic{\textbf{primary}}: gestiscono le informazioni relative a specifici domini, salvate negli \vedi{Zone files}, confgurati dall'amministratore di rete.
 \end{itemize}
 \end{itemize}
-Di seguito, le \textbf{Configurazioni} del \textbf{Resolver}, del \textbf{Named} e degli \textbf{Zone files} di BIND:
+Di seguito, le configurazioni del resolver, del named e degli \textbf{Zone files} di BIND:
 \paragraph{Resolver} \textbf{(/etc/resolv.conf)}: contiene istruzioni per l'esecuzione delle richieste; Si può usare la configurazione di default, altrimenti è necessario specificare:
 \begin{itemize}
 \item \textbf{nameserver \textless IP-address\textgreater}: le richieste saranno inviate all'IP \textit{IP-address}. Si possono specificare al massimo 3 nameserver, nel caso il primo non risponda.
@@ -1550,60 +1548,73 @@ non era adatto a supportre la crescita esponenziale del \vedi{WWW};
 \subsub{NFS}
 Network File System: permette di condividere directory e file su rete, riducendo l'occupazione dello spazio su disco locale.\\Lato client, l'inserimento di una directory collocata in un host remoto viene detto \italic{mounting} ed è realizzato tramite il comando \code{mount}.\\
 Lato server, la condivisione di una cartella con un host specifico è detta \italic{sharing} ed è ottenuta mediante il comando \code{export}.
-NFS si compone dei seguenti programmi:
+NFS è modulare, suddiviso in tre parti indipendenti:
 \begin{itemize}
-\item \code{nsfd [nserver\footnote{Numero di processi da eseguire}]} demone lato server  che gestisce le richieste NSF;
+\item \textbf{NFS}, implementata da: 
+\begin{itemize}
+\item \code{nsfd [nserver\footnote{Numero di processi da eseguire}]}, demone lato server  che gestisce le richieste NSF,
 \item \code{biod [nserver]} demone lato server che gestice l'I/O dei client;
-\item \code{rcp.locked} demone che gestisce i \italic{lock files} che bloccano istanze multiple di processi specifici;
-\item \code{rcp.statd} demone che controlla lo stato della rete;
-\item \code{rcp.mountd} demone lato server che risponde alle richieste di mount.
+\end{itemize}
+\item \textbf{RPC} (Remote Procedure Code), implementata da:
+\begin{itemize}
+\item \code{rpc.locked} demone che gestisce i \italic{lock files} che bloccano istanze multiple di processi specifici,
+\item \code{rpc.statd} demone che controlla lo stato della rete,
+\item \code{rpc.mountd} demone lato server che risponde alle richieste di mount;
+\end{itemize}
+\item \textbf{XDR} (eXternal Data Representation), che consente la condivisione dei file a prescindere dalla codifica specifica di ognuno.
 \end{itemize} 
 \subsub{SNMP}  %Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI)
 Simple Network Management Protocol: protocollo per la gestione di reti internet che permette ad uno o più \vedi{DTE} detti \italic{manager} di accedere e modificare, attraverso \vedi{UDP} sulle porte $161$ e $162$, alcune informazioni elementari dei vari dispositivi di rete, detti \italic{agents}. Le informazioni gestiste nei vari \italic{agents}, dette 
-oggetti (in inglese \italic{managed objects}), vengono raccolte in un databse chiamato \vedi{MIB} (Management Information Base).
+oggetti (in inglese \italic{managed objects}), vengono raccolte in un database chiamato \vedi{MIB}.
 \\Esistono più versioni del protocollo:
 \begin{itemize}
-\item SNMPv1 definito nell \vedi{RFC} 1157;
-\item SNMPv2 definito negli RFC 1441, 445, 1446, 1448, 1449;
-\item SNMPv2 definito negli RFC che vanno dal 1901 fino al 1910;
-\item SNMPv3 defintio negli RFC 2026 e 2200, che rimedia alle carenze in merito a sicurezza e privacy delle versioni precedenti, tramite un sistema di autenticazione e strumenti di controllo degli accessi.
+\item SNMPv1;
+\item SNMPv2;
+\item SNMPv3, che rimedia alle carenze in merito a sicurezza e privacy delle versioni precedenti, tramite un sistema di autenticazione e strumenti di controllo degli accessi.
 \end{itemize}
-\para{MIB} Da non confondere con il film Man in Black.
+\para{MIB} (Management Information Base).
 \para{SMI} Structure of Management Information.
  
- \sub {Posta Elettronica}
-La Posta Elettronica \'e composta da due programm: il Mail User Agent ed il programma di trasporto (ad esempio \textit{SendMail}). Il primo \'e un' interfaccia verso l'applicazione utilizzata ed offre funzionalità di:
- \begin{itemize}
- 	\item composizione 
- 	\item visualizzazione
- 	\item eliminazione
- \end{itemize}
- Per composizione si intende il processo di composizione del messaggio stesso.\newline
- Per visualizzazione ci si riferisce ai processi di visualizzazione del messaggio stesso, di archiviazione e di interazione con il sistema.\newline
- Per eliminazione si intende il processo di gestione dello spazio eliminando mail irrilevanti\newline
- Il programma di trasporto si interessa di:
- \begin{itemize}
-	\item trasferimento
-	\item notifica all'utente
- \end{itemize}
- Per trasferimento si intende il meccanismo con il quale il messaggio viene trasmesso: quando il Mail User Agent spedisce il messaggio viene attivata una sessione con il server di destinazione, le mail vengono trasferite secondo il protocollo SMTP(Simple Mail Transfer Protocol).\newline 
- Con notifica dell'utente ci si riferisce alla gestione della ricevuta di ritorno, utile per quando l'utente finale non riceve la mail.\newline
- I protocolli principali utilizzati per interagire con il protocollo di trasporto sono IMAP (Internet Message Access Protocol), SMTP (Simple Mail Transfer Protocol) e POP3 (Post Office Protocol). %spiega i tre protocolli 
-\subsub{MIME}
- Per poter far fronte ai diversi caratteri da dover rappresentare con le email  \'e stato introdotto lo standard di decodifica MIME (Multipurpouse Internet Mail Extensions).\\
- Lo standard MIME aggiunge nuovi headers rispetto al RFC822 senza influire sul normale funzionamento del Programma di Trasporto tra i quali il Content-Type che descrive il tipo di contenuto (Ad es: Content-Type: mpeg).
-
-\subsub{SMTP}
-Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente e affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE (Inter Process Communication Environment). Quando avviene una richiesta di posta dell'utente viene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (sender) che invia i comandi e quello ricevente (receiver) che invia le risposte.
-Una volta stabilito il canale trasmissivo con il comando HELLO, l'SMTP-sender invia il comando MAIL (che contiene il mittente) e il receiver risponde con OK.\\
-Il sender invia poi il comando RCPT (che contiene il destinatario) identificando il recipient della mail. Se il receiver non pu\'o rispondere invia un codice di reject del recipient. Ogni qualvolta che il receiver interpreta correttamente un messaggio risponde con OK. Tutto il dialogo \'e bloccante ovvero funziona un passo alla volta. 
-I comandi MAIL, SEND, SOML o SAML iniziano una transizione di mail. Vanno seguiti da uno o pi\'u comandi RCPT e dal comando DATA. L'ultimo comando \'e QUIT 
-%mancano esempi
-\subsub{POP3}
+ \sub {Posta elettronica}
+La posta elettronica \'e un servizio che coinvolge due programmi: il \textbf{Mail User Agent} ed il \textbf{programma di trasporto} (ad esempio \textit{SendMail}). 
+\subsub{MUA} Il Mail User Agent costituisce un'interfaccia utente verso l'applicazione utilizzata ed offre funzionalità di composizione, visualizzazione, archiviazione ed eliminazione (automatica, tramite filtri, o manuale) dei messaggi.
+I principali protocolli che consentono l'interazione tra MUA e protocollo di trasporto sono \textbf{IMAP} (Internet Message Access Protocol) e \textbf{POP3} (Post Office Protocol 3) o Popper. 
+\para{POP3}
 Il Post Office Protocol permette l'accesso da remoto ad un server di posta elettronica in ascolto sulla porta 110.
-\'e un'applicazione client-server che consente al client di ricevere e cancellare messaggi sul server SMTP. La connessione al server \'e stabilita tramite il protocollo TCP/IP. Client e Server si scambiano comandi  e risposte: i primi segueno la seguente sintassi \code{keyword argomento} e le risposte: \code{state keyword info}
-\subsub{IMAP}
-Dalle dispense l'unica cosa che si evince \'e che imap \'e meglio di pop3 e che utilizza dei flag per i messaggi che ne indicano lo stato e suppongo sia l'unica cosa che gli interessi. Il resto \'e un ammasso di informazioni incomprensibili e disegni senza contesto.
+Si tratta di un'applicazione client-server in cui la connessione al server \'e stabilita tramite il protocollo TCP/IP. Client e server si scambiano comandi (sintassi: \code{keyword argomento}) e risposte (sintassi: \code{state keyword info}), in un dialogo articolato in quattro fasi:
+\begin{enumerate}
+\item apertura di una connessione TCP/IP e invio di un messaggio di benvenuto al client da parte del server;
+\item \textbf{authorization}: il client effettua il login in chiaro, tramite i comandi \code{USER} e \code{PASS};
+\item \textbf{transaction}: il client richiede azioni al server. I comandi utilizzati sono:
+\begin{itemize}
+\item \code{STAT}, che restituisce numero e dimensione totale dei messaggi);
+\item \code{LIST [msg]}, che elenca id e dimensione del/i messaggio/i specificato/i;
+\item \code{RETR msg}, per la ricezione del/i messaggio/i specificato/i;
+\item \code{DELE msg}, per la cancellazione del/i messaggio/i specificato/i;
+\item \code{NOOP};
+\item \code{LAST}, che indica il messaggio con id più alto ricevuto;
+\item \code{RSET}, per la marcatura dei messaggi da cancellare;
+\end{itemize}
+\item \textbf{update}: rilascio delle risorse acquisite e chiusura della sessione, tramite il comando \code{QUIT}.
+\end{enumerate}
+\para{IMAP}
+L'Interactive Mail Access Protocol, definito negli \vedi{RFC} 1064 e 2060 e attualmente alla sua quarta versione, è un metodo per l'accesso dinamico alle mailbox più moderno ed efficiente di \vedi{POP3}, specialmente nei casi, oramai all'ordine del giorno, in cui l'utente ha necessità di accedere alla propria casella di posta da più di un client simultaneamente. Esso è inoltre dotato di potenti strumenti di ricerca delle informazioni e di gestione delle informazioni multimediali (vedi \vedi{MIME}). 
+IMAP, che utilizza la porta 143, associa ai messaggi delle flag di sistema, che ne definiscono lo stato, ad esempio \code{\textbackslash Seen}, \code{\textbackslash Answered}, \code{\textbackslash Flagged}, \code{\textbackslash Deleted}, \code{\textbackslash Draft} e \code{\textbackslash Recent Message}.\\
+\subsub{Programma di trasporto} Il programma di trasporto si occupa del trasferimento dei messaggi e del servizio di notifica all'utente, ossia la gestione della ricevuta di ritorno, utile per rilevare i casi in cui l'utente finale non riceve la mail.\newline
+Per \textit{trasferimento} si intende il meccanismo con il quale il messaggio viene effettivamente trasmesso: nel momento in cui il MUA procede all'invio di un messaggio viene attivata una sessione con il server di destinazione e il programma di trsporto trasferisce l'e-mail tramite il protocollo \textbf{SMTP} (Simple Mail Transfer Protocol). 
+
+\para{SMTP} Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente ed affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE (Inter Process Communication Environment). Ad ogni richiesta da parte dell'utente, tramite il comando \code{HELO} viene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (\textit{sender}), che invia i comandi, e quello ricevente (\textit{receiver}), che invia le risposte.
+Una volta creato il canale, l'SMTP-sender invia il comando \code{MAIL}\footnote{Comandi alternativi a \code{MAIL} sono \code{SEND}, \code{SOML} e \code{SAML}}, che contiene i dati riguardanti il mittente, e il receiver risponde con \code{OK}.\\
+Il sender invia poi il comando \code{RCPT}, contenente i dati del destinatario, seguito da \code{DATA}. Se il receiver non pu\'o rispondere, invia un codice di reject. Ogniqualvolta il receiver interpreta correttamente un messaggio risponde con \code{OK}. Altri comandi utilizzati durande la sessione sono \code{NOOP}, \code{HELP}, \code{EXPN} e \code{VRFY}. La sessione termina sempre con \code{QUIT}. Tale dialogo \'e bloccante. 
+%mancano esempi
+\para{Configurazione di Sendmail}
+La configurazione manuale di Sendmail (file \code{sendmail.cf}) è diventata nel tempo talmente complessa da essere sconsigliata. Essa viene semplificata tramite uno pseudolinguaggio, \textbf{M4}.
+\para{MIME}
+Per poter far fronte alle nuove esigenze di codifica di caratteri speciali e contenuti multimediali, gli \vedi{RFC} 1341 e 1521 hanno introdotto lo standard di codifica MIME (Multipurpouse Internet Mail Extensions). Esso aggiunge nuovi header rispetto al RFC 822 senza influire sul normale funzionamento del programma di trasporto, tra i quali il content-type, che descrive il tipo di contenuto. 
+\para{Mail relay} Quando un dominio di posta è particolarmente importante, occorre definire un gestore di posta secondario, che in caso di malfunzionamenti sia in grado di salvare temporaneamente i messaggi in transito, facendo le veci del server di destinazione, in modo che eventuali anomalie non abbiano conseguenze sul mittente.
+Tale funzione, tuttavia, è stata a lungo sfruttata dagli spammer, che si fingevano server secondari. Attualmente si suole dunque indicare espressamente gli host dai quali si accetta relaying in un'apposita tabella.
+\para{Posta elettronica privata}
+La crittografia ed i certificati digitali permettono di garantire la segretezza della corrispondenza. Esiste la possibilità, difatti, di configurare il proprio \vedi{MUA} per l'uso, ad esempio, di GPG (GNU Privacy Guard, equivalente libero di PGP) tramite il plugin Enigmail. La PEC (Posta Elettronica Certificata) è la modalita di attuazione italiana del concetto di posta elettronica privata.
 \newpage
 \sec{Sicurezza di rete}
 La sicurezza di rete è una branca della sicurezza informatica che si occupa dei rischi correlati all'interconnessione di host.
