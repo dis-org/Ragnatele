@@ -1570,47 +1570,45 @@ e permette di interrogare un nameserver per ottenere informazioni  e verificarne
 \subsub{NIS}
 Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages), è un servizio che permette di definire delle risorse di amministrazione comuni ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP} 
-HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul Web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} distribuita nella rete ed acceduta mediante \textit{hyperlinks} \footnote{Collegamenti ipertestuali.}). Utilizza il protocollo TCP sulla porta 80.
-\paragraph{Storia} HTTP è utilizzato dal \vedi{WWW} dal 1990, e da allora è stato aggiornato a diverse versioni:
+HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul Web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} distribuita nella rete ed acceduta mediante \textit{hyperlink}\footnote{Collegamenti ipertestuali.}). Utilizza il protocollo TCP sulla porta 80.
+\paragraph{Storia} HTTP è utilizzato dal \vedi{WWW} dal 1990, e se ne sono susseguite diverse versioni:
 \begin{itemize}
 \item \textbf{HTTP/0.9}: semplice protocollo per il trasferimento di dati grezzi sulla rete Internet, gestito dal \vedi{W3C};
 \item \textbf{HTTP/1.0} (\vedi{RFC} 1945): pur consentendo il trasferimento di messaggi di tipo MIME, % vedi?
 non era adatto a supportre la crescita esponenziale del \vedi{WWW};
 \item \textbf{HTTP/1.1}: versione consolidata del protocollo, usato per 15 anni per lo sviluppo del Web;
-\item \textbf{HTTP/2} (\vedi{RFC} 7540): nuovo standard basato sul protocollo SPDY/2 sviluppato da Google.
+\item \textbf{HTTP/2} (\vedi{RFC} 7540): nuovo standard basato sul protocollo SPDY/2, quest'ultimo sviluppato da Google. Questa nuova versione migliora di molto le prestazioni, senza bisogno che le applicazioni preesistenti necessitino di modifiche. 
 \end{itemize}
-\paragraph{Funzionamento} L'HTTP ha un'architettura di tipo client/server \italic{stateless}\footnote{Un protocollo di comunicazione stateless non salva informazioni sulla sessione e quindi interpreta ogni messaggio indipendentemente dagli altri.} e comprende due tipi di messaggi: di richiesta e di risposta.
+\paragraph{Funzionamento} L'HTTP ha un'architettura di tipo client/server \italic{stateless}\footnote{Un protocollo di comunicazione stateless non salva informazioni sulla sessione e quindi interpreta ogni messaggio indipendentemente dagli altri.} e comprende due tipi di messaggi: quelli di richiesta e quelli di risposta.
 \begin{itemize}
-\item \textbf{HTTP Request} inviato dal client verso un server, è composto da:
+\item \textbf{HTTP Request}: inviato dal client verso un server, è composta da:
 \begin{itemize}
-\item \textbf{request line}: riga di richiesta composta dal metodo di richiesta \textit{(GET, POST, HEAD, PUT, DELETE, TRACE, OPTIONS, CONNECT)}, l'URI \textit{(indica la risorsa richiesta, es pagina web)} e la versione del protocollo.
-\item \textbf{header}: informazioni aggiuntive, tra cui l'Host \textit{(nameserver a cui si riferisce l'URL)} e l'User-Agent \textit{(tipo di client)}
-\item riga vuota
-\item \textbf{body}: corpo del messaggio
+\item \textbf{request line}: riga di richiesta composta da metodo di richiesta (\code{GET}, \code{POST}, \code{HEAD}, \code{PUT}, \code{DELETE}, \code{TRACE}, \code{OPTIONS} o \code{CONNECT}), \vedi{URI} e versione del protocollo;
+\item \textbf{header}: riga che contiene informazioni aggiuntive, tra cui l'host e l'\textit{user-agent} (tipo di client), seguita da una riga vuota;
+\item \textbf{body}: corpo del messaggio.
 \end{itemize}
 \item \textbf{HTTP Response} inviato dal server, è di tipo testuale ed è composto da:
 \begin{itemize}
-\item \textbf{status line}: riga di stato che riporta un codice a tre cifre per identificare lo stato della risposta \textit{(1xx Informational, 2xx Successful, 3xx Redirection, 4xx Client error, 5xx Server error)}
-\item \textbf{header}: Server \textit{(indica il tipo di server)}, Content-Type \textit{(il tipo di contenuto restituito in codifica MIME, es. text/html, text/plain...)}
-\item riga vuota
-\item \textbf{body}: contenuto della risposta
+\item \textbf{status line}: riga di stato che riporta un codice a tre cifre per identificare lo stato della risposta (\code{1xx}: informational, \code{2xx}: successful, \code{3xx}: redirection, \code{4xx}: client error, \code{5xx}: server error);
+\item \textbf{header}: è composto da i campi server (tipo di server) e content-type (tipo di contenuto restituito in codifica \vedi{MIME}) e seguito da una riga vuota;
+\item \textbf{body}: contenuto della risposta.
 \end{itemize}
 \end{itemize}
 \para{HTTPS} Adattamento dell'HTTP per comunicazioni sicure, utilizza un protocollo crittografico a doppia chiave. La comunicazione criptata avviene sulla porta 443. Esiste in due varianti che differiscono per il protocollo crittografico  utilizzato:
 \begin{itemize}
 \item SSL (Secure Sockets Layer): ogni server deve avere un certificato X.509, emesso da una \italic{certificate authority} (CA) e contenente:
 \begin{itemize}
-\item Chiave pubblica;
-\item Il \italic{distinguished name} del server (nome ed indirizzo);
-\item Numero di serie o data di pubblicazione dei certificato;
-\item La data di fine validità del certificato.
+\item chiave pubblica,
+\item \italic{distinguished name} del server (nome ed indirizzo),
+\item numero di serie o data di pubblicazione dei certificato,
+\item data di fine validità del certificato;
 \end{itemize}
 
-\item TLS (Transport Layer): è l'evoluzione di SSL, definita nell'\vedi{RFC} 2246 (SSL 3.1). Si articola in tre fasi:
+\item TLS (Transport Layer): è l'evoluzione di SSL, definita nell'\vedi{RFC} 2246 (SSL 3.1). Si articola nelle seguenti fasi:
 \begin{enumerate}
-\item Negoziazione degli algoritmi da utilizzare;
-\item Scambio delle chiavi;
-\item Autenticazione;
+\item Negoziazione degli algoritmi da utilizzare,
+\item Scambio delle chiavi,
+\item Autenticazione,
 \item Cifratura simmetrica.
 \end{enumerate}
 \end{itemize}
