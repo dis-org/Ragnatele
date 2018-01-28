@@ -25,12 +25,13 @@
 ### Argomenti lasciati alla buona volontà dei posteri 
 + Livello di rete
     + EGP (il protocollo, non la famiglia!)
-    + BGP - struttura dei diversi tipi di messaggi 
-    + Routing internet delle origini 
+    + BGP - struttura dei diversi tipi di messaggi (sono troppi)
+    + Routing internet delle origini (nessuno aveva voglia di scriverlo)
 + Livello delle Applicazioni
     + Algoritmi crittografici (non sono molto attinenti all'architettura reti)
     + Usenet news (non le usa più nessuno)
     + HTTP 1 (non si usa, siamo al 2)
+    + Informazioni vaghe su sicurezza e attacchi informatici tratte dalle slides di Arch. reti (poco significative rispetto al resto)
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
