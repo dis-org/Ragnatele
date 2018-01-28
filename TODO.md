@@ -31,7 +31,7 @@
     + Algoritmi crittografici (non sono molto attinenti all'architettura reti)
     + Usenet news (non le usa più nessuno)
     + HTTP 1 (non si usa, siamo al 2)
-    + Informazioni vaghe su sicurezza e attacchi informatici tratte dalle slides di Arch. reti (poco significative rispetto al resto)
+    + Informazioni vaghe su sicurezza e attacchi informatici tratte dalle slides di Arch. reti (poco significative rispetto al resto, e in compenso molto divertenti da leggere così come sono ;) )
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
