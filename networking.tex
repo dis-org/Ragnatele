@@ -104,7 +104,77 @@ La comunicazione tra due computer può apparire banale agli utenti, ma in realt�
 \image[osi-model.png][scale=0.2]{Modello di riferimento ISO/OSI}
 
 \sub{Internet}
-Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente e a condividere servizi, definita formalmente nel \vedi{RFC} 1122 (originariamente in \vedi{RFC} 760).
+Rete globale di reti che abilita i \vedi{DTE} a comunicare direttamente ed in modo trasparente e a condividere servizi, definita formalmente nel \vedi{RFC} 1122 (originariamente in \vedi{RFC} 760). 
+\para{Definizione}
+\textit{Internet} si riferisce al sistema di informazione globale che:
+\begin{itemize}
+\item è logicamente interconnesso attraverso uno spazio d'indirizzamento unico e globale, basato sull’IP o sulle
+sue successive estensioni e sviluppi;
+\item è in grado di supportare comunicazioni mediante la \vedi{Internet protocol suite (TCP/IP)} o le
+sue successive estensioni/sviluppi, e/o altri protocolli compatibili con l’IP; 
+\item fornisce, utilizza e rende accessibili, sia pubblicamente che privatamente, servizi di alto livello che poggiano sui differenti strati di comunicazioni e di infrastrutture a esse correlate.
+\end{itemize}
+
+\subsub{Cronologia}
+\begin{itemize}
+\item[\textbf{1962:}] \begin{itemize}
+\item Licklider propone il concetto di \textit{galactic network}, un'infrastruttura basata su un insieme di computer globalmente interconnessi al fine di scambiare dati. Internet è il risultato dell'evoluzione di questa idea.
+\item Licklider avvia il programma di ricerca \textbf{ARPA} (Advanced Research Project Agency) che cambierà il proprio nome  nel '71 in \textbf{DARPA} (Defense ARPA).
+\item Kleinrock pubblica il primo articolo sulla teoria del \textbf{packet switching}.
+\end{itemize}
+\item[\textbf{1965:}] \begin{itemize}
+\item Merrill e Roberts riescono a far comunicare due computer (Uno in Massachussets e l'altro in California), creando la prima \vedi{WAN} della storia.
+\end{itemize} 
+
+\item[\textbf{1969:}] \begin{itemize}
+\item Nasce ARPANET (ARPA NETwork), prima rete globale dalla quale nascerà Internet. Il suo primo stadio è la connessione host-to-host di due nodi.
+\item Crocker pubblica il primo \vedi{RFC}.
+\end{itemize} 
+
+\item[\textbf{1973:}] \begin{itemize}
+\item A Standford, Cerf e Kahn ideano il TCP/IP: nasce la posta elettronica.
+\item Metcalfe inventa l'\vedi{Ethernet}.
+\end{itemize}
+
+\item[\textbf{1980:}] \begin{itemize}
+\item Il \vedi{TCP} viene adottato come protocollo standard dal DoD (Department of Defense).
+\item Iniziano le attività di \textbf{USENET} (USEr NETwork) e dei relativi primi gruppi di discussione delle NEWS, prime applicazioni client-server su larga scala.
+\end{itemize} 
+
+\item[\textbf{1983:}] \begin{itemize}
+\item Postel sviluppa il \vedi{DNS}.
+\item ARPANET adotta il TCP/IP, mentre il \vedi{Modello di riferimento ISO/OSI} è sempre meno applicato.
+\item Vengono introdotte le reti \vedi{IP} di classe A, B e C.	.
+\item Vengono introdotti i TLD (vedi \vedi{DNS}) .edu, .com, .net, .org, oltre quelli della codifica ISO.
+\item La \textbf{NSF} (National Science Foundation) costituisce i centri di calcolo per servire la comunità scientifica americana.
+\end{itemize}
+
+\item[\textbf{1985:}] \begin{itemize}
+\item L'algoritmo di routing originario di Internet viene rimpiazzato dai protocolli \vedi{IGP} ed \vedi{EGP}.
+\item Nascono le prime multinazionali operanti nel settore delle reti (IBM, Proteon, Synoptis, CISCO...).
+\end{itemize}
+
+\item[\textbf{1987:}] \begin{itemize}
+\item Diventano sempre più importanti le problematiche di network management, che porteranno allo sviluppo del \vedi{SNMP}.
+\end{itemize}
+\item[\textbf{1989:}] \begin{itemize}
+\item Cerf e Kahn organizzano il primo workshop sul Gigabit.
+\item Barners-Lee, al CERN, propone il concetto di ipertesto: nasce il \vedi{WWW}.
+\end{itemize}
+\item[\textbf{1991:}] 
+\begin{itemize}
+\item Nasce \textbf{PGP} (Pretty Good Privacy).
+\end{itemize}
+\item[\textbf{1992:}] 
+\begin{itemize}
+\item Nasce \textbf{ISOC} (Internet SOCiety), fondata da Cerf e Kahn.
+\item Il \vedi{WWW} esplode. Boom.
+\end{itemize}
+\item[\textbf{1995:}] 
+\begin{itemize}
+\item IL \textbf{FNC} (Federal Networking Council) formula la \textbf{\vedi{Definizione} di Internet}.
+\end{itemize}
+\end{itemize}
 
 \subsub{WWW}
 Word Wide Web: inventato nel 1989 da Tim Berners-Lee, ricercatore al CERN, e comunemente noto come Web, è un modo di accedere alle informazioni tramite internet, basato sul concetto di ipertesto e, in particolare, sul protocollo \vedi{HTTP}. 
@@ -1500,47 +1570,45 @@ e permette di interrogare un nameserver per ottenere informazioni  e verificarne
 \subsub{NIS}
 Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages), è un servizio che permette di definire delle risorse di amministrazione comuni ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
 \subsub{HTTP} 
-HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul Web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} distribuita nella rete ed acceduta mediante \textit{hyperlinks} \footnote{Collegamenti ipertestuali.}). Utilizza il protocollo TCP sulla porta 80.
-\paragraph{Storia} HTTP è utilizzato dal \vedi{WWW} dal 1990, e da allora è stato aggiornato a diverse versioni:
+HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul Web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} distribuita nella rete ed acceduta mediante \textit{hyperlink}\footnote{Collegamenti ipertestuali.}). Utilizza il protocollo TCP sulla porta 80.
+\paragraph{Storia} HTTP è utilizzato dal \vedi{WWW} dal 1990, e se ne sono susseguite diverse versioni:
 \begin{itemize}
 \item \textbf{HTTP/0.9}: semplice protocollo per il trasferimento di dati grezzi sulla rete Internet, gestito dal \vedi{W3C};
 \item \textbf{HTTP/1.0} (\vedi{RFC} 1945): pur consentendo il trasferimento di messaggi di tipo MIME, % vedi?
 non era adatto a supportre la crescita esponenziale del \vedi{WWW};
 \item \textbf{HTTP/1.1}: versione consolidata del protocollo, usato per 15 anni per lo sviluppo del Web;
-\item \textbf{HTTP/2} (\vedi{RFC} 7540): nuovo standard basato sul protocollo SPDY/2 sviluppato da Google.
+\item \textbf{HTTP/2} (\vedi{RFC} 7540): nuovo standard basato sul protocollo SPDY/2, quest'ultimo sviluppato da Google. Questa nuova versione migliora di molto le prestazioni, senza bisogno che le applicazioni preesistenti necessitino di modifiche. 
 \end{itemize}
-\paragraph{Funzionamento} L'HTTP ha un'architettura di tipo client/server \italic{stateless}\footnote{Un protocollo di comunicazione stateless non salva informazioni sulla sessione e quindi interpreta ogni messaggio indipendentemente dagli altri.} e comprende due tipi di messaggi: di richiesta e di risposta.
+\paragraph{Funzionamento} L'HTTP ha un'architettura di tipo client/server \italic{stateless}\footnote{Un protocollo di comunicazione stateless non salva informazioni sulla sessione e quindi interpreta ogni messaggio indipendentemente dagli altri.} e comprende due tipi di messaggi: quelli di richiesta e quelli di risposta.
 \begin{itemize}
-\item \textbf{HTTP Request} inviato dal client verso un server, è composto da:
+\item \textbf{HTTP Request}: inviato dal client verso un server, è composta da:
 \begin{itemize}
-\item \textbf{request line}: riga di richiesta composta dal metodo di richiesta \textit{(GET, POST, HEAD, PUT, DELETE, TRACE, OPTIONS, CONNECT)}, l'URI \textit{(indica la risorsa richiesta, es pagina web)} e la versione del protocollo.
-\item \textbf{header}: informazioni aggiuntive, tra cui l'Host \textit{(nameserver a cui si riferisce l'URL)} e l'User-Agent \textit{(tipo di client)}
-\item riga vuota
-\item \textbf{body}: corpo del messaggio
+\item \textbf{request line}: riga di richiesta composta da metodo di richiesta (\code{GET}, \code{POST}, \code{HEAD}, \code{PUT}, \code{DELETE}, \code{TRACE}, \code{OPTIONS} o \code{CONNECT}), \vedi{URI} e versione del protocollo;
+\item \textbf{header}: riga che contiene informazioni aggiuntive, tra cui l'host e l'\textit{user-agent} (tipo di client), seguita da una riga vuota;
+\item \textbf{body}: corpo del messaggio.
 \end{itemize}
 \item \textbf{HTTP Response} inviato dal server, è di tipo testuale ed è composto da:
 \begin{itemize}
-\item \textbf{status line}: riga di stato che riporta un codice a tre cifre per identificare lo stato della risposta \textit{(1xx Informational, 2xx Successful, 3xx Redirection, 4xx Client error, 5xx Server error)}
-\item \textbf{header}: Server \textit{(indica il tipo di server)}, Content-Type \textit{(il tipo di contenuto restituito in codifica MIME, es. text/html, text/plain...)}
-\item riga vuota
-\item \textbf{body}: contenuto della risposta
+\item \textbf{status line}: riga di stato che riporta un codice a tre cifre per identificare lo stato della risposta (\code{1xx}: informational, \code{2xx}: successful, \code{3xx}: redirection, \code{4xx}: client error, \code{5xx}: server error);
+\item \textbf{header}: è composto da i campi server (tipo di server) e content-type (tipo di contenuto restituito in codifica \vedi{MIME}) e seguito da una riga vuota;
+\item \textbf{body}: contenuto della risposta.
 \end{itemize}
 \end{itemize}
 \para{HTTPS} Adattamento dell'HTTP per comunicazioni sicure, utilizza un protocollo crittografico a doppia chiave. La comunicazione criptata avviene sulla porta 443. Esiste in due varianti che differiscono per il protocollo crittografico  utilizzato:
 \begin{itemize}
 \item SSL (Secure Sockets Layer): ogni server deve avere un certificato X.509, emesso da una \italic{certificate authority} (CA) e contenente:
 \begin{itemize}
-\item Chiave pubblica;
-\item Il \italic{distinguished name} del server (nome ed indirizzo);
-\item Numero di serie o data di pubblicazione dei certificato;
-\item La data di fine validità del certificato.
+\item chiave pubblica,
+\item \italic{distinguished name} del server (nome ed indirizzo),
+\item numero di serie o data di pubblicazione dei certificato,
+\item data di fine validità del certificato;
 \end{itemize}
 
-\item TLS (Transport Layer): è l'evoluzione di SSL, definita nell'\vedi{RFC} 2246 (SSL 3.1). Si articola in tre fasi:
+\item TLS (Transport Layer): è l'evoluzione di SSL, definita nell'\vedi{RFC} 2246 (SSL 3.1). Si articola nelle seguenti fasi:
 \begin{enumerate}
-\item Negoziazione degli algoritmi da utilizzare;
-\item Scambio delle chiavi;
-\item Autenticazione;
+\item Negoziazione degli algoritmi da utilizzare,
+\item Scambio delle chiavi,
+\item Autenticazione,
 \item Cifratura simmetrica.
 \end{enumerate}
 \end{itemize}
@@ -1576,12 +1644,12 @@ oggetti (in inglese \italic{managed objects}), vengono raccolte in un database c
 \para{SMI} Structure of Management Information.
  
  \sub {Posta elettronica}
-La posta elettronica \'e un servizio che coinvolge due programmi: il \textbf{Mail User Agent} ed il \textbf{programma di trasporto} (ad esempio \textit{SendMail}). 
-\subsub{MUA} Il Mail User Agent costituisce un'interfaccia utente verso l'applicazione utilizzata ed offre funzionalità di composizione, visualizzazione, archiviazione ed eliminazione (automatica, tramite filtri, o manuale) dei messaggi.
-I principali protocolli che consentono l'interazione tra MUA e protocollo di trasporto sono \textbf{IMAP} (Internet Message Access Protocol) e \textbf{POP3} (Post Office Protocol 3) o Popper. 
+La posta elettronica \'e un servizio che coinvolge due programmi: il \textbf{Mail User Agent} ed il \textbf{programma di trasporto}, di cui è un esempio \textit{SendMail}. 
+\subsub{MUA} Il Mail User Agent costituisce un'interfaccia utente che offre funzionalità di composizione, visualizzazione, archiviazione ed eliminazione (automatica, tramite filtri, o manuale) dei messaggi.
+I principali protocolli che consentono l'interazione tra MUA e protocollo di trasporto sono \vedi{POP3} e \vedi{IMAP}. 
 \para{POP3}
-Il Post Office Protocol permette l'accesso da remoto ad un server di posta elettronica in ascolto sulla porta 110.
-Si tratta di un'applicazione client-server in cui la connessione al server \'e stabilita tramite il protocollo TCP/IP. Client e server si scambiano comandi (sintassi: \code{keyword argomento}) e risposte (sintassi: \code{state keyword info}), in un dialogo articolato in quattro fasi:
+Il Post Office Protocol, noto anche come \textit{Popper}, permette l'accesso da remoto ad un server di posta elettronica in ascolto sulla porta 110.
+Si tratta di un'applicazione client-server in cui la connessione \'e stabilita tramite il protocollo TCP/IP. Client e server si scambiano comandi (sintassi: \code{keyword \textit{argomento}}) e risposte (sintassi: \code{state keyword info}), in un dialogo articolato in quattro fasi:
 \begin{enumerate}
 \item apertura di una connessione TCP/IP e invio di un messaggio di benvenuto al client da parte del server;
 \item \textbf{authorization}: il client effettua il login in chiaro, tramite i comandi \code{USER} e \code{PASS};
@@ -1598,84 +1666,51 @@ Si tratta di un'applicazione client-server in cui la connessione al server \'e s
 \item \textbf{update}: rilascio delle risorse acquisite e chiusura della sessione, tramite il comando \code{QUIT}.
 \end{enumerate}
 \para{IMAP}
-L'Interactive Mail Access Protocol, definito negli \vedi{RFC} 1064 e 2060 e attualmente alla sua quarta versione, è un metodo per l'accesso dinamico alle mailbox più moderno ed efficiente di \vedi{POP3}, specialmente nei casi, oramai all'ordine del giorno, in cui l'utente ha necessità di accedere alla propria casella di posta da più di un client simultaneamente. Esso è inoltre dotato di potenti strumenti di ricerca delle informazioni e di gestione delle informazioni multimediali (vedi \vedi{MIME}). 
+L'Interactive Mail Access Protocol, definito negli \vedi{RFC} 1064 e 2060 e attualmente alla sua quarta versione, è un metodo per l'accesso dinamico alle mailbox più moderno ed efficiente di \vedi{POP3}, specialmente nei casi, oramai all'ordine del giorno, in cui l'utente ha necessità di accedere alla propria casella di posta da più di un client simultaneamente. Esso è inoltre dotato di potenti strumenti di ricerca delle informazioni e di gestione dei contenuti multimediali (vedi \vedi{MIME}). 
 IMAP, che utilizza la porta 143, associa ai messaggi delle flag di sistema, che ne definiscono lo stato, ad esempio \code{\textbackslash Seen}, \code{\textbackslash Answered}, \code{\textbackslash Flagged}, \code{\textbackslash Deleted}, \code{\textbackslash Draft} e \code{\textbackslash Recent Message}.\\
-\subsub{Programma di trasporto} Il programma di trasporto si occupa del trasferimento dei messaggi e del servizio di notifica all'utente, ossia la gestione della ricevuta di ritorno, utile per rilevare i casi in cui l'utente finale non riceve la mail.\newline
-Per \textit{trasferimento} si intende il meccanismo con il quale il messaggio viene effettivamente trasmesso: nel momento in cui il MUA procede all'invio di un messaggio viene attivata una sessione con il server di destinazione e il programma di trsporto trasferisce l'e-mail tramite il protocollo \textbf{SMTP} (Simple Mail Transfer Protocol). 
+\subsub{Programma di trasporto} Il programma di trasporto si occupa del trasferimento dei messaggi e del servizio di notifica all'utente, ossia della gestione della ricevuta di ritorno, utile per rilevare i casi in cui l'utente finale non riceve la mail.\newline
+Per trasferimento s'intende il meccanismo con il quale il messaggio viene effettivamente trasmesso: nel momento in cui il MUA procede all'invio di un messaggio, viene attivata una sessione con il server di destinazione e il programma di trsporto trasferisce l'e-mail tramite il protocollo \textbf{SMTP} (Simple Mail Transfer Protocol). 
 
-\para{SMTP} Il Simple Mail Transfer Protocol  \'e adibito al trasporto (efficiente ed affidabile) in ambienti diversi. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE (Inter Process Communication Environment). Ad ogni richiesta da parte dell'utente, tramite il comando \code{HELO} viene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (\textit{sender}), che invia i comandi, e quello ricevente (\textit{receiver}), che invia le risposte.
+\para{SMTP} Il Simple Mail Transfer Protocol  \'e adibito al trasporto di messaggi, efficiente ed affidabile, in ambienti eterogenei. Il trasferimento \'e indipendente dal tipo di rete e avviene tra due interfacce IPCE (Inter Process Communication Environment). Ad ogni richiesta da parte dell'utente, tramite il comando \code{HELO} viene attivato un canale di comunicazione bidirezionale sulla porta 25 tra il server SMTP trasmettitore (\textit{sender}), che invia i comandi, e quello ricevente (\textit{receiver}), che invia le risposte.
 Una volta creato il canale, l'SMTP-sender invia il comando \code{MAIL}\footnote{Comandi alternativi a \code{MAIL} sono \code{SEND}, \code{SOML} e \code{SAML}}, che contiene i dati riguardanti il mittente, e il receiver risponde con \code{OK}.\\
 Il sender invia poi il comando \code{RCPT}, contenente i dati del destinatario, seguito da \code{DATA}. Se il receiver non pu\'o rispondere, invia un codice di reject. Ogniqualvolta il receiver interpreta correttamente un messaggio risponde con \code{OK}. Altri comandi utilizzati durande la sessione sono \code{NOOP}, \code{HELP}, \code{EXPN} e \code{VRFY}. La sessione termina sempre con \code{QUIT}. Tale dialogo \'e bloccante. 
 %mancano esempi
 \para{Configurazione di Sendmail}
-La configurazione manuale di Sendmail (file \code{sendmail.cf}) è diventata nel tempo talmente complessa da essere sconsigliata. Essa viene semplificata tramite uno pseudolinguaggio, \textbf{M4}.
+La configurazione manuale di Sendmail (file \code{sendmail.cf}) è diventata nel tempo talmente complessa da essere sconsigliata. Essa viene semplificata tramite uno pseudolinguaggio compilato, \textbf{M4}.
 \para{MIME}
 Per poter far fronte alle nuove esigenze di codifica di caratteri speciali e contenuti multimediali, gli \vedi{RFC} 1341 e 1521 hanno introdotto lo standard di codifica MIME (Multipurpouse Internet Mail Extensions). Esso aggiunge nuovi header rispetto al RFC 822 senza influire sul normale funzionamento del programma di trasporto, tra i quali il content-type, che descrive il tipo di contenuto. 
 \para{Mail relay} Quando un dominio di posta è particolarmente importante, occorre definire un gestore di posta secondario, che in caso di malfunzionamenti sia in grado di salvare temporaneamente i messaggi in transito, facendo le veci del server di destinazione, in modo che eventuali anomalie non abbiano conseguenze sul mittente.
 Tale funzione, tuttavia, è stata a lungo sfruttata dagli spammer, che si fingevano server secondari. Attualmente si suole dunque indicare espressamente gli host dai quali si accetta relaying in un'apposita tabella.
 \para{Posta elettronica privata}
-La crittografia ed i certificati digitali permettono di garantire la segretezza della corrispondenza. Esiste la possibilità, difatti, di configurare il proprio \vedi{MUA} per l'uso, ad esempio, di GPG (GNU Privacy Guard, equivalente libero di PGP) tramite il plugin Enigmail. La PEC (Posta Elettronica Certificata) è la modalita di attuazione italiana del concetto di posta elettronica privata.
+La crittografia ed i certificati digitali permettono di garantire la segretezza della corrispondenza. Esiste la possibilità, difatti, di configurare il proprio \vedi{MUA} per l'uso, ad esempio, di GPG (GNU Privacy Guard, equivalente libero di PGP) tramite il plugin Enigmail. La PEC (Posta Elettronica Certificata) è la modalita di attuazione italiana, istituzionalizzata, del concetto di posta elettronica privata.
 \newpage
 \sec{Sicurezza di rete}
-La sicurezza di rete è una branca della sicurezza informatica che si occupa dei rischi correlati all'interconnessione di host.
 \para{Minacce} 
-Ogni host connesso ad una rete è sottoposto ad un gran numero di minacce, come \textbf{accessi non autorizzati} o \textbf{DoS} (\textit{Denial of Services}), ovvero la negazione di servizi all'utente autorizzato.\\
+Ogni host connesso ad una rete è sottoposto ad un gran numero di minacce, ad esempio \textbf{accessi non autorizzati} o \textbf{DoS} (\textit{Denial of Services}, la negazione di servizi all'utente autorizzato).\\
 Esistono diversi strategie per proteggere una rete da questi ed altri attacchi, le principali delle quali sono \vedi{Oscuramento}, \vedi{Hardening} e uso di \vedi{Firewall}.
 \sub{Oscuramento}
-Per oscuramento si intende il garantire la sicurezza nascondendo le risorse di rete mediante strumenti come \vedi{NAT}, IP Masquerading, \vedi{SSH} (per le connessioni), GPG (per la validazione di utenti e servizi) e trasmissioni crittografate.
-\subsub{Encryption} limita gli accessi ai dati trasmessi sulle reti: il contenuto viene crittografato, spedito e in ricezione de-crittografato.\\
-Si usano i comandi UNIX \code{crypt} e \code{des}.
-\paragraph{IP Masquerading} grazie al \vedi{NAT} è possibile utilizzare un singolo IP privato per affacciare una intera sottorete all'esterno (internet).
-\subsub{Hardening} 
-Per hardening si intende la gestione della sicurezza \textit{a livello del singolo host};
-\subsub{Monitoraggio} Un modo è effettuare un monitoraggio continuo sul sistema, usando gli IDS (Intrusion Detecting System), che possono essere:
+Per oscuramento si intende il garantire la sicurezza nascondendo le risorse di rete mediante strumenti come \vedi{NAT}, IP Masquerading, GPG e trasmissioni crittografate.
+\subsub{Encryption} Limita gli accessi ai dati trasmessi, crittografando i contenuti.
+In ambienti Unix, si usano i comandi \code{crypt} e \code{des}.
+\sub{Hardening} 
+Per hardening si intende la gestione della sicurezza a livello del singolo host.
+\subsub{TCP-wrapper} 
+I TCP-wrapper consentono di limitare l'accesso ai servizi basandosi sull'IP e l'hostname del client. \\
+Le richieste verso l'host vengono elaborate dal wrapper, che verifica che l'indirizzo del chiamante sia incluso nell'elenco di \code{/etc/hosts.allow}: se è così, o se non è incluso in \code{/etc/hosts.deny}, permette l'accesso.
+Tramite le seguenti \textbf{keyword} è possibile inoltre specificare host o gruppi di host: 
 \begin{itemize}
-\item Host-based IDS: verifica periodicamente i log dei servizi di rete, di sistema e l'integrità dei dati e dei filesystem (\code{diff e rpm -V})
-\item Network-based IDS: scandisce il traffico di rete alla ricerca di pacchetti sospetti, segnalandoli ed assegnandoli un livello di pericolosità in base a dei database. Lavora impostando in modalità \textit{promisqua} l'interfaccia di rete.
+\item \code{ALL} (tutti gli host);
+\item \code{LOCAL} (tutti gli host locali);
+\item \code{KNOWN} (host riconosciuti dal sistema);
+\item \code{UNKNOWN} (host non riconosciuti);
+\item \code{PARANOID} (host il cui nome non corrisponde all'indirizzo).
 \end{itemize}
-Oppure usando manualmente i comandi UNIX:
-\begin{itemize}
-\item \textbf{ps -aux} processi attivi
-\item \textbf{who} chi è collegato al sistema
-\item \textbf{ls -lR} crea una lista sulle info di ogni file di sistema per poi confrontarla con \code{diff} con una precedente
-\item \textbf{last} per vedere il contenuto del file /usr/adm/wtmp (registro dei collegamenti avvenuti al sistema)
-\end{itemize}
-\subsub{TCP-wrapper} consentono di limitare l'accesso ai servizi basandosi sull'IP e l'hostname del client. \\
-Le richieste verso l'host vengono elaborate dal wrapper, che verifica che l'indirizzo del chiamante sia incluso nell'elenco di \textbf{\textit{/etc/hosts.allow}}: se è così permette l'accesso, altrimenti verifica non sia incluso in \textit{\textbf{/etc/hosts.deny}}.\\
-In entrambi files è anche possibile definire delle \textbf{regole di filtraggio}, che hanno effetto \textit{dal basso verso l'alto} e quelle di hosts.allow hanno la precedenza su quelle di hosts.deny.\\
-Il formato delle regole è:\\
-\code{<elenco-servizi> : <elenco-client> [: spawn <comando-shell>]}\\
-E le seguenti \textbf{keywords} sono uste per specificare host o gruppi di host: ALL \textit{(tutti i client/servizi)}, LOCAL \textit{(tutti gli host locali)}, KNOWN \textit{(host riconosciuti dal sistema)}, UNKNOWN \textit{(host non riconosciuti)}, PARANOID \textit{(host il cui nome non corrisponde all'indirizzo)}.\\
-In oltre \code{spawn} permette di eseguire normali comandi da shell qualora una richiesta entrante soddisfa una regola.\\
-Esempio in hosts.deny \textit{(rifiuta *.example.com e scrive alcune info di log)}\\ \code{ALL : .example.com : spawn (/bin/echo \\ \%a from \%h attempted to access \%p >> /var/log/connections.log)}\\
-Alcuni codici speciali sono: \textbf{\%c} \textit{(info generali del client)}, \textbf{\%s} \textit{(info generali del server)}, \textbf{\%a/\%A} \textit{(IP del client/Server)}, \textbf{\%h/\%H} \textit{(hostname del client/Server)}, \textbf{\%u} \textit{(username)}, \textbf{\%p} \textit{(PID del processo server)}
-\subsub{xinetd} demone che estende le funzionalità di \textit{inetd}, infatti non gestisce solo l'accesso ai servizi di rete ma controlla anche i servizi stessi a Livello Applicazione.\\
-Viene configurato mediante \textit{/etc/xinetd.conf} ed altri file per ogni servizio presenti nella directory \textit{/etc/xinetd.d} (inclusa nel .conf mediante \textit{includedir}). 
-\begin{itemize}
-\item \textbf{xinetd.conf}: file principale del demone, definisce le regole generali.
-\code{
-defaults \{ \\
-instances = 60 \#max num di istanze per ogni servizio\\
-log\_type = SYSLOG authpriv \#tipo di logging\\
-log\_on\_success = HOST PID \#info di log\\
-log\_on\_failure = HOST\\
-cps = 25 30 \#max connessioni per sec - wait time \} \\
-includedir /etc/xinetd.d \#directory per i singoli servizi
-}
-\item \textbf{xinetd.d}: regole definite direttamente nei file di configurazione dei servizi (xinetd.d). Permette il controllo sugli accessi mediante le opzioni: \textbf{only\_from} (gli host specificati possono usare il servizio), \textbf{no\_access} (impedisce l'accesso a tali host), \textbf{access\_time} (fascia oraria in cui un servizio è utilizzabile HH:MM-HH:MM)
-\item \textbf{Funzioni}: Permette di impostare per il server una configurazione \textit{firewall-like}, attraverso due funzioni definibili per ogni servizio:  \textbf{bind} (collega un servizio ad un IP, ossia accetta le richieste per il servizio inoltrate solo a quell'IP) e \textbf{redirect} (le richieste per questo servizio saranno redirette verso l'hostname o IP specificato come parametro).\\È sufficiente aggiungere le seguenti righe al file di configurazione de lsingolo servizio:\\
-\code{
-bind = <indirizzo\_IP> \\
-redirect = <indirizzo\_IP>
-}
-\item \textbf{Trips}: è possibile difendersi contro alcuni attacchi al sistema come il port-scanning o il DoS.\\
-Mentre per quest'ultimo si limitano le risorse impegnare dalle connessioni con i client, per il port-scanning si definiscono dei \textbf{Sensori} si servizi che non si vogliono attivi sul server ed impostare sul relativo file di configurazione:\\
-\code{
-flags = SENSOR\\
-deny\_time = 20 \#può anche valere FOREVER (fino al riavvio di xinetd) o NEVER (accetta)\\
-disable = no
-}
-\end{itemize}
+In entrambi file è anche possibile definire delle \textbf{regole di filtraggio}, che hanno effetto dal basso verso l'alto; inoltre quelle di \code{hosts.allow} hanno la precedenza su quelle di \code{hosts.deny}.
+Il formato delle regole è:
+\\ \\ \code{<elenco-servizi> : <elenco-client> [: spawn\footnote{permette di eseguire normali comandi da shell qualora una richiesta entrante soddisfi una regola.} <comando-shell>]}\\ \\
+\subsub{xinetd} 
+Demone che estende le funzionalità di \code{inetd}, non si limita a gestire l'accesso ai servizi di rete, ma controlla anche i servizi stessi al \vedi{Livello delle applicazioni}.
+Viene configurato mediante \code{/etc/xinetd.conf} ed altri file (uno per ogni servizio) posti nella directory \code{/etc/xinetd.d}, da importare nel file di configurazione generale di xinetd mediante il comando \code{includedir}. 
 
 \sub{Firewall} Sistema hardware e/o software che costituisce un intermediario tra la rete locale (o singolo host) ed una o più reti esterne (tipicamente internet), filtrando il traffico. Tipicamente, un firewall è un \vedi{DTE} con più schede di rete che costituisce l'unico punto di collegamento tra le reti coinvolte.\\
 Nella rete interna ci saranno i servizi di base (come \vedi{NFS}, \vedi{NIS}, LDAP etc.) rivolti agli utenti della sottorete interna; nella rete esterna i servizi di networking (ad esempio \vedi{DNS}, SMPT, \vedi{FTP} etc.), rivolti sia ad utenti interni che esterni e dunque esposti a rischi.\\
@@ -1720,7 +1755,6 @@ Masquerading).
 \item \code{OUTPUT}: tutti i pacchetti generati dal sistema passano per questa catena.
 \end{itemize}
 \end{itemize}
-\ \\ 
 NetFilter è inoltre in grado di stabilire il \textit{contesto} del pacchetto, cioè se esso è \code{NEW} (appartenente ad una nuova connessione), \code{ESTABLISHED} (appartenente ad una connessione esistente), \code{RELATED} (legato ad una connessione esistente) o \code{INVALID} (pacchetto sospetto, non legato ad alcuna connessione stabilita) e può essere configurato per comportarsi di conseguenza.
 \\Il packet filtering opera al \vedi{Livello di rete}, per cui non si preoccupa di quali siano le applicazioni che generano il traffico. Tuttavia, non tutti i firewall operano allo stesso livello: ad esempio, un firewall che lavora anche al \vedi{Livello delle applicazioni} è il \vedi{Proxy}.
 \para{Architetture di firewall} 
@@ -1733,4 +1767,17 @@ Un firewall può essere configurato in diverse modalità:
 \end{itemize}
 \subsub{Proxy}
 Con il termine \textit{proxy} si indica un server collocato tra un host e un web server il quale funge da intermediario fra i due, disaccoppiando l'accesso ad internet dal browser. Non occorre forse ricordare che il termine \textit{server} non indica propriamente una macchina, ma un software che vi gira: un proxy è dunque un prodotto software, di cui è un noto esempio SQUID, distribuito sotto la GNU GPL\footnote{General Public License}. Più specificamente, un proxy mantiene una cache di pagine visitate di recente e la mette a disposizione dei vari client il cui browser è configurato per utilizzarla, in modo tale da limitare il consumo di banda (anche in maniera consistente, specialmente nei contesti, per esempio aziendali, in cui i diversi utenti, cui il proxy è totalmente trasparente, si servono spesso tutti quanti delle stesse pagine) e, soprattutto, poter filtrare le pagine accessibili in base al loro contenuto. I proxy sono dunque largamente impiegati come \vedi{Firewall} al \vedi{Livello delle applicazioni}, oltre a poter essere utilizzati in catena per garantire l'anonimato in internet (si pensi in particolare al progetto TOR).
+\sub{Monitoraggio} C'è la possibilità di effettuare un monitoraggio continuo sul sistema usando gli \textbf{IDS} (Intrusion Detecting Systems), che possono essere:
+\begin{itemize}
+\item Host-based IDS: verifica periodicamente i log dei servizi di rete e di sistema e controlla l'integrità dei dati e dei filesystem (comandi \code{diff} ed \code{rpm -V})
+\item Network-based IDS: scandisce il traffico di rete alla ricerca di pacchetti sospetti, segnalandoli ed assegnandogli un
+livello di pericolosità in base a dei database. Lavora impostando in \textit{modalità promiscua} l'interfaccia di rete.
+\end{itemize}
+In alternativa agli IDS, si possono utilizzare i comandi Unix-Linux:
+\begin{itemize}
+\item \code{ps -aux}: mostra i processi attivi;
+\item \code{who}: restituisce la lista degli utenti collegati al sistema;
+\item \code{last}: mostra il contenuto del file \code{/usr/adm/wtmp} (registro dei collegamenti al sistema);
+\item \code{ls -lR}: crea una lista con le informazioni su ogni file di sistema, la quale può essere poi confrontata con con una precedente tramite il comando \code{diff}.
+\end{itemize}
 \end{document}
