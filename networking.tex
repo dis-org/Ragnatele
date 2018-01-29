@@ -1685,65 +1685,32 @@ Tale funzione, tuttavia, è stata a lungo sfruttata dagli spammer, che si fingev
 La crittografia ed i certificati digitali permettono di garantire la segretezza della corrispondenza. Esiste la possibilità, difatti, di configurare il proprio \vedi{MUA} per l'uso, ad esempio, di GPG (GNU Privacy Guard, equivalente libero di PGP) tramite il plugin Enigmail. La PEC (Posta Elettronica Certificata) è la modalita di attuazione italiana, istituzionalizzata, del concetto di posta elettronica privata.
 \newpage
 \sec{Sicurezza di rete}
-La sicurezza di rete è una branca della sicurezza informatica che si occupa dei rischi correlati all'interconnessione di host.
 \para{Minacce} 
-Ogni host connesso ad una rete è sottoposto ad un gran numero di minacce, come \textbf{accessi non autorizzati} o \textbf{DoS} (\textit{Denial of Services}), ovvero la negazione di servizi all'utente autorizzato.\\
+Ogni host connesso ad una rete è sottoposto ad un gran numero di minacce, ad esempio \textbf{accessi non autorizzati} o \textbf{DoS} (\textit{Denial of Services}, la negazione di servizi all'utente autorizzato).\\
 Esistono diversi strategie per proteggere una rete da questi ed altri attacchi, le principali delle quali sono \vedi{Oscuramento}, \vedi{Hardening} e uso di \vedi{Firewall}.
 \sub{Oscuramento}
-Per oscuramento si intende il garantire la sicurezza nascondendo le risorse di rete mediante strumenti come \vedi{NAT}, IP Masquerading, \vedi{SSH} (per le connessioni), GPG (per la validazione di utenti e servizi) e trasmissioni crittografate.
-\subsub{Encryption} limita gli accessi ai dati trasmessi sulle reti: il contenuto viene crittografato, spedito e in ricezione de-crittografato.\\
-Si usano i comandi UNIX \code{crypt} e \code{des}.
-\paragraph{IP Masquerading} grazie al \vedi{NAT} è possibile utilizzare un singolo IP privato per affacciare una intera sottorete all'esterno (internet).
-\subsub{Hardening} 
-Per hardening si intende la gestione della sicurezza \textit{a livello del singolo host};
-\subsub{Monitoraggio} Un modo è effettuare un monitoraggio continuo sul sistema, usando gli IDS (Intrusion Detecting System), che possono essere:
+Per oscuramento si intende il garantire la sicurezza nascondendo le risorse di rete mediante strumenti come \vedi{NAT}, IP Masquerading, GPG e trasmissioni crittografate.
+\subsub{Encryption} Limita gli accessi ai dati trasmessi, crittografando i contenuti.
+In ambienti Unix, si usano i comandi \code{crypt} e \code{des}.
+\sub{Hardening} 
+Per hardening si intende la gestione della sicurezza a livello del singolo host.
+\subsub{TCP-wrapper} 
+I TCP-wrapper consentono di limitare l'accesso ai servizi basandosi sull'IP e l'hostname del client. \\
+Le richieste verso l'host vengono elaborate dal wrapper, che verifica che l'indirizzo del chiamante sia incluso nell'elenco di \code{/etc/hosts.allow}: se è così, o se non è incluso in \code{/etc/hosts.deny}, permette l'accesso.
+Tramite le seguenti \textbf{keyword} è possibile inoltre specificare host o gruppi di host: 
 \begin{itemize}
-\item Host-based IDS: verifica periodicamente i log dei servizi di rete, di sistema e l'integrità dei dati e dei filesystem (\code{diff e rpm -V})
-\item Network-based IDS: scandisce il traffico di rete alla ricerca di pacchetti sospetti, segnalandoli ed assegnandoli un livello di pericolosità in base a dei database. Lavora impostando in modalità \textit{promisqua} l'interfaccia di rete.
+\item \code{ALL} (tutti gli host);
+\item \code{LOCAL} (tutti gli host locali);
+\item \code{KNOWN} (host riconosciuti dal sistema);
+\item \code{UNKNOWN} (host non riconosciuti);
+\item \code{PARANOID} (host il cui nome non corrisponde all'indirizzo).
 \end{itemize}
-Oppure usando manualmente i comandi UNIX:
-\begin{itemize}
-\item \textbf{ps -aux} processi attivi
-\item \textbf{who} chi è collegato al sistema
-\item \textbf{ls -lR} crea una lista sulle info di ogni file di sistema per poi confrontarla con \code{diff} con una precedente
-\item \textbf{last} per vedere il contenuto del file /usr/adm/wtmp (registro dei collegamenti avvenuti al sistema)
-\end{itemize}
-\subsub{TCP-wrapper} consentono di limitare l'accesso ai servizi basandosi sull'IP e l'hostname del client. \\
-Le richieste verso l'host vengono elaborate dal wrapper, che verifica che l'indirizzo del chiamante sia incluso nell'elenco di \textbf{\textit{/etc/hosts.allow}}: se è così permette l'accesso, altrimenti verifica non sia incluso in \textit{\textbf{/etc/hosts.deny}}.\\
-In entrambi files è anche possibile definire delle \textbf{regole di filtraggio}, che hanno effetto \textit{dal basso verso l'alto} e quelle di hosts.allow hanno la precedenza su quelle di hosts.deny.\\
-Il formato delle regole è:\\
-\code{<elenco-servizi> : <elenco-client> [: spawn <comando-shell>]}\\
-E le seguenti \textbf{keywords} sono uste per specificare host o gruppi di host: ALL \textit{(tutti i client/servizi)}, LOCAL \textit{(tutti gli host locali)}, KNOWN \textit{(host riconosciuti dal sistema)}, UNKNOWN \textit{(host non riconosciuti)}, PARANOID \textit{(host il cui nome non corrisponde all'indirizzo)}.\\
-In oltre \code{spawn} permette di eseguire normali comandi da shell qualora una richiesta entrante soddisfa una regola.\\
-Esempio in hosts.deny \textit{(rifiuta *.example.com e scrive alcune info di log)}\\ \code{ALL : .example.com : spawn (/bin/echo \\ \%a from \%h attempted to access \%p >> /var/log/connections.log)}\\
-Alcuni codici speciali sono: \textbf{\%c} \textit{(info generali del client)}, \textbf{\%s} \textit{(info generali del server)}, \textbf{\%a/\%A} \textit{(IP del client/Server)}, \textbf{\%h/\%H} \textit{(hostname del client/Server)}, \textbf{\%u} \textit{(username)}, \textbf{\%p} \textit{(PID del processo server)}
-\subsub{xinetd} demone che estende le funzionalità di \textit{inetd}, infatti non gestisce solo l'accesso ai servizi di rete ma controlla anche i servizi stessi a Livello Applicazione.\\
-Viene configurato mediante \textit{/etc/xinetd.conf} ed altri file per ogni servizio presenti nella directory \textit{/etc/xinetd.d} (inclusa nel .conf mediante \textit{includedir}). 
-\begin{itemize}
-\item \textbf{xinetd.conf}: file principale del demone, definisce le regole generali.
-\code{
-defaults \{ \\
-instances = 60 \#max num di istanze per ogni servizio\\
-log\_type = SYSLOG authpriv \#tipo di logging\\
-log\_on\_success = HOST PID \#info di log\\
-log\_on\_failure = HOST\\
-cps = 25 30 \#max connessioni per sec - wait time \} \\
-includedir /etc/xinetd.d \#directory per i singoli servizi
-}
-\item \textbf{xinetd.d}: regole definite direttamente nei file di configurazione dei servizi (xinetd.d). Permette il controllo sugli accessi mediante le opzioni: \textbf{only\_from} (gli host specificati possono usare il servizio), \textbf{no\_access} (impedisce l'accesso a tali host), \textbf{access\_time} (fascia oraria in cui un servizio è utilizzabile HH:MM-HH:MM)
-\item \textbf{Funzioni}: Permette di impostare per il server una configurazione \textit{firewall-like}, attraverso due funzioni definibili per ogni servizio:  \textbf{bind} (collega un servizio ad un IP, ossia accetta le richieste per il servizio inoltrate solo a quell'IP) e \textbf{redirect} (le richieste per questo servizio saranno redirette verso l'hostname o IP specificato come parametro).\\È sufficiente aggiungere le seguenti righe al file di configurazione de lsingolo servizio:\\
-\code{
-bind = <indirizzo\_IP> \\
-redirect = <indirizzo\_IP>
-}
-\item \textbf{Trips}: è possibile difendersi contro alcuni attacchi al sistema come il port-scanning o il DoS.\\
-Mentre per quest'ultimo si limitano le risorse impegnare dalle connessioni con i client, per il port-scanning si definiscono dei \textbf{Sensori} si servizi che non si vogliono attivi sul server ed impostare sul relativo file di configurazione:\\
-\code{
-flags = SENSOR\\
-deny\_time = 20 \#può anche valere FOREVER (fino al riavvio di xinetd) o NEVER (accetta)\\
-disable = no
-}
-\end{itemize}
+In entrambi file è anche possibile definire delle \textbf{regole di filtraggio}, che hanno effetto dal basso verso l'alto; inoltre quelle di \code{hosts.allow} hanno la precedenza su quelle di \code{hosts.deny}.
+Il formato delle regole è:
+\\ \\ \code{<elenco-servizi> : <elenco-client> [: spawn\footnote{permette di eseguire normali comandi da shell qualora una richiesta entrante soddisfi una regola.} <comando-shell>]}\\ \\
+\subsub{xinetd} 
+Demone che estende le funzionalità di \code{inetd}, non si limita a gestire l'accesso ai servizi di rete, ma controlla anche i servizi stessi al \vedi{Livello delle applicazioni}.
+Viene configurato mediante \code{/etc/xinetd.conf} ed altri file (uno per ogni servizio) posti nella directory \code{/etc/xinetd.d}, da importare nel file di configurazione generale di xinetd mediante il comando \code{includedir}. 
 
 \sub{Firewall} Sistema hardware e/o software che costituisce un intermediario tra la rete locale (o singolo host) ed una o più reti esterne (tipicamente internet), filtrando il traffico. Tipicamente, un firewall è un \vedi{DTE} con più schede di rete che costituisce l'unico punto di collegamento tra le reti coinvolte.\\
 Nella rete interna ci saranno i servizi di base (come \vedi{NFS}, \vedi{NIS}, LDAP etc.) rivolti agli utenti della sottorete interna; nella rete esterna i servizi di networking (ad esempio \vedi{DNS}, SMPT, \vedi{FTP} etc.), rivolti sia ad utenti interni che esterni e dunque esposti a rischi.\\
@@ -1788,7 +1755,6 @@ Masquerading).
 \item \code{OUTPUT}: tutti i pacchetti generati dal sistema passano per questa catena.
 \end{itemize}
 \end{itemize}
-\ \\ 
 NetFilter è inoltre in grado di stabilire il \textit{contesto} del pacchetto, cioè se esso è \code{NEW} (appartenente ad una nuova connessione), \code{ESTABLISHED} (appartenente ad una connessione esistente), \code{RELATED} (legato ad una connessione esistente) o \code{INVALID} (pacchetto sospetto, non legato ad alcuna connessione stabilita) e può essere configurato per comportarsi di conseguenza.
 \\Il packet filtering opera al \vedi{Livello di rete}, per cui non si preoccupa di quali siano le applicazioni che generano il traffico. Tuttavia, non tutti i firewall operano allo stesso livello: ad esempio, un firewall che lavora anche al \vedi{Livello delle applicazioni} è il \vedi{Proxy}.
 \para{Architetture di firewall} 
@@ -1801,4 +1767,17 @@ Un firewall può essere configurato in diverse modalità:
 \end{itemize}
 \subsub{Proxy}
 Con il termine \textit{proxy} si indica un server collocato tra un host e un web server il quale funge da intermediario fra i due, disaccoppiando l'accesso ad internet dal browser. Non occorre forse ricordare che il termine \textit{server} non indica propriamente una macchina, ma un software che vi gira: un proxy è dunque un prodotto software, di cui è un noto esempio SQUID, distribuito sotto la GNU GPL\footnote{General Public License}. Più specificamente, un proxy mantiene una cache di pagine visitate di recente e la mette a disposizione dei vari client il cui browser è configurato per utilizzarla, in modo tale da limitare il consumo di banda (anche in maniera consistente, specialmente nei contesti, per esempio aziendali, in cui i diversi utenti, cui il proxy è totalmente trasparente, si servono spesso tutti quanti delle stesse pagine) e, soprattutto, poter filtrare le pagine accessibili in base al loro contenuto. I proxy sono dunque largamente impiegati come \vedi{Firewall} al \vedi{Livello delle applicazioni}, oltre a poter essere utilizzati in catena per garantire l'anonimato in internet (si pensi in particolare al progetto TOR).
+\sub{Monitoraggio} C'è la possibilità di effettuare un monitoraggio continuo sul sistema usando gli \textbf{IDS} (Intrusion Detecting Systems), che possono essere:
+\begin{itemize}
+\item Host-based IDS: verifica periodicamente i log dei servizi di rete e di sistema e controlla l'integrità dei dati e dei filesystem (comandi \code{diff} ed \code{rpm -V})
+\item Network-based IDS: scandisce il traffico di rete alla ricerca di pacchetti sospetti, segnalandoli ed assegnandogli un
+livello di pericolosità in base a dei database. Lavora impostando in \textit{modalità promiscua} l'interfaccia di rete.
+\end{itemize}
+In alternativa agli IDS, si possono utilizzare i comandi Unix-Linux:
+\begin{itemize}
+\item \code{ps -aux}: mostra i processi attivi;
+\item \code{who}: restituisce la lista degli utenti collegati al sistema;
+\item \code{last}: mostra il contenuto del file \code{/usr/adm/wtmp} (registro dei collegamenti al sistema);
+\item \code{ls -lR}: crea una lista con le informazioni su ogni file di sistema, la quale può essere poi confrontata con con una precedente tramite il comando \code{diff}.
+\end{itemize}
 \end{document}
