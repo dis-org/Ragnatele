@@ -20,7 +20,6 @@
 ### Cosa va rivisto
 + Livello di rete
   + DNS
-+ Sicurezza di rete
       
 ### Argomenti lasciati alla buona volontà dei posteri 
 + Livello di rete
@@ -42,6 +41,7 @@
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento            |
 |:-------------------|:------------:|:--------:|:---------:|:--------------------:|
 | Arianna Masciolini | harisont     | hub      | revisione | cfr. slides AR       |
+|                    |              |          | scrittura | frame relay          |
 | Claudio Pannacci   | Kappanneo    | backbone |           |                      |
 | Filippo Mariani    | FilMar       | stub     | scrittura | ampliamento ethernet |
 | Francesco Bultrini | frabulous    | ramoso   |           |                      |
