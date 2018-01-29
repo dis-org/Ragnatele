@@ -22,6 +22,8 @@
   + DNS
       
 ### Argomenti lasciati alla buona volontà dei posteri 
++ Livello di collegamento
+    + X.25 (viene continuamente menzionato ma mai spiegato nelle dispense)
 + Livello di rete
     + EGP (il protocollo, non la famiglia!)
     + BGP - struttura dei diversi tipi di messaggi (sono troppi)
