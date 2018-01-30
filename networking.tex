@@ -1416,7 +1416,7 @@ Ad ogni dominio è associato un Resource Record (RR), ossia un file ASCII che co
 \para{Risoluzione}
 La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
 La risoluzione può essere statica (mapping stabilito permanentemente tramite una \textit{host table}) o dinamica (mapping stabilito ad ogni avvio dell'host).\\
-Per eseguire la risoluzione, il client chiama il \vedi{Resolver}, il quale invia un pacchetto \vedi{UDP} ad un server DNS locale (\textit{primary server}) che cerca il nome e, se è presente nella sua cache, lo restituisce, mentre in caso contrario interroga ricorsivamente i server partendo da un \textit{root server} del TLD fino ad arrivare ai server autoritativi del nome richiesto (\textit{authoritative server}), i quali invieranno la loro risposta al client.
+Per eseguire la risoluzione, il client utilizza il resolver, il quale invia un pacchetto \vedi{UDP} ad un server DNS locale (\textit{primary server}) che cerca il nome e, se è presente nella sua cache, lo restituisce, mentre in caso contrario interroga ricorsivamente i server partendo da un \textit{root server} del TLD fino ad arrivare ai server autoritativi del nome richiesto (\textit{authoritative server}), i quali invieranno la loro risposta al client.
 
 \paragraph{BIND} \textit{Berkeley Internet Name Domain} è l'implementazione più comune del DNS su ambiente Unix ed è disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND è composto da una parte client, il \textit{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare query al server dei nomi; la seconda un demone che risponde a suddette richieste. 
 BIND può essere configurato come 
@@ -1424,60 +1424,53 @@ BIND può essere configurato come
 \item \italic{\textbf{caching-only}}: reindirizza ogni richiesta del resolver ad altri server e memorizza le risposte in una cache locale;
 \item \textbf{\textit{authoritative}}: ha una zona di competenza, della quale contiene le informazioni. In tal caso può essere: 
 \begin{itemize}
-\item \italic{\textbf{primary}}, qualora gestisca esso stesso le informazioni relative al proprio dominio, salvate negli \vedi{Zone files}, configurati dall'amministratore di rete,
-\item \italic{\textbf{secondary}}: scaricano gli \vedi{Zone files} dal primary server e li memorizzano in appositi file detti \italic{zone file transfer}.
+\item \italic{\textbf{primary}}, qualora gestisca esso stesso le informazioni relative al proprio dominio, salvate negli \vedi{Zone file}, configurati dall'amministratore di rete,
+\item \italic{\textbf{secondary}}: scaricano gli \vedi{Zone file} dal primary server e li memorizzano in appositi file detti \italic{zone file transfer}.
 \end{itemize}
 \end{itemize}
-\paragraph{Resolver} \textbf{(/etc/resolv.conf)}: contiene istruzioni per l'esecuzione delle richieste; Si può usare la configurazione di default, altrimenti è necessario specificare:
+\paragraph{Configurazione del resolver} Il file relativo alla configurazione del resolver è \code{(/etc/resolv.conf)}. Qualora non si voglia utilizzare la configurazione di default è necessario specificare:
 \begin{itemize}
-\item \textbf{nameserver \textless IP-address\textgreater}: le richieste saranno inviate all'IP \textit{IP-address}. Si possono specificare al massimo 3 nameserver, nel caso il primo non risponda.
-\item \textbf{domain \textless name\textgreater}: nome del dominio di default che verrà concatenato a sinistra di ogni nome host che non contiene il carattere punto (in caso di fallimento omette i domini meno significativi fino a concatenare solo il TLD).
-\item \textbf{search \textless domain-1, ..., domain-n\textgreater}: come domain ma con la possibilità di avere più domini da provare ad aggiungere al nome host (ma non risale i domini se fallisce).
+\item indirizzo del server dei nomi cui saranno inviate le richieste (sintassi: \code{nameserver \textit{IP-address}}). Si possono specificare fino a tre nameserver, nell'ordine in cui si vuole che vengano interrogati;
+\item nome del dominio di default che verrà concatenato a sinistra di ogni nome host non contenente il carattere "\code{.}"; in caso di fallimento omette i domini meno significativi, fino a concatenare solo il TLD (sintassi: \code{domain \textit{name}}). Un'alternativa per ottenere un risultato analogo è \code{search \textit{names}}, che offre la possibilità di elencare più nomi da provare a concatenare, ma non risale i domini in caso di fallimento.
 \end{itemize}
 
-\paragraph{Named} (Server): è necessario configurare più files: 
+\paragraph{Configurazione del server dei nomi (\code{named})} 
+La configurazione di \code{named} coinvolge più file: 
 \begin{itemize}
-\item \textbf{/etc/named.conf}: parametri generali di configurazione e puntatori ai file dei domini gestiti dal server (ossia gli zone files)
+\item \code{/etc/named.conf} contiene i parametri generali di configurazione e i puntatori agli \vedi{Zone file} dei domini gestiti dal server. 
 \begin{itemize}
-\item caching-only: si omettono i comandi di configurazione del primary e secondary server tranne il dominio di loopback.
-\code{primary \quad 0.0.127.IN-ADDR.ARPA \quad /etc/named.local \\ 
-cache \qquad . \qquad \qquad \qquad \qquad \qquad /etc/named.ca}//
-\item primary server: supponendo che il dominio sia \textit{unipg.it} e il primary server \textit{moe}
+\item Se si sta configurando un \textbf{caching-only} server, la configurazione è assai concisa:
+\begin{itemize}
+\item \code{primary 0.0.127.IN-ADDR.ARPA /etc/named.local}\\
+indica che il server locale è primary server solo ed esclusivamente per il proprio dominio di loopback e specifica il file contenente le relative informazioni
+\item \code{cache . /etc/named.ca}\\ 
+impone a \code{named} di memorizzare in una cache locale le risposte dei nameserver cui redirige le richieste dei resolver e di inizializzare suddetta cache con la lista dei root server, contenuta in \code{/etc/named.ca}
+\end{itemize}
+\item Se si sta configurando un \textbf{primary} server occorre, appunto, inoltre specificare il dominio per cui il server è primario e specificare il file contenente le associazioni IP-hostname (righe 2-3 dell'esempio sottostante, in cui il dominio è\code{unipg.it})\\
 \code{\begin{tabbing}
 \hspace*{8cm} \= \kill
-directory \>/etc\\
-\hspace*{3cm} \= \hspace*{5cm} \= \kill
+directory /etc\\
+\hspace*{2cm} \= \hspace*{4.5cm} \= \kill
 primary \> unipg.it \> named.hosts\\ 
 primary \> 250.141.IN-ADDR.ARPA \> named.rev\\ 
 primary \> 0.0.127.IN-ADDR.ARPA \> named.local\\
 cache \> . \> named.ca
 \end{tabbing}
 }
-\textit{2. il server locale è il primary server per [unipg.it] con zonefile [named.host]}\\
-\textit{3. puntatore a [named.rev]. Il server locale è il primary server per il reverse domain [205.141.IN-ADDR.ARPA]}\\
-\item secondary server: supponendo che il dominio sia \textit{unipg.it} e il primary server \textit{moe}
+\item Se si sta configurando un \textbf{secondary} server, bisogna invece specificare il server primario di riferimento per i vari domini e il file in cui memorizzare le risposte ottenute (righe 2-3 dell'esempio sottostante, riferito anch'esso al dominio unipg.it)\\
 \code{\begin{tabbing}
-\hspace*{10cm} \= \kill
-directory \>/etc\\
-\hspace*{2,5cm} \= \hspace*{4,5cm} \= \hspace*{3cm} \=\kill
+\hspace*{8cm} \= \kill
+directory /etc\\
+\hspace*{2cm} \= \hspace*{4.2cm} \= \hspace*{3cm} \=\kill
 secondary \> unipg.it \>141.250.1.1 \> unipg.it.hosts\\ 
 secondary \> 250.141.IN-ADDR.ARPA \> 141.250.1.1 \> 250.141.rev\\ 
 primary \> 0.0.127.IN-ADDR.ARPA \>  \>named.local\\
 cache \> . \>  \qquad  \qquad \qquad \qquad named.ca
 \end{tabbing}
 }
-\textit{2. server locale scarica info su  [unipg.it] dal server con IP [141.250.1.1] e memorizza nel file [unipg.it.hosts]}\\
-\textit{3. il server locale è il secondary server per il reverse domain [250.141.IN-ADDR.ARPA]. I suoi dati vanno scaricati dal server con IP [141.250.1.1] e memorizzati nel file [/etc/250.141.rev]}
 \end{itemize}
-\item \textbf{/etc/named.ca}: puntatori ai root domain server. Stabilisce il nome dei root server e i loro indirizzi.
-\code{
-;\\
-; formerly NS1.ISI.EDU\\
-.  \qquad \qquad \qquad \qquad \qquad \quad 3600000  \qquad \qquad  NS  \qquad \qquad B.ROOT-SERVERS.NET.\\
-B.ROOT-SERVERS.NET. \qquad 3600000  \qquad \qquad A  \qquad \qquad 128.9.0.107\\
-...
-}
-\item \textbf{/etc/named.local}: zone file per la traduzione del reverse domain 0.0.127.IN-ADDR.ARPA (lookback). Permette quindi la conversione di 127.0.0.1 nel nome "localhost".
+\item \code{/etc/named.ca} contiene i puntatori ai root domain server;
+\item \code{/etc/named.local} è lo zone file per la traduzione del reverse domain \code{0.0.127.IN-ADDR.ARPA} (lookback). In pratica, permette la conversione di \code{127.0.0.1} in \code{localhost}. Si noti, nell'esempio che segue, il simbolo \code{@}: esso verrà sostituito col nome di dominio corrispondente a questo file, definito in \code{named.conf}
 \code{\begin{tabbing}
 \hspace*{1cm} \= \hspace*{1cm} \= \hspace*{2cm} \= \hspace*{2cm} \=  \kill
 \$TTL \> 86400 \>\>\>\\
@@ -1490,86 +1483,43 @@ B.ROOT-SERVERS.NET. \qquad 3600000  \qquad \qquad A  \qquad \qquad 128.9.0.107\\
 \> IN \> NS \> localhost.\> \\
 1 \> IN \> PTR \> localhost.\\
 \end{tabbing}}
-\italic{Dove ad @ verrà sostituito il nome del dominio corrispondente a questo file, e 1 rappresenta l'ultimo numero dell'IP 127.0.0.1 (i primi tre sono in 0.0.127.IN-ADDR.ARPA)}
-\item \textbf{/etc/named.hosts}: zone file per la risoluzione diretta\\
-\code{
-@ IN SOA moe.unipg.it. root.moe.unipg.it. (
-\begin{tabbing}
-\hspace*{6cm} \= \hspace*{3cm} \= \kill
-\>2014030101 \>; Serial\\
-\>10800 \>; Refresh\\
-\>3600 \>; Retry\\
-\>604800 \>; Expire\\
-\>86400 ) \>; Minimum\\
-\hspace*{0,5cm} \= \hspace*{5cm} \= \kill
- \italic{//Name servers}\>\>\\
-\>\> IN NS moe.unipg.it.\\
- \>plant\> IN NS pack.plant.unipg.it.\\
- \italic{//Mail server}\>\>\\
- \>\>IN MX 10 moe.unipg.it.\\
- \>\>IN MX 20 larry.unipg.it.\\
-\>localhost\> IN A 127.0.0.1\\
- \italic{//Name to IP mapping}\>\>\\
-\>moe.unipg.it.\> IN A 141.250.1.1\\
-\>larry.unipg.it. \>IN A 141.250.1.2\\
-\>omniw.unipg.it. \>IN A 141.250.1.40\\
- \italic{//Alias}\>\>\\
-\>www \>IN CNAME moe.unipg.it.\\
-//interface specific name\>\>\\
-\>ns133.unipg.it. \>IN A 141.250.5.51\\
-\end{tabbing}}
-\item \textbf{/etc/named.rev}: zone file per la risoluzione inversa\\
-\code{
-@ IN SOA moe.unipg.it. root.moe.unipg.it. (
-\begin{tabbing}
-\hspace*{6cm} \= \hspace*{3cm} \= \kill
-\>2014030101 \>; Serial\\
-\>10800 \>; Refresh\\
-\>3600 \>; Retry\\
-\>604800 \>; Expire\\
-\>86400 ) \>; Minimum\\
-\hspace*{0,5cm} \= \hspace*{5cm} \= \kill
-\italic{//Name server}\\
-\>250.141.in-addr.arpa.\> IN NS moe.unipg.it.\\
-\>250.141.in-addr.arpa.\> IN NS larry.unipg.it.\\
-//Address point to canonical names\\
-\>1.1.250.141.in-addr.arpa.\> IN PTR moe.unipg.it.\\
-\>2.1.250.141.in-addr.arpa. \>IN PTR larry.unipg.it\\
-\end{tabbing}}
+\item \code{/etc/named.hosts} è lo zone file per la risoluzione diretta;
+\item \code{/etc/named.rev} è lo zone file per la risoluzione inversa.
 \end{itemize}
 
-\para{Zone files}File di testo che descrivono un sottoinsieme di domini (spesso un singolo dominio), ogni riga viene detta \italic{Resource Record} (RR) ed è della forma:
+\para{Zone file} 
 \boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
-
-\image[zone-file.png][scale=0.7]{Formato di un RR.}
-con:
+File di testo che descrive un sottoinsieme di domini (o, più spesso, un singolo dominio). Ogni riga viene detta \italic{Resource Record} (RR) ed è in forma
+\image[zone-file.png][scale=0.5]{Formato di un RR.}
+dove:
 \begin{itemize}
-\item \textbf{name}: nome di dominio (in genere si usa @ per riferirlo al dominio definito nello zone file)
-\item \textbf{ttl (time to live)}: tempo di permanenza del RR nella cache di un sistema remoto
-\item \textbf{record class}: sempre \code{IN}, indica che il record è un INternet DNS RR
-\item \textbf{record type}: il tipo di RR (v. standard resource record)
-\item \textbf{record data}: info specifiche del tipo di RR
+\item \textbf{name} è il nome di dominio (in genere si usa \code{@} per riferirlo al dominio definito nello zone file);
+\item \textbf{ttl (time to leave)} è il tempo di permanenza del RR nella cache di un sistema remoto;
+\item \textbf{record class} ha sempre valore \code{IN}. Indica che il record è un INternet DNS RR;
+\item \textbf{record type} indica il tipo di RR;
+\item \textbf{record data} contiene informazioni specifiche del tipo di RR.
 \end {itemize}
-I principali componenti di uno zone file sono chiamati "standard resource record" e sono:
+I record più comuni in uno \vedi{Zone file} sono chiamati \textit{standard resource record} e sono:
 \begin{itemize}
-\item \textbf{SOA} (Start of authority): segna l'inizio di un zone file (in genere è il primo record usato e ne esiste uno per zone file), definendo parametri specifici per questo zone file [data]
-\item \textbf{NS} (Name Server): nome del server \italic{[record data]} che ha autorità su questo dominio \italic{[name]}
-\item \textbf{A} (Address record): associa l'hostname \italic{[name]} ad un indirizzo IP \italic{[record data]}
-\item \textbf{PTR} (domain name PoinTR): associa gli indirizzi IP \italic{[name]} ad un nome di host \italic{[record data]}
-\item \textbf{MX} (Mail eXchanger): definisce il server \italic{[record data]} che gestisce la posta per un host o un dominio \italic{[name]}
-\item \textbf{CNAME} (Canonical NAME): definisce un alias per il nome di un host
+\item \code{SOA} (Start Of Authority): segna l'inizio di uno \vedi{Zone file} (in genere è il primo record; ne esiste uno per zone file);
+\item \code{NS} (Name Server): nome del server che ha autorità sul dominio;
+\item \code{A} (Address record): associa un hostname ad un indirizzo IP;
+\item \code{PTR} (domain name PoinTeR): permette di associare indirizzi IP ad un hostname;
+\item \code{MX} (Mail eXchanger): definisce il server che gestisce la posta per un host o un dominio;
+\item \code{CNAME} (Canonical NAME): definisce un alias per il nome di un host.
 \end{itemize}
-\paragraph{Comandi:} Per avviare il servizio DNS si usa\\ \code{named [\begin{tabbing}
-\hspace*{1cm} \= \hspace*{2,5cm} \= \kill
-\> -c configfile \> \textit{//path di named.conf (default: /etc/named.conf)}\\
-\> -d level \> \textit{//attiva il debug, salvando i log in \$dir/named.run}\\
-\> -p port \> \textit{//porta a cui deve rispondere il servizio (default: 53)}\\
-\> -n ncpus \> \textit{//per sfruttare i sistemi multiprocessore}\\
-\> -t directory \> \textit{//cambio di directory dopo aver letto named.conf}\\
-\> -u user \> \textit{//utente che esegue named}\\] \end{tabbing}}
-Per avviare un tool di debugging (\textbf{dig}) si usa\\
-\code{dig @server hostname}\\
-e permette di interrogare un nameserver per ottenere informazioni  e verificarne la configurazione.
+\ \\Per avviare il servizio DNS si usa il comando \code{named}, con la sintassi
+\\ \code{named [\begin{tabbing}
+\hspace*{1cm} \= \hspace*{3cm} \= \kill
+\> -c \textit{configfile} \> //path di named.conf\\
+\> -d \textit{level} \> //attiva il debugging\\
+\> -p \textit{portnumber} \> //default: 53\\
+\> -n \textit{ncpus} \> //sfrutta i sistemi multiprocessore\\
+\> -t \textit{directory}\\
+\> -u \textit{user}\\] 
+\end{tabbing}}
+\paragraph{Debugging} I principali strumenti di debugging del DNS sono: \code{dig} e \code{nslookup} (obsoleto).
+
 \newpage
 
 \subsub{NIS}
