@@ -5,22 +5,13 @@
 + Quando hai finito rimuovi l'argomento dalla scaletta e dalla tabella.
 
 ### Cosa c'è da fare
-+ Premessa
-+ Introduzione
-    + Tipi di connessione (point-to-point VS multipunto) (?)
 + Livello di Collegamento
   + Encoding (introduzione)
-  + Frame Relay
-+ Livello di rete
-+ Livello delle Applicazioni
-  + inetd (Internet daemon)
-  + Servizi di rete 
-    + SNMP 
-
+  + Tipi di Ethernet
+  
 ### Cosa va rivisto
-+ Livello di rete
-  + DNS
-      
+
+
 ### Argomenti lasciati alla buona volontà dei posteri 
 Lista di argomenti che volutamente non sono stati inseriti per mancanza di fonti affidabili o perché ritenuti secondari:
 + Livello di collegamento
@@ -46,10 +37,9 @@ Lista di argomenti che volutamente non sono stati inseriti per mancanza di fonti
 | Nome (facoltativo) | GitHub       | Branch   | Azione    | Argomento            |
 |:-------------------|:------------:|:--------:|:---------:|:--------------------:|
 | Arianna Masciolini | harisont     | hub      | revisione | cfr. slides AR       |
-|                    |              |          | scrittura | frame relay          |
 | Claudio Pannacci   | Kappanneo    | backbone |           |                      |
 | Filippo Mariani    | FilMar       | stub     | scrittura | ampliamento ethernet |
 | Francesco Bultrini | frabulous    | ramoso   |           |                      |
 | Gioara Cuccu       | Gio93k       | border   |           |                      |
 | Giorgio Mazza      | Shizen39     | metric   |           |                      |
-| Tommaso Ricci      | Batto1300    | Tommaso  | scrittura | Posta Elettronica    |
+| Tommaso Ricci      | Batto1300    | Tommaso  |           |                      |
