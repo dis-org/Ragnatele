@@ -6,7 +6,6 @@
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{nameref} 
 \usepackage{siunitx} 
-
 \setcounter{section}{-1} %per numerare le sezioni partendo da 0
 
 \graphicspath{{./images/}}
@@ -730,8 +729,8 @@ Per le operazioni del \vedi{Livello di collegamento} il PPP si avvale del protoc
 	\item[4.] \textbf{Terminazione}: la connessione viene interrotta. Può accadere a seguito del fallimento della fase 2, oppure se la connessione cade improvvisamente o se l'utente decide volontariamente di interromperla.
 \end{itemize}
 \subsub{X.25} %daje, su, tocca metterlo
-\subsub{FR} %scusate ma non si capisce niente
-Frame Relay: tecnologia di comunicazione ad alte prestazioni  utilizzata per connettere più reti, costituisce un'evoluzione del protocollo \vedi{X.25}, da cui differisce principalmente per la strategia di correzione degli errori, che garantisce migliori prestazioni, ed è il risultato ottenuto nel 1990 da un consorzio appositamente creato (il Frame Relay Forum), cui appartengono, tra gli altri, Cisco, Digital, Northern Telecom e Stratacom. In sintesi, FR va inteso come un modo per inviare informazioni attraverso una \vedi{WAN}, suddividendole in \textit{frames}. Utilizza una forma di \vedi{Packet switching} che ben si presta ad essere usata nelle \vedi{LAN} e in \vedi{Internet}. In una rete FR, gli endpoint sono connessi da un \textit{logical path}, denominato \textit{virtual circuit}.
+\subsub{FR} %scusate ma non si capisce
+Frame Relay: tecnologia di comunicazione \vedi{Connection-oriented} ad alte prestazioni  utilizzata per connettere più reti, costituisce un'evoluzione del protocollo \vedi{X.25}, da cui differisce principalmente per la strategia di correzione degli errori, che garantisce maggiore velocità (fino a 2Mbps), ed è il risultato ottenuto nel 1990 da un consorzio appositamente creato (il Frame Relay Forum), cui appartengono, tra gli altri, Cisco, Digital, Northern Telecom e Stratacom. In sintesi, FR va inteso come un modo per inviare informazioni attraverso una \vedi{WAN}, suddividendole in \textit{frames}. Utilizza una forma di \vedi{Packet switching} che ben si presta ad essere usata nelle \vedi{LAN} e in \vedi{Internet}. In una rete FR, gli endpoint sono connessi da un \textit{logical path}, denominato \textit{virtual circuit}.
 \subsub{ATM}
 Asynchronous Transfer Mode è un protocollo nato negli anni '90 allo scopo di unificare varie tipologie di traffico all'interno di un solo sistema integrato. Per adempiere tale compito, infatti, è in grado di trasportare contemporaneamente segnali diversi e, di conseguenza, supportare molteplici velocità e tipologie di traffico. Ciò rende ATM ottimale sia nelle connessioni LAN-LAN che in quelle LAN-WAN.
 \\Il consorzio \textit{ATM Forum} ha condotto il processo di standardizzazione del protocollo con il fine di realizzare una rete BISDN (\textit{Broadband-ISDN}), ovvero una rete a banda larga che trasporti sia voce sia dati. Questo modello prevede, tra le altre cose, la presenza di interfacce \textbf{UNI} (\textit{user-network interface}) e \textbf{NNI} (\textit{network-network interface}).
@@ -1412,7 +1411,6 @@ Essi sono assegnati da \vedi{ICANN} alle organizzazioni o alle autorità respons
 \end{itemize}
 Quindi, al contrario di quanto avviene con gli indirizzi IP, in un nome la parte più importante è la prima partendo da destra (il TLD).
 Ad ogni dominio è associato un Resource Record (RR), ossia un file ASCII che contiene record del database DNS.
-\image[rr-types.png][scale=0.35]{Tipi di record RR}
 \para{Risoluzione}
 La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
 La risoluzione può essere statica (mapping stabilito permanentemente tramite una \textit{host table}) o dinamica (mapping stabilito ad ogni avvio dell'host).\\
@@ -1500,6 +1498,7 @@ dove:
 \item \textbf{record data} contiene informazioni specifiche del tipo di RR.
 \end {itemize}
 I record più comuni in uno \vedi{Zone file} sono chiamati \textit{standard resource record} e sono:
+\image[rr-types.png][scale=0.35]{Tipi di record RR}
 \begin{itemize}
 \item \code{SOA} (Start Of Authority): segna l'inizio di uno \vedi{Zone file} (in genere è il primo record; ne esiste uno per zone file);
 \item \code{NS} (Name Server): nome del server che ha autorità sul dominio;
@@ -1519,11 +1518,9 @@ I record più comuni in uno \vedi{Zone file} sono chiamati \textit{standard reso
 \> -u \textit{user}\\] 
 \end{tabbing}}
 \paragraph{Debugging} I principali strumenti di debugging del DNS sono: \code{dig} e \code{nslookup} (obsoleto).
-
 \newpage
-
 \subsub{NIS}
-Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages), è un servizio che permette di definire delle risorse di amministrazione comuni ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato NIS map) collocato nel master server, che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}.
+Network Information Service: inizialmente chiamato \textbf{YP} (Yellow Pages), è un servizio spesso utilizzato nel contesto di applicazioni parallele e distribuite che permette di definire delle risorse di amministrazione comuni ad un insieme di host, in modo che l'utente possa utilizzare host differenti mantenendo gli stessi username, password, cartella home e permessi. Funziona per mezzo di un database (in formato \textbf{NIS map}) collocato nel master server, il che permette un controllo centralizzato e la condivisione automatica delle risorse. Le NIS map sono rese disponibili ai client tramite il processo \code{ypserv} e vengono aggiornate dinamicamente tramite il demone \code{ypbind}. Sia il server che i client fanno parte di uno stesso \textit{NIS domanin}, il cui nome può essere stabilito tramite il comando \code{domainname \textit{domain}}, mentre \code{ypwhich} serve a visualizzare l'indirizzo del server. 
 \subsub{HTTP} 
 HyperText Transfer Protocol: principale sistema che permette la trasmissione di informazioni sul Web, al fine di realizzare sistemi informativi distribuiti, collaborativi ed ipermediali (ossia composti da \textit{multimedialità} distribuita nella rete ed acceduta mediante \textit{hyperlink}\footnote{Collegamenti ipertestuali.}). Utilizza il protocollo TCP sulla porta 80.
 \paragraph{Storia} HTTP è utilizzato dal \vedi{WWW} dal 1990, e se ne sono susseguite diverse versioni:
@@ -1589,16 +1586,15 @@ NFS è modulare, suddiviso in tre parti indipendenti:
 \subsub{SNMP}  %Managment Information Base (MIB), SNMP trap per gestione imprevisti, polling orientato ai trap, Structure of Management Information (SMI)
 Simple Network Management Protocol: protocollo per la gestione di reti internet che permette ad uno o più \vedi{DTE} detti \italic{manager} di accedere e modificare, attraverso \vedi{UDP} sulle porte $161$ e $162$, alcune informazioni elementari dei vari dispositivi di rete, detti \italic{agents}. Le informazioni gestiste nei vari \italic{agents}, dette 
 oggetti (in inglese \italic{managed objects}), vengono raccolte in un database chiamato \vedi{MIB}.
-\\Esistono più versioni del protocollo:
-\begin{itemize}
-\item SNMPv1;
-\item SNMPv2;
-\item SNMPv3, che rimedia alle carenze in merito a sicurezza e privacy delle versioni precedenti, tramite un sistema di autenticazione e strumenti di controllo degli accessi.
-\end{itemize}
-\para{MIB} (Management Information Base).
-\para{SMI} Structure of Management Information.
+La terza versione del protocollo rimedia alle carenze in merito a sicurezza e privacy delle versioni precedenti tramite un sistema di autenticazione e strumenti di controllo degli accessi. In particolare, maschera le informazioni per proteggerle da modifiche non autorizzate (\italic{authentication}) e ne garantisce la riservatezza.
+\para{MIB} Management Information Base: archivio di informazioni di gestione inserite dagli \textit{agent}.
+\para{SMI} Structure of Management Information: insieme delle regole, specificate per mezzo dell'\vedi{ASN.1} che definiscono i nomi e la codifica delle variabili MIB. 
+\para{OID} Object IDentifer: contiene i criteri per definire un
+oggetto. Si segue una struttura ad albero di standard e
+si pone qualsiasi oggetto o standard in una regione
+precisa dell’albero. 
  
- \sub {Posta elettronica}
+\sub {Posta elettronica}
 La posta elettronica \'e un servizio che coinvolge due programmi: il \textbf{Mail User Agent} ed il \textbf{programma di trasporto}, di cui è un esempio \textit{SendMail}. 
 \subsub{MUA} Il Mail User Agent costituisce un'interfaccia utente che offre funzionalità di composizione, visualizzazione, archiviazione ed eliminazione (automatica, tramite filtri, o manuale) dei messaggi.
 I principali protocolli che consentono l'interazione tra MUA e protocollo di trasporto sono \vedi{POP3} e \vedi{IMAP}. 
