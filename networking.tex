@@ -1394,45 +1394,40 @@ Dynamic Host Configuration Protocol daemon), la cui configurazione viene eseguit
 chiamato \code{dhcpd.conf}.
 
 \newpage\subsub{DNS}
-Il DNS (\textit{Domain Name System}) è un servizio utilizzato per associare i nomi degli host, più semplici da ricordare per l'utente, ai relativi indirizzi  \vedi{IP}. In tal modo è inoltre possibile attribuire più nomi allo stesso indirizzo IP (o viceversa) per rappresentare servizi diversi forniti da uno stesso host (o più host che forniscono lo stesso servizio).
-\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP};\\ nel 1983, quando questo modello diventò insostenibile, assieme a Paul Mockapetris e Craig Partridge ideò il \italic{Domain Name Scheme} su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
-\paragraph{Spazio dei nomi gerarchico} Basato su un insieme di database distribuiti, garantisce l'aggiornamento di tutta la rete. L'insieme dei nomi viene suddiviso in zone dette domini che possono coprire più host ed essere suddivise in sotto-domini e così via, formando una struttura ad albero in cui i nodi rappresentano i nomi:
+Il DNS (\textit{Domain Name System}) è un servizio utilizzato per associare i nomi degli host, più semplici da ricordare per l'utente, ai relativi indirizzi  \vedi{IP}. In tal modo è inoltre possibile attribuire più nomi allo stesso indirizzo IP, per rappresentare servizi diversi forniti da uno stesso host, o viceverda, per rappresentare più host che forniscono lo stesso servizio).
+\paragraph{Cenni storici} Nei primi anni di Internet Jon Postel aggiornava manualmente la lista di coppie nome-indirizzo salvata su un server \vedi{FTP}.\\ Nel 1983, quando questo modello diventò insostenibile, assieme a Paul Mockapetris e Craig Partridge ideò il \italic{Domain Name Scheme}, su cui si basa il DNS, introdotto nell'\vedi{RFC} 882 e ridefinito nei 1032 e 1035.
+\paragraph{Spazio dei nomi gerarchico} Basato su un insieme di database distribuiti, garantisce l'aggiornamento di tutta la rete. L'insieme dei nomi viene suddiviso in zone, dette \textit{domini}, che possono coprire più host ed essere suddivise in sotto-domini e così via, formando una struttura ad albero in cui i nodi rappresentano i nomi:
 \begin{itemize}
 \item I domini di primo livello o \textbf{TLD} (\textit{Top Level Domain}) sono i figli del nodo radice ".", suddivisi in: 
 \begin{itemize}
-\item \textbf{gTLD} (\textit{generic TLD}), ad esempio .com, .edu\footnote{gTLD riservati: \code{.example}, \code{.invalid}, \code{.localhost}, \code{.test}}...
-\item \textbf{ccTLD} (\textit{country-code TLD}) ad esempio .it, .fr, .uk...,
-\item \textbf{infrastrutturali}: .arpa, usato per la risoluzione inversa dei nomi. 
+\item \textbf{gTLD} (\textit{generic TLD}), ad esempio \code{.com}, \code{.edu}\footnote{gTLD riservati: \code{.example}, \code{.invalid}, \code{.localhost}, \code{.test}} etc.;
+\item \textbf{ccTLD} (\textit{country-code TLD}) ad esempio \code{.it}, \code{.fr}, \code{.uk} etc;
+\item \textbf{infrastrutturali}: \code{.arpa}, usato per la risoluzione inversa dei nomi. 
 \end{itemize}
-Essi sono assegnati da \vedi{ICANN} alle organizzioni o alle autorità responsabili locali (per l'Italia l'IIT CNR). La lista completa è disponibile all'indirizzo \url{www.iana.org/domains/root/db}.
-\item I domini di secondo livello, in genere, appartengono alle organizzazioni che li hanno registrati e comprendono il loro nome e il dominio di primo livello separati da un punto (es. unipg.it).
+Essi sono assegnati da \vedi{ICANN} alle organizzazioni o alle autorità responsabili locali (per l'Italia l'IIT CNR). La loro lista completa è disponibile all'indirizzo \url{www.iana.org/domains/root/db}.
+\item I domini di secondo livello, in genere, appartengono alle organizzazioni che li hanno registrati e comprendono il loro nome e il dominio di primo livello separati da un punto (es. \code{unipg.it}).
 \item I successivi \textit{sotto-domini} vengono creati per rendere la gestione del DNS modulare e seguono la stessa logica dei domini di secondo livello.
-\item Infine le foglie corrispondono agli host. 
+\item Infine, le foglie corrispondono ai singoli host. 
 \image[dns.png][scale=0.35]{Spazio gerarchico dei nomi}
 \end{itemize}
-Quindi, al contrario degli indirizzi IP, in un nome DNS la parte più importante è la prima partendo da destra (appunto, il TLD).
-Ad ogni dominio è associato un Resource Record (RR), file ASCII che contiene record del database DNS.  %\vedi resource record
-\paragraph{Name server} Server DNS che risponde alle richieste del resolver, effettuando le conversioni nomi/indirizzi.
-\paragraph{Resolver} Libreria di funzioni presente nei client per generare e inviare le query relative ai nameserver.
-
+Quindi, al contrario di quanto avviene con gli indirizzi IP, in un nome la parte più importante è la prima partendo da destra (il TLD).
+Ad ogni dominio è associato un Resource Record (RR), ossia un file ASCII che contiene record del database DNS.
 \image[rr-types.png][scale=0.35]{Tipi di record RR}
-\boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
-\paragraph{Risoluzione}
+\para{Risoluzione}
 La conversione di un nome in un indirizzo è detta \textit{risoluzione}, mentre la conversione di un indirizzo in nome è detta \textit{risoluzione inversa}.\\
-La risoluzione può essere \textbf{statica} (mapping stabilito permanentemente tramite una host table) o \textbf{dinamica} (mapping stabilito ad ogni avvio dell'host).\\
-Per eseguire la risoluzione il client chiama il risolutore, passandone come parametro il nome. \\Questo invia un pacchetto \vedi{UDP} a un server DNS locale (\textit{primary server}) che cerca il nome e se è presente nella sua cache lo restituisce; in caso contrario interroga ricorsivamente i server partendo da un root server del TLD fino ad arrivare ai server autorevoli del nome richiesto (\textit{authoritative server}), i quali invieranno la loro risposta al client.
+La risoluzione può essere statica (mapping stabilito permanentemente tramite una \textit{host table}) o dinamica (mapping stabilito ad ogni avvio dell'host).\\
+Per eseguire la risoluzione, il client chiama il \vedi{Resolver}, il quale invia un pacchetto \vedi{UDP} ad un server DNS locale (\textit{primary server}) che cerca il nome e, se è presente nella sua cache, lo restituisce, mentre in caso contrario interroga ricorsivamente i server partendo da un \textit{root server} del TLD fino ad arrivare ai server autoritativi del nome richiesto (\textit{authoritative server}), i quali invieranno la loro risposta al client.
 
-\paragraph{BIND} \textit{Berkeley Internet Name Domain} è l'implementazione più comune del DNS su ambiente Unix ed è disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND è composto da una parte client, il \code{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare le richieste al server; la seconda un demone che risponde alle richieste del resolver. Sia lato server che lato client, la configurazione avviene tramite specifici file di testo.\\
+\paragraph{BIND} \textit{Berkeley Internet Name Domain} è l'implementazione più comune del DNS su ambiente Unix ed è disponibile sul sito dell'\italic{Internet Software Consortium} (ISC) \url{www.isc.org}. BIND è composto da una parte client, il \textit{resolver}, ed una parte server, \code{named}. La prima è una libreria volta a generare ed inviare query al server dei nomi; la seconda un demone che risponde a suddette richieste. 
 BIND può essere configurato come 
 \begin{itemize}
-\item \italic{\textbf{caching-only}} reindirizza ogni richiesta del resolver ad altri server e memorizza il risultato che ritornano in una cache locale
-\item \textbf{authoritative} contiene info su tutta la zona di sua competenza. Può essere 
+\item \italic{\textbf{caching-only}}: reindirizza ogni richiesta del resolver ad altri server e memorizza le risposte in una cache locale;
+\item \textbf{\textit{authoritative}}: ha una zona di competenza, della quale contiene le informazioni. In tal caso può essere: 
 \begin{itemize}
-\item \italic{\textbf{secondary}}: scaricano gli \vedi{Zone files} dal \italic{primary server} e li memorizzano in appositi file detti \italic{zone file transfer};
-\item \italic{\textbf{primary}}: gestiscono le informazioni relative a specifici domini, salvate negli \vedi{Zone files}, confgurati dall'amministratore di rete.
+\item \italic{\textbf{primary}}, qualora gestisca esso stesso le informazioni relative al proprio dominio, salvate negli \vedi{Zone files}, configurati dall'amministratore di rete,
+\item \italic{\textbf{secondary}}: scaricano gli \vedi{Zone files} dal primary server e li memorizzano in appositi file detti \italic{zone file transfer}.
 \end{itemize}
 \end{itemize}
-Di seguito, le configurazioni del resolver, del named e degli \textbf{Zone files} di BIND:
 \paragraph{Resolver} \textbf{(/etc/resolv.conf)}: contiene istruzioni per l'esecuzione delle richieste; Si può usare la configurazione di default, altrimenti è necessario specificare:
 \begin{itemize}
 \item \textbf{nameserver \textless IP-address\textgreater}: le richieste saranno inviate all'IP \textit{IP-address}. Si possono specificare al massimo 3 nameserver, nel caso il primo non risponda.
@@ -1544,6 +1539,8 @@ B.ROOT-SERVERS.NET. \qquad 3600000  \qquad \qquad A  \qquad \qquad 128.9.0.107\\
 \end{itemize}
 
 \para{Zone files}File di testo che descrivono un sottoinsieme di domini (spesso un singolo dominio), ogni riga viene detta \italic{Resource Record} (RR) ed è della forma:
+\boximage[zone-file-example.png][scale=0.3]{Esempio di zone file}
+
 \image[zone-file.png][scale=0.7]{Formato di un RR.}
 con:
 \begin{itemize}
