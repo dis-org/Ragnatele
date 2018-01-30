@@ -32,6 +32,7 @@
     + Algoritmi crittografici (non sono molto attinenti all'architettura reti)
     + Usenet news (non le usa più nessuno)
     + HTTP 1 (non si usa, siamo al 2)
+    + elenco completo dei file NIS map (se lo si ritiene utile)
 + Sicurezza di rete
     + Informazioni vaghe su sicurezza e attacchi informatici tratte dalle slides di Arch. reti (poco significative rispetto al resto, e in compenso molto divertenti da leggere così come sono ;) Potrebbero diventare una sezione "Terminologia" analoga a quelle dei diversi livelli del modello ISO/OSI)
 
