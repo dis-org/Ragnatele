@@ -22,19 +22,21 @@
   + DNS
       
 ### Argomenti lasciati alla buona volontà dei posteri 
+Lista di argomenti che volutamente non sono stati inseriti per mancanza di fonti affidabili o perché ritenuti secondari:
 + Livello di collegamento
     + X.25 (viene continuamente menzionato ma mai spiegato nelle dispense)
 + Livello di rete
     + EGP (il protocollo, non la famiglia!)
-    + BGP - struttura dei diversi tipi di messaggi (sono troppi)
-    + Routing internet delle origini (nessuno aveva voglia di scriverlo)
+    + BGP - struttura dei diversi tipi di messaggi
+    + Routing internet delle origini 
 + Livello delle Applicazioni
-    + Algoritmi crittografici (non sono molto attinenti all'architettura reti)
-    + Usenet news (non le usa più nessuno)
-    + HTTP 1 (non si usa, siamo al 2)
-    + elenco completo dei file NIS map (se lo si ritiene utile)
+    + Algoritmi crittografici 
+    + Usenet news 
+    + HTTP 1 
+    + elenco completo dei file NIS map
+    + Ampliamento SNMP 
 + Sicurezza di rete
-    + Informazioni vaghe su sicurezza e attacchi informatici tratte dalle slides di Arch. reti (poco significative rispetto al resto, e in compenso molto divertenti da leggere così come sono ;) Potrebbero diventare una sezione "Terminologia" analoga a quelle dei diversi livelli del modello ISO/OSI)
+    + Informazioni vaghe su sicurezza e attacchi informatici tratte dalle slides di Arch. reti (potrebbero diventare una sezione "Terminologia" analoga a quelle dei diversi livelli del modello ISO/OSI)
 
 ### Chi sta facendo cosa
 + Chi lavora al progetto è pregato di aggiungere la propria riga e mantenerla aggiornata.
