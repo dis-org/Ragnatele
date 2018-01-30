@@ -14,6 +14,7 @@ Fonti:
 + http://www.di-srv.unisa.it/
 + www.fiberopticshare.com
 + https://www.tecmint.com/ (guida avanzata ai sistemi linux)
++ https://unix.stackexchange.com
 + ...
 
 
