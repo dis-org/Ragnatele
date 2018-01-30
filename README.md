@@ -3,7 +3,7 @@ Progetto di realizzazione di dispense collaborative di **Architettura reti** e *
 
 Per partecipare vedi [CONTRIBUTING.md](https://github.com/Disorganizzazione/Ragnatele/blob/master/CONTRIBUTING.md)
 
-Fonti:
+Bibliografia:
 + Slides e appunti delle lezioni tenutesi nell'ambito dei corsi sopra citati nell' A.A. 2017-'18
 + *Computer networks* (Tanenbaum, Wetherall)
 + *IPtables for Fun – Implementare un firewall in linux* (Contavalli) 
