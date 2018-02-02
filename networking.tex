@@ -454,6 +454,29 @@ In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello 
 \end{itemize}
 \sub{Ethernet} 
 \'E una delle tecnologie per il collegamento LAN più utilizzate al mondo, posto a metà fra il primo e il secondo livello (più in particolare nel sottolivello MAC) del modello ISO.
+L'interfaccia ethernet si occupa di:
+\begin{itemize} 
+    \item Incapsulamento e decapsulamento dei dati.
+    \item Codifica e decodifica \vedi{Manchester} dei bit per trasmettere il clock insieme ai dati. Questa codifica, garantisce la transizione del segnale elettrico in ogni bit trasmesso, questo permette al ricevitore di agganciare il clock del trasmettitore nella fare di preambolo e ricevere il messaggio nel modo giusto.
+\end{itemize}
+\subsub{switched Lan}
+    Sono reti lan ethernet con la caratteristica di utilizzare degli \vedi{Switch}, questo risolve i problemi dello CSMA/CD perchè, questa tecnologia, minimizza le collisioni. \'E una tecnologia con bassi costi, bassa manutenzione e la la migrazione da una lan ad una switch lan necessita della sola sostituzione degli apparati attivi, mantenendo il cablaggio inalterato  
+\subsub{IEEE 802.3}
+le reti locali appartenenti a questo standard adottano uno accesso al bus di tipo CSMA/CD.
+lo standard 802.3 prevede diverse variabili al livello \vedi{MAC}:
+\begin{itemize}
+    \item \textbf{10base5}
+        è la prima versione del MAC e prevede l' uso del cavo coassiale thick da 50 Ohm, la velocità è di 10 mdps. la lunghezza massima di un singolo cavo è 500 m, distanze superiori richiedono l'utilizzo di bridge locali o remoti che operano su trame generate al livello MAC la connessione delle stazioni avviene tramite la connessione a vampiro.
+    \item \textbf{10base2}
+        creato per la difficile manipolazione dei cavi di tipo thick, sfrutta cavi coassiali sottili tipo RG58 molto più flessibili.
+        Lunghezza massima di un segmento 185 m con 30 stazioni collegabili ad un singolo segmento.
+        Questo metodo crea diversi problemi: difficoltà nel trovare danni ai cavi, cavi troppo piegati producono diverse interferenze.
+    \item \textbf{10baseT}
+        creato per semplificare la realizzazione delle reti tramite sistemi di cablaggio strutturato, utilizza il doppino non schermato(UTP) ed ha una struttura a stella con hub connessi in parallelo, lunghezza max singolo tratto 100 m, poichè si utilizza un doppino telefonico l'impianto può esser riusato in diversi modi a seconda delle necessità.
+     \item \textbf{10baseFOIRL} 
+         alternativa al cavo thick con fibra ottica ed un transceiver fiber optic MAU in grado di ricevere segnali ottici fino a 1000m
+     \item ne esistono altri in fibra ottica che differiscono di poche caratteristiche(10basFF,10baseFP,10baseFB,10baseFM)
+\end{itemize}
 \subsub {Ethernet framing}
 Nonostante esistano diversi tipi di ethernet, la struttura del frame è la stessa.
 \image[etherframe.png][scale=0.35]{Frame ethernet di tipo 2 (fra i più comuni).}
