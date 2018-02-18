@@ -1,6 +1,10 @@
 # Ragnatele
 Progetto di realizzazione di dispense collaborative di **Architettura reti** e **Protocolli** per i rispettivi corsi tenuti presso il Dipartimento di Matematica ed Informatica dell'Università degli studi di Perugia.
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=Tq0vfiLzn8c
+" target="_blank"><img src="http://img.youtube.com/vi/Tq0vfiLzn8c/0.jpg" 
+alt="Credits" width="240" height="180" border="10" /></a>
+
 Per partecipare vedi [CONTRIBUTING.md](https://github.com/Disorganizzazione/Ragnatele/blob/master/CONTRIBUTING.md)
 
 Bibliografia:
