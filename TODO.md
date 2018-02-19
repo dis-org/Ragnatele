@@ -24,7 +24,6 @@ Lista di argomenti che volutamente non sono stati inseriti per mancanza di fonti
     + Algoritmi crittografici 
     + Usenet news 
     + HTTP 1 
-    + elenco completo dei file NIS map
     + Ampliamento SNMP 
 + Sicurezza di rete
     + Informazioni vaghe su sicurezza e attacchi informatici tratte dalle slides di Arch. reti (potrebbero diventare una sezione "Terminologia" analoga a quelle dei diversi livelli del modello ISO/OSI)
