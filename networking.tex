@@ -63,12 +63,12 @@ Si distinguono standard \textit{de iure}, cioè codificati dalle \vedi{Organizza
 Famiglia di protocolli e servizi standardizzati dall'\vedi{IEEE} 802 \italic{LAN/MAN Standards Committee} (LMSC): situata ai due livelli più bassi del \vedi{Modello di riferimento ISO/OSI}, si dedica alle reti che utilizzano pacchetti di lunghezza variabile. \'E qui che vengono definiti i sottolivelli \vedi{MAC} e \vedi {LLC}. \\Gli standard sono numerati in base al gruppo di lavoro che li ha prodotti.
 \\I gruppi più importanti sono:
 \begin{itemize}
-\item IEEE 802.1 \vedi{LAN}
-\item IEEE 802.3 \vedi{Ethernet}
-\item IEEE 802.5 TokenRing
-\item IEEE 802.11 \vedi{WLAN}
-\item IEEE 802.15 \vedi{WPAN}
-\item IEEE 802.16 Broadband Wireless Access, conosciuto anche come \textit{Wireless\vedi{MAN}} (WiMAX)
+\item IEEE 802.1 \vedi{LAN};
+\item IEEE 802.3 \vedi{Ethernet};
+\item IEEE 802.5 TokenRing;
+\item IEEE 802.11 \vedi{WLAN};
+\item IEEE 802.15 \vedi{WPAN};
+\item IEEE 802.16 Broadband Wireless Access, conosciuto anche come \textit{Wireless\vedi{MAN}} (WiMAX).
 \end{itemize}
 Una lista completa dei gruppi di lavoro e dei loro standard è reperibile sul sito ufficiale dello LMSC: \url{www.ieee802.org}. 
 \subsub{RFC}
@@ -99,17 +99,17 @@ Attualmente, la materia è oggetto di completa ristrutturazione sotto la respons
 \subsub{ICANN}
 Internet Corporation for Assigned Names and Numbers: organizzazione che ha attualmente la responsabilità della gestione dello spazio di indirizzamento IP (vedi \vedi{IANA}).
 \subsub{GIPI}
-Global Internet Policy Initiative: rete di organizzazioni non governative no-profit che sostiene l’adozione nei paesi in via di sviluppo di piattaforme legislative e politiche per la realizzazione di un’accesso ad Internet aperto e democratico.
+Global Internet Policy Initiative: rete di organizzazioni non governative no-profit che sostiene, nei paesi in via di sviluppo, l’adozione di piattaforme legislative e politiche per la realizzazione di un’accesso ad Internet aperto e democratico.
 \newpage\sub{Modello di riferimento ISO/OSI}
 Il modello Open Systems Interconnection è stato progettato dalla \vedi{ISO} come modello di riferimento per standardizzare la comunicazione tra sistemi aperti. Le motivazioni di tale scelta si chiariscono se si pensa all'Internet delle origini: alla fine degli anni ’70 i leader del settore delle tecnologie di rete si ritrovarono di fronte a problemi di compatibilità, dovuti alla molteplicità delle diverse architetture proprietarie. 
-Il modello lSO/OSI si prefiggeva dunque di offrire una base teorica per lo sviluppo di standard di comunicazione indipendenti dai fornitori. In base ad esso, il complesso processo della comunicazione di rete si divide in sette livelli (in inglese \textit{layers}). Nell'ambito della comunicazione tra due sistemi, ad ogni livello devono essere svolti compiti specifici, tra cui il controllo della comunicazione, l’indirizzamento del sistema target o la conversione dei pacchetti in segnali fisici. Questo può funzionare solo se tutti i sistemi coinvolti nella comunicazione si attengono a regole precise, stabilite dai protocolli, che si applicano ad uno o più livelli (si parla in tal caso di protocolli multilivello).
+Il modello lSO/OSI si prefiggeva dunque di offrire una base teorica per lo sviluppo di standard di comunicazione indipendenti dai fornitori. In base ad esso, il complesso processo della comunicazione di rete si divide in sette livelli, ad ognuno dei quali dovranno essere svolti compiti specifici. Questo può funzionare solo se tutti i sistemi coinvolti nella comunicazione si attengono a regole precise, stabilite dai protocolli, che si applicano ad uno o più livelli (si parla in tal caso di protocolli multilivello).
 Il modello di riferimento ISO/OSI non è però uno standard di rete concreto: esso descrive in forma astratta quali procedimenti devono essere regolati per far funzionare la comunicazione in una rete.  
 \paragraph{Vantaggi dell'architettura a livelli}
-La comunicazione tra due computer può apparire banale agli utenti, ma in realtà durante la trasmissione di dati in una rete devono essere compiuti numerosi compiti e soddisfatte diverse richieste nell’ambito dell’attendibilità, della sicurezza e dell’integrità. Per questo si è deciso di dividere la comunicazione di rete in livelli: ognuno accede tramite un’interfaccia a quello inferiore e mette un servizio a disposizione di quello superiore.
+La comunicazione tra due computer può apparire banale agli utenti, ma in realtà è proprio la sua complessità che ha portato alla decisione di suddividerla in livelli: ognuno accede tramite un’interfaccia a quello inferiore e mette un servizio a disposizione di quello superiore.
 \\Questo approccio ha due vantaggi decisivi:
 \begin{itemize}
-	\item I compiti e le richieste che devono essere compiuti e soddisfatti all’interno di un livello sono definiti chiaramente, cosicché per ogni livello possono essere sviluppati diversi standard, indipendenti gli uni dagli altri;
-	\item La chiara divisione tra i livelli fa sì che le modifiche ad uno standard non abbiano alcun effetto sui processi che si svolgono su un altro livello. Introdurre nuovi standard risulta così più semplice.
+	\item le funzioni di ogni livello sono definite chiaramente, cosicché per ogni livello possono essere sviluppati diversi standard, indipendenti gli uni dagli altri;
+	\item La chiara suddivisione in livelli fa sì che le modifiche ad uno standard non abbiano alcun effetto sui processi che operano ad un altro livello. Anche questo facilita l'introduzione di nuovi standard.
 \end{itemize}
 \image[osi-model.png][scale=0.2]{Modello di riferimento ISO/OSI}
 
@@ -128,9 +128,9 @@ sue successive estensioni/sviluppi, e/o altri protocolli compatibili con l’IP;
 \subsub{Cronologia}
 \begin{itemize}
 \item[\textbf{1962:}] \begin{itemize}
-\item Licklider propone il concetto di \textit{galactic network}, un'infrastruttura basata su un insieme di computer globalmente interconnessi al fine di scambiare dati. Internet è il risultato dell'evoluzione di questa idea.
+\item Licklider propone il concetto di \textit{galactic network}: un'infrastruttura basata su un insieme di computer globalmente interconnessi al fine di scambiare dati. Internet è il risultato dell'evoluzione di questa idea.
 \item Licklider avvia il programma di ricerca \textbf{ARPA} (Advanced Research Project Agency) che cambierà il proprio nome  nel '71 in \textbf{DARPA} (Defense ARPA).
-\item Kleinrock pubblica il primo articolo sulla teoria del \textbf{packet switching}.
+\item Kleinrock pubblica il primo articolo sulla teoria del \textit{packet switching}.
 \end{itemize}
 \item[\textbf{1965:}] \begin{itemize}
 \item Merrill e Roberts riescono a far comunicare due computer (Uno in Massachussets e l'altro in California), creando la prima \vedi{WAN} della storia.
@@ -142,7 +142,7 @@ sue successive estensioni/sviluppi, e/o altri protocolli compatibili con l’IP;
 \end{itemize} 
 
 \item[\textbf{1973:}] \begin{itemize}
-\item A Standford, Cerf e Kahn ideano il TCP/IP: nasce la posta elettronica.
+\item A Standford, Cerf e Kahn ideano il TCP/IP: nasce la \vedi{Posta elettronica}.
 \item Metcalfe inventa l'\vedi{Ethernet}.
 \end{itemize}
 
@@ -182,7 +182,7 @@ sue successive estensioni/sviluppi, e/o altri protocolli compatibili con l’IP;
 \end{itemize}
 \item[\textbf{1995:}] 
 \begin{itemize}
-\item IL \textbf{FNC} (Federal Networking Council) formula la \textbf{\vedi{Definizione} di Internet}.
+\item IL \textbf{FNC} (Federal Networking Council) formula la \vedi{Definizione} formale di Internet.
 \end{itemize}
 \end{itemize}
 
@@ -193,14 +193,14 @@ Word Wide Web: inventato nel 1989 da Tim Berners-Lee, ricercatore al CERN, e com
 Termine utilizzato per indicare l'uso di Internet all'interno di un'azienda, basato sull'utilizzo di una \vedi{LAN}.
 
 \subsub{Extranet}
-Termine che identifica le risorse hardware e software che realizzano la presenza visibile in internet di un'organizzazione.
+Termine che identifica le risorse hardware e software che realizzano la presenza visibile in Internet di un'organizzazione.
 
 \sub{Internet protocol suite (TCP/IP)}
 Detto anche \italic{Stack TCP/IP}, è la famiglia di protocolli alla base del funzionamento di \vedi{Internet}.
 I protocolli sono divisi in quattro livelli, ripresi in parte dal \vedi{Modello di riferimento ISO/OSI}, questa suddivisione rappresenta lo standard \italic{de facto} per l'architettura di rete.
 \image[tcpipprotocols.png][scale=0.75]{Famiglia dei protocolli TCP/IP}
 \sub{Protocolli elementari}
-In questa sezione saranno introdotti alcuni semplici protocolli, suddivisi, a seconda della relazione tra i DTE coinvolti, in:
+In questa sezione saranno introdotti alcuni semplici protocolli\footnote{Nota per i futuri revisori: vi saremmo grati se, una volta individuatoli con certezza, li collocaste ai rispettivi livelli di pertinenza}, suddivisi, a seconda della relazione tra i DTE coinvolti, in:
 \begin{itemize}
 \item protocolli in ambito \textbf{primario-secondario}: \vedi{RTS/CTS}, \vedi{XON-XOFF}, \vedi{ARQ};
 \item protocolli \textbf{peer-to-peer};
