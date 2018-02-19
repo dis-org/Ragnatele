@@ -41,7 +41,17 @@
 \newpage
 \tableofcontents
 \newpage
-
+\section*{Premessa}
+Queste dispense rispondono all'esigenza di sistematizzare il materiale didattico dei corsi di Architettura Reti e Protocolli 
+tenuti presso il Dipartimento di Matematica e Informatica dell'Università degli Studi di Perugia, integrando le 
+informazioni che si ricavano dalle dispense dei due corsi e sforzandosi di renderle più facilmente compresibili. Quanto segue è 
+il risultato di un lavoro di riorganizzazione dei contenuti e progressivo raffinamento delle spiegazioni. Teniamo a 
+sottolineare che non tutti gli argomenti presentano lo stesso livello di approfondimento, ed è dunque auspicabile che il 
+materiale venga revisionato, ampliato e aggiornato in accordo agli sviluppi futuri delle tecnologie trattate. Gli studenti che, 
+nei prossimi anni, volessero collaborare sono invitati anche a consultare il file TODO.md, contenente una lista non esaustiva 
+degli argomenti ancora da rifinire, il tutto rispettando la licenza allegata (footnote con link al codice, al todo e alla 
+licenza).
+ 
 \section{Introduzione}
 La comunicazione, intesa come scambio di informazioni, può avvenire solo se l'emittente e il ricevente concordano sull'interpretazione del messaggio trasmesso. In altre parole, deve esistere una serie di regole comuni che permetta di risalire al significato del messaggio, in quanto la stessa informazione può e deve assumere forme diverse, anche a seconda del canale di comunicazione.
 Nell'ambito delle telecomunicazioni, questo insieme di regole definito formalmente è detto \textbf{protocollo di comunicazione}. \\Se i partecipanti sono molteplici, sarà necessario definire un sistema utilizzato da tutti, che indichi quali protocolli utilizzare in quali situazioni. \'E a questo che servono gli \textbf{standard}.
@@ -143,7 +153,7 @@ sue successive estensioni/sviluppi, e/o altri protocolli compatibili con l’IP;
 \item[\textbf{1983:}] \begin{itemize}
 \item Postel sviluppa il \vedi{DNS}.
 \item ARPANET adotta il TCP/IP, mentre il \vedi{Modello di riferimento ISO/OSI} è sempre meno applicato.
-\item Vengono introdotte le reti \vedi{IP} di classe A, B e C.	.
+\item Vengono introdotte le reti \vedi{IP} di classe A, B e C.
 \item Vengono introdotti i TLD (vedi \vedi{DNS}) .edu, .com, .net, .org, oltre quelli della codifica ISO.
 \item La \textbf{NSF} (National Science Foundation) costituisce i centri di calcolo per servire la comunità scientifica americana.
 \end{itemize}
@@ -544,7 +554,7 @@ lo standard 802.3 prevede diverse variabili al livello \vedi{MAC}:
         creato per semplificare la realizzazione delle reti tramite sistemi di cablaggio strutturato, utilizza il doppino non schermato(UTP) ed ha una struttura a stella con hub connessi in parallelo, lunghezza max singolo tratto 100 m, poichè si utilizza un doppino telefonico l'impianto può esser riusato in diversi modi a seconda delle necessità.
      \item \textbf{10baseFOIRL} 
          alternativa al cavo thick con fibra ottica ed un transceiver fiber optic MAU in grado di ricevere segnali ottici fino a 1000m
-     \item ne esistono altri in fibra ottica che differiscono di poche caratteristiche(10basFF,10baseFP,10baseFB,10baseFM)
+     \item \textbf{10baseF} insieme degli standard di ricezione per la fibra ottica:\textbf{10baseFP} (10mb/s, con stella passiva) \textbf{10baseFB} (con dorsale fra i ripetitori) \textbf{10baseFL}  (interconnessione fra i ripetitori sia con struttura point-to-point, che stellare )
 \end{itemize}
 \subsub {Ethernet framing}
 Nonostante esistano diversi tipi di ethernet, la struttura del frame è la stessa.
@@ -590,11 +600,20 @@ Questa codifica è usata nella \vedi{PCM}.
 Lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasmissioni di lunga distanza, consiste nel mescolare in modo "intelligente" i bit per mantenere attiva la linea, è utilizzata nella codifica 2B1Q (two Binary, one Quaternary).
 
 \sub{Controllo degli errori}
-%concetto di ridondanza 
+Esistono 3 tipi di errore:
+\begin{itemize}
+    \item single-bit(un solo bit cambia di valore)
+    \item multiple-bit(più bit non consegutivi cambiano di valore)
+    \item burst(più bit consegutivi cambiano di valore)
+\end{itemize}
+Per rilevare gli errori esistono diversi modi, principalmente consistono in aggiungere dei bit "ridontanti" che in fase di ricezione che, dopo aver accertato la correttezza del messaggio, vengono cancellati. I principali algoritmi di questo tipo sono:
 \subsub{VRC}
+Il VRC(controllo di ridondanza verticale) consiste nell' aggiungere un solo bit pari a uno al messaggio, in questo modo si rendono i bit pari a uno del messaggio pari, o dispari, volutamente per verificare se il messaggio è alterato. Questo metodo é semplice e pratico ma gestise pochi errori poichè se gli errori sono tali da non cambiare la parità non funziona.
 \subsub{LRC}
+L'LRC(controllo di ridondanza longitudinale) è un VRC bidimensionale.
+Assicura una migliore gestione di errori di tipo multiple-bit e burst ma è debole contro le transazioni di bit
 \subsub{CRC}
-
+Il CRC(controllo di ridondanza ciclica) consiste nel creare un numero in binario basato sul file che verrà trasmesso con il messaggio. Questo permette di avere un ottimo controllo degli errori di ogni tipo.
 \sub{Tipi di flusso trasmissivo}
 \subsub{Simplex} Flusso monodirezionale. Le trasmissioni radiofoniche ne sono un tipico esempio. 
 \subsub{Half-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in un solo senso alla volta. Le ricetrasmittenti lavorano in questa maniera. 
