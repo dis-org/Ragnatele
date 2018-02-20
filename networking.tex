@@ -7,7 +7,7 @@
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{nameref} 
 \usepackage{siunitx} 
-\usepackage[top=0.7in, bottom=0.7in, left=0.7in, right=1.6in]{geometry}
+\usepackage[top=0.7in, bottom=0.7in, left=0.7in, right=1.6in]{geometry} %margini
 \setcounter{section}{-1} %per numerare le sezioni partendo da 0
 
 \graphicspath{{./images/}}
@@ -529,6 +529,21 @@ In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello 
 \item controllare gli errori di trasmissione e gestirli;
 \item gestire il flusso di dati.
 \end{itemize}
+\sub{Sottolivelli}
+Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
+\subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l'accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
+\para{Indirizzo MAC} A questo livello si pone l'indirizzo MAC, ossia l'indirizzo fisico della macchina, non individuabile dall'esterno, utilizzato per l'instradamento diretto in reti locali, ovvero per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
+\subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
+I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
+\para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
+In base all'implementazione, il LLC prevede 3 diversi servizi fornibili al livello superiore:
+\begin{itemize}
+	\item \textbf{LLC1}: servizio \vedi{Connectionless}, non è prevista alcuna forma di \textit{conferma}, di \textit{correzione errori} ne di \textit{controllo del flusso};
+	\item \textbf{LLC2}: servizio \vedi{Connection-oriented} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC};
+	\item \textbf{LLC3}: servizio alternativo al LLC1 in quanto è \vedi{Connectionless}, ma prevede una \textit{conferma di ricezione} (acknowledge - ACK) per i frame inviati e garantisce la \textit{consegna ordinata} dei dati.
+\end{itemize}
+
+
 \sub{Ethernet} 
 \'E una delle tecnologie per il collegamento LAN più utilizzate al mondo, posta a metà fra il primo e il secondo livello (più in particolare nel sottolivello \vedi{MAC}) del \vedi{Modello di riferimento ISO/OSI}.
 L'interfaccia Ethernet ha funzione di:
@@ -555,43 +570,45 @@ Lo standard 802.3 prevede diverse varianti del livello \vedi{MAC}:
 \subsub{Switched Lan}
 Sono \vedi{LAN} Ethernet caratterizzate dall'impiego di \vedi{Switch}, che risolve i problemi del matodo di accesso CSMA/CD minimizzando le collisioni. \'E una tecnologia con bassi costi di installazione e manutenzione e la migrazione da LAN a switched LAN necessita della sola sostituzione degli apparati attivi, cioè mantiene il cablaggio inalterato.
 \subsub {Ethernet framing}
-Nonostante esistano diversi tipi di Ethernet, tutte le varianti condividono la struttura del frame.
 \image[etherframe.png][scale=0.35]{Frame ethernet di tipo 2 (fra i più comuni).}
-\ \\\'E strutturato come segue:
+Nonostante esistano diversi tipi di Ethernet, tutte le varianti condividono la struttura del frame, strutturato come segue:
 \begin{itemize}
     \item \italic{Preamble} (preambolo): sette byte ognuno dei quali ha valore \code{10101010}, servono a svegliare il ricevente ed a sincronizzarlo con l'emittente, non fa quindi parte del vero frame ma avvisa che a breve ne arriverà uno; 
     \item  \italic{Start Frame Delimiter} (SFD): ulteriore byte non appartenente al frame, ha valore \code{10101011} se il messaggio in arrivo è importante, altrimenti ha lo stesso valore dei byte del preambolo. \'E protetto da codifica \vedi{Manchester};
     \item \italic{Destination MAC Address} (indirizzo destinazione): di 6 byte, contiene l'indirizzo fisico del ricevente; se esso non corrisponde il frame viene scartato al \vedi{Livello fisico}.
     \item \italic{Source MAC Address} (indirizzo sorgente): di 6 byte, contiene l'indirizzo fisico del mittente.
-    \item \italic{Ether Type} (tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, in caso di frame \vedi{IEEE 802}.3, la lunghezza del campo dati.
+    \item \italic{Ether Type} (tipo): di 2 byte, indica il tipo di protocollo di rete in uso o, nello standard \vedi{IEEE 802}.3, la lunghezza del campo dati.
     \item \italic{PayLoad} (campo dati): da 46 a 1500 byte, contiene i dati reali, i dati troppo grandi vengono divisi in più frame mentre ai dati troppo piccoli viene aggiunto un riempitivo (padding) della lunghezza necessaria.
     \item \italic{Frame Check Sequence} (controllo a ridondanza ciclica): di 4 byte, verifica la presenza di errori, il ricevente calcola il FCS tramite un algoritmo per poi confrontarlo con quello presente nel frame. 
 \end{itemize}
 
 \sub{Tipi di trasmissione}
-\subsub{Sincrona}
-Con il termine sincrona si indica una comunicazione scandita da un clock che sincronizza trasmettitore e ricevitore; i dati vengono raggruppati in blocchi e trasmessi secondo il tempo dato dal clock. Il ricevitore ha sia il sincronismo a bit, cioè è in grado di estrarre singoli bit dal flusso di dati in ricezione, sia il sincronismo di carattere, può cioè estrarre interi caratteri dal flusso di bit, cosa che, generalmente, viene assicurata da alcuni caratteri inviati all'inizio della trasmissione.\\ Vi sono vari metodi per assicurare la sincronizzazione, ad esempio il PLL (Phase Lock Loop molto utilizzato) o l'\vedi{AMI}.
+Una trasmissione può essere asincrona o sincrona, quest'ultima orientata al bit o al carattere. Inoltre, a seconda del ruolo delle due stazioni, si può suddividere il flusso trasmissivo in simplex, half duplex e full duplex.
 \subsub{Asincrona}
-In una comunicazione asincrona il ricevente sta a riposo fin che non riceve un segnale di start, che precede il messaggio. Alla fine del messaggio viene inviato un segnale di stop che, se non seguito da altri messaggi, rimanda a riposo il ricevente. Questo metodo è molto buono in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona, ma il segnale di start e quello di stop rappresentano circa il $30\%$ dei bit trasmessi.  
-\subsub{Orientata al carattere}
+In una comunicazione asincrona il ricevente sta a riposo finché non riceve un segnale di start, che precede il messaggio. Alla fine del messaggio viene inviato un segnale di stop che, se non seguito da altri messaggi, rimanda a riposo il ricevente. L'asincronia è dovuta al fatto che l'intervallo di tempo tra l'invio di due caratteri non è precisabile. Questo metodo è vantaggioso in caso di comunicazioni irregolari senza la precisione di una comunicazione sincrona, ma il segnale di start e quello di stop rappresentano circa il $30\%$ dei bit trasmessi.  
+\subsub{Sincrona}
+Con il termine \textit{sincrona} si indica una comunicazione scandita da un clock, che sincronizza trasmettitore e ricevitore; i dati vengono raggruppati in blocchi e trasmessi secondo il tempo dato dal clock. Il ricevitore ha sia il sincronismo a bit, cioè è in grado di estrarre singoli bit dal flusso di dati in ricezione, sia il sincronismo di carattere, può cioè estrarre interi caratteri dal flusso di bit, cosa che, generalmente, viene assicurata da alcuni caratteri inviati all'inizio della trasmissione.\\ Vi sono vari metodi per assicurare la sincronizzazione, ad esempio il PLL (Phase Lock Loop, molto utilizzato) o l'\vedi{AMI}.
+\para{Orientata al carattere}
 La trasmissione orientata al carattere, utilizzata per le informazioni testuali, come i file in ASCII, prevede la lettura dei bit a gruppi di otto. \\La sincronizzazione è ottenuta tramite una serie di caratteri di controllo SYN, il primo dei quali viene ricercato spostandosi di un bit alla volta.
 Una volta raggiunta la sincronia si ricerca il carattere di controllo STX che sancisce l'inizio della trasmissione, terminata dal carattere ETX.\\ Per evitare che i dati della trasmissione vengano scambiati per caratteri di controllo si fa precedere ai caratteri STX e ETX, un altro carattere di controllo chiamato DLE (tutti 1 o tutti 0 a seconda del sistema) e in invio viene eseguito il \italic{byte stuffing} dei dati: eventuali occorrenze del carattere DLE nei dati vengono duplicate in modo da renderle riconoscibili.   
-
-\subsub{Orientata al bit}
-Questa tecnica è preferibile sia quando i dati non sono organizzati in caratteri, sia per non dipendere da caratteri di controllo.
+\para{Orientata al bit}
+Questa tecnica è preferibile sia quando i dati non sono organizzati in caratteri, sia, in generale, quando si preferisce non dipendere da caratteri di controllo.
 La sincronizzazione si basa su degli \textit{idle bytes} (\code{011111111}), inviati nei periodi di inattività, e dei \textit{flag bytes} (\code{01111110}) che indicano l'inizio e fine della trasmissione, il rischio di simulare il flag nella trasmissione è scongiurato dall'utilizzo del \italic{bit stuffing}: durante l'invio dei dati, ogni volta che si incontrano 5 bit uguali a 1 viene aggiunto uno 0 che verrà poi rimosso dal ricevente.
+\subsub{Simplex} Flusso monodirezionale. Le trasmissioni radiofoniche ne sono un tipico esempio. 
+\subsub{Half-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in un solo senso alla volta. Le ricetrasmittenti lavorano in questa maniera. 
+\subsub{Full-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in ambo i sensi contemporaneamente, come nella rete telefonica. 
 \sub{Encoding}
 \boximage[encoding.jpg][scale=0.35]{Principali codifiche a confronto.}
 \subsub{NRZ}
-Not Reduced Zero: codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso, richiede circuiti semplici ed ha una buona resistenza agli errori, il problema è che su lunghe trasmissioni si perde la sincronia nella trasmissione di lunghe serie di bit di uguale valore.
+Not Reduced Zero: codifica molto semplice dove lo stato digitale 1 viene rappresentato da un segnale alto mentre un lo stato 0 viene rappresentato da un segnale basso. Richiede circuiti semplici ed ha una buona resistenza agli errori, il problema è che su lunghe trasmissioni si perde la sincronia nella trasmissione di lunghe serie di bit di uguale valore.
 \subsub{RZ}
-Return to Zero: questa codifica è estremamente simile all'NRZ con la differenza che a metà di ogni impulso il segnale torna sempre a zero; il clock ha quindi frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronizzazione ma ha un più alto rischio di errore. Può essere anche a tre livelli (\textit{RZ bipolare}), ed in tal caso il livello inferiore (-V) rappresenta lo 0 logico, il livello superiore (+V) l'1 logico e a metà di ogni impulso si ritorna al livello intermedio (0), che non rappresenta di per sé alcun valore logico.
+Return to Zero: questa codifica è del tutto analoga all'NRZ, con la differenza però che a metà di ogni impulso il segnale torna sempre a zero; il clock ha quindi frequenza doppia per dimezzare la durata di un impulso, questo metodo non causa desincronizzazione ma ha un più alto rischio di errore. Può essere anche a tre livelli (\textit{RZ bipolare}), ed in tal caso il livello inferiore (-V) rappresenta lo 0 logico, il livello superiore (+V) l'1 logico e a metà di ogni impulso si ritorna al livello intermedio (0), che non rappresenta di per sé alcun valore logico.
 \subsub{Manchester}
 Come nella \vedi{RZ}, la frequenza del clock è raddoppiata. Allo 0 logico corrisponde una transizione dal basso verso l'alto,
 mentre all'1 logico una transizione dall'alto verso il basso. In tutti e due i casi la transizione avviene a metà dell'impulso.\\
 
 \subsub{AMI}
-Alternative Mark Inversion: come la \vedi{RZ} bipolare, utilizza tre stati, con la differenza che lo 0 logico corrisponde allo stato 0 mentre l'1 logico si alterna fra +V e -V.
+Alternate Mark Inversion: come la \vedi{RZ} bipolare, utilizza tre stati, con la differenza che lo 0 logico corrisponde allo stato 0 mentre l'1 logico si alterna fra +V e -V.
 Questa codifica è usata nella \vedi{PCM}. 
 
 \subsub{Scrambling}
@@ -600,59 +617,20 @@ Lo scrambling è un metodo che consente di risolvere alcuni problemi nelle trasm
 \sub{Controllo degli errori}
 Esistono 3 tipi di errore:
 \begin{itemize}
-    \item single-bit(un solo bit cambia di valore)
-    \item multiple-bit(più bit non consegutivi cambiano di valore)
-    \item burst(più bit consegutivi cambiano di valore)
+    \item single-bit (un solo bit cambia di valore);
+    \item multiple-bit (più bit non consegutivi cambiano di valore);
+    \item burst (più bit consegutivi cambiano di valore).
 \end{itemize}
-Per rilevare gli errori esistono diversi modi, principalmente consistono in aggiungere dei bit "ridontanti" che in fase di ricezione che, dopo aver accertato la correttezza del messaggio, vengono cancellati. I principali algoritmi di questo tipo sono:
+Per rilevare gli errori esistono diversi metodi, che consistono principalmente nell'aggiunta di bit ridondanti che, in fase di ricezione, dopo la verifica l'integrità del messaggio, vengono cancellati. I principali algoritmi di controllo sono illustrati di seguito.
 \subsub{VRC}
-Il VRC(controllo di ridondanza verticale) consiste nell' aggiungere un solo bit pari a uno al messaggio, in questo modo si rendono i bit pari a uno del messaggio pari, o dispari, volutamente per verificare se il messaggio è alterato. Questo metodo é semplice e pratico ma gestise pochi errori poichè se gli errori sono tali da non cambiare la parità non funziona.
+Il VRC (Controllo di Ridondanza Verticale) consiste nell'aggiungere un solo bit di valore 1 al messaggio, in modo tale da rendere pari (o dispari) il numero di bit con tale valore per verificare se il messaggio è alterato. Questo metodo é semplice e pratico ma gestisce pochi errori poichè se gli errori sono tali da non cambiare la parità non funziona.
 \subsub{LRC}
-L'LRC(controllo di ridondanza longitudinale) è un VRC bidimensionale.
-Assicura una migliore gestione di errori di tipo multiple-bit e burst ma è debole contro le transazioni di bit
+L'LRC (Controllo di Ridondanza Longitudinale) è un VRC bidimensionale.
+Assicura una migliore gestione di errori di tipo multiple-bit e burst ma non è sufficiente robusto per le transazioni di bit. %che caspita sono le transazioni di bit?
 \subsub{CRC}
-Il CRC(controllo di ridondanza ciclica) consiste nel creare un numero in binario basato sul file che verrà trasmesso con il messaggio. Questo permette di avere un ottimo controllo degli errori di ogni tipo.
-\sub{Tipi di flusso trasmissivo}
-\subsub{Simplex} Flusso monodirezionale. Le trasmissioni radiofoniche ne sono un tipico esempio. 
-\subsub{Half-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in un solo senso alla volta. Le ricetrasmittenti lavorano in questa maniera. 
-\subsub{Full-Duplex} Flusso bidirezionale in cui la trasmissione può avvenire in ambo i sensi contemporaneamente, come nella rete telefonica. 
-
-\sub{Sottolivelli}
-Il DLL, secondo lo standard \vedi{IEEE 802}, in caso di reti \vedi{LAN} brodcast, è diviso in due sottolivelli:
-\subsub{MAC} Il livello MAC (\textit{Media Access Control}) è diverso per ciascun tipo di \vedi{LAN} e disciplina l'accesso contemporaneo di molti nodi ad un solo canale di comunicazione condiviso, evitando e gestendo le collisioni. 
-\para{Indirizzo MAC} Indirizzo fisico della macchina, non individuabile dall'esterno utilizzato per l'instradamento diretto in reti locali, ovvero per raggiungere un host da una stessa sottorete passando per il solo livello 2.\\La conversione degli indirizzi di livello 3 (es. \vedi{IP}) in indirizzi MAC di livello 2 è in genere eseguita dal protocollo \vedi{ARP}, mentre la procedura opposta da protocolli come \vedi{RARP} e \vedi{DHCP}.
-\subsub{LLC} Il livello LLC (\italic{Logical Link Control}), posto tra livello MAC e \vedi{Livello di rete}, controlla il flusso di dati e gestisce gli errori, fornendo un'interfaccia unica per tutti i tipi di \vedi{LAN}.
-I protocolli \vedi{PPP} e \vedi{HDLC} fanno parte di questo sottolivello.
-\para{Standard} I dati ricevuti dal livello superiore vengono incapsulati sottoforma di \textit{frame LLC} ed inviati a quello inferiore (MAC), che si occuperà di trasmetterli sul mezzo fisico prescelto. I frame LLC sono costituiti dall'indirizzo sorgente, di destinazione, un campo di controllo ed infine i dati.\\
-In base all'implementazione, il LLC prevede 3 diversi servizi fornibili al livello superiore:
-\begin{itemize}
-\item \textbf{LLC1}: servizio \vedi{Connectionless}, non è prevista alcuna forma di \textit{conferma}, di \textit{correzione errori} ne di \textit{controllo del flusso}.
-\item \textbf{LLC2}: servizio \vedi{Connection-oriented} unicast (punto-punto) e simmetrica. Prevede meccanismi di \textit{correzione errori} e di \textit{sequenziamento dei dati}. Analogo ad altri protocolli di livello 2 come l'\vedi{HDLC}.
-\item \textbf{LLC3}: servizio alternativo al LLC1 in quanto è \vedi{Connectionless}, ma prevede una \textit{conferma di ricezione} (acknowledge - ACK) per i frame inviati e garantisce la \textit{consegna ordinata} dei dati.
-\end{itemize}
-
+Il CRC (Controllo di Ridondanza Ciclica) consiste nel creare, a partire dal file che verrà trasmesso con il messaggio, secondo un dato polinomio generatore, un numero in binario. Questo permette di avere un ottimo controllo degli errori, di qualsiasi tipo essi siano.
 
 \subsection{Protocolli di secondo livello}
-I protocolli di secondo livello si dividono in due principali categorie:
-\begin{itemize}
-	\item\textbf{\vedi{Asincrona}}:
-	consentono soltanto trasmissioni di caratteri singoli.
-	\\L'asincronia è dovuta al fatto che l'intervallo di tempo tra l'invio di due caratteri non è precisabile. È comunque obbligatorio definire un \italic{bit time} di durata del carattere.
-	\\I protocolli asincroni sono detti anche \textbf{start/stop}: ogni carattere è composto da un \textit{bit di start}, dal bit del carattere vero e proprio che si vuole trasmettere, da un bit di parità (volto al controllo dell'errore) e da uno o due \textit{bit di stop}.
-	\\L'utilizzo di questi bit in forma, rispettivamente, di \textit{header} e \textit{trailer} consente al ricevente di distinguere i singoli byte trasmessi.
-	%si potrebbe aggiungere l'approfondimento sul protocollo XMODEM, ma anche no
-	\item\textbf{\vedi{Sincrona}}:
-	mittente e destinatario sincronizzano i loro clock grazie a particolari caratteri.
-	\\A loro volta si suddividono a seconda della trasmissione:
-	\begin{itemize}
-		\item[-]\vedi{Orientata al carattere}: utilizzano il carattere di sincronismo SYN.
-		\\La lunghezza del frame dipende dal protocollo utilizzato.
-		\\Appartiene a questa tipologia il protocollo \vedi{BSC}.
-		\item[-]\vedi{Orientata al bit}: la sincronia è garantita da 2 byte detti \italic{flag} posti uno all'inizio e l'altro alla fine del pacchetto.
-		\\Appartiene a questa tipologia il protocollo \vedi{HDLC}.
-	\end{itemize}
-	
-\end{itemize}
 \subsub{BSC}
 Introdotto dalla IBM, il \textit{Binary Synchronous Communication} è un protocollo sincrono orientato al carattere. Il flusso trasmissivo è di tipo \vedi{Half-Duplex} con velocità tra 1200 e 19200 bps.
 \\Il frame è composto da circa cento byte, divisi tra messaggio da trasmettere e caratteri di controllo.
