@@ -7,6 +7,7 @@
 \usepackage[colorlinks=true,linkcolor=blue]{hyperref}
 \usepackage{nameref} 
 \usepackage{siunitx} 
+\usepackage[top=0.7in, bottom=0.7in, left=0.7in, right=1.6in]{geometry}
 \setcounter{section}{-1} %per numerare le sezioni partendo da 0
 
 \graphicspath{{./images/}}
@@ -554,7 +555,7 @@ Lo standard 802.3 prevede diverse varianti del livello \vedi{MAC}:
 \subsub{Switched Lan}
 Sono \vedi{LAN} Ethernet caratterizzate dall'impiego di \vedi{Switch}, che risolve i problemi del matodo di accesso CSMA/CD minimizzando le collisioni. \'E una tecnologia con bassi costi di installazione e manutenzione e la migrazione da LAN a switched LAN necessita della sola sostituzione degli apparati attivi, cioè mantiene il cablaggio inalterato.
 \subsub {Ethernet framing}
-Nonostante esistano diversi tipi di ethernet, la struttura del frame è la stessa.
+Nonostante esistano diversi tipi di Ethernet, tutte le varianti condividono la struttura del frame.
 \image[etherframe.png][scale=0.35]{Frame ethernet di tipo 2 (fra i più comuni).}
 \ \\\'E strutturato come segue:
 \begin{itemize}
