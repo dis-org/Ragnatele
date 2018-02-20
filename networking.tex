@@ -221,7 +221,7 @@ Nonostante l'amministratore di rete non abbia la possibilità di influirvi diret
 
 \subsection{Terminologia}
 \subsub{Informazione} 
-L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}m\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $m$ possibili stati.
+L'informazione è una grandezza misurabile in bit. In particolare, \[Q=log_{2}n\] dove $Q$ è il numero di bit necessari per rappresentare l'informazione relativa ad $n$ possibili stati.
 
 \subsub{Codice}
 Al fine di rappresentare l'informazione in maniera tale da renderne più semplice la gestione, un codice associa sequenze di bit a caratteri. I codici che godono della più ampia diffusione sono:
@@ -234,16 +234,16 @@ Al fine di rappresentare l'informazione in maniera tale da renderne più semplic
 \end{itemize}
 
 \subsub{Segnale}
-Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente un'informazione. Un segnale \textbf{analogico} varia in modo continuo nel tempo ed ha infiniti livelli di intensità; un segnale \textbf{digitale} varia invece in modo discreto e ha solo due livelli di intensità. Ogni tipo di dato può essere rappresentato in entrambe le maniere e può essere convertito da analogico a digitale e viceversa.
+Si dice \textit{segnale} una grandezza fisica variabile nel tempo corrispondente ad un'informazione. Un segnale \textbf{analogico} varia in modo continuo nel tempo ed ha infiniti livelli di intensità; un segnale \textbf{digitale} varia invece in modo discreto e ha solo due livelli di intensità. Ogni tipo di dato può essere rappresentato in entrambe le maniere ed essere convertito in entrambi i sensi.
 \\\\Fra i segnali analogici assumono particolare rilevanza i \textbf{segnali sinusoidali}, ossia segnali che variano nel tempo secondo una legge del tipo \[u=Usen(\omega t+\varphi )\] dove 
 \begin{itemize}
-\item $u$ è l'ampiezza istantanea
-\item $U$ è l'ampiezza massima 
-\item $\omega $ è la \textit{velocità angolare}, ovvero la variazione dell'angolo nel tempo, espressa in radianti al secondo
-\item $\varphi $ è la \textit{fase}, ossia lo sfasamento rispetto all'origine, espresso in radianti
-\item $t$ è il tempo (variabile)
-\item $T$ è il \textit{periodo}, cioè l'intervallo di tempo (in secondi) impiegato dall'onda per effettuare un'oscillazione completa.
-\item $1/T=f$ è detta \textit{frequenza}, misurata in Hz ($1/s $)\\\\
+\item $u$ è l'ampiezza istantanea;
+\item $U$ è l'ampiezza massima;
+\item $\omega $ è la \textit{velocità angolare}, ovvero la variazione dell'angolo nel tempo, espressa in radianti al secondo;
+\item $\varphi $ è la \textit{fase}, ossia lo sfasamento rispetto all'origine, espresso in radianti;
+\item $t$ è il tempo;
+\item $T$ è il \textit{periodo}, cioè l'intervallo di tempo (in secondi) impiegato dall'onda per effettuare un'oscillazione completa;
+\item $1/T=f$ si dice \textit{frequenza} e si misura in Hz ($1/s $).\\\\
 \end{itemize}
 La curva in figura rappresenta istante per istante il valore del seno dell'angolo descritto da un segmento che ruota con un estremo vincolato all'origine degli assi cartesiani, in senso antiorario, con velocità angolare $\omega $. Di conseguenza, la frequenza $f$ è il numero di volte che il segmento effettua un giro completo in un secondo.
 \
@@ -253,15 +253,15 @@ La curva in figura rappresenta istante per istante il valore del seno dell'angol
 In un segnale sinusoidale, la distanza tra due massimi relativi è detta \textit{lunghezza d'onda} $\lambda =c/f =cT$ (dove $c$ è la velocità di propagazione del segnale).
 
 \subsub{Spettro}
-Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa affermazione, non necessariamente di immediata comprensione, diventa subito chiara se si tiene presente il \textbf{teorema di Fourier}, il quale afferma che un segnale può essere rappresentato come somma di sinusoidi (potenzialmente infinite) con caratteristiche differenti.
+Lo spettro è l'insieme delle frequenze che compongono un segnale. Questa affermazione va considerata alla luce del \textbf{teorema di Fourier}, il quale afferma che un segnale può essere rappresentato come somma di sinusoidi (potenzialmente infinite) con caratteristiche differenti.
 
 \boximage[fourier.png][scale=0.6]{Esempio di funzione composta da tre sinusoidi semplici.}
 
 \subsub{Banda}
-La banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente per le comunicazioni telefoniche (3100 Hz).
+La banda è costituita dall'insieme di frequenze dello spettro \textit{effettivamente utilizzate} e corrisponde alla massima velocità teorica della rete. Si parla di \textit{banda larga} nel caso in cui l'ampiezza di banda sia sensibilmente superiore a quella utilizzata correntemente in telefonia (3100 Hz).
 
 \subsection{Qualità delle trasmissioni} \label{qualita}
-I criteri per valutare la bontà della rete sono molteplici, legati alle prestazioni e ad affidabilità e sicurezza.
+I criteri per valutare la bontà della rete sono molteplici, legati da un lato alle prestazioni, dall'altro ad affidabilità e sicurezza.
 \subsub{Criteri di valutazione in base alle prestazioni}
 \para{Throughput}Quantità di dati spedita nell'unità di tempo; rappresenta l'effettiva velocità della rete.
 \para{Latenza}Detta anche ritardo, è il tempo necessario perché un messaggio giunga a destinazione; per il suo calcolo si tiene conto di:
@@ -293,14 +293,14 @@ dove $B$ è l'ampiezza di \vedi{Banda} e \textbf{SNR} è il rapporto segnale-\ve
 \subsubsection{Strumenti software}
 I criteri sopra descritti possono essere valutati con numerosi strumenti software, tra cui:
 \begin{itemize}
-\item il comando Unix-Linux \code{ping}, che indica se un host remoto possa essere raggiunto inviando \textit{echo messages} del protocollo \vedi{ICMP} e riporta le statistiche relative alla trasmissione, in particolare:
+\item il comando Unix-Linux \code{ping}, che, mediante l'invio di \textit{echo messages} del protocollo \vedi{ICMP}, verifica se un host remoto possa essere raggiunto e riporta le statistiche relative alla trasmissione, in particolare:
 \begin{itemize}
-\item \textit{packet loss}: percentuale di pacchetti persi, se la connessione è buona dovrebbe sempre essere pari a 0;
+\item \vedi{Packet loss}, in percentuale. Con una buona connessione dovrebbe sempre essere pari a 0;
 \item RTT (\textit{round trip time}): statistiche sul tempo di trasmissione;
 \end{itemize}
 \boximage[ping.png][scale=0.35]{Esempio di output del comando \code{ping}.}
 \item il comando Unix \code{traceroute} o \code{tracepath}, che indica i dispositivi attraversati per raggiungere una data destinazione;
-\item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, i cui risultati possono essere utilizzati come elemento probatorio nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
+\item applicazioni web quali ad esempio \url{speedtest.net} e \href{<https://www.misurainternet.it/>}{Ne.Me.Sys}, quest'ultimo sviluppato da AGCOM, utilizzabile per produrre elementi probatori nel caso in cui l’utente voglia esercitare il diritto di reclamo e recesso rispetto a promesse contrattuali di velocità di accesso ad Internet non mantenute dall‘operatore.
 \end{itemize}
 \sub{Filtri}
 Un filtro è un sistema che tratta le varie componenti del segnale in modo diverso a seconda della loro frequenza.
@@ -313,12 +313,12 @@ Un filtro è un sistema che tratta le varie componenti del segnale in modo diver
 \end{itemize}
 
 \sub{Alterazioni del segnale}
-L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento del suddetto. %Claudio perdonami, non credo che nessuno vorrà mai fare riferimenti a queste parole
-\subsub{Attenuazione} Perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}} = 20\log_{10}\frac{V_{i}}{V_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale, mentre $V_{i}$ e $V_{f}$ sono rispettivamente il potenziale elettrico iniziale e finale; vi si pone rimedio tramite dispositivi come gli amplificatori;
-\subsub{Distorsione} Cambiamento di forma del segnale, si verifica quando esso è composto da varie frequenze e dipende dal ritardo all'arrivo delle singole componenti;
-\subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore;
+L'espressione "alterazioni del segnale" racchiude tutti i tipi di deterioramento del suddetto. 
+\subsub{Attenuazione} Perdita di energia del segnale, misurata in $dB$, cioè $10\log_{10}\frac{P_{i}}{P_{f}} = 20\log_{10}\frac{V_{i}}{V_{f}}$, dove $P_{i}$ rappresenta la potenza iniziale e $P_{f}$ la potenza finale, mentre $V_{i}$ e $V_{f}$ sono rispettivamente il potenziale elettrico iniziale e finale; vi si pone rimedio tramite dispositivi come gli amplificatori.
+\subsub{Distorsione} Cambiamento di forma del segnale, si verifica quando esso è composto da varie frequenze e dipende dal ritardo all'arrivo delle singole componenti.
+\subsub{Rumore} Insieme dei segnali indesiderati, generati da processi sia interni che esterni al sistema, che si sovrappongono a quello utile. Il rapporto segnale-rumore (\textbf{SNR}, \textit{Signal to Noise Ratio}) mette in relazione la potenza del segnale utile con quella del rumore.
 \subsub{Interferenza} Sovrapposizione di informazioni non desiderate al segnale utile. Solitamente, per interferenza s'intende in particolare la contaminazione da parte di segnali esterni, i quali, a differenza del rumore, che è totalmente casuale, possono portare a loro volta informazione, benché indesiderata. L'interferenza \textbf{ISI} (\textit{Inter Symbol Interference}, interferenza intersimbolica) avviene quando, in seguito alla traduzione, i simboli si sovrappongono sull'asse del tempo; chiaramente questo è legato ai limiti della banda.
-\boximage[isi.png][scale=0.5]{Interferenza intersimbolica}
+\boximage[isi.png][scale=0.4]{Interferenza intersimbolica}
 \sub{Multiplazione}
 La multiplazione è una tecnica che prevede l'impiego di un unico canale per più comunicazioni differenti contemporanee.
 \subsub{FDM}
@@ -339,7 +339,7 @@ La TDM si suddivide in:
 Sovente capita che l'informazione debba essere convertita in maniera idonea ad essere inviata nel mezzo trasmissivo adottato. Tale processo è detto \textit{modulazione} ed è reversibile: il \textit{segnale portante}, caratteristico del mezzo trasmissivo, viene modificato in uno dei suoi parametri essenziali in accordo al segnale in ingresso, contenente l'informazione da trasmettersi, che è detto \textit{segnale modulante}, tipicamente analogico.
 \subsub{Modulazione ad onda continua}
 Si parla di modulazione ad onda continua nel momento in cui viene modulata una portante sinusoidale. Ne esistono tre tipologie.
-\para{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante;
+\para{AM} (Amplitude Modulation): l'ampiezza del segnale portante viene modulata in proporzione al segnale modulante.
 \para{FM} (Frequency Modulation): è la frequenza del segnale portante ad essere modulata, infittendosi quando la modulante si innalza e rarefacendosi quando si abbassa. Tipica delle trasmissione radiofoniche in Italia, pur necessitando di circuiti più complessi, è preferibile alla modulazione di ampiezza per motivi di efficienza e maggior tolleranza a disturbi di vario tipo.
 \para{PM} (Phase Modulation): molto simile alla modulazione di frequenza - come si può notare in figura, consiste nel variare la fase $\Phi $ (vedi \vedi{Segnale}) in proporzione all'intensità della modulante. Spesso s'impiega in sistemi in FM per ottenere l'amplificazione del segnale.
 \boximage[am_fm_pm.png][scale=0.5]{Confronto tra tipologie di modulazione ad onda continua}
@@ -353,44 +353,42 @@ La modulazione impulsiva è un tipo di modulazione in cui la modulante è una si
 \para{PCM} (Pulse Code Modulation), nata dall'esigenza, intorno agli anni '40, di aumentare il numero di collegamenti telefonici interurbani. Per evitare l'impianto di grossi fasci di conduttori, ingombranti, costosi e difficili da connettere, si pensò di multiplare più collegamenti su un unico cavo, utilizzando una soluzione preesistente, la \vedi{FDM}, poi  abbandonata per la più moderna \vedi{TDM}, inizialmente realizzata per mezzo delle tre tecniche impulsive sopra descritte, poi attraverso appunto la PCM, ad oggi l'unica adottata su larga scala.
 \\La PCM costa di tre fasi distinte:
 \begin{enumerate}
-\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
-\\Il campionamento si realizza per mezzo della PAM.
+\item \textbf{campionamento}: conversione del segnale continuo in un segnale discreto nel tempo, valutandone l'ampiezza a intervalli regolari. Ciò è possibile, come affermato dal \href{<https://it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon>}{Teorema di Shannon}\footnote{url: \url{it.wikipedia.org/wiki/Teorema_del_campionamento_di_Nyquist-Shannon}}, poiché è possibile rappresentare un segnale con frequenza limitata tra $f_{1}$ ed $f_{2}$, con $f_{1}<f_{2}$ mediante una successione di campioni con frequenza minima $2f_{2}$. La minima frequenza di campionamento (\textbf{cadenza di Nyquist}) è pari al doppio della banda; nella PSTN (Public Switched Telephone Network) si assume come frequenza di campionamento $f_{c}=8 Khz$.
+\\Il campionamento si realizza per mezzo della PAM;
 \item \textbf{quantizzazione}: discretizzazione dell'ampiezza del segnale campionato. Per ottenere un range di valori discreti, si stabiliscono un valore minimo e un valore massimo e si suddivide l'intervallo così ottenuto. Nella quantizzazione uniforme, l'intervallo è diviso in pari uguali; di norma, tuttavia, la suddivisione segue una scala logaritmica.
-\\Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - è dimostrato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze nella riproduzione dei suoni. 
+\\Com'è intuibile, la quantizzazione è un processo irreversibile, per cui è necessario tener conto dell'errore commesso - è dimostrato che, utilizzando 256 livelli di quantizzazione, l'orecchio umano non percepisce sostanziali differenze nella riproduzione dei suoni;
 \item \textbf{codifica}: gli impulsi campionati e quantizzati vengono convertiti in sequenze di bit.  
-\\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32*8000*8=2048 Mbit/sec$. %raggruppamenti di canali? 
+\\Nel PCM europeo, che utilizza appunto $256=2^{8}$ livelli, occorrono 8 bit per campione. Tra due sequenze di 8 bit destinate ad uno stesso canale telefonico ve ne sono altre trentuno, dirette ognuna ad un altro canale. Vengono dunque trasmessi 32 canali -di cui due di servizio- da 8 bit con 8000 campioni al secondo, per un totale di $32 \cdot 8000 \cdot 8=2048 Mbit/sec$. %raggruppamenti di canali? 
 \end{enumerate}
 \boximage[pcm.jpg][scale=0.45]{Fasi della PCM}
 
 \subsub{Modulazione digitale} 
-Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico, ma tale conversione è ottenuta facendo corrispondere ad ogni sequenza di bit in input un forma d'onda analogica univoca e limitata nel tempo in uscita, detta \textit{simbolo}. \'E più corretto dunque parlare di \textit{codifica}, della quale esistono diverse varianti: 
-\begin{itemize} 
-\item \textbf{ASK} (Amplitude-Shift Keying), derivante dalla AM; di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
-\item \textbf{FSK} (Frequency-Shift Keying): la frequenza della portante viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
+Nel caso in cui la comunicazione avvenga fra \vedi{DTE} (tramite un \vedi{Modem}), il termine modulazione é improprio, poiché il segnale viene convertito da digitale ad analogico (poi viceversa), ma tale conversione è ottenuta facendo corrispondere ad ogni sequenza di bit in input un forma d'onda analogica univoca e limitata nel tempo in uscita, detta \textit{simbolo}. \'E più corretto dunque parlare di \textit{codifica}, della quale esistono diverse varianti.
+\para{ASK} (Amplitude-Shift Keying), derivante dalla AM. Di semplice realizzazione ma poco utilizzata, se non per trasmissioni a breve distanza, per la sua forte sensibilità al rumore. Solitamente, si concretizza in una modulazione OOK (On-Off Keying), in cui il segnale modulato ha ampiezza 0 in corrispondenza dello 0 logico e ampiezza pari a quella della portante non modulata in corrispondenza dell'1 logico. 
+\para{FSK} (Frequency-Shift Keying): la frequenza della portante viene alternata fra due frequenze di valore ben definito. Tali frequenze sono note l'una come frequenza d'impulso (1 logico), l'altra come frequenza d'intervallo (0 logico). In merito alla scelta di tali frequenze va notato che: 
 \begin{itemize} 
 \item occorre limitare il più possibile l'occupazione della banda, ma i valori delle frequenze devono essere sufficientemente distanti per evitare che vengano confuse l'una con l'altra (\textit{\vedi{Interferenza} intersimbolica}); 
 \item i due simboli devono avere periodo inferiore o uguale alla frequenza di bit dell'informazione digitale in ingresso; 
 \item è assolutamente necessario mantenere una continuità di fase nelle variazioni di stato, poiché il circuito di demodulazione, costituito in genere da un rivelatore di passaggio per lo zero, deve essere in grado di individuare il salto di frequenza con la massima precisione.
 \end{itemize} 
 La FSK è stata utilizzata nei primi modem V.21 e V.23 e la si impiega ancora oggi nei ponti radio e nelle trasmissioni di tipo GSM tra cellulari. 
-\item \textbf{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
+\para{PSK} (Phase-Shift Keying), derivante direttamente dalla PM. Può essere applicata in varie maniere, le più diffuse delle quali sono: 
 \boximage[ask_psk_fsk.png][scale=0.3]{Confronto tra codifiche ASK, FSK, e PSK}
 \begin{itemize} 
 \item \textbf{BPSK} (BiPolar-Shift Keying) o \textbf{2-PSK}: quando la modulante cambia stato, il segnale modulato cambia fase. Per garantire la massima protezione dal rumore e dalle interferenze, solitamente vengono scelti i due valori di fase estremi, $\ang{0}$ e $\ang{180}$;
 \item \textbf{4-PSK} e \textbf{4-QPSK}: i bit del segnale in input vengono suddivisi in coppie da un convertitore, che genera così due segnali separati; vi sono inoltre due modulatori e due portanti con frequenza identica, ma in quadratura\footnote{L'espressione \textit{in quadratura} indica semplicemente una sfasatura di \ang{90}: i due segnali sono ortogonali, cosicché si evitano le interferenze}. I due segnali modulati, detti I (\textit{Infase}) e Q (\textit{Quadratura}), poi sommati, cambiano dunque fase a seconda del valore della coppia di bit in input e il segnale in uscita può avere quattro distinti valori di fase (le due varianti differiscono per la posizione delle quattro fasi utilizzate, che nella 4-PSK sono poste sugli assi cartesiani, mentre nella 4-QPSK sono sfasate di $\ang{45}$);
 \boximage[qpsk.png][scale=0.4]{Esempio di distribuzione delle fasi nella modulazione 4-QPSK}
 \item \textbf{8-PSK}: analoga alla 4-PSK, comporta l'utilizzo non di coppie ma di terne di bit;
-\item \textbf{DPSK} (Differential Phase-Shift Keying): analoga alla PSK, ma sono i salti di fase, e non i valori assoluti, a codificare i bit. Ne esistono diverse varianti, quali la 2-DPSK, la 4-DPSK e la 8-DPSK;
+\item \textbf{DPSK} (Differential Phase-Shift Keying): analoga alla PSK, ma sono i salti di fase, e non i valori assoluti, a codificare i bit. Ne esistono diverse varianti, quali la 2-DPSK, la 4-DPSK e la 8-DPSK.
 \end{itemize} 
-\item \textbf{QAM} (Quadrature Amplitude Modulation): combinazione di ASK e PSK, consiste nel modulare in ampiezza portanti in quadratura di uguale frequenza. Varianti della QAM particolarmente rilevanti sono la 16-QAM e la 64-QAM, usata nell'	A\vedi{DSL};
-\item \textbf{TCM} (Trellis Coded Modulation): simile alla QAM, assicura una maggiore immunità dal rumore e un minor tasso di errore aumentando la ridondanza della trasmissione. Vi è un cambio di stato sempre e soltanto in presenza di un bit 1. Il nome di questo tipo di modulazione deriva dal fatto che l'andamento temporale del segnale può essere rappresentato mediante un diagramma, visivamente simile ad un traliccio (in inglese, \textit{trellis}). %verificare attendibilità fonti
+\para{QAM} (Quadrature Amplitude Modulation): combinazione di ASK e PSK, consiste nel modulare in ampiezza portanti in quadratura di uguale frequenza. Varianti della QAM particolarmente rilevanti sono la 16-QAM e la 64-QAM, usata nell'	A\vedi{DSL};
+\para{TCM} (Trellis Coded Modulation): simile alla QAM, assicura una maggiore immunità al rumore e un minor tasso di errore aumentando la ridondanza della trasmissione. Vi è un cambio di stato sempre e soltanto in presenza di un bit 1. Il nome di questo tipo di modulazione deriva dal fatto che l'andamento temporale del segnale può essere rappresentato mediante un diagramma, visivamente simile ad un traliccio (in inglese, \textit{trellis}). %verificare attendibilità fonti
 \boximage[trellis.png][scale=0.3]{Diagramma a traliccio}
-\end{itemize}
 \para{Diagramma a costellazione}
 Rappresentazione grafica teorica di un segnale modulato secondo uno degli schemi di modulazione digitale. Il segnale viene mostrato su un piano bidimensionale in cui I e Q sono gli assi cartesiani e i punti in cui un vettore può trovarsi vengono rappresentati con dei punti. Se c’è del rumore, attorno al punto ideale si creano delle aree, utili per la comprensione delle cause del rumore stesso.
 \boximage[constellation.png][scale=0.3]{Diagramma a costellazione}
 \para{Vettore errore}
-Il vettore errore rappresenta la differenza tra il punto teorico in cui si sarebbe dovuto trovare il segnale nel \vedi{Diagramma a costellazione} e la sua posizione reale. Ciò che interessa maggiormente del vettore errore è il suo modulo, utile a valutare la qualità della modulazione, detto anche \textbf{EVM} (Error Vector Magnitude). Esso è espresso in percentuale o in $dB$, come rapporto tra il valore quadratico medio della potenza del vettore errore e il  \href{<https://it.wikipedia.org/wiki/Valore_efficace>}{valore quadratico medio}\footnote{Si noti che il concetto di valore quadratico medio non coincide con quello di scarto quadratico medio} della potenza del segnale di riferimento. In questo caso, l'EVM può avere -ed è auspicabile che abbia- valore negativo. %da riformulare
+Il vettore errore rappresenta la differenza tra il punto teorico in cui si sarebbe dovuto trovare il segnale nel \vedi{Diagramma a costellazione} e la sua posizione reale. Ciò che interessa maggiormente del vettore errore è il suo modulo, utile a valutare la qualità della modulazione, detto anche \textbf{EVM} (Error Vector Magnitude). Esso è espresso in percentuale o in $dB$, come rapporto tra il valore quadratico medio della potenza del vettore errore e il  \href{<https://it.wikipedia.org/wiki/Valore_efficace>}{valore quadratico medio}\footnote{Si noti che il concetto di valore quadratico medio non coincide con quello di scarto quadratico medio: si veda \url{it.wikipedia.org/wiki/Valore_efficace}} della potenza del segnale di riferimento. In questo caso, l'EVM può avere -ed è auspicabile che abbia- valore negativo. %da riformulare
 Per la misurazione dell'EVM esistono strumenti hardware e software, tutti quanti basati sulla demodulazione del segnale ed il confronto con quello ideale.
 
 \paragraph{Velocità di modulazione}
@@ -439,17 +437,17 @@ Di seguito alcuni standard delle tecniche d'interfacciamento,  stabiliti dalla \
 \subsection{Altri dispositivi}
 \subsub{Ripetitore}
 Dispositivo di rete che si limita a ripetere i pacchetti che gli arrivano.
-Si utilizza quando esiste una limitazione fisica alla lunghezza della \vedi{LAN}: le reti collegate possono in tal caso essere viste, da un punto di vista logico, come una rete unica.
+Si utilizza quando ci si scontra con i limiti fisici all'estensione della \vedi{LAN}: le reti collegate possono in tal caso essere viste, da un punto di vista logico, come una rete unica.
 \subsub{Hub} 
 Uno hub è un dispositivo di rete che funge da nodo di smistamento dati di una una \vedi{Rete a dorsale} o in una \vedi{Rete a stella}. Poiché non è in grado di reinviare i pacchetti se non in broadcast, è attualmente impiegato in misura molto minore rispetto allo \vedi{Switch}.
 
 \sub{Interfacce hardware} 
-Dal punto di vista fisico, un'interfaccia o porta è caratterizzata da un canale di trasmissione, identificato da un mezzo trasmissivo (ad esempio un cavo), due connettori e due porte o \textit{slot} poste agli estremi della trasmissione; dal punto di vista logico, da una modalità di trasmissione (seriale o parallela). 
+Dal punto di vista fisico, un'interfaccia è caratterizzata da un canale di trasmissione, identificato da un mezzo trasmissivo (ad esempio un cavo), due connettori e due porte o \textit{slot} poste agli estremi della trasmissione; dal punto di vista logico, da una modalità di trasmissione (seriale o parallela). 
 \subsub{Interfacce parallele}
 Le interfacce parallele trasmettono segnali da più pin in contemporanea.
 \para{Interfaccia Centronics}
 Ormai obsoleta, sostituita in gran parte dei casi dall'interfaccia \vedi{USB}, originariamente monodirezionale, è stata impiegata soprattutto per collegare i \vedi{DTE} alle stampanti, ma più di recente ne è stato sviluppato uno standard bidirezionale che permette anche il collegamento di dispositivi di input.
-Tale interfaccia consente di trasferire 8 bit in parallelo nello standard \textbf{TTL}\footnote{Transistor-Transistor Logic: prima tecnologia di circuiti integrati diffusa su scala globale}.
+Tale interfaccia consente di trasferire 8 bit in parallelo nello standard \textbf{TTL}\footnote{Transistor-Transistor Logic: prima tecnologia di circuiti integrati diffusa su larga scala.}.
 La porta parallela del DTE è un connettore femmina detto "a vaschetta" o DB 25, con 25 pin, mentre sulle periferiche è presente un connettore differente, chiamato appunto Centronics, dal nome del primo costruttore. Alle due porte corrispondono chiaramente due diversi connettori maschio.
 \boximage[parallel.png][scale=0.5]{I due diversi connettori maschio dell'interfaccia parallela}
 Sul DTE si trovavano tipicamente da una a tre porte parallele, dette \textbf{LPT} (\textit{Line Printer Terminal}) 1, 2 e 3, a ciascuna delle quali sono assegnati uno specifico interrupt (IRQ 7 per LPT1) e tre indirizzi riservati contigui:
@@ -460,7 +458,7 @@ Sul DTE si trovavano tipicamente da una a tre porte parallele, dette \textbf{LPT
 \end{itemize}
 
 \subsub{Interfacce seriali}
-le interfacce seriali trasmettono da un solo pin alla volta.
+Le interfacce seriali trasmettono da un solo pin alla volta.
 \para{RS-232}
 L'RS-232 è uno standard che permette la realizzazione di una trasmissione seriale tra un \vedi{DTE} e un \vedi{DCE}, in modalità sia sincrona che asincrona. Dal momento che il numero di linee effettivamente utilizzate varia sensibilmente a seconda del tipo di collegamento e dei modem eventualmente impiegati, per questa interfaccia esistono due diversi tipi di connettore: quello a 25 pin e quello ridotto, a 9 pin, sufficiente per molte applicazioni.
 \boximage[rs232.jpg][scale=0.5]{Uso di ogni linea nei due tipi di connettore RS-232}
@@ -473,7 +471,7 @@ Il sistema USB è asimmetrico: consiste in un singolo gestore e molte periferich
 La \vedi{IEEE} 1394, ideata da Apple nel 1968 per essere utilizzata nei PC e nota anche con i nomi commerciali \textbf{FireWire} ed \textbf{iLink}, attribuitile rispettivamente dalla stessa Apple e da Sony, è un'interfaccia bidirezionale in grado di gestire fino a 63 dispositivi sulla stessa linea ad alta velocità, miscelando dati sincroni ed asincroni. Come la \vedi{USB}, consente di collegare e scollegare i dispositivi a caldo tramite due diversi tipi di connettore, l'uno a quattro pin, senza alimentazione, l'altro a 6, con alimentazione da 8 a 30 V.
 Il limite principale di tale interfaccia è la portata, limitata a pochi metri, portati a 100 con lo standard IEEE 1394b.
 \para{RS422}
-Utilizzato principalmente per realizzare collegamenti punto-a-punto tra due apparecchiature -siano esse DTE o DCE- con alta immunità ai disturbi anche a distanze considerevoli (tipicamente fino a 1200 m) e a velocità anche superiori a 10 Mbps, è uno standard molto diffuso specie in ambito industriale.
+Utilizzata principalmente per realizzare collegamenti punto-a-punto tra due apparecchiature -siano esse DTE o DCE- con alta immunità ai disturbi anche a distanze considerevoli (tipicamente fino a 1200 m) e a velocità anche superiori a 10 Mbps, è uno standard molto diffuso specie in ambito industriale.
 Prevede, per ogni coppia di fili, trasmissione unidirezionale e non reversibile. Pertanto, per realizzare una connessione \vedi{Full-Duplex}, si utilizzano due coppie di fili. 
 \sub{Mezzi trasmissivi}
 Le diverse reti utilizzate per l'accesso ad internet sfruttano mezzi trasmissivi differenti.
@@ -499,7 +497,7 @@ Elementi principali di una rete FTTx sono:
 \item \textbf{OLT} (\textit{Optical Line Termination}): gestisce il flusso di dati; si trova presso il provider;
 \item \textbf{ONT} (\textit{Optical Network Termination}) ed \textbf{ONU} (\textit{Optical Network Unit}): interfacce di rete presso l'utente finale.
 \end{itemize}
-\paragraph{Reti AON} Le reti AON (Active Optical Network) sono strutture P2P (point-to-point), nel senso che ogni utente ha il proprio tratto di fibra, che giunge direttamente al proprio ONT. Nelle AON si utilizzano componenti attivi, come amplificatori, ripetitori, router o switch. La loro topologia è solitamente a stella (vedi \vedi{Rete a stella}). Garantisce, a costi elevati, la massima velocità di trasmissione.
+\paragraph{Reti AON} Le reti AON (Active Optical Network) sono strutture P2P (point-to-point), nel senso che ogni utente ha un tratto di fibra proprio, che giunge direttamente al suo ONT. Nelle AON si utilizzano componenti attivi, come amplificatori, ripetitori, router o switch. La loro topologia è solitamente a stella (vedi \vedi{Rete a stella}). Garantisce, a costi elevati, la massima velocità di trasmissione.
 \paragraph{Reti PON} Le reti PON (Passive Optical Network)
 utilizzano solo componenti passivi e sono caratterizzate da una topologia ad albero (vedi \vedi{Rete ad albero}). In esse, tratti di fibra vengono condivisi tra più utenti, e solo alla fine uno splitter ottico suddivide il segnale in più segnali uguali ma di potenza minore in modo da distribuirlo.
 \sub{Protocolli di primo livello}
@@ -507,15 +505,13 @@ utilizzano solo componenti passivi e sono caratterizzate da una topologia ad alb
 Plesiochronous Digital Hierarchy: tecnologia utilizzata nelle reti di telecomunicazione per trasportare grandi quantità di dati su apparecchiature di trasporto digitali. Rappresenta il primo metodo di \vedi{Multiplazione} per trasmettere
 molti (per l'esattezza 30) canali contemporaneamente.
 Tramite un multiplexer \vedi{TDM} si uniscono i diversi canali. Poiché questi possono funzionare a bitrate differenti, il multiplexer si trova a dover inserire bit aggiuntivi (i cosiddetti \textit{dummy bits}) per compensare la differenza e rendere sincrono il flusso in entrata al demultiplexer ricevente, che li riconosce e li elimina.
-Il PDH è incapace di monitorare le prestazioni della rete e garantire buone performance per trasferimento contemporaneo di audio, video e dati. Problemi di temporizzazione (il termine \textit{plesiochronous} significa letteralmente "quasi sincronizzato") portano a preferirgli l'\vedi{SDH}.
+Il PDH è incapace di monitorare le prestazioni della rete e garantire buone performance per trasferimento contemporaneo di audio, video e dati. Problemi di temporizzazione (il termine \textit{plesiochronous} significa letteralmente "quasi sincronizzato") portano a preferire l'\vedi{SDH}.
 \subsub{SDH}
 Synchronous Digital Hierarchy: protocollo usato per la trasmissione di fonia e dati su fibra e rete elettrica, anch'esso ha il compito di aggregare flussi di dati con bitrate diversi e spedirli tutti insieme a grandi distanze.
 A differenza del \vedi{PDH}, prevede che tutti gli elementi
-della rete siano sincronizzati da uno stesso clock. Inoltre permette di trasferire informazioni essenziali per la corretta gestione della rete, permettendo di raggiungere elevatissimi livelli di qualità del servizio. 
-Non presenta limiti di distanza e oggi può offrire una velocità di 140Gb/s. L'unico vincolo è dovuto alla multiplazione \vedi{TDM}, che quindi fornisce ad ogni utente una capacità costante nel tempo.
-Diffuso in tutto il mondo tranne che in Nord America.
-\para{SONET}
-Alternativa al \vedi{SDH} in Nord America.
+della rete siano sincronizzati da uno stesso clock. Consente inoltre di trasferire informazioni essenziali per la corretta gestione della rete, permettendo di raggiungere elevatissimi livelli di qualità del servizio. 
+Non presenta limiti di distanza e ad oggi offre velocità fino a 140Gb/s. L'unico vincolo è dovuto alla multiplazione \vedi{TDM}, che fornisce ad ogni utente una capacità costante nel tempo.
+Diffuso in tutto il mondo tranne che in Nord America, dove si utilizza un protocollo analogo, il \textbf{sonet}
 \subsub{DSL}
 Il termine DSL (Digital Subscriber Line) indica una famiglia di tecnologie che fornisce trasmissione digitale di dati su \vedi{Doppino telefonico}, comunemente utilizzata nella connessione ad Internet da utenza domestica nella sua specifica più diffusa, l'\textbf{ADSL} (Asymmetrical DSL). Il protocollo ADSL sfrutta completamente la banda passante del doppino telefonico, molto più ampia dei 4kHz utilizzati normalmente in fonia, utilizzando due tecniche di modulazione: la CAP (Carrierless Amplitude Phase, variante della QAM) e la DMT (Discrete Multi Tone).
 Con un filtro DSL, spesso chiamato \textit{splitter}, le bande di frequenza vengono tripartite, consentendo di utilizzare  allo stesso tempo un'unica linea telefonica sia per il servizio ADSL che per le chiamate telefoniche. L'ADSL è generalmente installata solo per brevi distanze dalla centrale telefonica (l'ultimo miglio), o comunque meno di 4 km.
@@ -533,30 +529,30 @@ In inglese \italic{Data Link Layer} (DLL), il secondo livello del \vedi{Modello 
 \item gestire il flusso di dati.
 \end{itemize}
 \sub{Ethernet} 
-\'E una delle tecnologie per il collegamento LAN più utilizzate al mondo, posto a metà fra il primo e il secondo livello (più in particolare nel sottolivello MAC) del modello ISO.
-L'interfaccia ethernet si occupa di:
+\'E una delle tecnologie per il collegamento LAN più utilizzate al mondo, posta a metà fra il primo e il secondo livello (più in particolare nel sottolivello \vedi{MAC}) del \vedi{Modello di riferimento ISO/OSI}.
+L'interfaccia Ethernet ha funzione di:
 \begin{itemize} 
-    \item Incapsulamento e decapsulamento dei dati.
-    \item Codifica e decodifica \vedi{Manchester} dei bit per trasmettere il clock insieme ai dati. Questa codifica, garantisce la transizione del segnale elettrico in ogni bit trasmesso, questo permette al ricevitore di agganciare il clock del trasmettitore nella fare di preambolo e ricevere il messaggio nel modo giusto.
+    \item Incapsulamento e decapsulamento dei dati;
+    \item Codifica e decodifica \vedi{Manchester} dei bit per trasmettere il clock insieme ai dati. Questa codifica garantisce la transizione del segnale elettrico in ogni bit trasmesso, il che permette al ricevitore di agganciare il clock del trasmettitore nella fase di preambolo e ricevere il messaggio nel modo giusto.
 \end{itemize}
-\subsub{switched Lan}
-    Sono reti lan ethernet con la caratteristica di utilizzare degli \vedi{Switch}, questo risolve i problemi dello CSMA/CD perchè, questa tecnologia, minimizza le collisioni. \'E una tecnologia con bassi costi, bassa manutenzione e la la migrazione da una lan ad una switch lan necessita della sola sostituzione degli apparati attivi, mantenendo il cablaggio inalterato  
 \subsub{IEEE 802.3}
-le reti locali appartenenti a questo standard adottano uno accesso al bus di tipo CSMA/CD.
-lo standard 802.3 prevede diverse variabili al livello \vedi{MAC}:
+Le reti locali appartenenti a questo standard adottano uno accesso al bus di tipo CSMA/CD.
+Lo standard 802.3 prevede diverse varianti del livello \vedi{MAC}:
 \begin{itemize}
-    \item \textbf{10base5}
-        è la prima versione del MAC e prevede l' uso del cavo coassiale thick da 50 Ohm, la velocità è di 10 mdps. la lunghezza massima di un singolo cavo è 500 m, distanze superiori richiedono l'utilizzo di bridge locali o remoti che operano su trame generate al livello MAC la connessione delle stazioni avviene tramite la connessione a vampiro.
-    \item \textbf{10base2}
-        creato per la difficile manipolazione dei cavi di tipo thick, sfrutta cavi coassiali sottili tipo RG58 molto più flessibili.
-        Lunghezza massima di un segmento 185 m con 30 stazioni collegabili ad un singolo segmento.
-        Questo metodo crea diversi problemi: difficoltà nel trovare danni ai cavi, cavi troppo piegati producono diverse interferenze.
-    \item \textbf{10baseT}
-        creato per semplificare la realizzazione delle reti tramite sistemi di cablaggio strutturato, utilizza il doppino non schermato(UTP) ed ha una struttura a stella con hub connessi in parallelo, lunghezza max singolo tratto 100 m, poichè si utilizza un doppino telefonico l'impianto può esser riusato in diversi modi a seconda delle necessità.
-     \item \textbf{10baseFOIRL} 
-         alternativa al cavo thick con fibra ottica ed un transceiver fiber optic MAU in grado di ricevere segnali ottici fino a 1000m
-     \item \textbf{10baseF} insieme degli standard di ricezione per la fibra ottica:\textbf{10baseFP} (10mb/s, con stella passiva) \textbf{10baseFB} (con dorsale fra i ripetitori) \textbf{10baseFL}  (interconnessione fra i ripetitori sia con struttura point-to-point, che stellare )
+    \item \textbf{10base5}:
+        prima versione del MAC, prevede l' uso di \vedi{Cavo coassiale} thick RG-8 da 50 Ohm. La velocità è di 10 Mbps e la lunghezza massima di un singolo cavo è 500 m: distanze superiori richiedono l'utilizzo di \vedi{Bridge} locali o remoti che operano su trame generate al livello MAC. La connessione delle stazioni impiega i cosiddetti \textit{connettori a vampiro};
+    \item \textbf{10base2}:
+        creato per evitare i problemi relativi alla difficile manipolazione dei cavi thick, sfrutta cavi coassiali sottili tipo RG-58, molto più flessibili.
+        La lunghezza massima di un segmento è 185 m, con 30 stazioni collegabili ad un singolo segmento.
+        I limiti di questo metodo sono la difficoltà nel localizzare danni nei cavi e interferenze dovute a cavi eccessivamente ripiegati su loro stessi;
+    \item \textbf{10baseT}:
+        creato per semplificare la realizzazione delle reti tramite sistemi di cablaggio strutturato, utilizza cavi UTP ed ha una struttura topologica a stella con hub connessi in parallelo. La lunghezza massima di un tratto è di 100 m;
+     \item \textbf{10baseFOIRL}:
+         impiega la fibra ottica al posto del \vedi{Cavo coassiale} thick.
+     \item \textbf{10baseF} insieme degli standard di ricezione per la fibra ottica. Comprende \textbf{10baseFP} (velocità: 10mb/s, topologia a stella, passiva) \textbf{10baseFB} (con dorsale fra i ripetitori) e \textbf{10baseFL}  (topologia point-to-point o stellare).
 \end{itemize}
+\subsub{Switched Lan}
+Sono \vedi{LAN} Ethernet caratterizzate dall'impiego di \vedi{Switch}, che risolve i problemi del matodo di accesso CSMA/CD minimizzando le collisioni. \'E una tecnologia con bassi costi di installazione e manutenzione e la migrazione da LAN a switched LAN necessita della sola sostituzione degli apparati attivi, cioè mantiene il cablaggio inalterato.
 \subsub {Ethernet framing}
 Nonostante esistano diversi tipi di ethernet, la struttura del frame è la stessa.
 \image[etherframe.png][scale=0.35]{Frame ethernet di tipo 2 (fra i più comuni).}
