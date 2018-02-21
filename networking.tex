@@ -690,8 +690,7 @@ I frame sono divisi nei seguenti sottocampi:
 	\\N.B: questo campo è assente nei S-frame;
 	\item \textbf{campo FCS} (Frame Check Sequence): 16 o 32 bit utilizzati per rilevare evenutuali errori di trasmissione.
 \end{itemize}
-\boximage[hdlc_frames.png][scale=0.62]{Struttura dei frame in HDLC con differenze nel campo di controllo in base alla tipologia di pacchetto}
-%immagine frame
+\boximage[hdlc_frames.png][scale=0.62]{Struttura dei frame in HDLC con differenze nel campo di controllo nei casi I, S ed U}
 
 \subsub{SDLC}
 HDLC deriva da SDLC (Synchronous Data Link Control), un protocollo definito da IBM negli anni '70.\\\\
@@ -708,9 +707,9 @@ Il Point-to-Point Protocol è, come intuibile, un protocollo usato nelle conness
 \begin{itemize}
 	\item \textbf{indirizzo}: i suoi 8 bit sono sempre \code{11111111} dal momento che le trasmissioni avvengono esclusivamente in \textit{broadcast};
 	\item \textbf{controllo}: solo 8 bit che, mentre in HDLC hanno struttura \code{11MMPMMM}, in PPP sono del valore fisso \code{11000000} e rappresentano il comando UI (\textit{unnambered information}), ovvero un messaggio che contiene dati;
-	\item \textbf{campo informativo}: la lunghezza è limitata tra 0 e 1500 ottetti ma può essere ampliata facendo uso del campo supplementare \textbf{padding}.
+	\item \textbf{campo informativo}: contiene i dati da scambiare. La lunghezza massima è 1500 byte e, in caso di messaggi più corti, si colma la differenza facendo uso del \textbf{padding}.
 \end{itemize}
-Inoltre, il PPP prevede un secondo campo che non compare in HDLC: 
+Inoltre, il PPP prevede un campo che non compare in HDLC: 
 \begin{itemize}
 	\item \textbf{protocol}: fatto di 1 o 2 \textit{byte}, serve ad identificare il protocollo incapsulato nel frame.
 \end{itemize}
